@@ -18,7 +18,7 @@ import "../Styles/PeopleSideCards.css";
 export default function Promoted() {
   return (
     <div>
-      <Card className="people-card-continer">
+      <Card className="people-card-container">
         <Card.Body>
           <Row>
             <Col className="d-flex justify-content-start">
