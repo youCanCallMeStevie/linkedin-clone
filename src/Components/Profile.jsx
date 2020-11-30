@@ -7,6 +7,7 @@ import '../Styles/Profile.css'
 import ELearning from "./ELearning";
 import PeopleSideCards from "./PeopleSideCards";
 import ExperienceEducation from "./ExperienceEducation";
+import Promoted from "./Promoted";
 
 export default class Profile extends Component {
   state = {
@@ -33,6 +34,7 @@ export default class Profile extends Component {
           </Col>
           <Col md={4}>
           <PeopleSideCards/>
+          <Promoted className ="mt-3"/>
           </Col>
         </Row>
       </Container>
