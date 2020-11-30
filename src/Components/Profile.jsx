@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Col } from "react";
+import { Container, Col } from "react-bootstrap";
 
 export default class Profile extends Component {
   render() {
