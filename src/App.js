@@ -1,3 +1,5 @@
+
+import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 import Profile from './Components/Profile';
 
