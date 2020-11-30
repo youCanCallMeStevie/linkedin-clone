@@ -1,0 +1,30 @@
+.experience-education-container {
+  border-radius: 15px;
+  width: 100%;
+}
+
+.card-title-expereince {
+  text-transform: uppercase;
+  letter-spacing: 20em;
+  font-size: 8px;
+}
+
+.experience-education-avatars {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+}
+
+.show-more-list-link {
+  color: rgb(12, 102, 194);
+  text-decoration: none;
+}
+.show-more-list-link.component:hover {
+  background-color: lightblue;
+  text-decoration: none !important;
+}
+
+.job-position-experience {
+  font-size: 50px;
+  font-weight: 700px;
+}

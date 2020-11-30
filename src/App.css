@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+:root {
+  --blue-primary: rgb(12, 102, 194);
+  --border-color: #e0e0de;
+  --button-grey-text-color: #7F7F7F
+}
+
+.App {
+  background-color: #f4f2ef;
+  min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+
+}
+
+/* Utils / Common styles */
+.blue-primary-color {
+  color: var(--blue-primary);
+}
+.font-weight-semiBold{
+  font-weight: 500;
+}
+.btn-primary {
+  background-color: var(--blue-primary);
+  color: white;
+}
+.btn-trasparent-grey {
+  background-color: transparent;
+  color: var(--button-grey-text-color);
+  border: 1px solid var(--button-grey-text-color);
+}
+

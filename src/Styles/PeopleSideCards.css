@@ -1,0 +1,23 @@
+.people-card-container {
+  border-radius: 15px;
+  width: 25rem;
+}
+
+.card-title {
+  font-weight: 400px;
+}
+
+.card-profile-images {
+  width: 75px;
+  height: 75px;
+  object-fit: cover;
+}
+
+.show-more-list-link {
+  color: rgb(12, 102, 194);
+  text-decoration: none;
+}
+.show-more-list-link.component:hover {
+  background-color: lightblue;
+  text-decoration: none !important;
+}
