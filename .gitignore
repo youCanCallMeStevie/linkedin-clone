@@ -21,6 +21,7 @@
 .env
 .env.bak
 
+.eslintcache
 Assignement.js
 
 npm-debug.log*
