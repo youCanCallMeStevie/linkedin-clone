@@ -1,11 +1,40 @@
 import './App.css';
-import Profile from './Components/Profile';
+import Footerr from './Components/Footerr'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
-    <div className="App">
-      <Profile/>
-    </div>
+    <>
+      <div>
+        <p>osvaldo</p>
+        <p>osvaldo</p>
+        <p>osvaldo</p>
+        <p>osvaldo</p>
+        <p>osvaldo</p>
+        <p>osvaldo</p>
+        <p>osvaldo</p>
+        <p>osvaldo</p>
+        <p>osvaldo</p>
+        <p>osvaldo</p>
+        <p>osvaldo</p>
+        <p>osvaldo</p>
+        <p>osvaldo</p>
+        <p>osvaldo</p>
+        <p>osvaldo</p>
+        <p>osvaldo</p>
+        <p>osvaldo</p>
+        <p>osvaldo</p>
+        <p>osvaldo</p>
+        <p>osvaldo</p>
+        <p>osvaldo</p>
+        <p>osvaldo</p>
+        <p>osvaldo</p>
+        <p>osvaldo</p>
+        <p>osvaldo</p>
+
+      </div>
+      <Footerr />
+    </>
   );
 }
 
