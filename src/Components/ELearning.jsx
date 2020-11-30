@@ -16,7 +16,7 @@ import "../Styles/ELearning.css";
 export default function Promoted() {
   return (
     <div>
-      <Card className="people-card-continer">
+      <Card className="elearning-card-container">
         <Card.Body>
           <Col className="d-flex justify-content-start">
             <Row>
