@@ -4,6 +4,10 @@ import {fetchUser, fetchAllUsers} from '../utils'
 import ProfileDetailsCard from "./ProfileDetailsCard";
 import '../Styles/Profile.css'
 
+import ELearning from "./ELearning";
+import PeopleSideCards from "./PeopleSideCards";
+import ExperienceEducation from "./ExperienceEducation";
+
 export default class Profile extends Component {
   state = {
     user: {},
@@ -24,9 +28,11 @@ export default class Profile extends Component {
         <Row>
           <Col md={8}>
             <ProfileDetailsCard user={user} users={users} />
+            <ExperienceEducation />
+            <ELearning/>
           </Col>
           <Col md={4}>
-          
+          <PeopleSideCards/>
           </Col>
         </Row>
       </Container>
