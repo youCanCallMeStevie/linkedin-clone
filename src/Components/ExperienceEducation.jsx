@@ -1,96 +1,281 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Card, Row, Image, Col } from "react-bootstrap";
+import { Card, Row, Image, Col, Media } from "react-bootstrap";
 import { makeStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
-import LinkedInIcon from "@material-ui/icons/LinkedIn";
-import Divider from "@material-ui/core/Divider";
+import {List, ListItem, ListItemText, Typography, Divider } from "@material-ui/core";
+import AddIcon from '@material-ui/icons/Add';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
+import CreateIcon from '@material-ui/icons/Create';
+
 import "../Styles/ExperienceEducation.css";
 
 export default function Promoted() {
   return (
     <div>
+
+
+
+
+
+
+
       <Card className="experience-education-container">
+        
+
         <Card.Body>
-          <Col className="d-flex justify-content-start">
-            <Row>
+        <Col >
+          <Row className="justify-content-between">
+                <Col className="d-flex justify-content-start">
               <Card.Title
-                classname="card-title-learning"
-                style={{ textTransform: "capitalize" }}
+                classname="card-title-expereince d-flex justify-content-start"
               >
-                <LinkedInIcon style={{color: "rgb(12,102,194)"}}/> Learning
+                 Experience
               </Card.Title>
+              </Col>
+
+              <Col className="d-flex justify-content-end">
+              <AddIcon />            
+              </Col>
+              
             </Row>
           </Col>
-          <Col>
-            <Row>
-              <Card.Text style={{ fontSize: "14px" }}>
-                Add new skills with these courses
-              </Card.Text>
-            </Row>
-          </Col>
+          
           <List>
             <ListItem>
               <div>
-                <span>
-                  <PlayCircleOutlineIcon className="video-play-button" style={{ fontSize: "50px" }} />
-                </span>
-                <Image
-                  src="https://via.placeholder.com/100x75"
-                  className="mr-3"
-                />
-              </div>
+                <Image src="https://via.placeholder.com/90x90" thumbnail className="experience-education-avatars mr-3"/>
 
-              <ListItemText primary="Vue.js Essential Training" secondary="12,557 viewers" />
-              
+              </div>
+              <Col>
+              <Row className="justify-content-between">
+              <Typography variant="h5">Job Position</Typography><span><CreateIcon/></span>
+              </Row>
+              <Row>
+              <ListItemText primary="Company Name" secondary="Time at Position" />
+              </Row>
+              </Col>
             </ListItem>
             <Divider variant="inset" component="li" />
             <ListItem>
-            <div>
-                <span>
-                  <PlayCircleOutlineIcon className="video-play-button" style={{ fontSize: "50px" }} />
-                </span>
-                <Image
-                  src="https://via.placeholder.com/100x75"
-                  className="mr-3"
-                />
-              </div>
+              <div>
+                <Image src="https://via.placeholder.com/90x90" thumbnail className="experience-education-avatars mr-3"/>
 
-              <ListItemText primary="CSS: Variables and Fluid Layouts" secondary="3,068 viewers" />
-              
+              </div>
+              <Col>
+              <Row className="justify-content-between">
+              <Typography variant="h5">Job Position</Typography><span><CreateIcon/></span>
+              </Row>
+              <Row>
+              <ListItemText primary="Company Name" secondary="Time at Position" />
+              </Row>
+              </Col>
             </ListItem>
             <Divider variant="inset" component="li" />
             <ListItem>
-            <div>
-                <span>
-                  <PlayCircleOutlineIcon className="video-play-button" style={{ fontSize: "50px" }} />
-                </span>
-                <Image
-                  src="https://via.placeholder.com/100x75"
-                  className="mr-3"
-                />
+              <div>
+                <Image src="https://via.placeholder.com/90x90" thumbnail className="experience-education-avatars mr-3"/>
+
               </div>
-              <ListItemText primary="Job Interview Strategies for UX Designers" secondary="21,506 viewers" />
-              
+              <Col>
+              <Row className="justify-content-between">
+              <Typography variant="h5">Job Position</Typography><span><CreateIcon/></span>
+              </Row>
+              <Row>
+              <ListItemText primary="Company Name" secondary="Time at Position" />
+              </Row>
+              </Col>
             </ListItem>
           </List>
         </Card.Body>
-        <Divider light />
         <ListItem
           button="primary"
           component="a"
           href="#"
-          className="show-more-list-link justify-content-center"
+          className="show-more-list-link justify-content-start"
         >
-          Show more on LinkedIn
+          Show 3 more expereinces
+ <KeyboardArrowDownIcon/>
+
         </ListItem>
+        <Divider light />
+
+
+
+
+        <Card.Body>
+          <Col >
+          <Row className="justify-content-between">
+                <Col className="d-flex justify-content-start">
+              <Card.Title
+                classname="card-title-expereince d-flex justify-content-start"
+              >
+                 Education
+              </Card.Title>
+              </Col>
+
+              <Col className="d-flex justify-content-end">
+              <AddIcon />            
+              </Col>
+              
+            </Row>
+          </Col>
+          
+          <List>
+            <ListItem>
+              <div>
+                <Image src="https://via.placeholder.com/90x90" thumbnail className="experience-education-avatars mr-3"/>
+
+              </div>
+              <Col>
+              <Row className="justify-content-between">
+              <Typography variant="h5">School</Typography><span><CreateIcon/></span>
+              </Row>
+              <Row>
+              <ListItemText primary="Education Title" secondary="Length of Studies" />
+              </Row>
+              <Row>
+              <ListItemText secondary="Scholarly Merits" />
+              </Row>
+              </Col>
+            </ListItem>
+            <Divider variant="inset" component="li" />
+            <ListItem>
+              <div>
+                <Image src="https://via.placeholder.com/90x90" thumbnail className="experience-education-avatars mr-3"/>
+
+              </div>
+              <Col>
+              <Row className="justify-content-between">
+              <Typography variant="h5">School</Typography><span><CreateIcon/></span>
+              </Row>
+              <Row>
+              <ListItemText primary="Education Title" secondary="Length of Studies" />
+              </Row>
+              <Row>
+              <ListItemText secondary="Scholarly Merits" />
+              </Row>
+              </Col>
+            </ListItem>
+            <Divider variant="inset" component="li" />
+            <ListItem>
+              <div>
+                <Image src="https://via.placeholder.com/90x90" thumbnail className="experience-education-avatars mr-3"/>
+
+              </div>
+              <Col>
+              <Row className="justify-content-between">
+              <Typography variant="h5">School</Typography><span><CreateIcon/></span>
+              </Row>
+              <Row>
+              <ListItemText primary="Education Title" secondary="Length of Studies" />
+              </Row>
+              <Row>
+              <ListItemText secondary="Scholarly Merits" />
+              </Row>
+              </Col>
+            </ListItem>
+          </List>
+        </Card.Body>
+        <ListItem
+          button="primary"
+          component="a"
+          href="#"
+          className="show-more-list-link justify-content-start"
+        >
+          Show 3 more education
+ <KeyboardArrowDownIcon/>
+
+        </ListItem>
+        <Divider light />
+
+
+
+
+
+        <Card.Body>
+        <Col >
+          <Row className="justify-content-between">
+                <Col className="d-flex justify-content-start">
+              <Card.Title
+                classname="card-title-expereince d-flex justify-content-start"
+              >
+                 Licenses & Certifications
+              </Card.Title>
+              </Col>
+
+              <Col className="d-flex justify-content-end">
+              <AddIcon />            
+              </Col>
+              
+            </Row>
+          </Col>
+          
+          <List>
+            <ListItem>
+              <div>
+                <Image src="https://via.placeholder.com/90x90" thumbnail className="experience-education-avatars mr-3"/>
+
+              </div>
+              <Col>
+              <Row className="justify-content-between">
+              <Typography variant="h5">Name of Award</Typography><span><CreateIcon/></span>
+              </Row>
+              <Row>
+              <ListItemText primary="Earned from Where" secondary="Time of Issue" />
+              </Row>
+              </Col>
+            </ListItem>
+            <Divider variant="inset" component="li" />
+            <ListItem>
+              <div>
+                <Image src="https://via.placeholder.com/90x90" thumbnail className="experience-education-avatars mr-3"/>
+
+              </div>
+              <Col>
+              <Row className="justify-content-between">
+              <Typography variant="h5">Name of Award</Typography><span><CreateIcon/></span>
+              </Row>
+              <Row>
+              <ListItemText primary="Earned from Where" secondary="Time of Issue" />
+              </Row>
+              </Col>
+            </ListItem>
+            <Divider variant="inset" component="li" />
+            <ListItem>
+              <div>
+                <Image src="https://via.placeholder.com/90x90" thumbnail className="experience-education-avatars mr-3"/>
+
+              </div>
+              <Col>
+              <Row className="justify-content-between">
+              <Typography variant="h5">Name of Award</Typography><span><CreateIcon/></span>
+              </Row>
+              <Row>
+              <ListItemText primary="Earned from Where" secondary="Time of Issue" />
+              </Row>
+              </Col>
+            </ListItem>
+          </List>
+        </Card.Body>
+        <ListItem
+          button="primary"
+          component="a"
+          href="#"
+          className="show-more-list-link justify-content-start"
+        >
+          Show more
+ <KeyboardArrowDownIcon/>
+
+        </ListItem>
+
+
+
       </Card>
+
+
+
+
+
     </div>
   );
 }
