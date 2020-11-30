@@ -1,8 +1,12 @@
 import './App.css';
-import Promoted from './Components/Promoted';
+
+import ELearning from "./Components/ELearning"
+
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import PeopleSideCards from "./Components/PeopleSideCards"
+
 
 import ExperienceEducation from "./Components/ExperienceEducation"
 
@@ -15,10 +19,14 @@ function App() {
   return (
     <div className="App">
 
+
+      <ELearning />
+
        <Promoted/>
 
 
       <PeopleSideCards/>
+
 
 
       <ExperienceEducation/>
