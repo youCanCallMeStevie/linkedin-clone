@@ -4,37 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
-    <>
-      <div>
-        <p>osvaldo</p>
-        <p>osvaldo</p>
-        <p>osvaldo</p>
-        <p>osvaldo</p>
-        <p>osvaldo</p>
-        <p>osvaldo</p>
-        <p>osvaldo</p>
-        <p>osvaldo</p>
-        <p>osvaldo</p>
-        <p>osvaldo</p>
-        <p>osvaldo</p>
-        <p>osvaldo</p>
-        <p>osvaldo</p>
-        <p>osvaldo</p>
-        <p>osvaldo</p>
-        <p>osvaldo</p>
-        <p>osvaldo</p>
-        <p>osvaldo</p>
-        <p>osvaldo</p>
-        <p>osvaldo</p>
-        <p>osvaldo</p>
-        <p>osvaldo</p>
-        <p>osvaldo</p>
-        <p>osvaldo</p>
-        <p>osvaldo</p>
-
-      </div>
+    <div className="App">
       <Footerr />
-    </>
+    </div>
   );
 }
 
