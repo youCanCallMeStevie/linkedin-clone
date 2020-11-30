@@ -1,0 +1,14 @@
+.promoted-card-continer {
+  border-radius: 15px;
+  width: 25rem;
+}
+
+.card-title {
+  font-weight: 400px;
+}
+
+.card-images {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
