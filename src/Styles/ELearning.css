@@ -1,3 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+:root {
+  --blue-primary: rgb(12, 102, 194);
+  --border-color: #e0e0de;
+  --button-grey-text-color: #7f7f7f;
+}
+
 .elearning-card-container {
   border-radius: 15px;
   width: 25rem;
@@ -16,12 +23,11 @@
 }
 
 .show-more-list-link {
-  color: rgb(12, 102, 194);
+  color: var(--blue-primary);
   text-decoration: none;
 }
 .show-more-list-link.component:hover {
   background-color: lightblue;
-  text-decoration: none !important;
 }
 
 .video-play-button {
@@ -30,4 +36,8 @@
   margin-left: 25px;
   color: white;
   z-index: 2;
+}
+
+.edit-work-experience:hover {
+  display: block;
 }
