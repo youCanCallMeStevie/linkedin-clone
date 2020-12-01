@@ -10,11 +10,11 @@ import {
 } from "react-bootstrap";
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
-import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
-import PeopleAltOutlinedIcon from "@material-ui/icons/PeopleAltOutlined";
-import WorkOutlineOutlinedIcon from "@material-ui/icons/WorkOutlineOutlined";
-import QuestionAnswerOutlinedIcon from "@material-ui/icons/QuestionAnswerOutlined";
-import NotificationsNoneOutlinedIcon from "@material-ui/icons/NotificationsNoneOutlined";
+import HomeIcon from '@material-ui/icons/Home';
+import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
+import WorkIcon from '@material-ui/icons/Work';
+import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
+import NotificationsIcon from '@material-ui/icons/Notifications';
 import AppsOutlinedIcon from "@material-ui/icons/AppsOutlined";
 import  {Avatar}  from '@material-ui/core';
 
@@ -45,36 +45,36 @@ export class NavBar extends Component {
               <Nav className="ml-auto">
                 <div className="navbar-item">
                   <Nav.Link href="#home">
-                    <HomeOutlinedIcon className="icons" />
+                    <HomeIcon className="icons" />
                     Home
                   </Nav.Link>
                 </div>
                 <div className="navbar-item">
                   <Nav.Link href="#network">
-                    <PeopleAltOutlinedIcon className="icons" />
+                    <PeopleAltIcon className="icons" />
                     My Network
                   </Nav.Link>
                 </div>
                 <div className="navbar-item">
                   <Nav.Link href="#jobs">
-                    <WorkOutlineOutlinedIcon className="icons" />
+                    <WorkIcon className="icons" />
                     Jobs
                   </Nav.Link>
                 </div>
                 <div className="navbar-item">
                   <Nav.Link href="#messages">
-                    <QuestionAnswerOutlinedIcon className="icons" />
+                    <ChatBubbleIcon className="icons" />
                     Messaging
                   </Nav.Link>
                 </div>
                 <div className="navbar-item">
                   <Nav.Link href="#notif">
-                    <NotificationsNoneOutlinedIcon className="icons" />
+                    <NotificationsIcon className="icons" />
                     Notifications
                   </Nav.Link>
                 </div>
                 <div className="navbar-item">
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                <Avatar className="navbar-avatar" alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
                   <NavDropdown title="Me" id="basic-nav-dropdown" className="avatar-dd">
                     <NavDropdown.Item href="#action/3.2">
                       View profile
