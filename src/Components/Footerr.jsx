@@ -2,7 +2,7 @@ import React from 'react';
 import { DropdownButton, Dropdown, Col, Container, Row, Image } from 'react-bootstrap';
 import HelpIcon from '@material-ui/icons/Help';
 import SettingsIcon from '@material-ui/icons/Settings';
-import './footerr.css'
+import '../Styles/footerr.css'
 
 export default function Footerr() {
     return (
