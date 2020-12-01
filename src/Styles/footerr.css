@@ -13,3 +13,8 @@
     margin-top: -10px;
 }
 
+.dropdown-menu{
+    height: 350px;
+    overflow-y: scroll;
+}
+
