@@ -18,7 +18,6 @@ export default class Profile extends Component {
     user: {},
     users: [],
     experiences: [],
-    showTopBar: false,
     showModal: false,
     selectedExprience: "",
   };
@@ -60,10 +59,13 @@ export default class Profile extends Component {
         let currentScrollPos = window.pageYOffset;
         let maxScroll = document.body.scrollHeight - window.innerHeight;
         // console.log(maxScroll)
-        if (currentScrollPos > 350 && currentScrollPos < maxScroll) {
-          this.setState({ showTopBar: true });
+        let topbar = document.querySelector(".profileTopBar");
+        if (currentScrollPos > 350 && currentScrollPos <= maxScroll) {
+          topbar.classList.add('d-flex')
+          topbar.classList.remove('d-none')
         } else {
-          this.setState({ showTopBar: false });
+             topbar.classList.add("d-none");
+             topbar.classList.remove("d-flex");
         }
       };
     }

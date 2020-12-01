@@ -3,12 +3,12 @@ import { Container, Col, Row } from "react-bootstrap";
 import "../Styles/ProfileTopBar.css";
 import ProfileDetailsButtons from "./ProfileDetailsButtons";
 
-function ProfileTopBar({ user, show }) {
-    console.log(show)
+function ProfileTopBar({ user }) {
+  
     return (
       <div
-        className={"profileTopBar justify-content-between align-items-center"}
-        style={{ display: show ? "flex" : "none" }}
+        className={"profileTopBar justify-content-between align-items-center d-none"}
+        
       >
         <div className="d-flex">
           <div className="profileTopBar__img">
