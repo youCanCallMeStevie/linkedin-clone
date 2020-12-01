@@ -1,0 +1,32 @@
+.elearning-card-container {
+  border-radius: 15px;
+}
+
+.card-title-learning {
+  text-transform: uppercase;
+  letter-spacing: 20em;
+  font-size: 8px;
+}
+
+.card-profile-images {
+  width: 75px;
+  height: 75px;
+  object-fit: cover;
+}
+
+.show-more-list-link {
+  color: rgb(12, 102, 194);
+  text-decoration: none;
+}
+.show-more-list-link.component:hover {
+  background-color: lightblue;
+  text-decoration: none !important;
+}
+
+.video-play-button {
+  position: absolute;
+  margin-top: 12px;
+  margin-left: 25px;
+  color: white;
+  z-index: 2;
+}
