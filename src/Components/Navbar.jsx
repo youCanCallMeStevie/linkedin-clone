@@ -12,11 +12,13 @@ import {
 } from "react-bootstrap";
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
+
 import HomeIcon from '@material-ui/icons/Home';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import WorkIcon from '@material-ui/icons/Work';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+
 import AppsOutlinedIcon from "@material-ui/icons/AppsOutlined";
 import  {Avatar}  from '@material-ui/core';
 
@@ -26,7 +28,11 @@ export class NavBar extends Component {
       <div>
         <Navbar expand="lg" className="position-sticky mynavbar" >
           <Container>
-            <Navbar.Brand href="#home" className=" position-sticky logo">
+
+
+            <Navbar.Brand href="#home" className="top-sticky logo">
+
+
             <img alt="icon" src={Linkedin} className="logo" />
             </Navbar.Brand>
             <div className="search">
@@ -47,36 +53,47 @@ export class NavBar extends Component {
               <Nav className="ml-auto">
                 <div className="navbar-item">
                   <Nav.Link href="#home">
+
                     <HomeIcon className="icons" />
+
                     Home
                   </Nav.Link>
                 </div>
                 <div className="navbar-item">
                   <Nav.Link href="#network">
+=
                     <PeopleAltIcon className="icons" />
+
                     My Network
                   </Nav.Link>
                 </div>
                 <div className="navbar-item">
                   <Nav.Link href="#jobs">
+
                     <WorkIcon className="icons" />
+
                     Jobs
                   </Nav.Link>
                 </div>
                 <div className="navbar-item">
                   <Nav.Link href="#messages">
+
                     <ChatBubbleIcon className="icons" />
+
                     Messaging
                   </Nav.Link>
                 </div>
                 <div className="navbar-item">
                   <Nav.Link href="#notif">
+
                     <NotificationsIcon className="icons" />
+
                     Notifications
                   </Nav.Link>
                 </div>
                 <div className="navbar-itemMe">
                 <Avatar className="navbar-avatar" alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+
                   <NavDropdown title="Me" id="basic-nav-dropdown" className="avatar-dd">
                     <Row>
                     <Col lg={2}>
