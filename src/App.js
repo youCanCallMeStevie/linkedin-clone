@@ -1,26 +1,26 @@
 
-import "bootstrap/dist/css/bootstrap.min.css";
-import './App.css';
-import PeopleSideCards from "./Components/PeopleSideCards"
 
-import ExperienceEducation from "./Components/ExperienceEducation"
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+
+
+
 
 import Profile from './Components/Profile';
 import NavBar from "./Components/Navbar";
+
+
+import Footerr from "./Components/Footerr";
+
 
 
 function App() {
   return (
     <div className="App">
 
-      <PeopleSideCards/>
-
-
-      <ExperienceEducation/>
-
-      <Profile/>
       <NavBar />
-
+      <Profile />
+      <Footerr />
     </div>
   );
 }

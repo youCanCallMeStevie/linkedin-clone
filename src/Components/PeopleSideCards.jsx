@@ -14,7 +14,7 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import "../Styles/PeopleSideCards.css";
 
-export default function Promoted() {
+export default function Promoted({ users }) {
   return (
     <div>
       <Card className="people-card-container">
@@ -27,38 +27,41 @@ export default function Promoted() {
             </Col>
           </Row>
           <List>
-            <ListItem>
-            <Image src="https://via.placeholder.com/75x75" roundedCircle className="mr-3" />
+            {users &&
+              users.slice(0, 4).map((user) => (
+                <>
+                  <ListItem>
+                    <Image
+                      src="https://via.placeholder.com/75x75"
+                      roundedCircle
+                      className="mr-3"
+                    />
 
-              <ListItemText primary="Photos" secondary="Jan 9, 2014" />
-              <ListItemAvatar>
-                  <PersonAddIcon />
-              </ListItemAvatar>
-            </ListItem>
+
+             <ListItemText
+                      primary={`${user.name} ${user.surname}`}
+                      secondary={user.title}
+                    />
+                    <ListItemAvatar>
+                       <PersonAddIcon /> 
+                       </ListItemAvatar>
+          
             <Divider variant="inset" component="li" />
-            <ListItem>
-            <Image src="https://via.placeholder.com/75x75" roundedCircle className="mr-3" />
+           
+                </>
+              ))}
 
-              <ListItemText primary="Work" secondary="Jan 7, 2014" />
-              <ListItemAvatar>
-                <PersonAddIcon />                
-              </ListItemAvatar>
-            </ListItem>
-            <Divider variant="inset" component="li" />
-            <ListItem>
-            <Image src="https://via.placeholder.com/75x75" roundedCircle className="mr-3" />
-              <ListItemText primary="Vacation" secondary="July 20, 2014" />
-              <ListItemAvatar>
-                <PersonAddIcon />                
-              </ListItemAvatar>
-            </ListItem>
-            </List>
-            </Card.Body>
-            <Divider light/>
-            <ListItem button="primary" component="a" href="#" className="show-more-list-link justify-content-center">
-Show More <KeyboardArrowDownIcon/>
-            </ListItem>
-
+          </List>
+        </Card.Body>
+        <Divider light />
+        <ListItem
+          button="primary"
+          component="a"
+          href="#"
+          className="show-more-list-link justify-content-center"
+        >
+          Show More <KeyboardArrowDownIcon />
+        </ListItem>
       </Card>
     </div>
   );
