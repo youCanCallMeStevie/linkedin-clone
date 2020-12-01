@@ -75,13 +75,15 @@ export class ExperienceModal extends React.Component {
             {selectedExprience !== "" ? "Edit Experience" : "Add Experience"}
           </Modal.Title>
         </Modal.Header>
-        <Container style={{ padding: "8rem" }}>
+        <Container>
           <Form
             className="text-white mt-5"
             onSubmit={(e) => this.handleSubmit(e)}
           >
+            <Form.Text className="text-muted">
+                Title *
+              </Form.Text>
             <Form.Group>
-              <Form.Label>Title *</Form.Label>
               <Form.Control
                 required
                 type="text"
@@ -94,8 +96,10 @@ export class ExperienceModal extends React.Component {
               />
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
+            <Form.Text className="text-muted employmentTitle">
+                Employment Type 
+              </Form.Text>
             <Form.Group>
-              <Form.Label>Employment Type</Form.Label>
               <Form.Control
                 as="select"
                 name="EmploymentType"
@@ -114,8 +118,10 @@ export class ExperienceModal extends React.Component {
                 Country-specific employment types
               </Form.Text>
             </Form.Group>
+            <Form.Text className="text-muted">
+                Company *
+              </Form.Text>
             <Form.Group>
-              <Form.Label>Company *</Form.Label>
               <Form.Control
                 required
                 type="text"
@@ -128,8 +134,10 @@ export class ExperienceModal extends React.Component {
               />
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
+            <Form.Text className="text-muted">
+               Location
+              </Form.Text>
             <Form.Group>
-              <Form.Label>Location</Form.Label>
               <Form.Control
                 required
                 type="text"
@@ -149,8 +157,8 @@ export class ExperienceModal extends React.Component {
             </Form.Group>
             <Row>
               <Col>
-                <Form.Group>
                   <Form.Label htmlFor="dateTime">Start Date </Form.Label>
+                <Form.Group>
                   <Form.Control
                     type="date"
                     name="startDate"
@@ -165,8 +173,8 @@ export class ExperienceModal extends React.Component {
               </Col>
 
               <Col>
-                <Form.Group>
                   <Form.Label htmlFor="dateTime">End Date </Form.Label>
+                <Form.Group>
                   <Form.Control
                     type="date"
                     name="endDate"
@@ -179,8 +187,10 @@ export class ExperienceModal extends React.Component {
                 </Form.Group>
               </Col>
             </Row>
+            <Form.Text className="text-muted">
+                Description
+              </Form.Text>
             <Form.Group>
-              <Form.Label>Description</Form.Label>
               <Form.Control
                 required
                 name="description"
@@ -193,11 +203,15 @@ export class ExperienceModal extends React.Component {
               <Form.File.Label>Upload</Form.File.Label>
               <Form.File.Input />
             </Form.File> */}
-            <Button type="submit" variant="primary">
-              Submit
-            </Button>
           </Form>
         </Container>
+        <Modal.Header>
+          <Modal.Title>
+          <Button type="submit" variant="primary">
+              Submit
+            </Button>
+          </Modal.Title>
+        </Modal.Header>
       </Modal>
     );
   }
