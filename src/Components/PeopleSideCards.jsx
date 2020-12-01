@@ -29,13 +29,14 @@ export default function Promoted({ users }) {
           <List>
             {users &&
               users.slice(0, 4).map((user) => (
-                <>
+                <div>
                   <ListItem>
                     <Image
                       src="https://via.placeholder.com/75x75"
                       roundedCircle
                       className="mr-3"
                     />
+                    </ListItem>
 
 
              <ListItemText
@@ -47,8 +48,8 @@ export default function Promoted({ users }) {
                        </ListItemAvatar>
           
             <Divider variant="inset" component="li" />
+            </div>
            
-                </>
               ))}
 
           </List>
