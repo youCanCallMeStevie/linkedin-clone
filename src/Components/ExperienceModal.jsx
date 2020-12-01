@@ -7,7 +7,7 @@ export class ExperienceModal extends React.Component {
     setValidated: false,
   };
 
-  updateRegistration = (event) => {
+  updateExp = (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -24,7 +24,7 @@ export class ExperienceModal extends React.Component {
             className="text-white mt-5"
             noValidate
             validated={this.state.validated}
-            onSubmit={this.updateRegistration}
+            onSubmit={this.updateExp}
           >
                 <Form.Group>
                   <Form.Label>Title *</Form.Label>
@@ -34,7 +34,7 @@ export class ExperienceModal extends React.Component {
                     placeholder="Ex: Retail Sales Manager"
                     id="role"
                     role="role"
-                    onChange={this.updateRegistration}
+                    onChange={this.updateExp}
                   />
                   <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 </Form.Group>
@@ -66,7 +66,7 @@ export class ExperienceModal extends React.Component {
                 placeholder="Ex: Microsoft"
                 id="company"
                 company="company"
-                onChange={this.updateRegistration}
+                onChange={this.updateExp}
               />
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
@@ -78,7 +78,7 @@ export class ExperienceModal extends React.Component {
                 placeholder="Ex: London, United Kingdom"
                 id="area"
                 area="area"
-                onChange={this.updateRegistration}
+                onChange={this.updateExp}
               />
             </Form.Group>
             <Form.Group id="currentlyWorking">
