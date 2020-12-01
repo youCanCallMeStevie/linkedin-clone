@@ -28,11 +28,7 @@ export class NavBar extends Component {
       <div>
         <Navbar expand="lg" className="position-sticky mynavbar" >
           <Container>
-
-
-            <Navbar.Brand href="#home" className="top-sticky logo">
-
-
+            <Navbar.Brand href="#home" className=" position-sticky logo">
             <img alt="icon" src={Linkedin} className="logo" />
             </Navbar.Brand>
             <div className="search">
@@ -132,7 +128,7 @@ export class NavBar extends Component {
                     </NavDropdown.Item>
                   </NavDropdown>
                 </div>
-                <div className="navbar-item navbar-item-work< ">
+                <div className="navbar-item navbar-item-work ">
                   <Nav.Link href="#work">
                     <AppsOutlinedIcon className="icons" />
                     Work

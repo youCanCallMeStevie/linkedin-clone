@@ -35,11 +35,66 @@
   font-size: 13px;
   position: relative;
   align-items: center;
+  margin-right: 5px;
+}
+.nav-link-work{
+  margin-left: 5px;
+
 }
 .MuiAvatar-root {
   width: 25px !important;
   height: 25px !important;
   font-size: 1rem !important;
+  margin-left:2px !important;
+}
+.navbar-itemMe{
+  border-right: solid 1px rgb(196, 196, 196);
+  padding: 5px;
+}
+.mynavbar{
+  z-index: 6;
+}
+.dropdown-item{
+  font-size: 15px;
+  color: #666666;
+  padding: .1 0.5rem !important;
+}
+.button-profile{
+  color: #007bff;
+  font-weight: 500;
+  margin-left: 2px;
+  margin-right: 2px;
+  background-color: white;
+  border-radius: 50px;
+  padding: 10px;
+  border:1px solid #007bff;
+  width:220px;
+  padding: 1px;
+  font-size: 14px;
+}
+.button-profile:hover{
+  border: #007bff solid 2px;
+  transition: ease-in-out 0.5s;
+  background-color:#e1e9ee ;
+}
+.dropdown-item:focus,
+.dropdown-item:hover{
+  text-decoration: underline;
+  background-color: none !important;
+}
+.name-title{
+  margin-bottom: 0.1rem !important;
+}
+.basic-nav-dropdown{
+  border-radius:1px;
+  width:28ch;
+}
+.dropdown-item {
+  color: rgb(82, 81, 81) !important;
+}
+.dropdown-item p{
+  color: rgb(25, 25, 25);
+  margin-bottom: 0rem !important;
   margin-top: 6px !important;
   margin-left:5px !important;
 }
@@ -47,8 +102,9 @@
   color:#666666 !important;
 }
 .avatar-dd{
-  margin-bottom: -12px;
-  margin-top:-5px;
+  margin-bottom: -13px;
+  margin-top:-10px;
+
 }
 .nav-link .nav-dropdown {
   margin-top: 6px !important;
@@ -69,6 +125,10 @@
 }
 .search:focus{
     border: 1px black solid;
+}
+.navbar-avatar{
+  width: 30px !important;
+  height: 30px !important;
 }
 
 .searchIcon {
