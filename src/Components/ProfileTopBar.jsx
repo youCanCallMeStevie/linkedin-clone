@@ -12,13 +12,13 @@ function ProfileTopBar({ user, show }) {
       >
         <div className="d-flex">
           <div className="profileTopBar__img">
-            <img src={user.image} alt="profile-thumb" className="img-fluid" />
+            <img src={user?.image} alt="profile-thumb" className="img-fluid" />
           </div>
           <div>
             <h6 className="font-weight-semiBold">
-              {user.name} {user.surname}
+              {user?.name} {user?.surname}
             </h6>
-            <p>{user.title}</p>
+            <p>{user?.title}</p>
           </div>
         </div>
         <div>
