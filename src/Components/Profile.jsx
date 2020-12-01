@@ -35,7 +35,7 @@ export default class Profile extends Component {
     } catch (err) {}
     this.handleScroll();
   };
-
+ 
   
 
   handleModalToggle = async (experience = "") => {
@@ -43,12 +43,13 @@ export default class Profile extends Component {
       showModal: !this.state.showModal,
       selectedExprience: experience,
     });
+    if(!this.state.showModal){
     try {
       const experiences = await fetchExperiences(this.state.user._id);
       this.setState({experiences });
     } catch (err) {
       console.log(err)
-    }
+    }}
     
   };
   

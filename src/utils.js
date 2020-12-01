@@ -144,3 +144,27 @@ export const editExperience = async (id, expId, experience) => {
     console.log("there is an error", err);
   }
 };
+
+export const deleteExperience = async (id, expId) => {
+
+  try {
+    const res = await fetch(
+      `https://striveschool-api.herokuapp.com/api/profile/${id}/experiences/${expId}`,
+      {
+        method: "DELETE",
+        headers: new Headers({
+          Authorization: "Bearer " + REACT_APP_TOKEN,
+          "Content-Type": "application/json",
+        })
+       
+      }
+    );
+    if (res.ok) {
+      return res;
+    } else {
+      console.log("there is an error with delete");
+    }
+  } catch (err) {
+    console.log("there is an error", err);
+  }
+};

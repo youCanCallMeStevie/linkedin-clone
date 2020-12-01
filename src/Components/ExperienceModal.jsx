@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Form, Row, Col, Modal, Button } from "react-bootstrap";
-import { postExperiences, editExperience } from "../utils";
+import { postExperiences, editExperience, deleteExperience } from "../utils";
 
 export class ExperienceModal extends React.Component {
   state = {
@@ -60,6 +60,21 @@ export class ExperienceModal extends React.Component {
     }
   };
 
+  handleDelete = async () => {
+   console.log('clicke')
+    try {
+      const res = await deleteExperience(this.props.userId, this.state.experience._id);
+      console.log('deleted');
+       if (res.ok) {
+      alert("experience deleted");
+      this.props.toggleModal("");
+    }
+    } catch(err) {
+      console.log(err);
+
+    }
+  };
+
   render() {
     const { toggleModal, showModal, userId, selectedExprience } = this.props;
 
@@ -80,9 +95,7 @@ export class ExperienceModal extends React.Component {
             className="text-body mt-5"
             onSubmit={(e) => this.handleSubmit(e)}
           >
-            <Form.Text className="text-muted">
-                Title *
-              </Form.Text>
+            <Form.Text className="text-muted">Title *</Form.Text>
             <Form.Group>
               <Form.Control
                 required
@@ -97,8 +110,8 @@ export class ExperienceModal extends React.Component {
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
             <Form.Text className="text-muted employmentTitle">
-                Employment Type 
-              </Form.Text>
+              Employment Type
+            </Form.Text>
             <Form.Group>
               <Form.Control
                 as="select"
@@ -118,9 +131,7 @@ export class ExperienceModal extends React.Component {
                 Country-specific employment types
               </Form.Text>
             </Form.Group>
-            <Form.Text className="text-muted">
-                Company *
-              </Form.Text>
+            <Form.Text className="text-muted">Company *</Form.Text>
             <Form.Group>
               <Form.Control
                 required
@@ -134,9 +145,7 @@ export class ExperienceModal extends React.Component {
               />
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
-            <Form.Text className="text-muted">
-               Location
-              </Form.Text>
+            <Form.Text className="text-muted">Location</Form.Text>
             <Form.Group>
               <Form.Control
                 required
@@ -157,12 +166,12 @@ export class ExperienceModal extends React.Component {
             </Form.Group>
             <Row>
               <Col>
-                  <Form.Label id="DateText" htmlFor="dateTime">Start Date </Form.Label>
+                <Form.Text className="text-muted">Start Date</Form.Text>
+
                 <Form.Group>
                   <Form.Control
                     type="date"
                     name="startDate"
-                    placeholder="Start Date"
                     value={this.state.experience.startDate}
                     onChange={(e) => {
                       this.handleChange(e);
@@ -173,12 +182,12 @@ export class ExperienceModal extends React.Component {
               </Col>
 
               <Col>
-                  <Form.Label id="DateText" htmlFor="dateTime">End Date </Form.Label>
+                <Form.Text className="text-muted">End Date</Form.Text>
+
                 <Form.Group>
                   <Form.Control
                     type="date"
                     name="endDate"
-                    placeholder="End Date"
                     value={this.state.experience.endDate}
                     onChange={(e) => {
                       this.handleChange(e);
@@ -187,16 +196,18 @@ export class ExperienceModal extends React.Component {
                 </Form.Group>
               </Col>
             </Row>
-            <Form.Text className="text-muted">
-                Description
-              </Form.Text>
+            <Form.Text className="text-muted">Description</Form.Text>
             <Form.Group>
               <Form.Control
                 required
+                type="text"
                 name="description"
                 value={this.state.experience.description}
                 as="textarea"
                 rows={3}
+                onChange={(e) => {
+                  this.handleChange(e);
+                }}
               />
             </Form.Group>
             {/* <Form.File id="uploadFile">
@@ -206,11 +217,20 @@ export class ExperienceModal extends React.Component {
           </Form>
         </Container>
         <Modal.Header>
-          <Modal.Title>
-          <Button type="submit" variant="primary">
+          <div className="w-100 d-flex justify-content-end">
+            {selectedExprience !== "" && (
+              <Button
+                className="mr-3"
+                variant="danger"
+                onClick={() => this.handleDelete()}
+              >
+                Delete
+              </Button>
+            )}
+            <Button type="submit" variant="primary">
               Submit
             </Button>
-          </Modal.Title>
+          </div>
         </Modal.Header>
       </Modal>
     );
