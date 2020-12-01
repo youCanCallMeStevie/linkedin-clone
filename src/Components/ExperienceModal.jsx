@@ -1,13 +1,22 @@
 import React from "react";
-import { Container, Form, Row, Col } from "react-bootstrap";
+import { Container, Form, Row, Col, Modal, Button } from "react-bootstrap";
+import { postExperiences } from "../utils";
 
 export class ExperienceModal extends React.Component {
   state = {
     validated: false,
     setValidated: false,
+    experience: {
+      role: "",
+      company: "",
+      startDate: "",
+      endDate: "",
+      description: "",
+      area: "",
+    },
   };
 
-  updateExp = (event) => {
+  updateExp = event => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -16,48 +25,75 @@ export class ExperienceModal extends React.Component {
       this.setState({ validated: true });
     }
   };
+
+  handleChange = e => {
+    let newExperience = { ...this.state.experience };
+    newExperience[e.target.id] = e.target.value;
+    this.setState({ experience: newExperience });
+    console.log(this.state.experience);
+  };
+
+  handleSubmit =  async (e) => {
+    e.preventdefault(e)
+   try { 
+  await postExperiences(this.props.userId, this.state.experience)
+      console.log("button is working")
+
+      
+  } catch (error) {
+    console.log(error)
+  }
+  }
+
   render() {
+    const { toggleModal, showModal, userId } = this.props;
+
     return (
-      <div>
+      <Modal
+        show={showModal}
+        onHide={toggleModal}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Expereince</Modal.Title>
+        </Modal.Header>
         <Container style={{ padding: "8rem" }}>
-          <Form
-            className="text-white mt-5"
-            noValidate
-            validated={this.state.validated}
-            onSubmit={this.updateExp}
-          >
-                <Form.Group>
-                  <Form.Label>Title *</Form.Label>
-                  <Form.Control
-                    required
-                    type="text"
-                    placeholder="Ex: Retail Sales Manager"
-                    id="role"
-                    role="role"
-                    onChange={this.updateExp}
-                  />
-                  <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Employment Type</Form.Label>
-                  <Form.Control
-                    as="select"
-                    id="EmploymentType"
-                    EmploymentType="EmploymentType"
-                    custom
-                  >
-                    <option value="0">Full-Time</option>
-                    <option value="1">Part-Time</option>
-                    <option value="2">Self Employed</option>
-                    <option value="3">Freelance</option>
-                    <option value="4">Contract</option>
-                    <option value="5">Internship</option>
-                    <option value="6">Apprenticeship</option>
-                  </Form.Control>
-                  <Form.Text className="text-muted">
-                    Country-specific employment types
-                  </Form.Text>
-                </Form.Group>
+          <Form className="text-white mt-5" onSubmit={(e)=>this.handleSubmit(e)}>
+            <Form.Group>
+              <Form.Label>Title *</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                placeholder="Ex: Retail Sales Manager"
+                id="role"
+                role="role"
+                onChange={e => {
+                  this.handleChange(e);
+                }}
+              />
+              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Employment Type</Form.Label>
+              <Form.Control
+                as="select"
+                id="EmploymentType"
+                EmploymentType="EmploymentType"
+                custom
+              >
+                <option value="0">Full-Time</option>
+                <option value="1">Part-Time</option>
+                <option value="2">Self Employed</option>
+                <option value="3">Freelance</option>
+                <option value="4">Contract</option>
+                <option value="5">Internship</option>
+                <option value="6">Apprenticeship</option>
+              </Form.Control>
+              <Form.Text className="text-muted">
+                Country-specific employment types
+              </Form.Text>
+            </Form.Group>
             <Form.Group>
               <Form.Label>Company *</Form.Label>
               <Form.Control
@@ -66,19 +102,23 @@ export class ExperienceModal extends React.Component {
                 placeholder="Ex: Microsoft"
                 id="company"
                 company="company"
-                onChange={this.updateExp}
+                onChange={e => {
+                  this.handleChange(e);
+                }}
               />
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
             <Form.Group>
               <Form.Label>Location</Form.Label>
               <Form.Control
-              required
+                required
                 type="text"
                 placeholder="Ex: London, United Kingdom"
                 id="area"
                 area="area"
-                onChange={this.updateExp}
+                onChange={e => {
+                  this.handleChange(e);
+                }}
               />
             </Form.Group>
             <Form.Group id="currentlyWorking">
@@ -88,134 +128,58 @@ export class ExperienceModal extends React.Component {
               />
             </Form.Group>
             <Row>
-                <Col>
-                <Form.Label>Start Date *</Form.Label>
-                <Form.Control
-                  required
-                  as="select"
-                  id="startDate"
-                  startDate="startDate"
-                  custom
-                >
-                  <option value="0">Month</option>
-                  <option value="1">January</option>
-                  <option value="2">February</option>
-                  <option value="3">March</option>
-                  <option value="4">April</option>
-                  <option value="5">May</option>
-                  <option value="6">June</option>
-                  <option value="7">July</option>
-                  <option value="8">August</option>
-                  <option value="9">September</option>
-                  <option value="10">October</option>
-                  <option value="11">November</option>
-                  <option value="12">December</option>
-                </Form.Control>
-                </Col>
-                <Col>
-                <Form.Control
-                  required
-                  as="select"
-                  id="startYear"
-                  startYear="startYear"
-                  custom
-                >
-                  <option value="0">Year</option>
-                  <option value="1">2020</option>
-                  <option value="2">2019</option>
-                  <option value="3">2018</option>
-                  <option value="4">2017</option>
-                  <option value="5">2016</option>
-                  <option value="6">2015</option>
-                  <option value="7">2014</option>
-                  <option value="8">2013</option>
-                  <option value="9">2012</option>
-                  <option value="10">2011</option>
-                  <option value="11">2010</option>
-                  <option value="12">2009</option>
-                  <option value="13">2008</option>
-                  <option value="14">2007</option>
-                  <option value="15">2006</option>
-                  <option value="16">2005</option>
-                  <option value="17">2004</option>
-                  <option value="18">2003</option>
-                  <option value="19">2002</option>
-                  <option value="20">2001</option>
-                  <option value="21">2000</option>
-                </Form.Control>
-                </Col>
-                <Col>
-                <Form.Label>End Date *</Form.Label>
-                <Form.Control
-                  required
-                  as="select"
-                  id="endDate"
-                  startDate="endDate"
-                  custom
-                >
-                  <option value="0">Month</option>
-                  <option value="1">January</option>
-                  <option value="2">February</option>
-                  <option value="3">March</option>
-                  <option value="4">April</option>
-                  <option value="5">May</option>
-                  <option value="6">June</option>
-                  <option value="7">July</option>
-                  <option value="8">August</option>
-                  <option value="9">September</option>
-                  <option value="10">October</option>
-                  <option value="11">November</option>
-                  <option value="12">December</option>
-                </Form.Control>
-                </Col>
-                <Col>
-                <Form.Control
-                  required
-                  as="select"
-                  id="endYear"
-                  startYear="endYear"
-                  custom
-                >
-                  <option value="0">Year</option>
-                  <option value="1">2020</option>
-                  <option value="2">2019</option>
-                  <option value="3">2018</option>
-                  <option value="4">2017</option>
-                  <option value="5">2016</option>
-                  <option value="6">2015</option>
-                  <option value="7">2014</option>
-                  <option value="8">2013</option>
-                  <option value="9">2012</option>
-                  <option value="10">2011</option>
-                  <option value="11">2010</option>
-                  <option value="12">2009</option>
-                  <option value="13">2008</option>
-                  <option value="14">2007</option>
-                  <option value="15">2006</option>
-                  <option value="16">2005</option>
-                  <option value="17">2004</option>
-                  <option value="18">2003</option>
-                  <option value="19">2002</option>
-                  <option value="20">2001</option>
-                  <option value="21">2000</option>
-                </Form.Control>
-                </Col>
-                </Row>
-                <Form.Group controlId="Description">
-                  <Form.Label>Description</Form.Label>
-                  <Form.Control 
-                  required
-                  id="description"
-                  description="description"
-                  as="textarea" rows={3} />
+              <Col>
+                <Form.Group>
+                  <Form.Label htmlFor="dateTime">Start Date </Form.Label>
+                  <Form.Control
+                    type="date"
+                    name="dateTime"
+                    id="startDate"
+                    placeholder="Start Date"
+      
+                    onChange={e => {
+                      this.handleChange(e);
+                    }}
+                    required
+                  />
                 </Form.Group>
-              <Form.File id="uploadFile">
-                <Form.File.Label>Upload</Form.File.Label>
-                <Form.File.Input />
-              </Form.File>
+              </Col>
+
+              <Col>
+                <Form.Group>
+                  <Form.Label htmlFor="dateTime">End Date </Form.Label>
+                  <Form.Control
+                    type="date"
+                    name="dateTime"
+                    id="endDate"
+                    placeholder="End Date"
+      
+                    onChange={e => {
+                      this.handleChange(e);
+                    }}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+            <Form.Group controlId="Description">
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                required
+                id="description"
+                description="description"
+                as="textarea"
+                rows={3}
+              />
+            </Form.Group>
+            <Form.File id="uploadFile">
+              <Form.File.Label>Upload</Form.File.Label>
+              <Form.File.Input />
+            </Form.File>
+                      <Button variant="primary" >Submit</Button>
+
           </Form>
         </Container>
-      </div>
+      </Modal>
     );
   }
 }
