@@ -57,7 +57,6 @@ export class NavBar extends Component {
                 </div>
                 <div className="navbar-item">
                   <Nav.Link href="#network">
-=
                     <PeopleAltIcon className="icons" />
 
                     My Network
