@@ -9,7 +9,6 @@ import ExperienceEducation from "./Components/ExperienceEducation"
 import Profile from './Components/Profile';
 import NavBar from "./Components/Navbar";
 
-op
 
 function App() {
   return (
