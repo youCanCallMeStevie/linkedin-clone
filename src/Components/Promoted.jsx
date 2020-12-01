@@ -7,6 +7,8 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import '../Styles/Promoted.css';
 
 export default function Promoted() {
+  
+  
   return (
     <div className="mt-3">
       <Card className="promoted-card-continer">

@@ -2,7 +2,7 @@
 :root {
   --blue-primary: rgb(12, 102, 194);
   --border-color: #e0e0de;
-  --button-grey-text-color: #7F7F7F
+  --button-grey-text-color: #7F7F7F;
 }
 
 .App {
