@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Linkedin from "../Assets/LinkedIn-Logos/linkedin.png";
-import "../Assets/navbar.css";
+import "../Styles/navbar.css";
 import {
   Navbar,
+  Row,
+  Col,  
   Container,
   Nav,
   NavDropdown,
@@ -22,12 +24,9 @@ export class NavBar extends Component {
   render() {
     return (
       <div>
-        <Navbar expand="lg">
+        <Navbar expand="lg" className="position-sticky mynavbar" >
           <Container>
-
-
-            <Navbar.Brand href="#home" className="top-sticky logo">
-
+            <Navbar.Brand href="#home" className=" position-sticky logo">
             <img alt="icon" src={Linkedin} className="logo" />
             </Navbar.Brand>
             <div className="search">
@@ -76,17 +75,23 @@ export class NavBar extends Component {
                     Notifications
                   </Nav.Link>
                 </div>
-                <div className="navbar-item">
+                <div className="navbar-itemMe">
                 <Avatar className="navbar-avatar" alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
                   <NavDropdown title="Me" id="basic-nav-dropdown" className="avatar-dd">
-                    <NavDropdown.Item href="#action/3.2">
-                      View profile
-                    </NavDropdown.Item>
+                    <Row>
+                    <Col lg={2}>
+                    <Avatar className="navbar-avatar" alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                    </Col>
+                    <Col lg={10}>
+                    <p className="name-title"><strong>Name</strong></p>
+                    <p className="name-title">Title/ work position</p>
+                    </Col>
+                    </Row>
+                      <button className="button-profile">View profile</button>
                     <NavDropdown.Divider />
                     <NavDropdown.Item href="#action/3.3">
-                      ACCOUNT
+                      <p><strong>Account</strong></p>
                     </NavDropdown.Item>
-                    <NavDropdown.Divider />
                     <NavDropdown.Item href="#action/3.4">
                       Settings & Privacy
                     </NavDropdown.Item>
@@ -95,10 +100,9 @@ export class NavBar extends Component {
                       Language
                     </NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action/3.4">
-                      MANAGE
+                    <NavDropdown.Item className="dropdown-item-strong" href="#action/3.4">
+                     <p><strong>Manage</strong></p>
                     </NavDropdown.Item>
-                    <NavDropdown.Divider />
                     <NavDropdown.Item href="#action/3.4">
                       Posts & Activity
                     </NavDropdown.Item>
@@ -111,7 +115,7 @@ export class NavBar extends Component {
                     </NavDropdown.Item>
                   </NavDropdown>
                 </div>
-                <div className="navbar-item">
+                <div className="navbar-item navbar-item-work< ">
                   <Nav.Link href="#work">
                     <AppsOutlinedIcon className="icons" />
                     Work

@@ -77,7 +77,7 @@ export class ExperienceModal extends React.Component {
         </Modal.Header>
         <Container>
           <Form
-            className="text-white mt-5"
+            className="text-body mt-5"
             onSubmit={(e) => this.handleSubmit(e)}
           >
             <Form.Text className="text-muted">
@@ -157,7 +157,7 @@ export class ExperienceModal extends React.Component {
             </Form.Group>
             <Row>
               <Col>
-                  <Form.Label htmlFor="dateTime">Start Date </Form.Label>
+                  <Form.Label id="DateText" htmlFor="dateTime">Start Date </Form.Label>
                 <Form.Group>
                   <Form.Control
                     type="date"
@@ -173,7 +173,7 @@ export class ExperienceModal extends React.Component {
               </Col>
 
               <Col>
-                  <Form.Label htmlFor="dateTime">End Date </Form.Label>
+                  <Form.Label id="DateText" htmlFor="dateTime">End Date </Form.Label>
                 <Form.Group>
                   <Form.Control
                     type="date"
