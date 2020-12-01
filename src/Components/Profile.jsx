@@ -8,7 +8,7 @@ import ELearning from "./ELearning";
 import PeopleSideCards from "./PeopleSideCards";
 import ExperienceEducation from "./ExperienceEducation";
 import Promoted from "./Promoted";
-import ProfileTopBar from "./ProfileTopBar";
+import Recommendations from "./Recommendations"
 
 export default class Profile extends Component {
   state = {
@@ -54,9 +54,9 @@ export default class Profile extends Component {
     const { user, users,showTopBar } = this.state;
     return (
       <Container className="profile">
-        <ProfileTopBar show={showTopBar} user={user}/>
           <Row>
             <Col md={8}>
+              <Recommendations/>
               <ProfileDetailsCard user={user} users={users} />
               <ExperienceEducation />
               <ELearning />
