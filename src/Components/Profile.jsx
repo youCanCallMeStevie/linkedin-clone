@@ -3,6 +3,7 @@ import { Container, Col,Row } from "react-bootstrap";
 import {fetchUser, fetchAllUsers} from '../utils'
 import ProfileDetailsCard from "./ProfileDetailsCard";
 import '../Styles/Profile.css'
+import AboutCard from "./AboutCard"
 
 import ELearning from "./ELearning";
 import PeopleSideCards from "./PeopleSideCards";
@@ -29,6 +30,7 @@ export default class Profile extends Component {
         <Row>
           <Col md={8}>
             <ProfileDetailsCard user={user} users={users} />
+            <AboutCard />
             <ExperienceEducation />
             <ELearning/>
           </Col>
