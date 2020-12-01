@@ -6,7 +6,6 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
 import ImageIcon from '@material-ui/icons/Image';
 import WorkIcon from '@material-ui/icons/Work';
 import BeachAccessIcon from '@material-ui/icons/BeachAccess';
@@ -33,9 +32,7 @@ export default function Promoted() {
 
               <ListItemText primary="Photos" secondary="Jan 9, 2014" />
               <ListItemAvatar>
-                <Avatar>
                   <PersonAddIcon />
-                </Avatar>
               </ListItemAvatar>
             </ListItem>
             <Divider variant="inset" component="li" />
@@ -44,9 +41,7 @@ export default function Promoted() {
 
               <ListItemText primary="Work" secondary="Jan 7, 2014" />
               <ListItemAvatar>
-                <Avatar>
                 <PersonAddIcon />                
-                </Avatar>
               </ListItemAvatar>
             </ListItem>
             <Divider variant="inset" component="li" />
@@ -54,9 +49,7 @@ export default function Promoted() {
             <Image src="https://via.placeholder.com/75x75" roundedCircle className="mr-3" />
               <ListItemText primary="Vacation" secondary="July 20, 2014" />
               <ListItemAvatar>
-                <Avatar>
                 <PersonAddIcon />                
-                </Avatar>
               </ListItemAvatar>
             </ListItem>
             </List>
