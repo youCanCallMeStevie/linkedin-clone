@@ -16,7 +16,6 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import "../Styles/PeopleSideCards.css";
 
 export default function Promoted({ users }) {
-users && users.map(user=>console.log(user))
   return (
     <div>
       <Card className="people-card-container">

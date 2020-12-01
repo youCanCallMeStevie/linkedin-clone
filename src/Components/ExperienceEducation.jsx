@@ -12,10 +12,9 @@ import {
 import AddIcon from "@material-ui/icons/Add";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import CreateIcon from "@material-ui/icons/Create";
-
 import "../Styles/ExperienceEducation.css";
 
-export default function Promoted() {
+export default function ExperienceEducation({toggleModal}) {
   return (
     <div className="mt-3">
       <Card className="experience-education-container">
@@ -29,7 +28,7 @@ export default function Promoted() {
               </Col>
 
               <Col className="d-flex justify-content-end">
-                <AddIcon />
+                <AddIcon onClick={()=> toggleModal()}/>
               </Col>
             </Row>
           </Col>
