@@ -119,3 +119,28 @@ export const postExperiences = async (id, experience) => {
     console.log("there is an error", err);
   }
 };
+
+export const editExperience = async (id, expId, experience) => {
+  console.log(experience);
+
+  try {
+    const res = await fetch(
+      `https://striveschool-api.herokuapp.com/api/profile/${id}/experiences/${expId}`,
+      {
+        method: "PUT",
+        headers: new Headers({
+          Authorization: "Bearer " + REACT_APP_TOKEN,
+          "Content-Type": "application/json",
+        }),
+        body: JSON.stringify(experience),
+      }
+    );
+    if (res.ok) {
+      return res;
+    } else {
+      console.log("there is an error with posting experiences");
+    }
+  } catch (err) {
+    console.log("there is an error", err);
+  }
+};
