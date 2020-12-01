@@ -1,6 +1,6 @@
 .logo {
   width: 40px;
-  margin-top: -15px;
+  margin-top: -3px;
 }
 .navbar {
   background-color: rgb(255, 255, 255) !important;
@@ -33,8 +33,13 @@
 .MuiAvatar-root {
   width: 25px !important;
   height: 25px !important;
-  margin-top: 6px;
-  font-size: 0.25rem;
+  font-size: 1rem !important;
+  margin-top: 6px !important;
+  margin-left:5px !important;
+}
+.avatar-dd{
+  margin-bottom: -12px;
+  margin-top:-5px;
 }
 .nav-link .nav-dropdown {
   margin-top: 6px !important;
@@ -51,7 +56,7 @@
   position: relative;
   background-color: #e1e9ee !important;
   padding: 4px;
-  margin-top:-20px;
+  margin-top:-6px;
 }
 .search:focus{
     border: 1px black solid;

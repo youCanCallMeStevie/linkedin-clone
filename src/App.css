@@ -1,11 +1,8 @@
-
-
-
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 :root {
   --blue-primary: rgb(12, 102, 194);
   --border-color: #e0e0de;
-  --button-grey-text-color: #7F7F7F
+  --button-grey-text-color: #7F7F7F;
 }
 
 .App {
