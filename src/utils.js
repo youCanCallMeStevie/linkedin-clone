@@ -105,12 +105,11 @@ export const postExperiences = async (id, experience) => {
       method: "POST",
       headers:  new Headers({
         Authorization: "Bearer " + REACT_APP_TOKEN,
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": "application/json",
       }),
       body: JSON.stringify(experience)
     });
     if (res.ok) {
-       console.log(res.json())
        return res
     } else {
       console.log('there is an error with posting experiences')
