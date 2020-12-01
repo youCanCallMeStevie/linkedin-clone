@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Container, Col, Row } from "react-bootstrap";
 import { fetchUser, fetchAllUsers, fetchExperiences } from "../utils";
 import ProfileDetailsCard from "./ProfileDetailsCard";
+
 import "../Styles/Profile.css";
 
 import ELearning from "./ELearning";
@@ -9,6 +10,7 @@ import PeopleSideCards from "./PeopleSideCards";
 import ExperienceEducation from "./ExperienceEducation";
 import Promoted from "./Promoted";
 import ProfileTopBar from "./ProfileTopBar";
+
 
 export default class Profile extends Component {
   state = {
@@ -54,6 +56,7 @@ export default class Profile extends Component {
     const { user, users,showTopBar } = this.state;
     return (
       <Container className="profile">
+
         <ProfileTopBar show={showTopBar} user={user}/>
           <Row>
             <Col md={8}>
@@ -66,6 +69,7 @@ export default class Profile extends Component {
               <Promoted />
             </Col>
           </Row>
+
       </Container>
     );
   }
