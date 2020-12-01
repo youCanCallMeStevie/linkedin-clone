@@ -24,7 +24,7 @@ export class NavBar extends Component {
       <div>
         <Navbar expand="lg">
           <Container>
-            <Navbar.Brand href="#home" className="sticky-top logo">
+            <Navbar.Brand href="#home" className="top-sticky logo">
             <img alt="icon" src={Linkedin} className="logo" />
             </Navbar.Brand>
             <div className="search">

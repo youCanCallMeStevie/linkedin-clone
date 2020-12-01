@@ -1,11 +1,10 @@
-.elearning-card-container {
+.people-card-container {
   border-radius: 15px;
+  width: 25rem;
 }
 
-.card-title-learning {
-  text-transform: uppercase;
-  letter-spacing: 20em;
-  font-size: 8px;
+.card-title {
+  font-weight: 400px;
 }
 
 .card-profile-images {
@@ -21,12 +20,4 @@
 .show-more-list-link.component:hover {
   background-color: lightblue;
   text-decoration: none !important;
-}
-
-.video-play-button {
-  position: absolute;
-  margin-top: 12px;
-  margin-left: 25px;
-  color: white;
-  z-index: 2;
 }
