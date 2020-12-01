@@ -25,6 +25,7 @@ export class NavBar extends Component {
         <Navbar expand="lg">
           <Container>
 
+
             <Navbar.Brand href="#home" className="top-sticky logo">
 
             <img alt="icon" src={Linkedin} className="logo" />
