@@ -5,22 +5,7 @@
   --button-grey-text-color: #7f7f7f;
 }
 
-.promoted-card-continer {
+.about-card-container {
   border-radius: 15px;
-  width: 25rem;
-}
-
-.card-title {
-  font-weight: 400px;
-}
-
-.card-images {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-}
-
-.show-more-list-link {
-  color: var(--blue-primary);
-  text-decoration: none;
+  width: 100%;
 }
