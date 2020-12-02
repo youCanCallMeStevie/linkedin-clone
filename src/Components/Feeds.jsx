@@ -14,7 +14,8 @@ class Feeds extends Component {
     user: "",
     allUsers: [],
     posts: [],
-      showModal: false
+      showModal: false,
+
   };
 
   componentDidMount = async () => {
@@ -48,14 +49,17 @@ class Feeds extends Component {
           <Col md={7} className="mx-3">
             {" "}
             {/* here goes all feeds + create new feed - */}
-            <Button onClick={()=>this.handleModalToggle()} />
+            <Button onClick={() => this.handleModalToggle()} />
             {posts.map((post) => (
-              <Post post={post} />
+              <Post post={post} currentUser={`${user.name} ${user.surname}`} />
             ))}
           </Col>
           <Col md={3}> {/* here goes the small list of recent feeds - */}</Col>
         </Row>
-        <PostFeedModal showModal={showModal} toggleModal={this.handleModalToggle} />
+        <PostFeedModal
+          showModal={showModal}
+          toggleModal={this.handleModalToggle}
+        />
       </Container>
     );
   }
