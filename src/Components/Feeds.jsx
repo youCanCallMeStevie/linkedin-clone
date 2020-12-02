@@ -8,6 +8,7 @@ import ProfileDetailsCard from "./ProfileDetailsCard";
 import Post from "./Post";
 import ExperienceModal from "./ExperienceModal";
 import PostFeedModal from "./PostFeedModal";
+import Postbox from "./Postbox"
 
 class Feeds extends Component {
   state = {
@@ -57,6 +58,7 @@ class Feeds extends Component {
           <Col md={7} className="mx-3">
             {" "}
             {/* here goes all feeds + create new feed - */}
+            <Postbox />
             <Button onClick={() => this.handleModalToggle()} />
             {posts
               .sort((a, b) => {
