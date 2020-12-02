@@ -29,7 +29,7 @@ function FeedsProfileCard({user,users}) {
                 </div>
                 <div>{users && users.length}</div>
               </span>
-              <span className="feeds_profileDetails__card-contacts d-flex justify-content-start align-items-center text-center font-weight-semiBold">
+              <span className="feeds_profileDetails__card-contacts d-flex justify-content-start align-items-center text-left font-weight-semiBold">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
