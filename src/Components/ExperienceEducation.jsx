@@ -73,7 +73,7 @@ export default function ExperienceEducation({ toggleModal, experiences }) {
           className="show-more-list-link justify-content-start"
         >
           Show 3 more expereinces
-          <KeyboardArrowDownIcon />
+          ▾
         </ListItem>
         </Card>
         </div>
