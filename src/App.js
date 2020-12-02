@@ -3,8 +3,9 @@ import "./App.css";
 import Profile from "./Components/Profile";
 import NavBar from "./Components/Navbar";
 import Footerr from "./Components/Footerr";
-import {Route,Redirect} from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import Feeds from "./Components/Feeds";
+import Dashboard from './Components/Dashboard'
 
 
 function App() {
@@ -12,8 +13,9 @@ function App() {
     <div className="App">
       <NavBar />
       <Route exact path="/">
-        <Redirect to="profile/me" /> 
+        <Redirect to="profile/me" />
       </Route>
+
       <Route
         exact
         path="/profile/:user"

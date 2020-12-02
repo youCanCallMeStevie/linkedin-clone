@@ -53,7 +53,7 @@ export default class Profile extends Component {
       console.log(experiences);
 
       this.setState({ user, users, experiences });
-    } catch (err) {}
+    } catch (err) { }
   };
 
   //function to toggle the modal
@@ -90,7 +90,7 @@ export default class Profile extends Component {
       };
     }
   };
-  
+
   render() {
     const {
       user,
