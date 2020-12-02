@@ -1,10 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+:root {
+  --blue-primary: rgb(12, 102, 194);
+  --border-color: #e0e0de;
+  --button-grey-text-color: #7f7f7f;
+  --hover-blue: rgb(233, 243, 253);
+}
+
 .people-card-container {
   border-radius: 15px;
   width: 25rem;
+  overflow: hidden;
 }
 
-.card-title {
-  font-weight: 400px;
+.people-card-container .MuiButtonBase-root {
+  color: var(--blue-primary);
+  text-decoration: none;
+}
+
+.people-card-container .MuiButtonBase-root:hover {
+  background-color: var(--hover-blue);
+  text-decoration: none !important;
 }
 
 .card-profile-images {
@@ -13,11 +28,20 @@
   object-fit: cover;
 }
 
-.show-more-list-link {
-  color: rgb(12, 102, 194);
-  text-decoration: none;
+.people-card-container svg {
+  background-color: white;
+  padding: 8px;
+  border-radius: 50%;
+  border: 1px solid;
+  border-color: var(--border-color);
+  color: darkgray;
+  font-size: 30px;
+  width: 2em;
+  height: 2em;
 }
-.show-more-list-link.component:hover {
-  background-color: lightblue;
-  text-decoration: none !important;
+
+.show-more-list-link svg {
+  border: none;
+  width: 1em;
+  height: 1em;
 }

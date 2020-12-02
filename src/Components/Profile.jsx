@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { Container, Col, Row } from "react-bootstrap";
 import { fetchUser, fetchAllUsers, fetchExperiences } from "../utils";
 import ProfileDetailsCard from "./ProfileDetailsCard";
+import '../Styles/Profile.css'
+import AboutCard from "./AboutCard"
 
-import "../Styles/Profile.css";
 
 import ELearning from "./ELearning";
 import PeopleSideCards from "./PeopleSideCards";
@@ -17,7 +18,6 @@ export default class Profile extends Component {
     user: {},
     users: [],
     experiences: [],
-    showTopBar: false,
     showModal: false,
     selectedExprience: "",
   };
@@ -34,7 +34,7 @@ export default class Profile extends Component {
     } catch (err) {}
     this.handleScroll();
   };
-
+ 
   
 
   handleModalToggle = async (experience = "") => {
@@ -42,12 +42,13 @@ export default class Profile extends Component {
       showModal: !this.state.showModal,
       selectedExprience: experience,
     });
+    if(!this.state.showModal){
     try {
       const experiences = await fetchExperiences(this.state.user._id);
       this.setState({experiences });
     } catch (err) {
       console.log(err)
-    }
+    }}
     
   };
   
@@ -58,10 +59,13 @@ export default class Profile extends Component {
         let currentScrollPos = window.pageYOffset;
         let maxScroll = document.body.scrollHeight - window.innerHeight;
         // console.log(maxScroll)
-        if (currentScrollPos > 350 && currentScrollPos < maxScroll) {
-          this.setState({ showTopBar: true });
+        let topbar = document.querySelector(".profileTopBar");
+        if (currentScrollPos > 350 && currentScrollPos <= maxScroll) {
+          topbar.classList.add('d-flex')
+          topbar.classList.remove('d-none')
         } else {
-          this.setState({ showTopBar: false });
+             topbar.classList.add("d-none");
+             topbar.classList.remove("d-flex");
         }
       };
     }
@@ -81,6 +85,9 @@ export default class Profile extends Component {
         <Row>
           <Col md={8}>
             <ProfileDetailsCard user={user} users={users} />
+
+            <AboutCard />
+
             <ExperienceEducation
               toggleModal={this.handleModalToggle}
               experiences={experiences}

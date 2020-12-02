@@ -1,7 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Card, Row, Image, Col, Media } from "react-bootstrap";
-import { makeStyles } from "@material-ui/core/styles";
 import {
   List,
   ListItem,
@@ -15,7 +14,7 @@ import CreateIcon from "@material-ui/icons/Create";
 import "../Styles/ExperienceEducation.css";
 
 export default function ExperienceEducation({ toggleModal, experiences }) {
-  console.log(experiences)
+  console.log(experiences);
   return (
     <div className="mt-3">
       <Card className="experience-education-container">
@@ -36,7 +35,7 @@ export default function ExperienceEducation({ toggleModal, experiences }) {
 
           <List>
             {experiences &&
-              experiences.map((experience) => (
+              experiences.map(experience => (
                 <>
                   <Divider variant="inset" component="li" />
                   <ListItem>
@@ -51,7 +50,7 @@ export default function ExperienceEducation({ toggleModal, experiences }) {
                       <Row className="justify-content-between">
                         <Typography variant="h5">{experience.role}</Typography>
                         <span>
-                          <CreateIcon onClick={ ()=>toggleModal(experience)}/>
+                          <CreateIcon onClick={() => toggleModal(experience)} />
                         </span>
                       </Row>
                       <Row>
@@ -66,14 +65,14 @@ export default function ExperienceEducation({ toggleModal, experiences }) {
               ))}
           </List>
         </Card.Body>
+        <Divider light />
         <ListItem
           button="primary"
           component="a"
           href="#"
           className="show-more-list-link justify-content-start"
         >
-          Show 3 more expereinces
-          <KeyboardArrowDownIcon />
+          Show 3 more expereinces ▾
         </ListItem>
         <Divider light />
 
@@ -181,8 +180,7 @@ export default function ExperienceEducation({ toggleModal, experiences }) {
           href="#"
           className="show-more-list-link justify-content-start"
         >
-          Show 3 more education
-          <KeyboardArrowDownIcon />
+          Show 3 more expereinces ▾
         </ListItem>
         <Divider light />
 
@@ -281,8 +279,7 @@ export default function ExperienceEducation({ toggleModal, experiences }) {
           href="#"
           className="show-more-list-link justify-content-start"
         >
-          Show more
-          <KeyboardArrowDownIcon />
+          Show 3 more expereinces ▾
         </ListItem>
       </Card>
     </div>

@@ -3,6 +3,7 @@
   --blue-primary: rgb(12, 102, 194);
   --border-color: #e0e0de;
   --button-grey-text-color: #7f7f7f;
+  --hover-blue: rgb(233, 243, 253);
 }
 
 .elearning-card-container {
@@ -21,14 +22,6 @@
   object-fit: cover;
 }
 
-.show-more-list-link {
-  color: var(--blue-primary);
-  text-decoration: none;
-}
-.show-more-list-link.component:hover {
-  background-color: lightblue;
-}
-
 .video-play-button {
   position: absolute;
   margin-top: 12px;
@@ -39,4 +32,20 @@
 
 .edit-work-experience:hover {
   display: block;
+}
+
+.people-card-container {
+  border-radius: 15px;
+  width: 25rem;
+  overflow: hidden;
+}
+
+.elearning-card-container .MuiButtonBase-root {
+  color: var(--blue-primary);
+  text-decoration: none;
+}
+
+.elearning-card-container .MuiButtonBase-root:hover {
+  background-color: var(--hover-blue);
+  text-decoration: none !important;
 }
