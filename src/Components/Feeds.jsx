@@ -36,7 +36,8 @@ class Feeds extends Component {
 
   handleModalToggle = async (selectedPost = "") => {
     this.setState({
-      showModal: !this.state.showModal,
+        showModal: !this.state.showModal,
+        selectedPost
     });
       if (!this.state.showModal) {
         this.fetchAllPosts()
@@ -58,7 +59,7 @@ class Feeds extends Component {
             {/* here goes all feeds + create new feed - */}
             <Button onClick={() => this.handleModalToggle()} />
             {posts.map((post) => (
-              <Post post={post} currentUser={`${user.name} ${user.surname}`} />
+                <Post post={post} currentUser={`${user.name} ${user.surname}`} toggleModal={this.handleModalToggle} userId={ user._id}/>
             ))}
           </Col>
           <Col md={3}> {/* here goes the small list of recent feeds - */}</Col>

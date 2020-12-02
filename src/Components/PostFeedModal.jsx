@@ -8,23 +8,39 @@ import {
   Button,
   Image,
 } from "react-bootstrap";
-import {} from "../utils";
 import AddIcon from "@material-ui/icons/Add";
 import PhotoSizeSelectActualOutlinedIcon from "@material-ui/icons/PhotoSizeSelectActualOutlined";
 import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
 import NoteIcon from "@material-ui/icons/Note";
 import { Divider } from "@material-ui/core";
-import { postPost } from "../utils";
+import { postPost, editPost, deletePost } from "../utils";
 
-export default function PostFeedModal({ toggleModal, showModal,selectedPost }) {
+export default function PostFeedModal({
+  toggleModal,
+  showModal,
+  selectedPost,
+}) {
   const [post, setPost] = useState({
     text: "",
   });
+
+  useEffect(() => {
+    console.log(selectedPost);
+    setPost(selectedPost);
+  }, [selectedPost]);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let res = await postPost(post);
-    if (res.ok) {
+    let res = "";
+    if (selectedPost == "") {
+      res = await postPost(post);
       alert("post successfully posted");
+
+      toggleModal("");
+    } else {
+      console.log(post._id);
+      res = await editPost(post._id, post);
+      alert("post successfully edited");
+
       toggleModal("");
     }
   };
@@ -32,6 +48,12 @@ export default function PostFeedModal({ toggleModal, showModal,selectedPost }) {
     const newPost = { ...post };
     newPost[e.target.name] = e.target.value;
     setPost(newPost);
+  };
+
+  const handleDeletePost = async () => {
+    const res = await deletePost(post._id);
+    alert("Post Successfully Deleted");
+    toggleModal("");
   };
 
   return (
@@ -44,7 +66,9 @@ export default function PostFeedModal({ toggleModal, showModal,selectedPost }) {
           keyboard={false}
         >
           <Modal.Header closeButton>
-            <Modal.Title>{selectedPost === "" ? 'Create a post' : 'Edit this post'}</Modal.Title>
+            <Modal.Title>
+              {selectedPost === "" ? "Create a post" : "Edit this post"}
+            </Modal.Title>
           </Modal.Header>
           <Container style={{ padding: "8rem" }}>
             <Row>
@@ -98,8 +122,14 @@ export default function PostFeedModal({ toggleModal, showModal,selectedPost }) {
                   </Row>
                 </Col>
                 <Col>
+                  {selectedPost !== "" && (
+                    <Button onClick={() => handleDeletePost()} variant="danger">
+                      Delete
+                    </Button>
+                  )}
+
                   <Button type="submit" variant="primary">
-                    Post
+                    {selectedPost !== "" ? "Edit" : "CreatePost"}
                   </Button>
                 </Col>
               </Row>
