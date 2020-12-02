@@ -43,7 +43,7 @@ export default function PostFeedModal({ toggleModal, showModal }) {
             </Col>
             <Col md={5}>
               {" "}
-              <Button variant="outline-secondary">{user?.name} ▾ </Button>
+              <Button variant="outline-secondary">{/*user?.name*/} ▾ </Button>
             </Col>
             <Col md={3}>
               <Button variant="outline-secondary">Anyone ▾ </Button>
