@@ -16,11 +16,15 @@ import NoteIcon from "@material-ui/icons/Note";
 import { Divider } from "@material-ui/core";
 import { postPost } from "../utils";
 
-export default function PostFeedModal({ toggleModal, showModal,selectedPost }) {
+export default function PostFeedModal({
+  toggleModal,
+  showModal,
+  selectedPost,
+}) {
   const [post, setPost] = useState({
     text: "",
   });
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     let res = await postPost(post);
     if (res.ok) {
@@ -28,22 +32,19 @@ export default function PostFeedModal({ toggleModal, showModal,selectedPost }) {
       toggleModal("");
     }
   };
-  const handleChange = (e) => {
+  const handleChange = e => {
     const newPost = { ...post };
     newPost[e.target.name] = e.target.value;
     setPost(newPost);
   };
 
   return (
-    <>
-
-    
     <div>
-    <Button variant="primary" onClick={() =>toggleModal()}>
+      <Button variant="primary" onClick={() => toggleModal()}>
         Launch demo modal
       </Button>
-     
-       <Modal
+
+      <Modal
         show={showModal}
         onHide={toggleModal}
         backdrop="static"
@@ -52,26 +53,39 @@ export default function PostFeedModal({ toggleModal, showModal,selectedPost }) {
         <Modal.Header closeButton>
           <Modal.Title>Create a post</Modal.Title>
         </Modal.Header>
+
         <Container style={{ padding: "1rem" }}>
           <Row>
-            <Col md={1}>
+            <Col md={3}>
               <Image
                 src="https://via.placeholder.com/75x75"
                 roundedCircle
                 className="mr-3"
               />
             </Col>
-            <Col md={5}>
-              {" "}
-              <Button variant="outline-secondary" className="rounded-pill" style={{width: "75px", fontSize:"12px"}}>
-                  {/* {user?.name}  */}
-                  User's Name ▾ </Button>
-            </Col>
             <Col md={3}>
-            <Button variant="outline-secondary" className="rounded-pill" style={{width: "125px", fontSize:"12px"}}>Anyone ▾ </Button>
+              {" "}
+              <Button
+                variant="outline-secondary"
+                className="rounded-pill"
+                style={{ width: "125px", fontSize: "12px" }}
+              >
+                {/* {user?.name}  */}
+                User's Name ▾{" "}
+              </Button>
+            </Col>
+            <Col md={3} className="ml-3">
+              <Button
+                variant="outline-secondary"
+                className="rounded-pill"
+                style={{ width: "125px", fontSize: "12px" }}
+              >
+                Anyone ▾{" "}
+              </Button>
             </Col>
             <Col md={3}></Col>
           </Row>
+
           <Form
             className="text-white mt-5"
             onSubmit={e => this.handleSubmit(e)}
@@ -86,86 +100,105 @@ export default function PostFeedModal({ toggleModal, showModal,selectedPost }) {
                 rows={3}
               />
             </Form.Group>
-
-            <Row>
-              <Col md={3} style={{color:"blue"}}>
-                Add Hastag
-              </Col>
-              <Col md={3}  style={{color:"blue"}}>
-                #programming
-              </Col>
-              <Col md={3} style={{color:"blue"}}>
-                #computerscience
-
-              </Col>
-              <Col md={3}></Col>
-            </Row>
-            <Row >
-              <Col>
-                <Row md={4} className= "d-flex d-flex justify-content-between">
-                  {" "}
-                  <AddIcon style={{color:"blue"}}/> <PhotoSizeSelectActualOutlinedIcon style={{color:"grey"}} />{" "}
-                  <VideoLibraryIcon style={{color:"grey"}}  />
-                  <NoteIcon style={{color:"grey"}} />
-                </Row>
-              </Col>
-              <Col >
-              <Row md={8} className= "d-flex d-flex justify-content-end">
-
-                <Button type="submit" variant="primary" className="rounded-pill mr-4" style={{width: "75px", fontSize:"12x"}} >
-                  Post
-
-            <Form className="text-white mt-5" onSubmit={(e) => handleSubmit(e)}>
-              <Form.Group>
-                <Form.Control
-                  required
-                  name="text"
-                  value={post.text}
-                  placeholder="What do you want to talk about?"
-                  as="textarea"
-                  rows={3}
-                  onChange={(e) => handleChange(e)}
-                />
-              </Form.Group>
-
-
-                </Button>
-                </Row>
-              </Col>
-            </Row>
-
           </Form>
-          <Divider light />
-          <Row >
-            <Col md={6} className="d-flex justify-content-around">
-            <Button variant="outline-secondary" className="rounded-pill" style={{width: "175px", fontSize:"12px"}}>Celebrate an occasion</Button>
+          <Row className= "d-flex justify-content-start">
+            <Col md={3} style={{ color: "blue", fontSize: "12px" }}>
+              Add Hastag
             </Col>
-            <Col md={6} className="d-flex justify-content-around">
-            <Button variant="outline-secondary" className="rounded-pill" style={{width: "175px", fontSize:"12px"}}>
+            <Col md={3} style={{ color: "blue", fontSize: "12px" }} >
+              #programming
+            </Col>
+            <Col md={3} style={{ color: "blue", fontSize: "12px" }} >
+              #computerscience
+            </Col>
+            <Col md={3}></Col>
+          </Row>
+          <Row>
+            <Col>
+              <Row md={4} className="d-flex d-flex justify-content-between mt-2">
+                {" "}
+                <AddIcon style={{ color: "blue" }} />{" "}
+                <PhotoSizeSelectActualOutlinedIcon style={{ color: "grey" }} />{" "}
+                <VideoLibraryIcon style={{ color: "grey" }} />
+                <NoteIcon style={{ color: "grey" }} />
+              </Row>
+            </Col>
+            <Col>
+              <Row md={8} className="d-flex d-flex justify-content-end">
+                <Button
+                  type="submit"
+                  variant="primary"
+                  className="rounded-pill mr-4 mb-2"
+                  style={{ width: "75px", fontSize: "12x" }}
+                >
+                  Post
+                </Button>
+              </Row>
+            </Col>
+          </Row>
+          <Divider light />
+          <Row>
+            <Col md={6} className="d-flex justify-content-around mt-3">
+              <Button
+                variant="outline-secondary"
+                className="rounded-pill"
+                style={{ width: "175px", fontSize: "12px" }}
+              >
+                Celebrate an occasion
+              </Button>
+            </Col>
+            <Col md={6} className="d-flex justify-content-around mt-3">
+              <Button
+                variant="outline-secondary"
+                className="rounded-pill"
+                style={{ width: "175px", fontSize: "12px" }}
+              >
                 Share the you're hiring
               </Button>
             </Col>
           </Row>
-          <Row >
-            <Col md={6} className="d-flex justify-content-around">
-            <Button variant="outline-secondary" className="rounded-pill" style={{width: "175px", fontSize:"12px"}}>Find an expert</Button>
+          <Row>
+            <Col md={6} className="d-flex justify-content-around mt-2">
+              <Button
+                variant="outline-secondary"
+                className="rounded-pill"
+                style={{ width: "175px", fontSize: "12px" }}
+              >
+                Find an expert
+              </Button>
             </Col>
-            <Col md={6} className="d-flex justify-content-around">
-              <Button variant="outline-secondary" className="rounded-pill" style={{width: "175px", fontSize:"12px"}}>Create a poll</Button>
+            <Col md={6} className="d-flex justify-content-around mt-2">
+              <Button
+                variant="outline-secondary"
+                className="rounded-pill"
+                style={{ width: "175px", fontSize: "12px" }}
+              >
+                Create a poll
+              </Button>
             </Col>
           </Row>
-          <Row >
-            <Col md={6} className="d-flex justify-content-around">
-            <Button variant="outline-secondary" className="rounded-pill" style={{width: "175px", fontSize:"12px"}}>Add a profile</Button>
+          <Row>
+            <Col md={6} className="d-flex justify-content-around mt-2">
+              <Button
+                variant="outline-secondary"
+                className="rounded-pill"
+                style={{ width: "175px", fontSize: "12px" }}
+              >
+                Add a profile
+              </Button>
             </Col>
-            <Col md={6} className="d-flex justify-content-around">
-            <Button variant="outline-secondary" className="rounded-pill" style={{width: "175px", fontSize:"12px"}}>Offer help</Button>
+            <Col md={6} className="d-flex justify-content-around mt-2">
+              <Button
+                variant="outline-secondary"
+                className="rounded-pill"
+                style={{ width: "175px", fontSize: "12px" }}
+              >
+                Offer help
+              </Button>
             </Col>
           </Row>
         </Container>
       </Modal>
     </div>
-
-    </>
   );
 }
