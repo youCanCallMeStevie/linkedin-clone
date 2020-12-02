@@ -44,7 +44,7 @@ export class ExperienceModal extends React.Component {
     e.preventDefault(e);
     let res = "";
     console.log('ghbjg')
-    if (this.props.selectedExprience == "") {
+    if (this.props.selectedExprience === "") {
       res = await postExperiences(this.props.userId, this.state.experience);
       console.log("button is working");
     } else {
@@ -62,15 +62,15 @@ export class ExperienceModal extends React.Component {
   };
 
   handleDelete = async () => {
-   console.log('clicke')
+    console.log('clicke')
     try {
       const res = await deleteExperience(this.props.userId, this.state.experience._id);
       console.log('deleted');
-       if (res.ok) {
-      alert("experience deleted");
-      this.props.toggleModal("");
-    }
-    } catch(err) {
+      if (res.ok) {
+        alert("experience deleted");
+        this.props.toggleModal("");
+      }
+    } catch (err) {
       console.log(err);
 
     }
@@ -86,14 +86,14 @@ export class ExperienceModal extends React.Component {
         backdrop="static"
         keyboard={false}
       >
-        <Form  onSubmit={(e) => this.handleSubmit(e)}>
-        <Modal.Header closeButton>
-          <Modal.Title>
-            {selectedExprience !== "" ? "Edit Experience" : "Add Experience"}
-          </Modal.Title>
-        </Modal.Header>
-        <Container  className="text-body mt-5">
-       
+        <Form onSubmit={(e) => this.handleSubmit(e)}>
+          <Modal.Header closeButton>
+            <Modal.Title>
+              {selectedExprience !== "" ? "Edit Experience" : "Add Experience"}
+            </Modal.Title>
+          </Modal.Header>
+          <Container className="text-body mt-5">
+
             <Form.Text className="text-muted">Title *</Form.Text>
             <Form.Group>
               <Form.Control
