@@ -31,7 +31,6 @@ class Feeds extends Component {
         <Row>
           <Col md={3}>
                     {/* here goes the profile card - Rita - */}
-                    {user?.name}
                     <FeedsProfileCard user={user} users={allUsers}/>
           </Col>
           <Col md={5}> {/* here goes all feeds + create new feed - */}</Col>
