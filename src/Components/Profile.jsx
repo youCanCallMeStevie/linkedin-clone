@@ -46,7 +46,7 @@ export default class Profile extends Component {
       const user =
         param === "me"
           ? await fetchUser()
-          : users.find((user) => user._id === param);
+          : users.find((user) => user.username === param);
       console.log(user);
 
       const experiences = await fetchExperiences(user._id);

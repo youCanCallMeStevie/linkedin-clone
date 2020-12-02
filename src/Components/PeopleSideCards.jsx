@@ -37,7 +37,7 @@ export default function Promoted({ users }) {
                       roundedCircle
                       className="mr-3"
                     />
-<Link to={`/profile/${user._id}`}>
+<Link to={`/profile/${user.username}`}>
                     <ListItemText
                       primary={`${user.name} ${user.surname}`}
                       secondary={user.title}

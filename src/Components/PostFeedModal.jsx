@@ -8,13 +8,12 @@ import {
   Button,
   Image,
 } from "react-bootstrap";
-import {} from "../utils";
 import AddIcon from "@material-ui/icons/Add";
 import PhotoSizeSelectActualOutlinedIcon from "@material-ui/icons/PhotoSizeSelectActualOutlined";
 import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
 import NoteIcon from "@material-ui/icons/Note";
 import { Divider } from "@material-ui/core";
-import { postPost } from "../utils";
+import { postPost, editPost, deletePost } from "../utils";
 
 export default function PostFeedModal({
   toggleModal,
@@ -24,11 +23,26 @@ export default function PostFeedModal({
   const [post, setPost] = useState({
     text: "",
   });
-  const handleSubmit = async e => {
+
+
+  useEffect(() => {
+    console.log(selectedPost);
+    setPost(selectedPost);
+  }, [selectedPost]);
+  const handleSubmit = async (e) => {
+
     e.preventDefault();
-    let res = await postPost(post);
-    if (res.ok) {
+    let res = "";
+    if (selectedPost == "") {
+      res = await postPost(post);
       alert("post successfully posted");
+
+      toggleModal("");
+    } else {
+      console.log(post._id);
+      res = await editPost(post._id, post);
+      alert("post successfully edited");
+
       toggleModal("");
     }
   };
@@ -38,7 +52,14 @@ export default function PostFeedModal({
     setPost(newPost);
   };
 
+  const handleDeletePost = async () => {
+    const res = await deletePost(post._id);
+    alert("Post Successfully Deleted");
+    toggleModal("");
+  };
+
   return (
+
     <div>
       <Button variant="primary" onClick={() => toggleModal()}>
         Launch demo modal
@@ -121,6 +142,7 @@ export default function PostFeedModal({
                 <PhotoSizeSelectActualOutlinedIcon style={{ color: "grey" }} />{" "}
                 <VideoLibraryIcon style={{ color: "grey" }} />
                 <NoteIcon style={{ color: "grey" }} />
+
               </Row>
             </Col>
             <Col>
