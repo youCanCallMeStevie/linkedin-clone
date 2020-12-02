@@ -27,7 +27,7 @@ export class NavBar extends Component {
   render() {
     return (
       <div>
-        <Navbar expand="lg" className="position-sticky mynavbar" >
+        <Navbar expand="lg" className=" mynavbar" >
           <Container>
             <Navbar.Brand href="#home" className=" position-sticky logo">
             <img alt="icon" src={Linkedin} className="logo" />

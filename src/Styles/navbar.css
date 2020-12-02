@@ -52,19 +52,25 @@
 }
 .mynavbar {
   z-index: 6;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 80px;
+  z-index: 333;
 }
 .dropdown-item {
   font-size: 15px;
   color: #666666;
   padding: 0.1 0.5rem !important;
 }
-.avatar-dd .dropdown-menu{
+.avatar-dd .dropdown-menu {
   overflow-y: hidden !important;
-    height: auto !important;
-    width: 200px !important;
+  height: auto !important;
+  width: 200px !important;
 }
-.avatar-dd .dropdown-menu.show{
-display: table !important;
+.avatar-dd .dropdown-menu.show {
+  display: table !important;
 }
 .button-profile {
   color: #007bff;
