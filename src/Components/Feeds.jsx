@@ -8,7 +8,9 @@ import ProfileDetailsCard from "./ProfileDetailsCard";
 import Post from "./Post";
 import ExperienceModal from "./ExperienceModal";
 import PostFeedModal from "./PostFeedModal";
-import Postbox from "./Postbox"
+import Postbox from "./Postbox";
+import LinkedNews from "./LinkedNews";
+import AddFeed from "./AddFeed";
 
 class Feeds extends Component {
   state = {
@@ -55,7 +57,7 @@ class Feeds extends Component {
             {/* here goes the profile card - Rita - */}
             <FeedsProfileCard user={user} users={allUsers} />
           </Col>
-          <Col md={7} className="mx-3">
+          <Col md={7}>
             {" "}
             {/* here goes all feeds + create new feed - */}
             <Postbox />
@@ -75,7 +77,10 @@ class Feeds extends Component {
                 />
               ))}
           </Col>
-          <Col md={3}> {/* here goes the small list of recent feeds - */}</Col>
+          <Col md={3}> 
+          <LinkedNews /> 
+          <AddFeed />
+          </Col>
         </Row>
         <PostFeedModal
           showModal={showModal}
