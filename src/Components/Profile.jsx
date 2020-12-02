@@ -11,6 +11,7 @@ import ExperienceEducation from "./ExperienceEducation";
 import Promoted from "./Promoted";
 import ProfileTopBar from "./ProfileTopBar";
 import ExperienceModal from "./ExperienceModal";
+import Dashboard from './Dashboard'
 
 export default class Profile extends Component {
   state = {
@@ -52,7 +53,7 @@ export default class Profile extends Component {
       console.log(experiences);
 
       this.setState({ user, users, experiences });
-    } catch (err) {}
+    } catch (err) { }
   };
 
   //function to toggle the modal
@@ -89,7 +90,7 @@ export default class Profile extends Component {
       };
     }
   };
-  
+
   render() {
     const {
       user,
@@ -105,7 +106,7 @@ export default class Profile extends Component {
         <Row>
           <Col md={8}>
             <ProfileDetailsCard user={user} users={users} />
-
+            <Dashboard />
             <AboutCard />
 
             <ExperienceEducation
