@@ -5,15 +5,16 @@ import PublicIcon from "@material-ui/icons/Public";
 import AddIcon from "@material-ui/icons/Add";
 import DropdownPost from "./DropdownPost";
 
-function Post({ post }) {
+function Post({ post,currentUser }) {
    
 
     return (
       <Row className="post d-flex flex-column ">
-        <Row className="d-flex justify-content-end">
+            <Row className="d-flex justify-content-between align-items-center pt-0 pb-3 post__header">
+                <span><b>{currentUser}</b> likes this</span>
           <DropdownPost></DropdownPost>
         </Row>
-        <Row className="d-flex justify-content-between">
+        <Row className="post__body d-flex justify-content-between pt-3">
           <div className="d-flex">
             <div className="post__avatar mr-2">
               <img src={post.user.image} />

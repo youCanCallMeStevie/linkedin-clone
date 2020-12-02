@@ -13,7 +13,7 @@ export default class DropdownPost extends Component {
   render() {
     return (
       <Dropdown className="dropdown-btn">
-        <Dropdown.Toggle>
+        <Dropdown.Toggle variant={'trasparent-grey-post'}>
           <MoreHorizIcon />
         </Dropdown.Toggle>
 

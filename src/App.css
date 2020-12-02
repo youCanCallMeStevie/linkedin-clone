@@ -29,4 +29,10 @@
   color: var(--button-grey-text-color);
   border: 1px solid var(--button-grey-text-color);
 }
+.btn-trasparent-grey-post {
+  background-color: transparent;
+  color: var(--button-grey-text-color);
+  height: 20px;
+  
+}
 

@@ -6,11 +6,12 @@
 
 .helpText{
     font-size: 12px;
+    color: #666666 !important;
 }
 
 .dropdownText{
     font-size: 11px !important;
-    margin-top: -10px;
+    color: #666666 !important;
 }
 
 .dropdown-menu{

@@ -1,22 +1,42 @@
 import React, { useState, useEffect } from "react";
-import { Container, Form, Row, Col, Modal, Button, Image } from "react-bootstrap";
+import {
+  Container,
+  Form,
+  Row,
+  Col,
+  Modal,
+  Button,
+  Image,
+} from "react-bootstrap";
+import {} from "../utils";
 import AddIcon from "@material-ui/icons/Add";
 import PhotoSizeSelectActualOutlinedIcon from "@material-ui/icons/PhotoSizeSelectActualOutlined";
 import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
 import NoteIcon from "@material-ui/icons/Note";
 import { Divider } from "@material-ui/core";
- 
+import { postPost } from "../utils";
 
-
-export default function PostFeedModal({ toggleModal, showModal }) {
+export default function PostFeedModal({ toggleModal, showModal,selectedPost }) {
   const [post, setPost] = useState({
-    text:""
-  })
-
+    text: "",
+  });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let res = await postPost(post);
+    if (res.ok) {
+      alert("post successfully posted");
+      toggleModal("");
+    }
+  };
+  const handleChange = (e) => {
+    const newPost = { ...post };
+    newPost[e.target.name] = e.target.value;
+    setPost(newPost);
+  };
 
   return (
-    
     <>
+
     
     <div>
     <Button variant="primary" onClick={() =>toggleModal()}>
@@ -76,7 +96,9 @@ export default function PostFeedModal({ toggleModal, showModal }) {
               </Col>
               <Col md={3} style={{color:"blue"}}>
                 #computerscience
+
               </Col>
+              <Col md={3}></Col>
             </Row>
             <Row >
               <Col>
@@ -92,10 +114,26 @@ export default function PostFeedModal({ toggleModal, showModal }) {
 
                 <Button type="submit" variant="primary" className="rounded-pill mr-4" style={{width: "75px", fontSize:"12x"}} >
                   Post
+
+            <Form className="text-white mt-5" onSubmit={(e) => handleSubmit(e)}>
+              <Form.Group>
+                <Form.Control
+                  required
+                  name="text"
+                  value={post.text}
+                  placeholder="What do you want to talk about?"
+                  as="textarea"
+                  rows={3}
+                  onChange={(e) => handleChange(e)}
+                />
+              </Form.Group>
+
+
                 </Button>
                 </Row>
               </Col>
             </Row>
+
           </Form>
           <Divider light />
           <Row >
@@ -127,6 +165,7 @@ export default function PostFeedModal({ toggleModal, showModal }) {
         </Container>
       </Modal>
     </div>
+
     </>
   );
 }
