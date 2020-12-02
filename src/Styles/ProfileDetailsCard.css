@@ -62,3 +62,27 @@ h6 {
 .profileDetails_card__body h6 {
   font-size: 18px;
 }
+
+.feedProfileCard .profileDetails_card {
+  min-height: 200px;
+}
+.feedProfileCard .profileDetails_card__profile-bgr {
+  height: 50px;
+  background-image: url("https://static-exp1.licdn.com/sc/h/cpemy7gsm8bzfb5nnbbnswfdm");
+  position: relative;
+}
+.feedProfileCard .profileDetails_card__profile-img {
+  width: 80px;
+  height: 80px;
+  background: var(--border-color);
+  border-radius: 50%;
+  position: absolute;
+  bottom: -50px;
+  left: 15px;
+  overflow: hidden;
+  padding: 1px;
+}
+.feedProfileCard .profileDetails_card__body {
+  background-color: rgb(255, 255, 255);
+
+}
