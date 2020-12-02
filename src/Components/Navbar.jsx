@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {withRouter} from 'react-router-dom'
 import "bootstrap/dist/css/bootstrap.min.css";
 import Linkedin from "../Assets/LinkedIn-Logos/linkedin.png";
 import "../Styles/navbar.css";
@@ -145,4 +146,4 @@ export class NavBar extends Component {
   }
 }
 
-export default NavBar;
+export default withRouter(NavBar);
