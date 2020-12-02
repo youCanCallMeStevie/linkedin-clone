@@ -43,7 +43,8 @@ export class ExperienceModal extends React.Component {
   handleSubmit = async (e) => {
     e.preventDefault(e);
     let res = "";
-    if (this.props.selectedExprience === "") {
+    console.log('ghbjg')
+    if (this.props.selectedExprience == "") {
       res = await postExperiences(this.props.userId, this.state.experience);
       console.log("button is working");
     } else {
@@ -85,16 +86,14 @@ export class ExperienceModal extends React.Component {
         backdrop="static"
         keyboard={false}
       >
+        <Form  onSubmit={(e) => this.handleSubmit(e)}>
         <Modal.Header closeButton>
           <Modal.Title>
             {selectedExprience !== "" ? "Edit Experience" : "Add Experience"}
           </Modal.Title>
         </Modal.Header>
-        <Container>
-          <Form
-            className="text-body mt-5"
-            onSubmit={(e) => this.handleSubmit(e)}
-          >
+        <Container  className="text-body mt-5">
+       
             <Form.Text className="text-muted">Title *</Form.Text>
             <Form.Group>
               <Form.Control
@@ -214,24 +213,24 @@ export class ExperienceModal extends React.Component {
               <Form.File.Label>Upload</Form.File.Label>
               <Form.File.Input />
             </Form.File> */}
-          </Form>
-        </Container>
-        <Modal.Header>
-          <div className="w-100 d-flex justify-content-end">
-            {selectedExprience !== "" && (
-              <Button
-                className="mr-3"
-                variant="danger"
-                onClick={() => this.handleDelete()}
-              >
-                Delete
+          </Container>
+          <Modal.Header>
+            <div className="w-100 d-flex justify-content-end">
+              {selectedExprience !== "" && (
+                <Button
+                  className="mr-3"
+                  variant="danger"
+                  onClick={() => this.handleDelete()}
+                >
+                  Delete
+                </Button>
+              )}
+              <Button type="submit" variant="primary">
+                Submit
               </Button>
-            )}
-            <Button type="submit" variant="primary">
-              Submit
-            </Button>
-          </div>
-        </Modal.Header>
+            </div>
+          </Modal.Header>
+        </Form>
       </Modal>
     );
   }
