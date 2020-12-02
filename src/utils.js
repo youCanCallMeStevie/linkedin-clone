@@ -35,6 +35,7 @@ const {
   REACT_APP_PROFILE,
   REACT_APP_TOKEN,
   REACT_APP_PROFILELIST,
+  REACT_APP_POSTS,
 } = process.env;
 
 export const fetchUser = async () => {
@@ -166,5 +167,24 @@ export const deleteExperience = async (id, expId) => {
     }
   } catch (err) {
     console.log("there is an error", err);
+  }
+};
+
+export const fetchPosts = async () => {
+  try {
+    const res = await fetch(REACT_APP_POSTS, {
+      headers: {
+        Authorization: "Bearer " + REACT_APP_TOKEN,
+      },
+    });
+    const posts= await res.json();
+    if (res.ok) {
+      console.log("all good");
+      return posts;
+    } else {
+      console.log("there is an error with posts");
+    }
+  } catch (err) {
+    console.log("there is an error with fetching posts");
   }
 };

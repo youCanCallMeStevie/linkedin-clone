@@ -5,6 +5,7 @@
   border: 1px solid #e0e0de;
   margin: 0;
   overflow: hidden;
+  width: 100%;
 }
 
 .profileDetails_card__profile-bgr {
@@ -69,20 +70,67 @@ h6 {
 .feedProfileCard .profileDetails_card__profile-bgr {
   height: 50px;
   background-image: url("https://static-exp1.licdn.com/sc/h/cpemy7gsm8bzfb5nnbbnswfdm");
-  position: relative;
+  position: relative;  
+  border-top: 3px solid var(--gold-color);
 }
+.feedProfileCard .profileDetails_card__profile-bgr:after {
+  height: 100%;
+  width: 100%;
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  background: linear-gradient(to bottom,rgba(0,0,0,.75),rgba(0,0,0,0));
+}
+
+
 .feedProfileCard .profileDetails_card__profile-img {
-  width: 80px;
-  height: 80px;
-  background: var(--border-color);
-  border-radius: 50%;
+  width: 65px;
+  height: 65px;
+  background: white;
+  border: 0.1px solid var(--border-color);
   position: absolute;
-  bottom: -50px;
-  left: 15px;
-  overflow: hidden;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
   padding: 1px;
+  z-index: 33
+
 }
 .feedProfileCard .profileDetails_card__body {
   background-color: rgb(255, 255, 255);
+  border-radius: 15px;
+  padding-top: 50px;
+  text-align: center;
+  padding-left:0;
+  padding-right:0;
+  padding-bottom: 0;
 
+  
+
+}
+.feedProfileCard .profileDetails_card {
+  background-color: rgb(255, 255, 255);
+  border-radius: 15px;
+  min-height: 200px;
+  border: 1px solid #e0e0de;
+  margin: 0;
+  overflow: hidden;
+    min-height: fit-content;
+    padding-bottom: 0;
+
+}
+.feedProfileCard .profileDetails_card__body h5 {
+  font-weight: 600;
+  font-size: 16px;
+}
+.feedProfileCard .profileDetails_card__body h4 {
+  font-size: 12px;
+}
+.feeds_profileDetails__card-contacts{
+  margin-top: 20px;
+  font-size: 12px;
+  padding:15px;
+  padding-bottom: 0px;
+  border-top: 1px solid var(--border-color);
 }
