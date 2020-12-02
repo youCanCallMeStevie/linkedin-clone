@@ -1,13 +1,13 @@
 import React from "react";
 import { Container, Form, Row, Col, Modal, Button, Image } from "react-bootstrap";
-import {} from "../utils";
 import AddIcon from "@material-ui/icons/Add";
 import PhotoSizeSelectActualOutlinedIcon from "@material-ui/icons/PhotoSizeSelectActualOutlined";
 import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
 import NoteIcon from "@material-ui/icons/Note";
 import { Divider } from "@material-ui/core";
+ 
 
-export default function PostFeedModal({toggleModal, showModal}) {
+export default function PostFeedModal({toggleModal, showModal, user}) {
 
   return (
     
@@ -38,7 +38,7 @@ export default function PostFeedModal({toggleModal, showModal}) {
             </Col>
             <Col md={5}>
               {" "}
-              <Button variant="outline-secondary">user?.name ▾ </Button>
+              <Button variant="outline-secondary">{user?.name} ▾ </Button>
             </Col>
             <Col md={3}>
               <Button variant="outline-secondary">Anyone ▾ </Button>

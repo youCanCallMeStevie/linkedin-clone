@@ -5,11 +5,13 @@ import "../Styles/Feeds.css";
 import { fetchUser, fetchAllUsers, fetchExperiences } from "../utils";
 import FeedsProfileCard from "./FeedsProfileCard";
 import ProfileDetailsCard from "./ProfileDetailsCard";
+import PostFeedModal from "./PostFeedModal"
 
 class Feeds extends Component {
     state = {
         user: "",
-        allUsers:[]
+        allUsers:[],
+        showModal: false,
     }
   componentDidMount = () => {
     console.log(this.props);
@@ -24,8 +26,18 @@ class Feeds extends Component {
             }
 
     }
+
+
+
+
+      //function to toggle the modal
+  handleModalToggle = async () => {
+    this.setState({
+      showModal: !this.state.showModal,
+    });
+  };
     render() {
-      const { user, allUsers } = this.state;
+      const { user, allUsers, showModal } = this.state;
     return (
       <Container className="feeds">
         <Row>
@@ -33,6 +45,8 @@ class Feeds extends Component {
                     {/* here goes the profile card - Rita - */}
                     {user?.name}
                     <FeedsProfileCard user={user} users={allUsers}/>
+                    <PostFeedModal toggleModal={this.handleModalToggle}
+          showModal={showModal}/>
           </Col>
           <Col md={5}> {/* here goes all feeds + create new feed - */}</Col>
           <Col md={4}> {/* here goes the small list of recent feeds - */}</Col>
