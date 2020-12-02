@@ -59,7 +59,6 @@ export default function PostFeedModal({
   };
 
   return (
-
     <div>
       <Button variant="primary" onClick={() => toggleModal()}>
         Launch demo modal
@@ -72,7 +71,9 @@ export default function PostFeedModal({
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Create a post</Modal.Title>
+          <Modal.Title>
+            {selectedPost == "" ? "Create a post" : "Edit Post"}
+          </Modal.Title>
         </Modal.Header>
 
         <Container style={{ padding: "1rem" }}>
@@ -107,10 +108,7 @@ export default function PostFeedModal({
             <Col md={3}></Col>
           </Row>
 
-          <Form
-            className="text-white mt-5"
-            onSubmit={e => this.handleSubmit(e)}
-          >
+          <Form className="text-white mt-5" onSubmit={(e) => handleSubmit(e)}>
             <Form.Group>
               <Form.Control
                 required
@@ -119,41 +117,53 @@ export default function PostFeedModal({
                 placeholder="What do you want to talk about?"
                 as="textarea"
                 rows={3}
+                onChange={() => handleChange()}
               />
             </Form.Group>
           </Form>
-          <Row className= "d-flex justify-content-start">
+          <Row className="d-flex justify-content-start">
             <Col md={3} style={{ color: "blue", fontSize: "12px" }}>
               Add Hastag
             </Col>
-            <Col md={3} style={{ color: "blue", fontSize: "12px" }} >
+            <Col md={3} style={{ color: "blue", fontSize: "12px" }}>
               #programming
             </Col>
-            <Col md={3} style={{ color: "blue", fontSize: "12px" }} >
+            <Col md={3} style={{ color: "blue", fontSize: "12px" }}>
               #computerscience
             </Col>
             <Col md={3}></Col>
           </Row>
           <Row>
             <Col>
-              <Row md={4} className="d-flex d-flex justify-content-between mt-2">
+              <Row
+                md={4}
+                className="d-flex d-flex justify-content-between mt-2"
+              >
                 {" "}
                 <AddIcon style={{ color: "blue" }} />{" "}
                 <PhotoSizeSelectActualOutlinedIcon style={{ color: "grey" }} />{" "}
                 <VideoLibraryIcon style={{ color: "grey" }} />
                 <NoteIcon style={{ color: "grey" }} />
-
               </Row>
             </Col>
             <Col>
-              <Row md={8} className="d-flex d-flex justify-content-end">
+              <Row md={8} className="d-flex d-flex justify-content-end py-3">
+                {selectedPost !== "" &&
+                  <Button
+                    onClick={() => handleDeletePost()}
+                    variant="danger"
+                    className="rounded-pill mr-4 mb-2"
+                    style={{ width: "75px", fontSize: "12x" }}
+                  >
+                    Delete
+                </Button>}
                 <Button
                   type="submit"
                   variant="primary"
                   className="rounded-pill mr-4 mb-2"
                   style={{ width: "75px", fontSize: "12x" }}
                 >
-                  Post
+                  {selectedPost == "" ? "Post" : "Edit"}
                 </Button>
               </Row>
             </Col>
