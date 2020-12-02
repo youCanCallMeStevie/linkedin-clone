@@ -12,6 +12,7 @@ import ExperienceEducation from "./ExperienceEducation";
 import Promoted from "./Promoted";
 import ProfileTopBar from "./ProfileTopBar";
 import ExperienceModal from "./ExperienceModal";
+import PostFeedModal from "./PostFeedModal";
 
 export default class Profile extends Component {
   state = {
@@ -84,6 +85,7 @@ export default class Profile extends Component {
         <ProfileTopBar show={showTopBar} user={user} />
         <Row>
           <Col md={8}>
+           
             <ProfileDetailsCard user={user} users={users} />
 
             <AboutCard />
@@ -106,6 +108,8 @@ export default class Profile extends Component {
           toggleModal={this.handleModalToggle}
           selectedExprience={selectedExprience}
         />
+         {/* <PostFeedModal toggleModal={this.handleModalToggle}
+          showModal={showModal}/> */}
       </Container>
     );
   }
