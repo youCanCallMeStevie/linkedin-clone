@@ -14,13 +14,12 @@ class Feeds extends Component {
     user: "",
     allUsers: [],
     posts: [],
-      showModal: false,
-
+    showModal: false,
+    selectedPost: "",
   };
 
   componentDidMount = async () => {
-    const posts = await fetchPosts();
-    this.setState({ posts });
+    this.fetchAllPosts();
   };
   componentDidUpdate = (prevProp) => {
     if (prevProp.curretUser !== this.props.curretUser) {
@@ -28,19 +27,25 @@ class Feeds extends Component {
     }
     if (prevProp.allUsers !== this.props.allUsers) {
       this.setState({ allUsers: this.props.allUsers });
-
     }
   };
+  fetchAllPosts = async () => {
+    const posts = await fetchPosts();
+    this.setState({ posts });
+  };
 
-  handleModalToggle = async (experience = "") => {
+  handleModalToggle = async (selectedPost = "") => {
     this.setState({
       showModal: !this.state.showModal,
     });
+      if (!this.state.showModal) {
+        this.fetchAllPosts()
+      this.setState({ selectedPost });
+    }
   };
 
-
   render() {
-    const { user, allUsers, posts, showModal } = this.state;
+    const { user, allUsers, posts, showModal, selectedPost } = this.state;
     return (
       <Container className="feeds">
         <Row>
@@ -55,13 +60,13 @@ class Feeds extends Component {
             {posts.map((post) => (
               <Post post={post} currentUser={`${user.name} ${user.surname}`} />
             ))}
-
           </Col>
           <Col md={3}> {/* here goes the small list of recent feeds - */}</Col>
         </Row>
         <PostFeedModal
           showModal={showModal}
           toggleModal={this.handleModalToggle}
+          selectedPost={selectedPost}
         />
       </Container>
     );

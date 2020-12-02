@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Container, Form, Row, Col, Modal, Button, Image } from "react-bootstrap";
+import {
+  Container,
+  Form,
+  Row,
+  Col,
+  Modal,
+  Button,
+  Image,
+} from "react-bootstrap";
 import {} from "../utils";
 import AddIcon from "@material-ui/icons/Add";
 import PhotoSizeSelectActualOutlinedIcon from "@material-ui/icons/PhotoSizeSelectActualOutlined";
@@ -8,13 +16,17 @@ import NoteIcon from "@material-ui/icons/Note";
 import { Divider } from "@material-ui/core";
 import { postPost } from "../utils";
 
-export default function PostFeedModal({ toggleModal, showModal }) {
+export default function PostFeedModal({ toggleModal, showModal,selectedPost }) {
   const [post, setPost] = useState({
     text: "",
   });
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("submit");
+    let res = await postPost(post);
+    if (res.ok) {
+      alert("post successfully posted");
+      toggleModal("");
+    }
   };
   const handleChange = (e) => {
     const newPost = { ...post };
@@ -32,7 +44,7 @@ export default function PostFeedModal({ toggleModal, showModal }) {
           keyboard={false}
         >
           <Modal.Header closeButton>
-            <Modal.Title>Create a post</Modal.Title>
+            <Modal.Title>{selectedPost === "" ? 'Create a post' : 'Edit this post'}</Modal.Title>
           </Modal.Header>
           <Container style={{ padding: "8rem" }}>
             <Row>
