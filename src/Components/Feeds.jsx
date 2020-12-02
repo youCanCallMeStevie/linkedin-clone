@@ -60,8 +60,7 @@ class Feeds extends Component {
           <Col md={7}>
             {" "}
             {/* here goes all feeds + create new feed - */}
-            <Postbox />
-            <Button onClick={() => this.handleModalToggle()} />
+                    <Postbox toggleModal={this.handleModalToggle}/>
             {posts
               .sort((a, b) => {
                 const c = new Date(a.updatedAt);

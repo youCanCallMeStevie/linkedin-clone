@@ -1,5 +1,4 @@
 #cardd{
-    width: 35rem;
     height: 7.5rem;
     
 }
@@ -25,4 +24,9 @@
     background: transparent;
     border-color: transparent;
     color: #666666 !important;
+}
+
+#startPost .MuiSvgIcon-root{
+    cursor: pointer;
+    margin-right: 10px;
 }
