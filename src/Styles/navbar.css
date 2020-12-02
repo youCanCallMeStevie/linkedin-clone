@@ -58,6 +58,14 @@
   color: #666666;
   padding: 0.1 0.5rem !important;
 }
+.avatar-dd .dropdown-menu{
+  overflow-y: hidden !important;
+    height: auto !important;
+    width: 200px !important;
+}
+.avatar-dd .dropdown-menu.show{
+display: table !important;
+}
 .button-profile {
   color: #007bff;
   font-weight: 500;
@@ -100,6 +108,7 @@
 .icons {
   color: #666666 !important;
 }
+
 .avatar-dd {
   margin-bottom: -13px;
   margin-top: -10px;
