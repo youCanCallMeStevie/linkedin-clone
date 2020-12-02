@@ -27,6 +27,7 @@ class Feeds extends Component {
     }
     if (prevProp.allUsers !== this.props.allUsers) {
       this.setState({ allUsers: this.props.allUsers });
+
     }
   };
 
@@ -35,6 +36,7 @@ class Feeds extends Component {
       showModal: !this.state.showModal,
     });
   };
+
 
   render() {
     const { user, allUsers, posts, showModal } = this.state;
@@ -52,6 +54,7 @@ class Feeds extends Component {
             {posts.map((post) => (
               <Post post={post} />
             ))}
+
           </Col>
           <Col md={3}> {/* here goes the small list of recent feeds - */}</Col>
         </Row>
