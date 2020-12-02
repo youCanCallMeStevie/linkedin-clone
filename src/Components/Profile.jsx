@@ -11,7 +11,6 @@ import ExperienceEducation from "./ExperienceEducation";
 import Promoted from "./Promoted";
 import ProfileTopBar from "./ProfileTopBar";
 import ExperienceModal from "./ExperienceModal";
-import Dashboard from './Dashboard'
 
 export default class Profile extends Component {
   state = {
@@ -106,7 +105,7 @@ export default class Profile extends Component {
         <Row>
           <Col md={8}>
             <ProfileDetailsCard user={user} users={users} />
-            <Dashboard />
+
             <AboutCard />
 
             <ExperienceEducation
