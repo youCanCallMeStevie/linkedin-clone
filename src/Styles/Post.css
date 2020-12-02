@@ -33,3 +33,7 @@
     transform: translateX(-20px);
     font-size: 12px;
 }
+
+.post__header{
+  border-bottom: 1px solid var(--border-color);
+}
