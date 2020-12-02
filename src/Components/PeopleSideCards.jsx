@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from 'react-router-dom'
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Card, Row, Image, Col } from "react-bootstrap";
 import { makeStyles } from '@material-ui/core/styles';
@@ -36,11 +37,11 @@ export default function Promoted({ users }) {
                       roundedCircle
                       className="mr-3"
                     />
-
+<Link to={`/profile/${user._id}`}>
                     <ListItemText
                       primary={`${user.name} ${user.surname}`}
                       secondary={user.title}
-                    />
+                    /> </Link>
                     <ListItemAvatar>
                         <PersonAddIcon />
                     </ListItemAvatar>

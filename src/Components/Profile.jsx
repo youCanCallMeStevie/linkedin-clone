@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import { Container, Col, Row } from "react-bootstrap";
 import { fetchUser, fetchAllUsers, fetchExperiences } from "../utils";
 import ProfileDetailsCard from "./ProfileDetailsCard";
-import '../Styles/Profile.css'
-import AboutCard from "./AboutCard"
-
+import "../Styles/Profile.css";
+import AboutCard from "./AboutCard";
 
 import ELearning from "./ELearning";
 import PeopleSideCards from "./PeopleSideCards";
@@ -21,38 +20,58 @@ export default class Profile extends Component {
     showModal: false,
     selectedExprience: "",
   };
+  //called when components receive a new prop (for example a new user id)
+  componentDidUpdate = async (prevProp, prevState) => {
+    if (prevProp.match.params.user != this.props.match.params.user) {
+      this.setUpUser();
+    }
+  };
 
+  //called once when component mounts 
   componentDidMount = async () => {
-    try {
-      const user = await fetchUser();
-      const experiences = await fetchExperiences(user._id);
-      console.log(experiences);
-      const users = await fetchAllUsers();
+    this.setUpUser();
 
-      this.setState({ user, users, experiences });
-      console.log(this.state);
-    } catch (err) {}
+    console.log(this.state);
+
     this.handleScroll();
   };
- 
-  
 
+  //function to set up the userand experiences when component load or when routing to new user
+  setUpUser = async () => {
+    let param = this.props.match.params.user;
+    // use later: param = param.split(".");
+    try {
+      const users = await fetchAllUsers();
+      const user =
+        param === "me"
+          ? await fetchUser()
+          : users.find((user) => user._id === param);
+      console.log(user);
+
+      const experiences = await fetchExperiences(user._id);
+      console.log(experiences);
+
+      this.setState({ user, users, experiences });
+    } catch (err) {}
+  };
+
+  //function to toggle the modal
   handleModalToggle = async (experience = "") => {
     this.setState({
       showModal: !this.state.showModal,
       selectedExprience: experience,
     });
-    if(!this.state.showModal){
-    try {
-      const experiences = await fetchExperiences(this.state.user._id);
-      this.setState({experiences });
-    } catch (err) {
-      console.log(err)
-    }}
-    
+    if (!this.state.showModal) {
+      try {
+        const experiences = await fetchExperiences(this.state.user._id);
+        this.setState({ experiences });
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
-  
 
+  //function to make the top bar appear when scrolling
   handleScroll = () => {
     if (typeof window !== "undefined") {
       window.onscroll = () => {
@@ -61,15 +80,16 @@ export default class Profile extends Component {
         // console.log(maxScroll)
         let topbar = document.querySelector(".profileTopBar");
         if (currentScrollPos > 350 && currentScrollPos <= maxScroll) {
-          topbar.classList.add('d-flex')
-          topbar.classList.remove('d-none')
+          topbar.classList.add("d-flex");
+          topbar.classList.remove("d-none");
         } else {
-             topbar.classList.add("d-none");
-             topbar.classList.remove("d-flex");
+          topbar.classList.add("d-none");
+          topbar.classList.remove("d-flex");
         }
       };
     }
   };
+  
   render() {
     const {
       user,
