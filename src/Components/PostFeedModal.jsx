@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Form, Row, Col, Modal, Button, Image } from "react-bootstrap";
 import {} from "../utils";
 import AddIcon from "@material-ui/icons/Add";
@@ -7,7 +7,10 @@ import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
 import NoteIcon from "@material-ui/icons/Note";
 import { Divider } from "@material-ui/core";
 
-export default function PostFeedModal({toggleModal, showModal}) {
+export default function PostFeedModal({ toggleModal, showModal }) {
+  const [post, setPost] = useState({
+    text:""
+  })
 
   return (
     
@@ -52,8 +55,8 @@ export default function PostFeedModal({toggleModal, showModal}) {
             <Form.Group>
               <Form.Control
                 required
-                name="post"
-                // value={}
+                name="text"
+                value={post.text}
                 placeholder="What do you want to talk about?"
                 as="textarea"
                 rows={3}

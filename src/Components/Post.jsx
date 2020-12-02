@@ -1,13 +1,18 @@
-import React from "react";
-import { Container, Col, Row } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Container, Col, Row ,Button, Dropdown} from "react-bootstrap";
 import "../Styles/Post.css";
 import PublicIcon from "@material-ui/icons/Public";
 import AddIcon from "@material-ui/icons/Add";
+import DropdownPost from "./DropdownPost";
 
 function Post({ post }) {
+   
+
     return (
       <Row className="post d-flex flex-column ">
-        <Row></Row>
+        <Row className="d-flex justify-content-end">
+          <DropdownPost></DropdownPost>
+        </Row>
         <Row className="d-flex justify-content-between">
           <div className="d-flex">
             <div className="post__avatar mr-2">
