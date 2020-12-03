@@ -19,6 +19,7 @@ export default function PostFeedModal({
   toggleModal,
   showModal,
   selectedPost,
+  user
 }) {
   const [post, setPost] = useState({
     text: "",
@@ -80,23 +81,22 @@ export default function PostFeedModal({
           <Row>
             <Col md={3}>
               <Image
-                src="https://via.placeholder.com/75x75"
+                src={user?.image}
                 roundedCircle
                 className="mr-3"
               />
             </Col>
-            <Col md={3}>
+            <Col md={4} className="mt-4">
               {" "}
               <Button
                 variant="outline-secondary"
                 className="rounded-pill"
-                style={{ width: "125px", fontSize: "12px" }}
+                style={{ width: "180px", fontSize: "12px" }}
               >
-                {/* {user?.name}  */}
-                User's Name ▾{" "}
+                {user.name}{user.surname}  ▾{" "}
               </Button>
             </Col>
-            <Col md={3} className="ml-3">
+            <Col md={2} className="ml-4 mt-4">
               <Button
                 variant="outline-secondary"
                 className="rounded-pill"
@@ -116,7 +116,7 @@ export default function PostFeedModal({
                 value={post.text}
                 placeholder="What do you want to talk about?"
                 as="textarea"
-                rows={3}
+                rows={5}
                 onChange={(e) => handleChange(e)}
               />
             </Form.Group>
