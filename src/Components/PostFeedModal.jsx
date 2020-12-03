@@ -74,11 +74,12 @@ export default function PostFeedModal({
     newPost[e.target.name] = e.target.value;
     setPost(newPost);
   };
-  const handleChangeImage = (e) => {
+  const handleChangeImage = async (e) => {
     // const formData = new FormData();
     // formData.append('post',e.target.files[0])
     setPostImage(e.target.files[0]);
-    setImageThumb(toBase64(e.target.files[0]));
+    let encodedImage = await toBase64(e.target.files[0]);
+    setImageThumb(encodedImage);
     console.log(postImage);
     console.log(imageThumb);
   };
@@ -105,7 +106,11 @@ export default function PostFeedModal({
         <Container style={{ padding: "1rem" }}>
           <Row>
             <Col md={3}>
-              <Image src={user?.image} roundedCircle className="mr-3" />
+              <Image
+                src={user?.image}
+                roundedCircle
+                className="mr-3 img-fluid"
+              />
             </Col>
             <Col md={4} className="mt-4">
               {" "}
@@ -161,12 +166,18 @@ export default function PostFeedModal({
                   md={4}
                   className="d-flex d-flex justify-content-between mt-2"
                 >
-                  {" "}
-                  <AddIcon style={{ color: "blue" }} />{" "}
-                  <label for="image-post">
-                    <PhotoSizeSelectActualOutlinedIcon
-                      style={{ color: "grey" }}
-                    />{" "}
+                  <label for="image-post" className="d-flex" >
+                    <AddIcon style={{ color: "blue" }} />{" "}
+                    {imageThumb !== "" ? (
+                      <Image
+                        src={imageThumb}
+                        className="mr-3 img-fluid post__thumb"
+                      />
+                    ) : (
+                      <PhotoSizeSelectActualOutlinedIcon
+                        style={{ color: "grey" }}
+                      />
+                    )}
                   </label>
                   <input
                     id="image-post"
@@ -202,7 +213,9 @@ export default function PostFeedModal({
               </Col>
             </Row>
           </Form>
+
           <Divider light />
+
           <Row>
             <Col md={6} className="d-flex justify-content-around mt-3">
               <Button
