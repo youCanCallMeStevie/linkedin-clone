@@ -38,7 +38,7 @@ const Contain = styled.div`
       width: 175px;
       top: 100px;
       z-index: 99;
-      right: 53%;
+      right: 51.75%;
     `}
 `;
 export default NewPostButton;
