@@ -95,7 +95,7 @@ function NavBar({user,currentUser,history }) {
                   <Avatar
                     className="navbar-avatar"
                     alt={user?.image}
-                    src="/static/images/avatar/1.jpg"
+                    src={user?.image}
                   />
 
                   <NavDropdown
@@ -108,7 +108,7 @@ function NavBar({user,currentUser,history }) {
                         <Avatar
                           className="navbar-avatar"
                           alt={user?.image}
-                          src="/static/images/avatar/1.jpg"
+                          src={user?.image}
                         />
                       </Col>
                       <Col lg={10}>
