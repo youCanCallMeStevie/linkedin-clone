@@ -13,6 +13,15 @@ import PhotoSizeSelectActualOutlinedIcon from "@material-ui/icons/PhotoSizeSelec
 import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
 import NoteIcon from "@material-ui/icons/Note";
 import { Divider } from "@material-ui/core";
+<<<<<<< Updated upstream
+=======
+import PersonIcon from "@material-ui/icons/Person";
+import PublicIcon from "@material-ui/icons/Public";
+import SettingsIcon from '@material-ui/icons/Settings';
+import GroupIcon from '@material-ui/icons/Group';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+
+>>>>>>> Stashed changes
 import {
   postPost,
   editPost,

@@ -16,7 +16,7 @@ function App() {
         <Route exact path="/">
           <Redirect to="/feeds" />
         </Route>
-        <Route path="/connections" component = {Connections} />
+        <Route exact path="/connections" component = {Connections} />
         <Route
           exact
           path="/profile/:user"
