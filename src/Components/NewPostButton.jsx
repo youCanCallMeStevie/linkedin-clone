@@ -9,9 +9,7 @@ function NewPostButton() {
   const [fixedPosition, setFixedPosition] = useState(false);
   useEffect(() => {
     const initialTop = controls.current.getBoundingClientRect().top;
-    console.log({ initialTop });
     const handleScroll = () => {
-      console.log(window.scrollY);
       setFixedPosition(window.scrollY > initialTop);
     };
     window.addEventListener("scroll", handleScroll);
@@ -33,7 +31,7 @@ function NewPostButton() {
 const Contain = styled.div`
   display: flex;
   flex-direction: row;
-  ${props =>
+  ${(props) =>
     props.fixed &&
     css`
       position: fixed;
