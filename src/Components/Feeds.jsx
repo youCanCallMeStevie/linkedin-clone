@@ -11,6 +11,7 @@ import PostFeedModal from "./PostFeedModal";
 import Postbox from "./Postbox";
 import LinkedNews from "./LinkedNews";
 import AddFeed from "./AddFeed";
+import NewPostButton from "./NewPostButton";
 
 class Feeds extends Component {
   state = {
@@ -61,6 +62,7 @@ class Feeds extends Component {
             {" "}
             {/* here goes all feeds + create new feed - */}
                     <Postbox toggleModal={this.handleModalToggle}/>
+                    <NewPostButton />
             {posts
               .sort((a, b) => {
                 const c = new Date(a.updatedAt);
