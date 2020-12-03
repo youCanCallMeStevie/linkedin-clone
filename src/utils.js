@@ -273,7 +273,7 @@ export const deletePost = async (id) => {
 export const postUserImage = async (id,image) => {
 
   try {
-    const res = await fetch(`${REACT_APP_PROFILE}/${id}/picture`, {
+    const res = await fetch(`${REACT_APP_PROFILELIST}/${id}/picture`, {
       method: "POST",
       headers:  new Headers({
         Authorization: "Bearer " + REACT_APP_TOKEN
