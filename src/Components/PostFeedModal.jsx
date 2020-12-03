@@ -16,7 +16,6 @@ import NoteIcon from "@material-ui/icons/Note";
 import { Divider } from "@material-ui/core";
 import PersonIcon from "@material-ui/icons/Person";
 import PublicIcon from "@material-ui/icons/Public";
-import { postPost, editPost, deletePost } from "../utils";
 import SettingsIcon from '@material-ui/icons/Settings';
 import GroupIcon from '@material-ui/icons/Group';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
