@@ -37,3 +37,9 @@
 .post__header{
   border-bottom: 1px solid var(--border-color);
 }
+.post__comments{
+  border-top:1px solid var(--border-color);
+  padding:10px 0px;
+  margin-top: 15px;
+  color:#6e6558;
+}

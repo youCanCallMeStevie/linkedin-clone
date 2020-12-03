@@ -118,7 +118,7 @@ class NavBar extends Component {
                             {currentUser?.name} {currentUser?.surname}
                           </strong>
                         </p>
-                        <p className="name-title">Title/ work position</p>
+                        <p className="name-title">{currentUser.title}</p>
                       </Col>
                     </Row>
                     <button className="button-profile">View profile</button>
