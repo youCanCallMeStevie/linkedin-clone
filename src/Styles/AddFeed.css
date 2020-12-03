@@ -92,4 +92,6 @@
     margin-top: 10px;
     margin-left: 25px;
     font-weight: 300;
+    position: fixed;
+    top: 705px;
 }
