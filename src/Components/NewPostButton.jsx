@@ -37,6 +37,7 @@ const Contain = styled.div`
     props.fixed &&
     css`
       position: fixed;
+      width: 175px;
       top: 100px;
       z-index: 99;
       right: 53%;

@@ -7,9 +7,11 @@
 }
 
 .NewPostButton {
-  position: relative;
+  position: absolute;
+  width: 175px;
   /* top: 100px; */
   z-index: 99;
-  left: 40%;
-  margin-top: 10px;
+  margin-left: 33%;
+  margin-top: 8px;
+  box-shadow: 5px 5px 5px #aaaaaa;
 }
