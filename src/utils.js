@@ -38,6 +38,8 @@ const {
   REACT_APP_POSTS,
 } = process.env;
 
+//Users functions
+//GET current user
 export const fetchUser = async () => {
   console.log(REACT_APP_PROFILE);
   try {
@@ -58,6 +60,7 @@ export const fetchUser = async () => {
   }
 };
 
+//GET all users
 export const fetchAllUsers = async () => {
   console.log(REACT_APP_PROFILE);
   try {
@@ -78,6 +81,8 @@ export const fetchAllUsers = async () => {
   }
 };
 
+//EXPERIENCE FUNCTIONS
+//GET all experiences
 export const fetchExperiences = async (id) => {
   try {
     const res = await fetch(REACT_APP_PROFILELIST +`/${id}/experiences`, {
@@ -98,6 +103,7 @@ export const fetchExperiences = async (id) => {
   }
 };
 
+//POST experience
 export const postExperiences = async (id, experience) => {
   console.log(experience)
 
@@ -121,6 +127,8 @@ export const postExperiences = async (id, experience) => {
   }
 };
 
+
+//PUT experience
 export const editExperience = async (id, expId, experience) => {
   console.log(experience);
 
@@ -146,6 +154,7 @@ export const editExperience = async (id, expId, experience) => {
   }
 };
 
+//DELETE experience
 export const deleteExperience = async (id, expId) => {
 
   try {
@@ -170,6 +179,10 @@ export const deleteExperience = async (id, expId) => {
   }
 };
 
+
+//POSTS FUNCTIONS
+
+//GET all posts
 export const fetchPosts = async () => {
   try {
     const res = await fetch(REACT_APP_POSTS, {
@@ -189,6 +202,8 @@ export const fetchPosts = async () => {
   }
 };
 
+
+//POST a single post
 export const postPost = async (text) => {
   try {
     const res = await fetch(`${REACT_APP_POSTS}`, {
@@ -209,6 +224,7 @@ export const postPost = async (text) => {
   }
 };
 
+//PUT a single post -> note: you can edit only posts where the userId of the post matched the currentUserId
 export const editPost = async (id,text) => {
   try {
     const res = await fetch(`${REACT_APP_POSTS}/${id}`, {
@@ -229,6 +245,7 @@ export const editPost = async (id,text) => {
   }
 };
 
+//DELETE a single post -> note: you can delete only posts where the userId of the post matched the currentUserId
 export const deletePost = async (id) => {
   try {
     const res = await fetch(`${REACT_APP_POSTS}/${id}`, {
@@ -247,3 +264,37 @@ export const deletePost = async (id) => {
     console.log("there is an error", err);
   }
 };
+
+// https://striveschool-api.herokuapp.com/api/profile/{userId}/picture
+
+//IMAGES FUNCTIONS
+
+//POST user image
+export const postUserImage = async (id,image) => {
+
+  try {
+    const res = await fetch(`https://striveschool-api.herokuapp.com/api/profile/5fc4d4e9ed266800170ea3e3/picture`, {
+      method: "POST",
+      headers:  new Headers({
+        Authorization: "Bearer " + REACT_APP_TOKEN
+      }),
+      body: image
+    });
+    if (res.ok) {
+       return res
+    } else {
+      console.log('there is an error with posting image')
+    }
+   
+  } catch (err) {
+    console.log("there is an error", err);
+  }
+};
+
+//convert images in base64
+export const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+});

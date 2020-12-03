@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container, Col, Row } from "react-bootstrap";
-import { fetchUser, fetchAllUsers, fetchExperiences } from "../utils";
+import { fetchUser, fetchAllUsers, fetchExperiences,toBase64,postUserImage } from "../utils";
 import ProfileDetailsCard from "./ProfileDetailsCard";
 import "../Styles/Profile.css";
 import AboutCard from "./AboutCard";
@@ -21,6 +21,7 @@ export default class Profile extends Component {
     experiences: [],
     showModal: false,
     selectedExprience: "",
+ 
   };
   //called when components receive a new prop (for example a new user id)
   componentDidUpdate = async (prevProp, prevState) => {
@@ -92,6 +93,15 @@ export default class Profile extends Component {
     }
   };
 
+  handleChangeImage = async (e)=>{
+let formData = new FormData()
+formData.append('profile',e.target.files[0])
+if(formData)
+{let res = await postUserImage(this.state.user._id,formData)
+this.setUpUser()}
+
+  }
+
   render() {
     const {
       user,
@@ -100,13 +110,14 @@ export default class Profile extends Component {
       showModal,
       experiences,
       selectedExprience,
+     
     } = this.state;
     return (
       <Container className="profile">
         <ProfileTopBar show={showTopBar} user={user} />
         <Row>
           <Col md={8}>
-            <ProfileDetailsCard user={user} users={users} />
+            <ProfileDetailsCard user={user} users={users} handleChangeImage={this.handleChangeImage} />
 
             <AboutCard />
             <Dashboard />
