@@ -25,7 +25,7 @@ import { Avatar } from '@material-ui/core';
 import withUser from "./withUser";
 
 
-function NavBar({user,currentUser,history }) {
+function NavBar({currentUser,history }) {
   // state = {
   //   user:{}
   // }
@@ -94,8 +94,8 @@ function NavBar({user,currentUser,history }) {
                 <div className="navbar-itemMe">
                   <Avatar
                     className="navbar-avatar"
-                    alt={user?.image}
-                    src={user?.image}
+                    alt={currentUser?.image}
+                    src={currentUser?.image}
                   />
 
                   <NavDropdown
@@ -107,8 +107,8 @@ function NavBar({user,currentUser,history }) {
                       <Col lg={2}>
                         <Avatar
                           className="navbar-avatar"
-                          alt={user?.image}
-                          src={user?.image}
+                          alt={currentUser?.image}
+                          src={currentUser?.image}
                         />
                       </Col>
                       <Col lg={10}>
