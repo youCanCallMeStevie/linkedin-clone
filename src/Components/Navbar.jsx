@@ -21,89 +21,112 @@ import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 
 import AppsOutlinedIcon from "@material-ui/icons/AppsOutlined";
-import  {Avatar}  from '@material-ui/core';
+import { Avatar } from '@material-ui/core';
+import withUser from "./withUser";
 
-export class NavBar extends Component {
+
+class NavBar extends Component {
+  // state = {
+  //   user:{}
+  // }
+  // componentDidUpdate = (prevProps) => {
+  //   if (prevProps.currentUser !== this.props.currentUser) {
+  //     console.log(this.props)
+  //     this.setState({ user: this.props.currentUser })
+  //     console.log(this.state.user)
+  //   }
+  // }
   render() {
+    const { currentUser } = this.props;
+    console.log(this.props)
     return (
       <div>
-        <Navbar expand="lg" className=" mynavbar" >
+        <Navbar expand="lg" className=" mynavbar">
           <Container>
             <Navbar.Brand href="#home" className=" position-sticky logo">
-            <img alt="icon" src={Linkedin} className="logo" />
+              <img alt="icon" src={Linkedin} className="logo" />
             </Navbar.Brand>
             <div className="search">
-            <div className="searchIcon">
-              <SearchIcon />
+              <div className="searchIcon">
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: "inputRoot",
+                  input: " inputInput",
+                }}
+                inputProps={{ "aria-label": "search" }}
+              />
             </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root:"inputRoot",
-                input:" inputInput",
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="ml-auto">
                 <div className="navbar-item">
                   <Nav.Link href="#home">
-
                     <HomeIcon className="icons" />
-
                     Home
                   </Nav.Link>
                 </div>
                 <div className="navbar-item">
                   <Nav.Link href="#network">
                     <PeopleAltIcon className="icons" />
-
                     My Network
                   </Nav.Link>
                 </div>
                 <div className="navbar-item">
                   <Nav.Link href="#jobs">
-
                     <WorkIcon className="icons" />
-
                     Jobs
                   </Nav.Link>
                 </div>
                 <div className="navbar-item">
                   <Nav.Link href="#messages">
-
                     <ChatBubbleIcon className="icons" />
-
                     Messaging
                   </Nav.Link>
                 </div>
                 <div className="navbar-item">
                   <Nav.Link href="#notif">
-
                     <NotificationsIcon className="icons" />
-
                     Notifications
                   </Nav.Link>
                 </div>
                 <div className="navbar-itemMe">
-                <Avatar className="navbar-avatar" alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                  <Avatar
+                    className="navbar-avatar"
+                    alt="Remy Sharp"
+                    src="/static/images/avatar/1.jpg"
+                  />
 
-                  <NavDropdown title="Me" id="basic-nav-dropdown" className="avatar-dd">
+                  <NavDropdown
+                    title="Me"
+                    id="basic-nav-dropdown"
+                    className="avatar-dd"
+                  >
                     <Row>
-                    <Col lg={2}>
-                    <Avatar className="navbar-avatar" alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                    </Col>
-                    <Col lg={10}>
-                    <p className="name-title"><strong>Name</strong></p>
-                    <p className="name-title">Title/ work position</p>
-                    </Col>
+                      <Col lg={2}>
+                        <Avatar
+                          className="navbar-avatar"
+                          alt="Remy Sharp"
+                          src="/static/images/avatar/1.jpg"
+                        />
+                      </Col>
+                      <Col lg={10}>
+                        <p className="name-title">
+                          <strong>
+                            {currentUser?.name} {currentUser?.surname}
+                          </strong>
+                        </p>
+                        <p className="name-title">Title/ work position</p>
+                      </Col>
                     </Row>
-                      <button className="button-profile">View profile</button>
+                    <button className="button-profile">View profile</button>
                     <NavDropdown.Divider />
                     <NavDropdown.Item href="#action/3.3">
-                      <p><strong>Account</strong></p>
+                      <p>
+                        <strong>Account</strong>
+                      </p>
                     </NavDropdown.Item>
                     <NavDropdown.Item href="#action/3.4">
                       Settings & Privacy
@@ -113,8 +136,13 @@ export class NavBar extends Component {
                       Language
                     </NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item className="dropdown-item-strong" href="#action/3.4">
-                     <p><strong>Manage</strong></p>
+                    <NavDropdown.Item
+                      className="dropdown-item-strong"
+                      href="#action/3.4"
+                    >
+                      <p>
+                        <strong>Manage</strong>
+                      </p>
                     </NavDropdown.Item>
                     <NavDropdown.Item href="#action/3.4">
                       Posts & Activity
@@ -146,4 +174,4 @@ export class NavBar extends Component {
   }
 }
 
-export default withRouter(NavBar);
+export default withUser(withRouter(NavBar));

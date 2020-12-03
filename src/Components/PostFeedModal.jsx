@@ -29,9 +29,12 @@ export default function PostFeedModal({
     console.log(selectedPost);
     setPost(selectedPost);
   }, [selectedPost]);
+
+
   const handleSubmit = async (e) => {
 
     e.preventDefault();
+    console.log('submit')
     let res = "";
     if (selectedPost == "") {
       res = await postPost(post);
@@ -117,57 +120,61 @@ export default function PostFeedModal({
                 placeholder="What do you want to talk about?"
                 as="textarea"
                 rows={3}
-                onChange={() => handleChange()}
+                onChange={(e) => handleChange(e)}
               />
             </Form.Group>
-          </Form>
-          <Row className="d-flex justify-content-start">
-            <Col md={3} style={{ color: "blue", fontSize: "12px" }}>
-              Add Hastag
-            </Col>
-            <Col md={3} style={{ color: "blue", fontSize: "12px" }}>
-              #programming
-            </Col>
-            <Col md={3} style={{ color: "blue", fontSize: "12px" }}>
-              #computerscience
-            </Col>
-            <Col md={3}></Col>
-          </Row>
-          <Row>
-            <Col>
-              <Row
-                md={4}
-                className="d-flex d-flex justify-content-between mt-2"
-              >
-                {" "}
-                <AddIcon style={{ color: "blue" }} />{" "}
-                <PhotoSizeSelectActualOutlinedIcon style={{ color: "grey" }} />{" "}
-                <VideoLibraryIcon style={{ color: "grey" }} />
-                <NoteIcon style={{ color: "grey" }} />
-              </Row>
-            </Col>
-            <Col>
-              <Row md={8} className="d-flex d-flex justify-content-end py-3">
-                {selectedPost !== "" &&
+
+            <Row className="d-flex justify-content-start">
+              <Col md={3} style={{ color: "blue", fontSize: "12px" }}>
+                Add Hastag
+              </Col>
+              <Col md={3} style={{ color: "blue", fontSize: "12px" }}>
+                #programming
+              </Col>
+              <Col md={3} style={{ color: "blue", fontSize: "12px" }}>
+                #computerscience
+              </Col>
+              <Col md={3}></Col>
+            </Row>
+            <Row>
+              <Col>
+                <Row
+                  md={4}
+                  className="d-flex d-flex justify-content-between mt-2"
+                >
+                  {" "}
+                  <AddIcon style={{ color: "blue" }} />{" "}
+                  <PhotoSizeSelectActualOutlinedIcon
+                    style={{ color: "grey" }}
+                  />{" "}
+                  <VideoLibraryIcon style={{ color: "grey" }} />
+                  <NoteIcon style={{ color: "grey" }} />
+                </Row>
+              </Col>
+              <Col>
+                <Row md={8} className="d-flex d-flex justify-content-end py-3">
+                  {selectedPost !== "" && (
+                    <Button
+                      onClick={() => handleDeletePost()}
+                      variant="danger"
+                      className="rounded-pill mr-4 mb-2"
+                      style={{ width: "75px", fontSize: "12x" }}
+                    >
+                      Delete
+                    </Button>
+                  )}
                   <Button
-                    onClick={() => handleDeletePost()}
-                    variant="danger"
+                    type="submit"
+                    variant="primary"
                     className="rounded-pill mr-4 mb-2"
                     style={{ width: "75px", fontSize: "12x" }}
                   >
-                    Delete
-                </Button>}
-                <Button
-                  type="submit"
-                  variant="primary"
-                  className="rounded-pill mr-4 mb-2"
-                  style={{ width: "75px", fontSize: "12x" }}
-                >
-                  {selectedPost == "" ? "Post" : "Edit"}
-                </Button>
-              </Row>
-            </Col>
-          </Row>
+                    {selectedPost == "" ? "Post" : "Edit"}
+                  </Button>
+                </Row>
+              </Col>
+            </Row>
+          </Form>
           <Divider light />
           <Row>
             <Col md={6} className="d-flex justify-content-around mt-3">
@@ -209,6 +216,7 @@ export default function PostFeedModal({
               </Button>
             </Col>
           </Row>
+
           <Row>
             <Col md={6} className="d-flex justify-content-around mt-2">
               <Button

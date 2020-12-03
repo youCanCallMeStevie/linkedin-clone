@@ -2,3 +2,8 @@
     padding: 20px;
     min-height: 80vh;
 }
+
+.feeds__middle-column{
+    max-height: 100vh;
+    overflow: scroll;
+}

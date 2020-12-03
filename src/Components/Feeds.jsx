@@ -25,8 +25,8 @@ class Feeds extends Component {
     this.fetchAllPosts();
   };
   componentDidUpdate = (prevProp) => {
-    if (prevProp.curretUser !== this.props.curretUser) {
-      this.setState({ user: this.props.curretUser });
+    if (prevProp.currentUser !== this.props.currentUser) {
+      this.setState({ user: this.props.currentUser });
     }
     if (prevProp.allUsers !== this.props.allUsers) {
       this.setState({ allUsers: this.props.allUsers });
@@ -57,7 +57,7 @@ class Feeds extends Component {
             {/* here goes the profile card - Rita - */}
             <FeedsProfileCard user={user} users={allUsers} />
           </Col>
-          <Col md={7}>
+          <Col className="feeds__middle-column" md={7}>
             {" "}
             {/* here goes all feeds + create new feed - */}
                     <Postbox toggleModal={this.handleModalToggle}/>
