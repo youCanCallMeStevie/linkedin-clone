@@ -3,9 +3,9 @@
   --blue-primary: rgb(12, 102, 194);
   --border-color: #e0e0de;
   --button-grey-text-color: #7f7f7f;
+  --hover-blue: rgb(233, 243, 253);
 }
 
-.about-card-container {
-  border-radius: 15px;
-  width: 100%;
+.pill-border-button {
+  border-radius: 20px;
 }

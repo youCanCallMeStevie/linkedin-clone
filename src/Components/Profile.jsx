@@ -1,44 +1,135 @@
 import React, { Component } from "react";
-import { Container, Col,Row } from "react-bootstrap";
-import {fetchUser, fetchAllUsers} from '../utils'
+import { Container, Col, Row } from "react-bootstrap";
+import { fetchUser, fetchAllUsers, fetchExperiences } from "../utils";
 import ProfileDetailsCard from "./ProfileDetailsCard";
-import '../Styles/Profile.css'
-import AboutCard from "./AboutCard"
+import "../Styles/Profile.css";
+import AboutCard from "./AboutCard";
 
 import ELearning from "./ELearning";
 import PeopleSideCards from "./PeopleSideCards";
 import ExperienceEducation from "./ExperienceEducation";
 import Promoted from "./Promoted";
+import ProfileTopBar from "./ProfileTopBar";
+import ExperienceModal from "./ExperienceModal";
+import PostFeedModal from "./PostFeedModal";
 
 export default class Profile extends Component {
   state = {
     user: {},
-    users:{}
-  }
+    users: [],
+    experiences: [],
+    showModal: false,
+    selectedExprience: "",
+  };
+  //called when components receive a new prop (for example a new user id)
+  componentDidUpdate = async (prevProp, prevState) => {
+    if (prevProp.match.params.user != this.props.match.params.user) {
+      this.setUpUser();
+    }
+  };
 
+  //called once when component mounts 
   componentDidMount = async () => {
-    const user = await fetchUser()
-    const users = await fetchAllUsers()
-    this.setState({ user, users });
-    console.log(this.state)
+    this.setUpUser();
 
-  }
+    console.log(this.state);
+
+    this.handleScroll();
+  };
+
+  //function to set up the userand experiences when component load or when routing to new user
+  setUpUser = async () => {
+    let param = this.props.match.params.user;
+    // use later: param = param.split(".");
+    try {
+      const users = await fetchAllUsers();
+      const user =
+        param === "me"
+          ? await fetchUser()
+          : users.find((user) => user.username === param);
+      console.log(user);
+
+      const experiences = await fetchExperiences(user._id);
+      console.log(experiences);
+
+      this.setState({ user, users, experiences });
+    } catch (err) { }
+  };
+
+  //function to toggle the modal
+  handleModalToggle = async (experience = "") => {
+    this.setState({
+      showModal: !this.state.showModal,
+      selectedExprience: experience,
+    });
+    if (!this.state.showModal) {
+      try {
+        const experiences = await fetchExperiences(this.state.user._id);
+        this.setState({ experiences });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
+  //function to make the top bar appear when scrolling
+  handleScroll = () => {
+    if (typeof window !== "undefined") {
+      window.onscroll = () => {
+        let currentScrollPos = window.pageYOffset;
+        let maxScroll = document.body.scrollHeight - window.innerHeight;
+        // console.log(maxScroll)
+        let topbar = document.querySelector(".profileTopBar");
+        if (currentScrollPos > 350 && currentScrollPos <= maxScroll) {
+          topbar.classList.add("d-flex");
+          topbar.classList.remove("d-none");
+        } else {
+          topbar.classList.add("d-none");
+          topbar.classList.remove("d-flex");
+        }
+      };
+    }
+  };
+
   render() {
-    const {user,users} = this.state
+    const {
+      user,
+      users,
+      showTopBar,
+      showModal,
+      experiences,
+      selectedExprience,
+    } = this.state;
     return (
       <Container className="profile">
+        <ProfileTopBar show={showTopBar} user={user} />
         <Row>
           <Col md={8}>
+           
             <ProfileDetailsCard user={user} users={users} />
+
             <AboutCard />
-            <ExperienceEducation />
-            <ELearning/>
+
+            <ExperienceEducation
+              toggleModal={this.handleModalToggle}
+              experiences={experiences}
+            />
+            <ELearning />
           </Col>
           <Col md={4}>
-          <PeopleSideCards/>
-          <Promoted className ="mt-3"/>
+            <PeopleSideCards users={users} />
+            <Promoted />
           </Col>
         </Row>
+        <ExperienceModal
+          toggleModal={this.handleModalToggle}
+          showModal={showModal}
+          userId={user._id}
+          toggleModal={this.handleModalToggle}
+          selectedExprience={selectedExprience}
+        />
+         {/* <PostFeedModal toggleModal={this.handleModalToggle}
+          showModal={showModal}/> */}
       </Container>
     );
   }

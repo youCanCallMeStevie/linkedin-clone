@@ -2,7 +2,8 @@
 :root {
   --blue-primary: rgb(12, 102, 194);
   --border-color: #e0e0de;
-  --button-grey-text-color: #7F7F7F
+  --button-grey-text-color: #7F7F7F;
+  --gold-color:rgb(248,198,125)
 }
 
 .App {
@@ -27,5 +28,11 @@
   background-color: transparent;
   color: var(--button-grey-text-color);
   border: 1px solid var(--button-grey-text-color);
+}
+.btn-trasparent-grey-post {
+  background-color: transparent;
+  color: var(--button-grey-text-color);
+  height: 20px;
+  
 }
 
