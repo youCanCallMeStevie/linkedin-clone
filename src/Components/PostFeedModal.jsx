@@ -13,29 +13,28 @@ import PhotoSizeSelectActualOutlinedIcon from "@material-ui/icons/PhotoSizeSelec
 import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
 import NoteIcon from "@material-ui/icons/Note";
 import { Divider } from "@material-ui/core";
+import PersonIcon from "@material-ui/icons/Person";
+import PublicIcon from "@material-ui/icons/Public";
 import { postPost, editPost, deletePost } from "../utils";
 
 export default function PostFeedModal({
   toggleModal,
   showModal,
   selectedPost,
-  user
+  user,
 }) {
   const [post, setPost] = useState({
     text: "",
   });
-
 
   useEffect(() => {
     console.log(selectedPost);
     setPost(selectedPost);
   }, [selectedPost]);
 
-
-  const handleSubmit = async (e) => {
-
+  const handleSubmit = async e => {
     e.preventDefault();
-    console.log('submit')
+    console.log("submit");
     let res = "";
     if (selectedPost == "") {
       res = await postPost(post);
@@ -64,7 +63,6 @@ export default function PostFeedModal({
 
   return (
     <div>
-    
       <Modal
         show={showModal}
         onHide={toggleModal}
@@ -78,13 +76,11 @@ export default function PostFeedModal({
         </Modal.Header>
 
         <Container style={{ padding: "1rem" }}>
+        <div className="triangle-up"></div>
+
           <Row>
             <Col md={3}>
-              <Image
-                src={user?.image}
-                roundedCircle
-                className="mr-3"
-              />
+              <Image src={user?.image} roundedCircle className="user-avatar" />
             </Col>
             <Col md={4} className="mt-4">
               {" "}
@@ -93,7 +89,9 @@ export default function PostFeedModal({
                 className="rounded-pill"
                 style={{ width: "180px", fontSize: "12px" }}
               >
-                {user.name}{user.surname}  ▾{" "}
+                <PersonIcon />
+                {user.name}
+                {user.surname} ▾{" "}
               </Button>
             </Col>
             <Col md={2} className="ml-4 mt-4">
@@ -102,13 +100,13 @@ export default function PostFeedModal({
                 className="rounded-pill"
                 style={{ width: "125px", fontSize: "12px" }}
               >
-                Anyone ▾{" "}
+                <PublicIcon /> Anyone ▾{" "}
               </Button>
             </Col>
             <Col md={3}></Col>
           </Row>
 
-          <Form className="text-white mt-5" onSubmit={(e) => handleSubmit(e)}>
+          <Form className="text-white mt-5" onSubmit={e => handleSubmit(e)}>
             <Form.Group>
               <Form.Control
                 required
@@ -117,18 +115,18 @@ export default function PostFeedModal({
                 placeholder="What do you want to talk about?"
                 as="textarea"
                 rows={5}
-                onChange={(e) => handleChange(e)}
+                onChange={e => handleChange(e)}
               />
             </Form.Group>
 
             <Row className="d-flex justify-content-start">
-              <Col md={3} style={{ color: "blue", fontSize: "12px" }}>
+              <Col md={3} style={{ color: "rgb(12, 102, 194)", fontSize: "12px" }}>
                 Add Hastag
               </Col>
-              <Col md={3} style={{ color: "blue", fontSize: "12px" }}>
+              <Col md={3} style={{ color: "rgb(12, 102, 194)", fontSize: "12px" }}>
                 #programming
               </Col>
-              <Col md={3} style={{ color: "blue", fontSize: "12px" }}>
+              <Col md={3} style={{ color: "rgb(12, 102, 194)", fontSize: "12px" }}>
                 #computerscience
               </Col>
               <Col md={3}></Col>
@@ -137,7 +135,7 @@ export default function PostFeedModal({
               <Col>
                 <Row
                   md={4}
-                  className="d-flex d-flex justify-content-between mt-2"
+                  className="d-flex d-flex justify-content-between mt-5"
                 >
                   {" "}
                   <AddIcon style={{ color: "blue" }} />{" "}
@@ -149,12 +147,12 @@ export default function PostFeedModal({
                 </Row>
               </Col>
               <Col>
-                <Row md={8} className="d-flex d-flex justify-content-end py-3">
+                <Row md={8} className="d-flex justify-content-end py-3">
                   {selectedPost !== "" && (
                     <Button
                       onClick={() => handleDeletePost()}
                       variant="danger"
-                      className="rounded-pill mr-4 mb-2"
+                      className="rounded-pill mr-4"
                       style={{ width: "75px", fontSize: "12x" }}
                     >
                       Delete
@@ -163,7 +161,7 @@ export default function PostFeedModal({
                   <Button
                     type="submit"
                     variant="primary"
-                    className="rounded-pill mr-4 mb-2"
+                    className="rounded-pill mr-4"
                     style={{ width: "75px", fontSize: "12x" }}
                   >
                     {selectedPost == "" ? "Post" : "Edit"}
@@ -173,67 +171,70 @@ export default function PostFeedModal({
             </Row>
           </Form>
           <Divider light />
-          <Row>
-            <Col md={6} className="d-flex justify-content-around mt-3">
-              <Button
-                variant="outline-secondary"
-                className="rounded-pill"
-                style={{ width: "175px", fontSize: "12px" }}
-              >
-                Celebrate an occasion
-              </Button>
-            </Col>
-            <Col md={6} className="d-flex justify-content-around mt-3">
-              <Button
-                variant="outline-secondary"
-                className="rounded-pill"
-                style={{ width: "175px", fontSize: "12px" }}
-              >
-                Share the you're hiring
-              </Button>
-            </Col>
-          </Row>
-          <Row>
-            <Col md={6} className="d-flex justify-content-around mt-2">
-              <Button
-                variant="outline-secondary"
-                className="rounded-pill"
-                style={{ width: "175px", fontSize: "12px" }}
-              >
-                Find an expert
-              </Button>
-            </Col>
-            <Col md={6} className="d-flex justify-content-around mt-2">
-              <Button
-                variant="outline-secondary"
-                className="rounded-pill"
-                style={{ width: "175px", fontSize: "12px" }}
-              >
-                Create a poll
-              </Button>
-            </Col>
-          </Row>
 
-          <Row>
-            <Col md={6} className="d-flex justify-content-around mt-2">
-              <Button
-                variant="outline-secondary"
-                className="rounded-pill"
-                style={{ width: "175px", fontSize: "12px" }}
-              >
-                Add a profile
-              </Button>
-            </Col>
-            <Col md={6} className="d-flex justify-content-around mt-2">
-              <Button
-                variant="outline-secondary"
-                className="rounded-pill"
-                style={{ width: "175px", fontSize: "12px" }}
-              >
-                Offer help
-              </Button>
-            </Col>
-          </Row>
+          <Container className="fluid" style={{padding:"0px"}}>
+            <Row style={{backgroundColor:"#eeecec"}}>
+              <Col md={6} className="d-flex justify-content-around mt-3">
+                <Button
+                  variant="outline-secondary"
+                  className="rounded-pill"
+                  style={{ width: "175px", fontSize: "12px" }}
+                >
+                  Celebrate an occasion
+                </Button>
+              </Col>
+              <Col md={6} className="d-flex justify-content-around mt-3">
+                <Button
+                  variant="outline-secondary"
+                  className="rounded-pill"
+                  style={{ width: "175px", fontSize: "12px" }}
+                >
+                  Share the you're hiring
+                </Button>
+              </Col>
+            </Row>
+            <Row style={{backgroundColor:"#eeecec"}}>
+              <Col md={6} className="d-flex justify-content-around mt-2">
+                <Button
+                  variant="outline-secondary"
+                  className="rounded-pill"
+                  style={{ width: "175px", fontSize: "12px" }}
+                >
+                  Find an expert
+                </Button>
+              </Col>
+              <Col md={6} className="d-flex justify-content-around mt-2">
+                <Button
+                  variant="outline-secondary"
+                  className="rounded-pill"
+                  style={{ width: "175px", fontSize: "12px" }}
+                >
+                  Create a poll
+                </Button>
+              </Col>
+            </Row>
+
+            <Row style={{backgroundColor:"#eeecec", paddingBottom:"15px"}}>
+              <Col md={6} className="d-flex justify-content-around mt-2">
+                <Button
+                  variant="outline-secondary"
+                  className="rounded-pill"
+                  style={{ width: "175px", fontSize: "12px" }}
+                >
+                  Add a profile
+                </Button>
+              </Col>
+              <Col md={6} className="d-flex justify-content-around mt-2">
+                <Button
+                  variant="outline-secondary"
+                  className="rounded-pill"
+                  style={{ width: "175px", fontSize: "12px" }}
+                >
+                  Offer help
+                </Button>
+              </Col>
+            </Row>
+          </Container>
         </Container>
       </Modal>
     </div>
