@@ -2,7 +2,7 @@ import React from "react";
 import {Link} from 'react-router-dom'
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Card, Row, Image, Col } from "react-bootstrap";
-import { makeStyles } from '@material-ui/core/styles';
+import { Grid } from '@material-ui/core/';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -30,21 +30,22 @@ export default function Promoted({ users }) {
               users.slice(0, 4).map((user) => (
                <>
                <Row>
-
-                  <ListItem>
+                  <ListItem style={{justifyContent:"space-between"}} >
                     <Image
-                      src="https://via.placeholder.com/75x75"
+                      src={user.image}
                       roundedCircle
-                      className="mr-3"
+                      className="mr-3 avatar-image"
                     />
 <Link to={`/profile/${user.username}`}>
                     <ListItemText
                       primary={`${user.name} ${user.surname}`}
                       secondary={user.title}
                     /> </Link>
+                
                     <ListItemAvatar>
                         <PersonAddIcon />
                     </ListItemAvatar>
+                   
                   </ListItem>
                   </Row>
                   <Divider variant="inset" component="li" />
