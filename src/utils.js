@@ -273,7 +273,7 @@ export const deletePost = async (id) => {
 export const postUserImage = async (id,image) => {
 
   try {
-    const res = await fetch(`https://striveschool-api.herokuapp.com/api/profile/5fc4d4e9ed266800170ea3e3/picture`, {
+    const res = await fetch(`${REACT_APP_PROFILE}/${id}/picture`, {
       method: "POST",
       headers:  new Headers({
         Authorization: "Bearer " + REACT_APP_TOKEN
