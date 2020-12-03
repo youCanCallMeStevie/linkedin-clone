@@ -79,3 +79,12 @@
     width: 100px;
     word-spacing: 5px !important;
 }
+.copyright img{
+    width: 60px;
+}
+.copyright{
+    font-size: 13px;
+    margin-top: 10px;
+    margin-left: 25px;
+    font-weight: 300;
+}

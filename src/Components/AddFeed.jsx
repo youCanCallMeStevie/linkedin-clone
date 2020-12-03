@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import "../Styles/AddFeed.css";
 import { ListGroup } from "react-bootstrap";
 import Avatar from "@material-ui/core/Avatar";
-
+import Logo from "../Assets/LinkedIn-Logos/LI-Logo.png"
 export default class AddFeed extends Component {
   render() {
     return (
+        <>
       <ListGroup className="feed-group">
         <ListGroup.Item className="feed-head">Add to your feed</ListGroup.Item>
         <ListGroup.Item className="feed-item">
@@ -33,6 +34,8 @@ export default class AddFeed extends Component {
           View all recommendations
         </ListGroup.Item>
       </ListGroup>
+      <p className="copyright"><img src={Logo} alt="copyright"/>Linkedln Corporation © 2020</p>
+</>
     );
   }
 }
