@@ -1,0 +1,76 @@
+.news-item .MuiSvgIcon-root{
+    width: 0.8rem !important;
+    color: rgb(71, 182, 219);
+}
+/*.news-group{
+     border: 1px solid rgba(0, 0, 0, .125) !important;
+}*/
+.news-head .MuiSvgIcon-root{
+    color:rgba(202, 200, 200, 0.637);
+}
+.news-item{
+    padding: 7px !important;
+    font-size: 15px;
+    border-top: none !important;
+    border-bottom: none !important;
+}
+.news-item:hover{
+    background-color: rgba(202, 200, 200, 0.637);
+}
+.news-item .text-muted{
+    margin-bottom: 0 !important;
+    margin-left: 20px;
+}
+.news-head{ 
+    border-bottom: none!important;
+    padding-top:10px !important;
+    padding-bottom:0px !important;
+}
+.news-footer{
+    border-top:none !important;
+    padding-bottom: 10px !important;
+    padding-left: 20px !important;
+}
+.feed-group{
+    width: 300px !important;
+}
+.feed-item{
+    padding: 7px !important;
+    font-size: 15px;
+    border-top: none !important;
+    border-bottom: none !important;
+    display:inline-flex !important;
+    justify-content: space-between !important;
+    padding-bottom: 10px !important;
+    padding-top: 10px !important;
+    line-height: 2.5 !important;
+}
+.feed-item .MuiAvatar-root{
+    width: 50px !important;
+    height: 50px !important;
+}
+
+.feed-head{ 
+    border-bottom: none!important;
+    padding-top:10px !important;
+    padding-bottom:0px !important;
+}
+.feed-footer{
+    border-top:none !important;
+    padding-bottom: 10px !important;
+    padding-left: 20px !important;
+    color: rgb(38, 103, 163);
+    font-size: 15px !important;
+    font-weight: 600;
+}
+.follow-btn{
+    background-color:white;
+    border: 1px #007bff solid;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 10px !important;
+    margin: 0px;
+    width: 100px;
+    word-spacing: 5px !important;
+}

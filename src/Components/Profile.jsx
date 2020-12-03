@@ -12,6 +12,7 @@ import Promoted from "./Promoted";
 import ProfileTopBar from "./ProfileTopBar";
 import ExperienceModal from "./ExperienceModal";
 import PostFeedModal from "./PostFeedModal";
+import Dashboard from "./Dashboard";
 
 export default class Profile extends Component {
   state = {
@@ -28,7 +29,7 @@ export default class Profile extends Component {
     }
   };
 
-  //called once when component mounts 
+  //called once when component mounts
   componentDidMount = async () => {
     this.setUpUser();
 
@@ -46,14 +47,14 @@ export default class Profile extends Component {
       const user =
         param === "me"
           ? await fetchUser()
-          : users.find((user) => user._id === param);
+          : users.find((user) => user.username === param);
       console.log(user);
 
       const experiences = await fetchExperiences(user._id);
       console.log(experiences);
 
       this.setState({ user, users, experiences });
-    } catch (err) { }
+    } catch (err) {}
   };
 
   //function to toggle the modal
@@ -105,10 +106,10 @@ export default class Profile extends Component {
         <ProfileTopBar show={showTopBar} user={user} />
         <Row>
           <Col md={8}>
-           
             <ProfileDetailsCard user={user} users={users} />
 
             <AboutCard />
+            <Dashboard />
 
             <ExperienceEducation
               toggleModal={this.handleModalToggle}
@@ -128,8 +129,6 @@ export default class Profile extends Component {
           toggleModal={this.handleModalToggle}
           selectedExprience={selectedExprience}
         />
-         {/* <PostFeedModal toggleModal={this.handleModalToggle}
-          showModal={showModal}/> */}
       </Container>
     );
   }

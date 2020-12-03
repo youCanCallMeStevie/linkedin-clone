@@ -7,55 +7,55 @@ import EventIcon from '@material-ui/icons/Event';
 import FormatAlignLeftIcon from '@material-ui/icons/FormatAlignLeft';
 import "../Styles/postbox.css"
 
-export default function Postbox() {
+export default function Postbox({ toggleModal }) {
     return (
-        <Container>
-            <Card id="cardd">
-                <Card.Body>
-                    <Button id="startPost">
-                        <label style={{ marginTop: '5px' }}>
-                            <AddBoxIcon />
-                              Start a post
-                        </label>
-                    </Button>
-                </Card.Body>
-                <Card.Body>
-                    <Row style={{ marginTop: '-15px' }}>
-                        <Col>
-                            <Button className="add-btn">
-                                <label id="photo-btn">
-                                    <PhotoIcon />
-                                    Photo
-                                </label>
-                            </Button>
-                        </Col>
-                        <Col>
-                            <Button className="add-btn">
-                                <label id="video-btn">
-                                    <YouTubeIcon />
-                                    Video
-                                </label>
-                            </Button>
-                        </Col>
-                        <Col>
-                            <Button className="add-btn">
-                                <label id="event-btn">
-                                    <EventIcon />
-                                    Event
-                                </label>
-                            </Button>
-                        </Col>
-                        <Col>
-                            <Button className="add-btn">
-                                <label id="article-btn">
-                                    <FormatAlignLeftIcon />
-                                    Article
-                                </label>
-                            </Button>
-                        </Col>
-                    </Row>
-                </Card.Body>
-            </Card>
-        </Container>
+
+        <Card id="cardd">
+            <Card.Body>
+                <Button id="startPost" onClick={() => toggleModal()} >
+                    <label style={{ marginTop: "5px" }}>
+                        <AddBoxIcon />
+                Start a post
+              </label>
+                </Button>
+            </Card.Body>
+            <Card.Body>
+                <Row style={{ marginTop: "-15px" }}>
+                    <Col>
+                        <Button className="add-btn">
+                            <label id="photo-btn">
+                                <PhotoIcon />
+                    Photo
+                  </label>
+                        </Button>
+                    </Col>
+                    <Col>
+                        <Button className="add-btn">
+                            <label id="video-btn">
+                                <YouTubeIcon />
+                    Video
+                  </label>
+                        </Button>
+                    </Col>
+                    <Col>
+                        <Button className="add-btn">
+                            <label id="event-btn">
+                                <EventIcon />
+                    Event
+                  </label>
+                        </Button>
+                    </Col>
+                    <Col>
+                        <Button className="add-btn">
+                            <label id="article-btn">
+                                <FormatAlignLeftIcon />
+                    Article
+                  </label>
+                        </Button>
+                    </Col>
+                </Row>
+            </Card.Body>
+        </Card>
+
     );
 }

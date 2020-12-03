@@ -18,7 +18,7 @@ const withUser = (WrappedComponent) => (props) => {
     setUpUser();
   }, []);
 
-  return <WrappedComponent curretUser={user} allUsers={allUsers} {...props} />;
+  return <WrappedComponent currentUser={user} allUsers={allUsers} {...props} />;
 };
 
 export default withUser;

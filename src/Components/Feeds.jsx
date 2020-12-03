@@ -8,38 +8,48 @@ import ProfileDetailsCard from "./ProfileDetailsCard";
 import Post from "./Post";
 import ExperienceModal from "./ExperienceModal";
 import PostFeedModal from "./PostFeedModal";
+import Postbox from "./Postbox";
+import LinkedNews from "./LinkedNews";
+import AddFeed from "./AddFeed";
 
 class Feeds extends Component {
   state = {
     user: "",
     allUsers: [],
     posts: [],
-      showModal: false
+    showModal: false,
+    selectedPost: "",
   };
 
   componentDidMount = async () => {
-    const posts = await fetchPosts();
-    this.setState({ posts });
+    this.fetchAllPosts();
   };
   componentDidUpdate = (prevProp) => {
-    if (prevProp.curretUser !== this.props.curretUser) {
-      this.setState({ user: this.props.curretUser });
+    if (prevProp.currentUser !== this.props.currentUser) {
+      this.setState({ user: this.props.currentUser });
     }
     if (prevProp.allUsers !== this.props.allUsers) {
       this.setState({ allUsers: this.props.allUsers });
+    }
+  };
+  fetchAllPosts = async () => {
+    const posts = await fetchPosts();
+    this.setState({ posts });
+  };
 
+  handleModalToggle = async (selectedPost = "") => {
+    this.setState({
+      showModal: !this.state.showModal,
+      selectedPost,
+    });
+    if (!this.state.showModal) {
+      this.fetchAllPosts();
+      this.setState({ selectedPost });
     }
   };
 
-  handleModalToggle = async (experience = "") => {
-    this.setState({
-      showModal: !this.state.showModal,
-    });
-  };
-
-
   render() {
-    const { user, allUsers, posts, showModal } = this.state;
+    const { user, allUsers, posts, showModal, selectedPost } = this.state;
     return (
       <Container className="feeds">
         <Row>
@@ -47,18 +57,35 @@ class Feeds extends Component {
             {/* here goes the profile card - Rita - */}
             <FeedsProfileCard user={user} users={allUsers} />
           </Col>
-          <Col md={7} className="mx-3">
+          <Col className="feeds__middle-column" md={7}>
             {" "}
             {/* here goes all feeds + create new feed - */}
-            <Button onClick={()=>this.handleModalToggle()} />
-            {posts.map((post) => (
-              <Post post={post} />
-            ))}
-
+                    <Postbox toggleModal={this.handleModalToggle}/>
+            {posts
+              .sort((a, b) => {
+                const c = new Date(a.updatedAt);
+                const d = new Date(b.updatedAt);
+                return d - c;
+              })
+              .map((post) => (
+                <Post
+                  post={post}
+                  currentUser={`${user.name} ${user.surname}`}
+                  toggleModal={this.handleModalToggle}
+                  userId={user._id}
+                />
+              ))}
           </Col>
-          <Col md={3}> {/* here goes the small list of recent feeds - */}</Col>
+          <Col md={3}> 
+          <LinkedNews /> 
+          <AddFeed />
+          </Col>
         </Row>
-        <PostFeedModal showModal={showModal} toggleModal={this.handleModalToggle} />
+        <PostFeedModal
+          showModal={showModal}
+          toggleModal={this.handleModalToggle}
+          selectedPost={selectedPost}
+        />
       </Container>
     );
   }

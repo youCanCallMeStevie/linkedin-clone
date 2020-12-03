@@ -9,19 +9,23 @@ import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import FlagIcon from "@material-ui/icons/Flag";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 
-export default class DropdownPost extends Component {
+class DropdownPost extends Component {
   render() {
+    const { toggleModal, post, userId } = this.props;
     return (
       <Dropdown className="dropdown-btn">
-        <Dropdown.Toggle>
+        <Dropdown.Toggle variant={"trasparent-grey-post"}>
           <MoreHorizIcon />
         </Dropdown.Toggle>
 
         <Dropdown.Menu className="dropdown-post">
-          <Dropdown.Item href="#/action-1">
-            <TurnedInNotIcon /> <strong>Save</strong>
-            <p className="text-muted">Save for later</p>
-          </Dropdown.Item>
+          {userId === post.user._id && (
+            <Dropdown.Item href="#/action-1" onClick={() => toggleModal(post)}>
+              <TurnedInNotIcon /> <strong>Edit</strong>
+              <p className="text-muted">Save for later</p>
+            </Dropdown.Item>
+          )}
+
           <Dropdown.Item href="#/action-2">
             <LinkIcon /> <strong>Copy link to post</strong>{" "}
           </Dropdown.Item>
@@ -54,3 +58,4 @@ export default class DropdownPost extends Component {
     );
   }
 }
+export default DropdownPost;
