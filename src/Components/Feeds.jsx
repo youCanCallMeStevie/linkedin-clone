@@ -61,7 +61,7 @@ class Feeds extends Component {
           <Col className="feeds__middle-column" md={7}>
             {" "}
             {/* here goes all feeds + create new feed - */}
-                    <Postbox toggleModal={this.handleModalToggle}/>
+                    <Postbox toggleModal={this.handleModalToggle} user={user} users={allUsers} />
                     <NewPostButton />
             {posts
               .sort((a, b) => {
@@ -87,6 +87,7 @@ class Feeds extends Component {
           showModal={showModal}
           toggleModal={this.handleModalToggle}
           selectedPost={selectedPost}
+          user={user} users={allUsers}
         />
       </Container>
     );
