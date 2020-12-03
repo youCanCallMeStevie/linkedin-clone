@@ -6,14 +6,17 @@ import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import ProfileDetailsButtons from "./ProfileDetailsButtons";
 import DottedBox from "./DottedBox";
 
-function ProfileDetailsCard({ user,users }) {
+function ProfileDetailsCard({ user,users,handleChangeImage }) {
   return (
     <Row className="profileDetails_card">
       <div className="profileDetails_card__profile-bgr">
         <PhotoCameraIcon />
         <div className="profileDetails_card__profile-img">
+        <label for="file-input">
           <img className="img-fluid" src={user?.image} />
+          </label>
         </div>
+        <input id="file-input" type="file" className="d-none" onChange={(e)=>handleChangeImage(e)}/>
       </div>
 
       <div className="profileDetails_card__body">
