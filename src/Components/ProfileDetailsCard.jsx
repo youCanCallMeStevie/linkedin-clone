@@ -9,7 +9,7 @@ import {Link} from "react-router-dom"
 
 function ProfileDetailsCard({ user,users,handleChangeImage }) {
   return (
-    <Row className="profileDetails_card">
+    <Row className="profileDetails_card position-fixed">
       <div className="profileDetails_card__profile-bgr">
         <PhotoCameraIcon />
         <div className="profileDetails_card__profile-img">

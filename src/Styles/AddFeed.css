@@ -9,6 +9,8 @@
     color:rgba(202, 200, 200, 0.637);
 }
 .news-group{
+    position: fixed;
+    top: 360px;
     border-radius: 15px;
 }
 .news-item{
@@ -35,6 +37,7 @@
     padding-left: 20px !important;
 }
 .feed-group{
+    position: fixed;
     width: 300px !important;
     border-radius: 15px;
 }
