@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {withRouter} from 'react-router-dom'
+import {withRouter,Link} from 'react-router-dom'
 import "bootstrap/dist/css/bootstrap.min.css";
 import Linkedin from "../Assets/LinkedIn-Logos/linkedin.png";
 import "../Styles/navbar.css";
@@ -37,7 +37,7 @@ class NavBar extends Component {
   //   }
   // }
   render() {
-    const { currentUser } = this.props;
+    const { currentUser,history } = this.props;
     console.log(this.props)
     return (
       <div>
@@ -121,7 +121,7 @@ class NavBar extends Component {
                         <p className="name-title">{currentUser.title}</p>
                       </Col>
                     </Row>
-                    <button className="button-profile">View profile</button>
+                    <button className="button-profile" onClick={()=>history.push('/profile/me')}>View profile</button>
                     <NavDropdown.Divider />
                     <NavDropdown.Item href="#action/3.3">
                       <p>
