@@ -29,7 +29,7 @@ export default class Profile extends Component {
     }
   };
 
-  //called once when component mounts 
+  //called once when component mounts
   componentDidMount = async () => {
     this.setUpUser();
 
@@ -47,7 +47,7 @@ export default class Profile extends Component {
       const user =
         param === "me"
           ? await fetchUser()
-          : users.find((user) => user._id === param);
+          : users.find((user) => user.username === param);
       console.log(user);
 
       const experiences = await fetchExperiences(user._id);
@@ -91,7 +91,7 @@ export default class Profile extends Component {
       };
     }
   };
-  
+
   render() {
     const {
       user,
@@ -106,11 +106,10 @@ export default class Profile extends Component {
         <ProfileTopBar show={showTopBar} user={user} />
         <Row>
           <Col md={8}>
-           
             <ProfileDetailsCard user={user} users={users} />
 
             <AboutCard />
-            < Dashboard />
+            <Dashboard />
 
             <ExperienceEducation
               toggleModal={this.handleModalToggle}
@@ -130,7 +129,6 @@ export default class Profile extends Component {
           toggleModal={this.handleModalToggle}
           selectedExprience={selectedExprience}
         />
-       
       </Container>
     );
   }
