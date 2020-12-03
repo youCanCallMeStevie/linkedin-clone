@@ -14,7 +14,7 @@ function App() {
       <NavBar />
       <div className="margin-80">
         <Route exact path="/">
-          <Redirect to="profile/me" />
+          <Redirect to="/feeds" />
         </Route>
 
         <Route
