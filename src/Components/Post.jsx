@@ -40,7 +40,11 @@ function Post({ post, currentUser, toggleModal, userId}) {
           </span>
         </div>
       </Row>
-      <Row className="post__text mt-4">{post.text}</Row>
+      <Row className="post__text mt-4">{post.text}<br/>
+      <div>
+          <img src={post.image} alt=""/>
+      </div>
+      </Row>
       <Row className="d-flex align-items-center post__comments ">
         <span className="d-flex align-items-center ">
           <svg

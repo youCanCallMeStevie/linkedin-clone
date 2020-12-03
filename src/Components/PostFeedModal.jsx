@@ -13,7 +13,7 @@ import PhotoSizeSelectActualOutlinedIcon from "@material-ui/icons/PhotoSizeSelec
 import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
 import NoteIcon from "@material-ui/icons/Note";
 import { Divider } from "@material-ui/core";
-import { postPost, editPost, deletePost } from "../utils";
+import { postPost, editPost, deletePost,toBase64,postPostImage } from "../utils";
 
 export default function PostFeedModal({
   toggleModal,
@@ -24,6 +24,9 @@ export default function PostFeedModal({
   const [post, setPost] = useState({
     text: "",
   });
+  const [postImage,setPostImage] = useState('')
+  const [imageThumb,setImageThumb] = useState('')
+
 
 
   useEffect(() => {
@@ -39,6 +42,15 @@ export default function PostFeedModal({
     let res = "";
     if (selectedPost == "") {
       res = await postPost(post);
+      if(res.ok){
+        let data = await res.json()
+        // let imageSent = await postPostImage(data._id,postImage)
+        // if(imageSent.ok){
+        //   console.log('success')
+        // }  
+
+      }
+     
       alert("post successfully posted");
 
       toggleModal("");
@@ -55,7 +67,14 @@ export default function PostFeedModal({
     newPost[e.target.name] = e.target.value;
     setPost(newPost);
   };
-
+const handleChangeImage = e =>{
+  // const formData = new FormData();
+  // formData.append('post',e.target.files[0])
+  setPostImage(e.target.files[0])
+  setImageThumb(toBase64(e.target.files[0]))
+  console.log(postImage)
+  console.log(imageThumb)
+}
   const handleDeletePost = async () => {
     const res = await deletePost(post._id);
     alert("Post Successfully Deleted");
@@ -141,9 +160,15 @@ export default function PostFeedModal({
                 >
                   {" "}
                   <AddIcon style={{ color: "blue" }} />{" "}
+                  <label for="image-post">
                   <PhotoSizeSelectActualOutlinedIcon
                     style={{ color: "grey" }}
+                    
                   />{" "}
+                  </label>
+        
+        <input id="image-post" type="file" className="d-none" onChange={(e)=>handleChangeImage(e)}/>
+     
                   <VideoLibraryIcon style={{ color: "grey" }} />
                   <NoteIcon style={{ color: "grey" }} />
                 </Row>
@@ -168,6 +193,7 @@ export default function PostFeedModal({
                   >
                     {selectedPost == "" ? "Post" : "Edit"}
                   </Button>
+
                 </Row>
               </Col>
             </Row>
