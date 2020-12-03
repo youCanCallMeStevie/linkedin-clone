@@ -1,9 +1,16 @@
 .feeds {
   padding: 20px;
+  padding-top: 40px;
   min-height: 80vh;
 }
 
 .feeds__middle-column {
   /* max-height: 100vh; */
   /* overflow: scroll; */
+}
+.feeds__top-stick{
+  position: fixed;
+  top:80px;
+
+
 }
