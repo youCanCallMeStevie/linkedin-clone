@@ -291,10 +291,58 @@ export const postUserImage = async (id,image) => {
   }
 };
 
-//convert images in base64
+//POST user image
+export const postPostImage = async (id,image) => {
+  const formdata = new FormData();
+  formdata.append('post',image)
+
+  try {
+    const res = await fetch(`${REACT_APP_POSTS}/${id}`, {
+      method: "POST",
+      headers:  new Headers({
+        Authorization: "Bearer " + REACT_APP_TOKEN
+      }),
+      body:formdata
+    });
+    if (res.ok) {
+       return res
+    } else {
+      console.log('there is an error with posting image')
+    }
+   
+  } catch (err) {
+    console.log("there is an error", err);
+  }
+};
+
+
+//POST user image
+export const postExperienceImage = async (userId,expId,image) => {
+  const formdata = new FormData();
+  formdata.append('experience',image)
+
+  try {
+    const res = await fetch(`${REACT_APP_PROFILELIST}/${userId}/experiences/${expId}/picture`, {
+      method: "POST",
+      headers:  new Headers({
+        Authorization: "Bearer " + REACT_APP_TOKEN
+      }),
+      body:formdata
+    });
+    if (res.ok) {
+       return res
+    } else {
+      console.log('there is an error with posting image')
+    }
+   
+  } catch (err) {
+    console.log("there is an error", err);
+  }
+};
+
 export const toBase64 = file => new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = () => resolve(reader.result);
+  reader.onerror = error => reject(error);
 });

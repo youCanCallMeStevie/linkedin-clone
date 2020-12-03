@@ -117,9 +117,13 @@ this.setUpUser()}
         <ProfileTopBar show={showTopBar} user={user} />
         <Row>
           <Col md={8}>
-            <ProfileDetailsCard user={user} users={users} handleChangeImage={this.handleChangeImage} />
+            <ProfileDetailsCard
+              user={user}
+              users={users}
+              handleChangeImage={this.handleChangeImage}
+            />
 
-            <AboutCard />
+            <AboutCard bio={user.bio} />
             <Dashboard />
 
             <ExperienceEducation

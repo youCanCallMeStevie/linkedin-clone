@@ -21,6 +21,15 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import GroupIcon from '@material-ui/icons/Group';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
+import {
+  postPost,
+  editPost,
+  deletePost,
+  toBase64,
+  postPostImage,
+} from "../utils";
+
+
 export default function PostFeedModal({
   toggleModal,
   showModal,
@@ -31,34 +40,62 @@ export default function PostFeedModal({
     text: "",
   });
 
+  const [postImage, setPostImage] = useState("");
+  const [imageThumb, setImageThumb] = useState("");
+
+
   useEffect(() => {
     console.log(selectedPost);
     setPost(selectedPost);
   }, [selectedPost]);
 
-  const handleSubmit = async e => {
+
+  const handleSubmit = async (e) => {
+
     e.preventDefault();
     console.log("submit");
     let res = "";
     if (selectedPost == "") {
       res = await postPost(post);
-      alert("post successfully posted");
+      if (res.ok) {
+        let data = await res.json();
+        let imageSent = await postPostImage(data._id, postImage);
+        if (imageSent.ok) {
+          console.log("success");
+        }
+        alert("post successfully posted");
 
-      toggleModal("");
+        toggleModal("");
+      }
     } else {
       console.log(post._id);
       res = await editPost(post._id, post);
-      alert("post successfully edited");
+      if (res.ok) {
+        let data = await res.json();
+        let imageSent = await postPostImage(post._id, postImage);
+        if (imageSent.ok) {
+          console.log("success");
+        }
+        alert("post successfully edited");
 
-      toggleModal("");
+        toggleModal("");
+      }
     }
   };
-  const handleChange = e => {
+  const handleChange = (e) => {
     const newPost = { ...post };
     newPost[e.target.name] = e.target.value;
     setPost(newPost);
   };
-
+  const handleChangeImage = async (e) => {
+    // const formData = new FormData();
+    // formData.append('post',e.target.files[0])
+    setPostImage(e.target.files[0]);
+    let encodedImage = await toBase64(e.target.files[0]);
+    setImageThumb(encodedImage);
+    console.log(postImage);
+    console.log(imageThumb);
+  };
   const handleDeletePost = async () => {
     const res = await deletePost(post._id);
     alert("Post Successfully Deleted");
@@ -84,7 +121,13 @@ export default function PostFeedModal({
 
           <Row>
             <Col md={3}>
-              <Image src={user?.image} roundedCircle className="user-avatar" />
+
+              <Image
+                src={user?.image}
+                roundedCircle
+                className="mr-3 img-fluid"
+              />
+
             </Col>
             <Col md={4} className="mt-4">
               {" "}
@@ -93,7 +136,9 @@ export default function PostFeedModal({
                 className="rounded-pill"
                 style={{ width: "180px", fontSize: "12px" }}
               >
+
                 <PersonIcon />
+
                 {user.name}
                 {user.surname} ▾{" "}
               </Button>
@@ -189,11 +234,25 @@ export default function PostFeedModal({
                   md={4}
                   className="d-flex d-flex justify-content-between mt-5"
                 >
-                  {" "}
-                  <AddIcon style={{ color: "blue" }} />{" "}
-                  <PhotoSizeSelectActualOutlinedIcon
-                    style={{ color: "grey" }}
-                  />{" "}
+                  <label for="image-post" className="d-flex" >
+                    <AddIcon style={{ color: "blue" }} />{" "}
+                    {imageThumb !== "" ? (
+                      <Image
+                        src={imageThumb}
+                        className="mr-3 img-fluid post__thumb"
+                      />
+                    ) : (
+                      <PhotoSizeSelectActualOutlinedIcon
+                        style={{ color: "grey" }}
+                      />
+                    )}
+                  </label>
+                  <input
+                    id="image-post"
+                    type="file"
+                    className="d-none"
+                    onChange={(e) => handleChangeImage(e)}
+                  />
                   <VideoLibraryIcon style={{ color: "grey" }} />
                   <NoteIcon style={{ color: "grey" }} />
                 </Row>
@@ -222,7 +281,11 @@ export default function PostFeedModal({
               </Col>
             </Row>
           </Form>
+
           <Divider light />
+
+
+
 
           <Container className="fluid" style={{padding:"0px"}}>
             <Row style={{backgroundColor:"#eeecec"}}>
