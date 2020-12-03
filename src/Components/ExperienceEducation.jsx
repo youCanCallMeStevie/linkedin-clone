@@ -41,7 +41,7 @@ export default function ExperienceEducation({ toggleModal, experiences }) {
                   <ListItem>
                     <div>
                       <Image
-                        src="https://via.placeholder.com/90x90"
+                        src={experience.image}
                         thumbnail
                         className="experience-education-avatars mr-3"
                       />
