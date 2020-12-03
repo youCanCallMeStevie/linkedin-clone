@@ -51,6 +51,11 @@
   margin-left:7px;
   padding: 5px;
 }
+.navbar-itemMe .MuiAvatar-img{
+  width: 160% !important;
+  height: 172% !important;
+
+}
 .avatar-dd a::after{
   display: contents;
 }
