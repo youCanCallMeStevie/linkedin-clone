@@ -7,6 +7,7 @@ import {
   Modal,
   Button,
   Image,
+  NavDropdown, 
 } from "react-bootstrap";
 import AddIcon from "@material-ui/icons/Add";
 import PhotoSizeSelectActualOutlinedIcon from "@material-ui/icons/PhotoSizeSelectActualOutlined";
@@ -16,6 +17,9 @@ import { Divider } from "@material-ui/core";
 import PersonIcon from "@material-ui/icons/Person";
 import PublicIcon from "@material-ui/icons/Public";
 import { postPost, editPost, deletePost } from "../utils";
+import SettingsIcon from '@material-ui/icons/Settings';
+import GroupIcon from '@material-ui/icons/Group';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
 export default function PostFeedModal({
   toggleModal,
@@ -95,13 +99,61 @@ export default function PostFeedModal({
               </Button>
             </Col>
             <Col md={2} className="ml-4 mt-4">
+            
               <Button
                 variant="outline-secondary"
                 className="rounded-pill"
-                style={{ width: "125px", fontSize: "12px" }}
+                style={{ width: "150px", fontSize: "12px" }}
+                
               >
-                <PublicIcon /> Anyone ▾{" "}
-              </Button>
+              < Row className="d-flex justify-content-around"><PublicIcon className="ml-4"/> Anyone <NavDropdown
+                  >
+              
+
+              
+                    <NavDropdown.Item>
+                      <p>
+                        <strong>Who can see your post?</strong>
+                      </p>
+                    </NavDropdown.Item>
+                    <Form>
+                    <NavDropdown.Item>
+                    <Form.Check type="radio" aria-label="radio 1" > <PublicIcon /> Anyone </Form.Check>
+                      
+                      
+                    </NavDropdown.Item>
+                    <NavDropdown.Divider />
+
+                    <NavDropdown.Item>
+                    <Form.Check type="radio" aria-label="radio 1" ><PublicIcon /> Anyone + Twitter</Form.Check></NavDropdown.Item>
+                    <NavDropdown.Divider />
+
+                    <NavDropdown.Item >
+                    <Form.Check type="radio" aria-label="radio 1" >
+                    <PersonAddIcon/>Connections only</Form.Check>
+                    </NavDropdown.Item>
+                    <NavDropdown.Divider />
+
+                    <NavDropdown.Item >
+                    <Form.Check type="radio" aria-label="radio 1" >
+                     <GroupIcon/> Group Members</Form.Check>
+                    </NavDropdown.Item>
+                    <NavDropdown.Divider />
+
+                    <NavDropdown.Item >
+                    <Form.Check type="radio" aria-label="radio 1" >
+                     <SettingsIcon/>Advnace Settings </Form.Check>
+                    </NavDropdown.Item>
+                    </Form>
+                  </NavDropdown> 
+                  </Row>
+                  </Button>
+
+
+
+
+
+
             </Col>
             <Col md={3}></Col>
           </Row>
