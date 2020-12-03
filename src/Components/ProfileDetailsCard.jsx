@@ -29,7 +29,7 @@ function ProfileDetailsCard({ user,users,handleChangeImage }) {
           <h6>
             {user?.area} -{" "}
             <span className="blue-primary-color font-weight-bold">
-              {users && users.length} Contacts
+              {users && users.length} Connections
             </span>
           </h6>
           <span className="blue-primary-color font-weight-bold">
