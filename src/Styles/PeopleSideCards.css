@@ -22,10 +22,15 @@
   text-decoration: none !important;
 }
 
-.card-profile-images {
+/* .card-profile-images {
   width: 75px;
   height: 75px;
   object-fit: cover;
+} */
+
+.people-card-container .MuiListItem-root img.avatar-image {
+  width: 75px !important;
+  object-fit: contain;
 }
 
 .people-card-container svg {
@@ -34,8 +39,8 @@
   border-radius: 50%;
   border: 1px solid;
   border-color: var(--border-color);
-  color: darkgray;
-  font-size: 30px;
+  color: grey;
+  font-size: 20px;
   width: 2em;
   height: 2em;
 }
