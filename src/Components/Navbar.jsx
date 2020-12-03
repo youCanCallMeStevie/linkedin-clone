@@ -95,7 +95,7 @@ class NavBar extends Component {
                 <div className="navbar-itemMe">
                   <Avatar
                     className="navbar-avatar"
-                    alt="Remy Sharp"
+                    alt={currentUser.name}
                     src="/static/images/avatar/1.jpg"
                   />
 
@@ -108,7 +108,7 @@ class NavBar extends Component {
                       <Col lg={2}>
                         <Avatar
                           className="navbar-avatar"
-                          alt="Remy Sharp"
+                          alt={currentUser.name}
                           src="/static/images/avatar/1.jpg"
                         />
                       </Col>

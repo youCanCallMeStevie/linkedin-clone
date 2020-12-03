@@ -1,6 +1,6 @@
 .logo {
   width: 40px;
-  margin-top: -3px;
+  margin-top: 3px;
 }
 .text-muted {
   margin-bottom: 25px;
@@ -32,23 +32,30 @@
   flex-direction: column;
   justify-content: center !important;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 12px;
   position: relative;
   align-items: center;
-  margin-right: 5px;
+  margin-right: 7px;
+  margin-left: 7px;
 }
 .nav-link-work {
-  margin-left: 5px;
+  margin-right: 10px;
 }
-.MuiAvatar-root {
+.navbar-item .MuiAvatar-root {
   width: 25px !important;
   height: 25px !important;
-  font-size: 1rem !important;
-  margin-left: 2px !important;
+  font-size: 0.25rem !important;
 }
-.navbar-itemMe {
+.navbar-itemMe .MuiAvatar-root{
   border-right: solid 1px rgb(196, 196, 196);
+  margin-left:7px;
   padding: 5px;
+}
+.avatar-dd a::after{
+  display: contents;
+}
+.navbar-itemMe{
+  margin-top: 4px;
 }
 .mynavbar {
   z-index: 6;
@@ -56,7 +63,7 @@
   top: 0;
   left: 0;
   width: 100vw;
-  height: 60px;
+  height: 55px;
   z-index: 333;
 }
 .dropdown-item {
@@ -64,6 +71,7 @@
   color: #666666;
   padding: 0.1 0.5rem !important;
 }
+
 .avatar-dd .dropdown-menu {
   overflow-y: hidden !important;
   height: auto !important;
@@ -122,22 +130,24 @@
 .nav-link .nav-dropdown {
   margin-top: 6px !important;
 }
-.navbar-item svg:hover {
+.navbar-item a,
+.navbar-item a svg:hover {
   color: rgb(25, 25, 25) !important;
 }
-.navbar-item svg:active {
-  color: rgb(25, 25, 25);
+.navbar-item a:active {
+  color: rgb(25, 25, 25) !important;
 }
-
-.navbar-item:active {
+.navbar-item a:active {
   border-bottom: 2px solid rgb(25, 25, 25);
-  color: rgb(25, 25, 25);
+  transform: scale3d(1);
 }
 .search {
   position: relative;
-  background-color: #e1e9ee !important;
+  background-color: #EEF3F8 !important;
   padding: 4px;
-  margin-top: -6px;
+  margin-top: 4px;
+  width: 300px;
+  border-radius: 5px;
 }
 .search:focus {
   border: 1px black solid;
@@ -159,11 +169,7 @@
 .inputInput {
   padding: 5, 5, 5, 5px;
   padding-left: 2em;
-  transition: linear;
   width: 100%;
-}
-.inputInput:focus {
-  width: 30ch;
 }
 .MuiInputBase-input {
   padding: 0 !important;
