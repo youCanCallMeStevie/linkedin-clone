@@ -19,7 +19,7 @@ import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import WorkIcon from '@material-ui/icons/Work';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-
+import MenuBookIcon from '@material-ui/icons/MenuBook';
 import AppsOutlinedIcon from "@material-ui/icons/AppsOutlined";
 import { Avatar } from '@material-ui/core';
 import withUser from "./withUser";
@@ -163,7 +163,7 @@ class NavBar extends Component {
                   </Nav.Link>
                 </div>
                 <div className="navbar-item">
-                  <Nav.Link href="#learning">Linkedin Learning</Nav.Link>
+                  <Nav.Link href="#learning"><MenuBookIcon className="icons"/>Linkedin Learning</Nav.Link>
                 </div>
               </Nav>
             </Navbar.Collapse>
