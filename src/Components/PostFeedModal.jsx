@@ -63,10 +63,7 @@ export default function PostFeedModal({
 
   return (
     <div>
-      <Button variant="primary" onClick={() => toggleModal()}>
-        Launch demo modal
-      </Button>
-
+    
       <Modal
         show={showModal}
         onHide={toggleModal}
