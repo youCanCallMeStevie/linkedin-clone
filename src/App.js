@@ -6,7 +6,7 @@ import Footerr from "./Components/Footerr";
 import { Route, Redirect } from "react-router-dom";
 import Feeds from "./Components/Feeds";
 import Dashboard from './Components/Dashboard'
-
+import Connections from "./Components/Connections"
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
         <Route exact path="/">
           <Redirect to="/feeds" />
         </Route>
-
+        <Route path="/connections" component = {Connections} />
         <Route
           exact
           path="/profile/:user"

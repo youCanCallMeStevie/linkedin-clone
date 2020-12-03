@@ -5,6 +5,7 @@ import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import ProfileDetailsButtons from "./ProfileDetailsButtons";
 import DottedBox from "./DottedBox";
+import {Link} from "react-router-dom"
 
 function ProfileDetailsCard({ user,users,handleChangeImage }) {
   return (
@@ -28,9 +29,11 @@ function ProfileDetailsCard({ user,users,handleChangeImage }) {
           <h5>{user?.title}</h5>
           <h6>
             {user?.area} -{" "}
+          <Link to="/connections">
             <span className="blue-primary-color font-weight-bold">
               {users && users.length} Connections
             </span>
+            </Link>
           </h6>
           <span className="blue-primary-color font-weight-bold">
             Contact Info

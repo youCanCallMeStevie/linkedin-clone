@@ -1,0 +1,45 @@
+.connections-list{
+    width: 750px;
+    border-radius: 15px !important; /* not working */
+    
+}
+
+.message-btn{
+    right: 95px;
+    top: 30px;
+    position: absolute;
+    border-radius: 50px !important;
+    color: #2073C9 !important;
+    background-color: white !important;
+    padding: 2px !important;
+    width: 90px;
+    font-weight: 500;
+}
+.message-btn:hover{
+    background-color: #EAF4FE !important;
+    border-width: 2px;
+    transition: ease-in-out 0.5s;
+}
+.avatar-col .MuiAvatar-root{
+    width: 50px;
+    height: 50px;
+    line-height: 1;
+}
+.info-col{
+    margin-left: 20px;
+}
+.name-col{
+    color: #2073C9;
+    font-weight: 600;
+    font-size: 15px;
+}
+.title-col{
+    font-size: 14px;
+}
+.area-col{
+    font-size: 13px;
+    margin-bottom: 0px !important;
+}
+.results{
+    margin-bottom: 0px!important;
+}
