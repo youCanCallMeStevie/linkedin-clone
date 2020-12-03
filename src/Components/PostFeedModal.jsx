@@ -13,68 +13,75 @@ import PhotoSizeSelectActualOutlinedIcon from "@material-ui/icons/PhotoSizeSelec
 import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
 import NoteIcon from "@material-ui/icons/Note";
 import { Divider } from "@material-ui/core";
-import { postPost, editPost, deletePost,toBase64,postPostImage } from "../utils";
+import {
+  postPost,
+  editPost,
+  deletePost,
+  toBase64,
+  postPostImage,
+} from "../utils";
 
 export default function PostFeedModal({
   toggleModal,
   showModal,
   selectedPost,
-  user
+  user,
 }) {
   const [post, setPost] = useState({
     text: "",
   });
-  const [postImage,setPostImage] = useState('')
-  const [imageThumb,setImageThumb] = useState('')
-
-
+  const [postImage, setPostImage] = useState("");
+  const [imageThumb, setImageThumb] = useState("");
 
   useEffect(() => {
     console.log(selectedPost);
     setPost(selectedPost);
   }, [selectedPost]);
 
-
   const handleSubmit = async (e) => {
-
     e.preventDefault();
-    console.log('submit')
+    console.log("submit");
     let res = "";
     if (selectedPost == "") {
       res = await postPost(post);
-      if(res.ok){
-        let data = await res.json()
-        // let imageSent = await postPostImage(data._id,postImage)
-        // if(imageSent.ok){
-        //   console.log('success')
-        // }  
+      if (res.ok) {
+        let data = await res.json();
+        let imageSent = await postPostImage(data._id, postImage);
+        if (imageSent.ok) {
+          console.log("success");
+        }
+        alert("post successfully posted");
 
+        toggleModal("");
       }
-     
-      alert("post successfully posted");
-
-      toggleModal("");
     } else {
       console.log(post._id);
       res = await editPost(post._id, post);
-      alert("post successfully edited");
+      if (res.ok) {
+        let data = await res.json();
+        let imageSent = await postPostImage(post._id, postImage);
+        if (imageSent.ok) {
+          console.log("success");
+        }
+        alert("post successfully edited");
 
-      toggleModal("");
+        toggleModal("");
+      }
     }
   };
-  const handleChange = e => {
+  const handleChange = (e) => {
     const newPost = { ...post };
     newPost[e.target.name] = e.target.value;
     setPost(newPost);
   };
-const handleChangeImage = e =>{
-  // const formData = new FormData();
-  // formData.append('post',e.target.files[0])
-  setPostImage(e.target.files[0])
-  setImageThumb(toBase64(e.target.files[0]))
-  console.log(postImage)
-  console.log(imageThumb)
-}
+  const handleChangeImage = (e) => {
+    // const formData = new FormData();
+    // formData.append('post',e.target.files[0])
+    setPostImage(e.target.files[0]);
+    setImageThumb(toBase64(e.target.files[0]));
+    console.log(postImage);
+    console.log(imageThumb);
+  };
   const handleDeletePost = async () => {
     const res = await deletePost(post._id);
     alert("Post Successfully Deleted");
@@ -83,7 +90,6 @@ const handleChangeImage = e =>{
 
   return (
     <div>
-    
       <Modal
         show={showModal}
         onHide={toggleModal}
@@ -99,11 +105,7 @@ const handleChangeImage = e =>{
         <Container style={{ padding: "1rem" }}>
           <Row>
             <Col md={3}>
-              <Image
-                src={user?.image}
-                roundedCircle
-                className="mr-3"
-              />
+              <Image src={user?.image} roundedCircle className="mr-3" />
             </Col>
             <Col md={4} className="mt-4">
               {" "}
@@ -112,7 +114,8 @@ const handleChangeImage = e =>{
                 className="rounded-pill"
                 style={{ width: "180px", fontSize: "12px" }}
               >
-                {user.name}{user.surname}  ▾{" "}
+                {user.name}
+                {user.surname} ▾{" "}
               </Button>
             </Col>
             <Col md={2} className="ml-4 mt-4">
@@ -161,14 +164,16 @@ const handleChangeImage = e =>{
                   {" "}
                   <AddIcon style={{ color: "blue" }} />{" "}
                   <label for="image-post">
-                  <PhotoSizeSelectActualOutlinedIcon
-                    style={{ color: "grey" }}
-                    
-                  />{" "}
+                    <PhotoSizeSelectActualOutlinedIcon
+                      style={{ color: "grey" }}
+                    />{" "}
                   </label>
-        
-        <input id="image-post" type="file" className="d-none" onChange={(e)=>handleChangeImage(e)}/>
-     
+                  <input
+                    id="image-post"
+                    type="file"
+                    className="d-none"
+                    onChange={(e) => handleChangeImage(e)}
+                  />
                   <VideoLibraryIcon style={{ color: "grey" }} />
                   <NoteIcon style={{ color: "grey" }} />
                 </Row>
@@ -193,7 +198,6 @@ const handleChangeImage = e =>{
                   >
                     {selectedPost == "" ? "Post" : "Edit"}
                   </Button>
-
                 </Row>
               </Col>
             </Row>

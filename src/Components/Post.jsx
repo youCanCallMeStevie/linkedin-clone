@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Container, Col, Row ,Button, Dropdown} from "react-bootstrap";
+import { Container, Col, Row, Button, Dropdown } from "react-bootstrap";
 import "../Styles/Post.css";
 import PublicIcon from "@material-ui/icons/Public";
 import AddIcon from "@material-ui/icons/Add";
 import DropdownPost from "./DropdownPost";
 import CommentIcon from "@material-ui/icons/Comment";
 
-function Post({ post, currentUser, toggleModal, userId}) {
+function Post({ post, currentUser, toggleModal, userId }) {
   return (
     <Row className="post d-flex flex-column ">
       <Row className="d-flex justify-content-between align-items-center pt-0 pb-3 post__header">
@@ -40,10 +40,12 @@ function Post({ post, currentUser, toggleModal, userId}) {
           </span>
         </div>
       </Row>
-      <Row className="post__text mt-4">{post.text}<br/>
-      <div>
-          <img src={post.image} alt=""/>
-      </div>
+      <Row className="post__text mt-4">
+        {post.text}
+        <br />
+        <Row>
+          <img src={post.image} alt="" className="img-fluid" />
+        </Row>
       </Row>
       <Row className="d-flex align-items-center post__comments ">
         <span className="d-flex align-items-center ">
