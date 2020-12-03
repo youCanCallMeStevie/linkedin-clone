@@ -42,7 +42,7 @@ function NavBar({currentUser,history }) {
       <div>
         <Navbar expand="lg" className=" mynavbar">
           <Container>
-            <Navbar.Brand href="#home" className=" position-sticky logo">
+            <Navbar.Brand href="/feeds" className=" position-sticky logo">
               <img alt="icon" src={Linkedin} className="logo" />
             </Navbar.Brand>
             <div className="search">
@@ -62,7 +62,7 @@ function NavBar({currentUser,history }) {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="ml-auto">
                 <div className="navbar-item">
-                  <Nav.Link href="#home">
+                  <Nav.Link href="/feeds">
                     <HomeIcon className="icons" />
                     Home
                   </Nav.Link>
