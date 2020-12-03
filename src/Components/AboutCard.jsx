@@ -5,7 +5,7 @@ import CreateIcon from "@material-ui/icons/Create";
 
 import "../Styles/AboutCard.css";
 
-export default function Promoted() {
+export default function Promoted({bio}) {
   return (
     <div className="mt-3">
       <Card className="about-card-container">
@@ -19,8 +19,7 @@ export default function Promoted() {
             </Row>
             <Row>
               <Card.Text>
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
+                {bio}
               </Card.Text>
             </Row>
           </Col>
