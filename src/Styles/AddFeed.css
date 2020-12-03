@@ -69,15 +69,17 @@
     font-weight: 600;
 }
 .follow-btn{
-    background-color:white;
-    border: 1px #007bff solid;
-    border-radius: 30px;
-    font-size: 12px;
+    border-radius: 50px !important;
+    color: #2073C9 !important;
+    background-color: white !important;
+    padding: 2px !important;
+    width: 90px;
     font-weight: 500;
-    padding: 10px !important;
-    margin: 0px;
-    width: 100px;
-    word-spacing: 5px !important;
+}
+.follow-btn:hover{
+    background-color: #EAF4FE !important;
+    border-width: 2px;
+    transition: ease-in-out 0.5s;
 }
 .copyright img{
     width: 60px;
