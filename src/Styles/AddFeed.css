@@ -8,6 +8,9 @@
 .news-head .MuiSvgIcon-root{
     color:rgba(202, 200, 200, 0.637);
 }
+.news-group{
+    border-radius: 15px;
+}
 .news-item{
     padding: 7px !important;
     font-size: 15px;
@@ -33,6 +36,7 @@
 }
 .feed-group{
     width: 300px !important;
+    border-radius: 15px;
 }
 .feed-item{
     padding: 7px !important;
@@ -56,6 +60,7 @@
     padding-bottom:0px !important;
 }
 .feed-footer{
+
     border-top:none !important;
     padding-bottom: 10px !important;
     padding-left: 20px !important;
