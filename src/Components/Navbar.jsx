@@ -25,7 +25,7 @@ import { Avatar } from '@material-ui/core';
 import withUser from "./withUser";
 
 
-class NavBar extends Component {
+function NavBar({user,currentUser,history }) {
   // state = {
   //   user:{}
   // }
@@ -36,10 +36,9 @@ class NavBar extends Component {
   //     console.log(this.state.user)
   //   }
   // }
-  render() {
-    const { currentUser,history } = this.props;
-    console.log(this.props)
-    return (
+
+
+  return (
       <div>
         <Navbar expand="lg" className=" mynavbar">
           <Container>
@@ -95,7 +94,7 @@ class NavBar extends Component {
                 <div className="navbar-itemMe">
                   <Avatar
                     className="navbar-avatar"
-                    alt={currentUser.name}
+                    alt={user?.image}
                     src="/static/images/avatar/1.jpg"
                   />
 
@@ -108,7 +107,7 @@ class NavBar extends Component {
                       <Col lg={2}>
                         <Avatar
                           className="navbar-avatar"
-                          alt={currentUser.name}
+                          alt={user?.image}
                           src="/static/images/avatar/1.jpg"
                         />
                       </Col>
@@ -170,8 +169,7 @@ class NavBar extends Component {
           </Container>
         </Navbar>
       </div>
-    );
-  }
+  )
 }
 
 export default withUser(withRouter(NavBar));
