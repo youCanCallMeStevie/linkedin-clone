@@ -24,5 +24,26 @@
     height: 2.5rem;
     background: transparent;
     border-color: transparent;
-    color: #666666 !important;
 }
+
+.add-btn:hover{
+    background: #e7e7e7 !important;
+}
+
+#photo-btn{
+    color: #70B5F9;
+}
+
+#video-btn{
+    color: #F0BF7E;
+}
+
+#event-btn{
+    color: #A1B4B8;
+
+}
+
+#article-btn{
+    color: #7EC15E;
+}
+

@@ -23,34 +23,34 @@ export default function Postbox() {
                     <Row style={{ marginTop: '-15px' }}>
                         <Col>
                             <Button className="add-btn">
-                                <label>
+                                <label id="photo-btn">
                                     <PhotoIcon />
-                            Photo
-                        </label>
+                                    Photo
+                                </label>
                             </Button>
                         </Col>
                         <Col>
                             <Button className="add-btn">
-                                <label>
+                                <label id="video-btn">
                                     <YouTubeIcon />
-                            Video
-                        </label>
+                                    Video
+                                </label>
                             </Button>
                         </Col>
                         <Col>
                             <Button className="add-btn">
-                                <label>
+                                <label id="event-btn">
                                     <EventIcon />
-                            Event
-                        </label>
+                                    Event
+                                </label>
                             </Button>
                         </Col>
                         <Col>
                             <Button className="add-btn">
-                                <label>
+                                <label id="article-btn">
                                     <FormatAlignLeftIcon />
-                            Article
-                        </label>
+                                    Article
+                                </label>
                             </Button>
                         </Col>
                     </Row>
