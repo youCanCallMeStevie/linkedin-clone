@@ -12,6 +12,7 @@ import AddIcon from "@material-ui/icons/Add";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import CreateIcon from "@material-ui/icons/Create";
 import "../Styles/ExperienceEducation.css";
+import moment from 'moment'
 
 export default function ExperienceEducation({ toggleModal, experiences }) {
   console.log(experiences);
@@ -35,7 +36,7 @@ export default function ExperienceEducation({ toggleModal, experiences }) {
 
           <List>
             {experiences &&
-              experiences.map(experience => (
+              experiences.map((experience) => (
                 <>
                   <Divider variant="inset" component="li" />
                   <ListItem>
@@ -56,7 +57,11 @@ export default function ExperienceEducation({ toggleModal, experiences }) {
                       <Row>
                         <ListItemText
                           primary={experience.company}
-                          secondary={`${experience.startDate} - ${experience.endDate}`}
+                          secondary={`${moment(experience.startDate).format(
+                            "MM/DD/YYYY"
+                          )} - ${moment(experience.endDate).format(
+                            "MM/DD/YYYY"
+                          )}`}
                         />
                       </Row>
                     </Col>
