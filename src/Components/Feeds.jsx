@@ -66,7 +66,7 @@ class Feeds extends Component {
   };
 
   render() {
-    const { user, allUsers, posts, showModal, selectedPost, loading, handleLike } = this.state;
+    const { user, allUsers, posts, showModal, selectedPost, loading, toggleLike } = this.state;
     return (
       <Container className="feeds">
         <Row>
@@ -109,7 +109,8 @@ class Feeds extends Component {
                   toggleModal={this.handleModalToggle}
                   userId={user._id}
                   loading={loading}
-                  toggleLike={this.handleLike}
+                  toggleLike={toggleLike}
+                  handleLike={this.handleLike}
 
                 />
               )))
