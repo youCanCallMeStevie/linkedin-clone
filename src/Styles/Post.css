@@ -48,7 +48,7 @@
 .post__img {
   height: 300px;
   width: 100%;
-  object-fit: cover;
+  margin-top: 20px;
 }
 .post__img img {
   height: 100%;
