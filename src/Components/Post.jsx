@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import { Row } from "react-bootstrap";
 import "../Styles/Post.css";
 import PublicIcon from "@material-ui/icons/Public";
@@ -7,7 +7,13 @@ import DropdownPost from "./DropdownPost";
 import CommentIcon from "@material-ui/icons/Comment";
 import moment from "moment";
 
-function Post({ post, currentUser, toggleModal, userId, toggleLike,handleLike }) {
+function Post({ post, currentUser, toggleModal, userId }) {
+  const [toggleLike, setToggleLike] = useState(false)
+  
+  const handleLike = () => {
+    setToggleLike(!toggleLike)
+  }
+  
   const differenceDays = date => {
     const diff = moment(post.updatedAt).fromNow(); // another date
     return diff;
@@ -19,7 +25,7 @@ function Post({ post, currentUser, toggleModal, userId, toggleLike,handleLike })
     <Row className="post d-flex flex-column ">
       <Row className="d-flex justify-content-between align-items-center pt-0 pb-3 post__header">
         <span>
-          <b>{currentUser}</b> likes this
+          {toggleLike && <><b>{currentUser}</b> likes this</>}
         </span>
         <DropdownPost
           toggleModal={toggleModal}
