@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import { Container, Col, Row } from "react-bootstrap";
-import { fetchUser, fetchAllUsers, fetchExperiences,toBase64,postUserImage } from "../utils";
+import {
+  fetchUser,
+  fetchAllUsers,
+  fetchExperiences,
+  toBase64,
+  postUserImage,
+} from "../utils";
 import ProfileDetailsCard from "./ProfileDetailsCard";
 import "../Styles/Profile.css";
 import AboutCard from "./AboutCard";
@@ -21,7 +27,6 @@ export default class Profile extends Component {
     experiences: [],
     showModal: false,
     selectedExprience: "",
- 
   };
   //called when components receive a new prop (for example a new user id)
   componentDidUpdate = async (prevProp, prevState) => {
@@ -80,27 +85,28 @@ export default class Profile extends Component {
       window.onscroll = () => {
         let currentScrollPos = window.pageYOffset;
         let maxScroll = document.body.scrollHeight - window.innerHeight;
-        // console.log(maxScroll)
         let topbar = document.querySelector(".profileTopBar");
-        if (currentScrollPos > 350 && currentScrollPos <= maxScroll) {
-          topbar.classList.add("d-flex");
-          topbar.classList.remove("d-none");
-        } else {
-          topbar.classList.add("d-none");
-          topbar.classList.remove("d-flex");
+        if (typeof topbar !== "null") {
+          if (currentScrollPos > 350 && currentScrollPos <= maxScroll) {
+            topbar?.classList.add("d-flex");
+            topbar?.classList.remove("d-none");
+          } else {
+            topbar?.classList.add("d-none");
+            topbar?.classList.remove("d-flex");
+          }
         }
       };
     }
   };
 
-  handleChangeImage = async (e)=>{
-let formData = new FormData()
-formData.append('profile',e.target.files[0])
-if(formData)
-{let res = await postUserImage(this.state.user._id,formData)
-this.setUpUser()}
-
-  }
+  handleChangeImage = async (e) => {
+    let formData = new FormData();
+    formData.append("profile", e.target.files[0]);
+    if (formData) {
+      let res = await postUserImage(this.state.user._id, formData);
+      this.setUpUser();
+    }
+  };
 
   render() {
     const {
@@ -110,7 +116,6 @@ this.setUpUser()}
       showModal,
       experiences,
       selectedExprience,
-     
     } = this.state;
     return (
       <Container className="profile">

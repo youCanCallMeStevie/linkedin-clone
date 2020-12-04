@@ -1,3 +1,9 @@
+@media only screen and (max-width: 1205px) { 
+  .navbar{
+    display: none !important;
+    background-color: #f4f2ef !important;
+  }
+ }
 .logo {
   width: 40px;
   margin-top: 3px;

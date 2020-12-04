@@ -1,5 +1,4 @@
 import { Col, Container, ListGroup, Row, Button } from "react-bootstrap";
-import ProfileTopBar from "./ProfileTopBar";
 import { Link } from "react-router-dom";
 import React, { Component } from "react";
 import Avatar from "@material-ui/core/Avatar";
@@ -36,23 +35,9 @@ class Connections extends Component {
   };
   componentDidMount() {
     this.fetchAllUsers();
-    this.handleScroll();
+   
   }
-  handleScroll = () => {
-    if (typeof window !== "undefined") {
-      window.onscroll = () => {
-        let currentScrollPos = window.pageYOffset;
-        let maxScroll = document.body.scrollHeight - window.innerHeight;
-        // console.log(maxScroll)
-        let topbar = document.querySelector(".profileTopBar");
-        if (currentScrollPos > 350 && currentScrollPos <= maxScroll) {
-          topbar.classList.add("d-none");
-        } else {
-          topbar.classList.add("d-none");
-        }
-      };
-    }
-  };
+  
   render() {
     return (
       <Container className="container-conn mb-5">
@@ -87,7 +72,7 @@ class Connections extends Component {
             </ListGroup.Item>
           ))}
         </ListGroup>
-        <ProfileTopBar />
+     
       </Container>
     );
   }
