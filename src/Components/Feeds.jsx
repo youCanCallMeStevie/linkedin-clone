@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Col, Row, Button } from "react-bootstrap";
+import { Container, Col, Row, Button, Spinner} from "react-bootstrap";
 import withUser from "./withUser";
 import "../Styles/Feeds.css";
 import { fetchPosts } from "../utils";
@@ -102,14 +102,14 @@ class Feeds extends Component {
             />
             <NewPostButton />
 
-            {/* {loading ? (
+            {loading ? (
         <Col >
           <Spinner animation="border" variant="light" />
-        </Col>) : ( */}
+        </Col>) : (
 
 
 
-            {posts.sort((a, b) => {
+            posts.sort((a, b) => {
                 const c = new Date(a.updatedAt);
                 const d = new Date(b.updatedAt);
                 return d - c;
@@ -123,8 +123,8 @@ class Feeds extends Component {
                   userId={user._id}
                   loading={loading}
                 />
-              ))}
-              {/* )} */}
+              )))
+              }
           </Col>
           <Col md={3} className="position-relative">
             <div className="feeds__top-stick">
