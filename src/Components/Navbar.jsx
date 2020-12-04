@@ -43,7 +43,7 @@ function NavBar({ currentUser, history }) {
     <div>
       <Nav>
         <Container className="fluid ml-5">
-          <Dropdown className=" hamburger-menu d-fixed">
+          <Dropdown className=" hamburger-menu position-fixed ">
             <img alt="icon" src={LiLogo} className="lilogo" />
             <Dropdown.Toggle
               className="text-right"
@@ -57,17 +57,36 @@ function NavBar({ currentUser, history }) {
               <MenuIcon />
             </Dropdown.Toggle>
 
-            <Dropdown.Menu aria-labelledby="navbarDropdown">
-              <Dropdown.Item href="/feeds"></Dropdown.Item>
-              <Dropdown.Item href="/profile/me">
+            <Dropdown.Menu aria-labelledby="navbarDropdown" className="dropdown-hamb">
+              
+              <Dropdown.Item className="dropdown-me" href="/profile/me">
                 <Avatar
                   className="navbar-avatar"
                   alt={currentUser?.image}
                   src={currentUser?.image}
-                />
+                />Me
+              </Dropdown.Item>
+              <NavDropdown.Divider />
+              <Dropdown.Item href="/feeds"><HomeIcon className="icons" />Home</Dropdown.Item>
+              <Dropdown.Item href="#/action-3">
+              <PeopleAltIcon className="icons" />
+                  My Network
               </Dropdown.Item>
               <Dropdown.Item href="#/action-3">
-                <WorkIcon className="icons" />
+              <WorkIcon className="icons" />
+                  Jobs
+              </Dropdown.Item>
+              <Dropdown.Item href="#/action-3">
+              <ChatBubbleIcon className="icons" />
+                  Messaging
+              </Dropdown.Item>
+              <Dropdown.Item href="#/action-3">
+              <NotificationsIcon className="icons" />
+                  Notifications
+              </Dropdown.Item>
+              <NavDropdown.Divider />
+              <Dropdown.Item href="#/action-3">
+              Sign out
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>

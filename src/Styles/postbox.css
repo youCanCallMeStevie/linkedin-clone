@@ -6,13 +6,17 @@
 #startPost {
   background: transparent !important;
   color: #666666;
-  width: 100%;
+  width: -webkit-fill-available;
   height: 3rem;
   border-color: #666666;
   border-radius: 15px;
   text-align: start;
   font-size: small;
-  margin-top: -0.5vw;
+  margin: 0.25rem;
+}
+.start-postbox{
+  padding: 0px !important;
+  flex: auto !important;
 }
 
 #startPost:hover {
@@ -22,7 +26,10 @@
   .post-icons{
     position: absolute;
     top: 60px;
-
+    padding:0.25 !important;
+  }
+  .cardd .card-body{
+    padding:0.25 !important;
   }
 }
 .add-btn {

@@ -82,7 +82,7 @@ class Connections extends Component {
 
                   <Link
                     to={`/profile/${user.username}`}
-                    className="message-btn  text-center"
+                    className="message-btn text-center"
                   >
                     Message
                   </Link>

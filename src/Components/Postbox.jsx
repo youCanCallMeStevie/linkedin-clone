@@ -11,7 +11,7 @@ export default function Postbox({ toggleModal }) {
     return (
 
         <Card id="cardd">
-            <Card.Body>
+            <Card.Body className="start-postbox">
                 <Button id="startPost" onClick={() => toggleModal()} >
                     <label style={{ marginTop: "5px" }}>
                         <AddBoxIcon />
@@ -45,8 +45,8 @@ export default function Postbox({ toggleModal }) {
                   </label>
                         </Button>
                     </Col>
-                    <Col>
-                        <Button className="add-btn">
+                    <Col className="d-xs-none">
+                        <Button className="add-btn d-xs-none">
                             <label id="article-btn">
                                 <FormatAlignLeftIcon />
                     Article

@@ -36,10 +36,10 @@
   
 }
 .margin-80{
-  margin-top: 16px !important;
+  margin-top: 64px !important;
 }
 @media only screen and (max-width: 1205px) { 
   .margin-80{
-    margin: 0px !important;
+    margin: 40px !important;
   }
  }

@@ -50,6 +50,7 @@
 .connections-navbar{
     height: 60px;
     box-shadow: -3px 1px 13px 2px #0000004d;
+    top:-8px !important;
 }
 .connections-navbar .navbar-collapse .navbar-nav .nav-item a{
     font-size: 15px;
