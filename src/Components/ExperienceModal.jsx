@@ -243,7 +243,7 @@ export class ExperienceModal extends React.Component {
               />
             </Form.Group>
             <Row>
-              <AddIcon style={{ color: "blue" }} />{" "}
+              <AddIcon className="ml-3" style={{ color: "blue" }} />{" "}
               <label for="image-post">
                 <PhotoSizeSelectActualOutlinedIcon style={{ color: "grey" }} />{" "}
               </label>
