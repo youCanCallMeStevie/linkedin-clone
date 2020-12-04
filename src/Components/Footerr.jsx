@@ -44,93 +44,7 @@ function Footerr() {
                 Questions?
               </label>
             </Col>
-            <Col>
-              {["up"].map((direction) => (
-                <DropdownButton
-                  key={direction}
-                  id={`dropdown-button-drop-${direction}`}
-                  drop={direction}
-                  variant="secondary"
-                  title={` Language `}
-                >
-                  <Dropdown.Item>
-                    <p className="dropdownText">العربية (Arabic)</p>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <p className="dropdownText">čeština (Czech)</p>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <p className="dropdownText">Dansk (Danish)</p>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <p className="dropdownText">Detusch (German)</p>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <p className="dropdownText">Español (Spanish)</p>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <p className="dropdownText">Français (French)</p>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <p className="dropdownText">
-                      Bahasda Indonesia (Bahasda Indonesia)
-                    </p>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <p className="dropdownText">Italiano (Italian)</p>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <p className="dropdownText">日本人 (Japanese)</p>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <p className="dropdownText">한국어 (Korean)</p>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <p className="dropdownText">Bahasa Malasya (Malay)</p>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <p className="dropdownText">Netherlands (Dutch)</p>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <p className="dropdownText">Norsk (Norwegian)</p>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <p className="dropdownText">Polski (Polish)</p>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <p className="dropdownText">Português (Portuguese)</p>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <p className="dropdownText">Română (Romanian)</p>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <p className="dropdownText">русский (Russian)</p>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <p className="dropdownText">Svenska (Swedish)</p>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <p className="dropdownText">ภาษาไทย (Thai)</p>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <p className="dropdownText">Tagalog (Tagalog)</p>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <p className="dropdownText">Türkçe (Turkish)</p>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <p className="dropdownText">
-                      简体中文 (Chinise (Simplified))
-                    </p>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <p className="dropdownText">
-                      繁體中文 (Chinsie (Traditional))
-                    </p>
-                  </Dropdown.Item>
-                </DropdownButton>
-              ))}
-            </Col>
+            <Col></Col>
           </Row>
           <Row>
             <Col>
@@ -145,7 +59,90 @@ function Footerr() {
             <Col>
               <p className="helpText">Visit our Help Center</p>
             </Col>
-            <Col></Col>
+            <Col><DropdownButton
+              key="up"
+              id="dropdown-button-drop-up"
+              drop="up"
+              variant="outline-secondary"
+              title={` Language `}
+            >
+              <Dropdown.Item>
+                <p className="dropdownText">العربية (Arabic)</p>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <p className="dropdownText">čeština (Czech)</p>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <p className="dropdownText">Dansk (Danish)</p>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <p className="dropdownText">Detusch (German)</p>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <p className="dropdownText">Español (Spanish)</p>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <p className="dropdownText">Français (French)</p>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <p className="dropdownText">
+                  Bahasda Indonesia (Bahasda Indonesia)
+                    </p>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <p className="dropdownText">Italiano (Italian)</p>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <p className="dropdownText">日本人 (Japanese)</p>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <p className="dropdownText">한국어 (Korean)</p>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <p className="dropdownText">Bahasa Malasya (Malay)</p>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <p className="dropdownText">Netherlands (Dutch)</p>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <p className="dropdownText">Norsk (Norwegian)</p>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <p className="dropdownText">Polski (Polish)</p>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <p className="dropdownText">Português (Portuguese)</p>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <p className="dropdownText">Română (Romanian)</p>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <p className="dropdownText">русский (Russian)</p>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <p className="dropdownText">Svenska (Swedish)</p>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <p className="dropdownText">ภาษาไทย (Thai)</p>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <p className="dropdownText">Tagalog (Tagalog)</p>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <p className="dropdownText">Türkçe (Turkish)</p>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <p className="dropdownText">
+                  简体中文 (Chinise (Simplified))
+                    </p>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <p className="dropdownText">
+                  繁體中文 (Chinsie (Traditional))
+                    </p>
+              </Dropdown.Item>
+            </DropdownButton>
+            </Col>
           </Row>
           <Row>
             <Col>

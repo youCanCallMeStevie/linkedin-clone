@@ -19,3 +19,14 @@
     overflow-y: scroll;
 }
 
+#dropdown-button-drop-up{
+    width: 10.5vw;
+}
+
+#dropdown-button-drop-up:hover{
+    height: 2.01vw;
+    animation: normal !important;
+    border-width: 2px;
+    background: transparent;
+    color: #89758F;
+}

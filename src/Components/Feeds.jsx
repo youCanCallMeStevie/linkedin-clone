@@ -56,30 +56,7 @@ class Feeds extends Component {
       this.setState({ selectedPost });
     }
   };
-  // handleScroll = () => {
-  //  let elementsToFix = document.getElementsByClassName("feeds__top-stick");
-  //   elementsToFix = [...elementsToFix]
-  //   if (typeof window !== "undefined") {
-  //     window.onscroll = () => {
-  //       let currentScrollPos = window.pageYOffset;
-  //       let maxScroll = document.body.scrollHeight - window.innerHeight;
-  //       // console.log(maxScroll)
-  //       if (currentScrollPos > 350 && currentScrollPos <= maxScroll) {
-  //         elementsToFix.forEach((element) =>
-  //           element.classList.add("feeds__top-stick")
-  //         );
-  //         // topbar.classList.add("d-flex");
-         
-  //       } else {
-  //   elementsToFix.forEach((element) =>
-  //     element.classList.add("feeds__top-stick")
-  //   );
-  //         console.log('ciao')
-  //         // topbar.classList.remove("d-flex");
-  //       }
-  //     };
-  //   }
-  // };
+  
 
   render() {
     const { user, allUsers, posts, showModal, selectedPost, loading } = this.state;
@@ -102,6 +79,7 @@ class Feeds extends Component {
             />
             <NewPostButton />
 
+
             {loading ? (
        <><Container><Row className="mt-5"></Row><Row className="mt-5"></Row><Row className="mt-5"></Row> <Row className="mt-5"></Row> <Row className="mt-5"><Col md={{ span: 4, offset: 5 }}  >
           <Spinner animation="border" variant="primary" />
@@ -111,6 +89,7 @@ class Feeds extends Component {
 
 
             posts.sort((a, b) => {
+
                 const c = new Date(a.updatedAt);
                 const d = new Date(b.updatedAt);
                 return d - c;

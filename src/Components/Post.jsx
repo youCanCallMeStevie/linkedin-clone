@@ -5,8 +5,18 @@ import PublicIcon from "@material-ui/icons/Public";
 import AddIcon from "@material-ui/icons/Add";
 import DropdownPost from "./DropdownPost";
 import CommentIcon from "@material-ui/icons/Comment";
+import moment from "moment";
+
+
 
 function Post({ post, currentUser, toggleModal, userId, loading }) {
+
+  const differenceDays = (date) => {
+  
+  const diff = moment(post.updatedAt).fromNow(); // another date
+    return diff
+}
+
   return (
 
 
@@ -37,7 +47,7 @@ function Post({ post, currentUser, toggleModal, userId, loading }) {
               {post.user.name} {post.user.surname}
             </h4>
             <span className="post__user-days">
-              {post.createdAt} <PublicIcon />
+              {differenceDays(post.createdAt)} <PublicIcon />
             </span>
           </div>
         </div>
@@ -48,12 +58,12 @@ function Post({ post, currentUser, toggleModal, userId, loading }) {
           </span>
         </div>
       </Row>
-      <Row className="post__text mt-4">
+      <Row className="d-flex flex-column align-items-start post__text mt-4">
         {post.text}
         <br />
-        <Row>
-          <img src={post.image} alt="" className="img-fluid" />
-        </Row>
+        {post.image && <div className="post__img">
+          <img src={post.image} alt="" className="" />
+       </div>}
       </Row>
       <Row className="d-flex align-items-center post__comments ">
         <span className="d-flex align-items-center ">
