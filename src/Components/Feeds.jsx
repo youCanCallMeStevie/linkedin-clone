@@ -20,6 +20,8 @@ class Feeds extends Component {
     posts: [],
     showModal: false,
     selectedPost: "",
+    loading: true,
+    error: false,
   };
 
   componentDidMount = async () => {
@@ -37,6 +39,11 @@ class Feeds extends Component {
   fetchAllPosts = async () => {
     const posts = await fetchPosts();
     this.setState({ posts });
+    setTimeout(() => {
+      this.setState({
+        loading: false,
+      });
+    }, 750);
   };
 
   handleModalToggle = async (selectedPost = "") => {
@@ -75,7 +82,7 @@ class Feeds extends Component {
   // };
 
   render() {
-    const { user, allUsers, posts, showModal, selectedPost } = this.state;
+    const { user, allUsers, posts, showModal, selectedPost, loading } = this.state;
     return (
       <Container className="feeds">
         <Row>
@@ -94,20 +101,30 @@ class Feeds extends Component {
               users={allUsers}
             />
             <NewPostButton />
-            {posts
-              .sort((a, b) => {
+
+            {/* {loading ? (
+        <Col >
+          <Spinner animation="border" variant="light" />
+        </Col>) : ( */}
+
+
+
+            {posts.sort((a, b) => {
                 const c = new Date(a.updatedAt);
                 const d = new Date(b.updatedAt);
                 return d - c;
               })
               .map((post) => (
+                
                 <Post
                   post={post}
                   currentUser={`${user.name} ${user.surname}`}
                   toggleModal={this.handleModalToggle}
                   userId={user._id}
+                  loading={loading}
                 />
               ))}
+              {/* )} */}
           </Col>
           <Col md={3} className="position-relative">
             <div className="feeds__top-stick">

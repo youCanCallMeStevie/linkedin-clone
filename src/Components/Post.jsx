@@ -1,14 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { Container, Col, Row, Button, Dropdown } from "react-bootstrap";
+import React from "react";
+import { Row, Col, Spinner} from "react-bootstrap";
 import "../Styles/Post.css";
 import PublicIcon from "@material-ui/icons/Public";
 import AddIcon from "@material-ui/icons/Add";
 import DropdownPost from "./DropdownPost";
 import CommentIcon from "@material-ui/icons/Comment";
 
-function Post({ post, currentUser, toggleModal, userId }) {
+function Post({ post, currentUser, toggleModal, userId, loading }) {
   return (
+
+
+    
     <Row className="post d-flex flex-column ">
+      {loading ? (
+        <Col >
+          <Spinner animation="border" variant="primary" />
+        </Col>) : (
+<>
       <Row className="d-flex justify-content-between align-items-center pt-0 pb-3 post__header">
         <span>
           <b>{currentUser}</b> likes this
@@ -22,7 +30,7 @@ function Post({ post, currentUser, toggleModal, userId }) {
       <Row className="post__body d-flex justify-content-between pt-3">
         <div className="d-flex">
           <div className="post__avatar mr-2">
-            <img src={post.user.image} />
+            <img src={post.user.image} alt="user-posted-image" />
           </div>
           <div className="post__user">
             <h4>
@@ -67,6 +75,8 @@ function Post({ post, currentUser, toggleModal, userId }) {
           <CommentIcon /> Comment
         </span>
       </Row>
+      </>
+        )}
     </Row>
   );
 }
