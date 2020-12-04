@@ -103,9 +103,10 @@ class Feeds extends Component {
             <NewPostButton />
 
             {loading ? (
-        <Col >
-          <Spinner animation="border" variant="light" />
-        </Col>) : (
+       <><Container><Row className="mt-5"></Row><Row className="mt-5"></Row><Row className="mt-5"></Row> <Row className="mt-5"></Row> <Row className="mt-5"><Col md={{ span: 4, offset: 5 }}  >
+          <Spinner animation="border" variant="primary" />
+          
+        </Col></Row> </Container> </> ): (
 
 
 
