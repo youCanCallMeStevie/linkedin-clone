@@ -1,4 +1,4 @@
-import { Col, Container, ListGroup, Row, Button } from "react-bootstrap";
+import { Col, Container, ListGroup, Row, Navbar, NavDropdown, Nav} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import React, { Component } from "react";
 import Avatar from "@material-ui/core/Avatar";
@@ -35,45 +35,64 @@ class Connections extends Component {
   };
   componentDidMount() {
     this.fetchAllUsers();
-   
   }
-  
+
   render() {
     return (
-      <Container className="container-conn mb-5">
-        <ListGroup className="connections-list mb-5">
-          <ListGroup.Item>
-            <p className="text-muted results">
-              {this.state.allUsers.length} results
-            </p>
-          </ListGroup.Item>
-          {this.state.allUsers.map((user) => (
-            <ListGroup.Item className="connections-item">
-              <Row className="conn-row d-flex align-items-center">
-                <Col md={2} lg={1} className="avatar-col">
-                  <Avatar alt={user.image} src={user.image} />
-                </Col>
-                <Col md={3} lg={3} className="info-col">
-                  <Row className="name-col">
-                    {user.name} {user.surname}
-                  </Row>
-                  <Row className="title-col">{user.title}</Row>
-                  <Row className="area-col text-muted"> {user.area}</Row>
-                </Col>
-
-                <Link
-                  to={`/profile/${user.username}`}
-                  className="message-btn btn-trasparent-grey text-center"
-                >
-                  Profile
-                </Link>
-                <Link />
-              </Row>
+      <div>
+        <Navbar bg="light" expand="lg" className="connections-navbar">
+          <Container>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="mr-auto">
+              <NavDropdown title="People" id="people-nav-dropdown">
+                </NavDropdown>
+                <NavDropdown title="1st" id="number-nav-dropdown">
+                </NavDropdown>
+                <NavDropdown title="Current companies" id="company-nav-dropdown">
+                </NavDropdown>
+                <NavDropdown title="Locations" id="location-nav-dropdown">
+                </NavDropdown>
+                <Nav.Link>All Filters</Nav.Link>
+                <Nav.Link>Clear</Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
+        <Container className="container-conn mb-5">
+          <ListGroup className="connections-list mb-5">
+            <ListGroup.Item>
+              <p className="text-muted results">
+                {this.state.allUsers.length} results
+              </p>
             </ListGroup.Item>
-          ))}
-        </ListGroup>
-     
-      </Container>
+            {this.state.allUsers.map((user) => (
+              <ListGroup.Item className="connections-item">
+                <Row className="conn-row d-flex align-items-center">
+                  <Col md={2} lg={1} className="avatar-col">
+                    <Avatar alt={user.image} src={user.image} />
+                  </Col>
+                  <Col md={3} lg={3} className="info-col">
+                    <Row className="name-col">
+                      {user.name} {user.surname}
+                    </Row>
+                    <Row className="title-col">{user.title}</Row>
+                    <Row className="area-col text-muted"> {user.area}</Row>
+                  </Col>
+
+                  <Link
+                    to={`/profile/${user.username}`}
+                    className="message-btn  text-center"
+                  >
+                    Message
+                  </Link>
+                  <Link />
+                </Row>
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        </Container>
+      </div>
     );
   }
 }

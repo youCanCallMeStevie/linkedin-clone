@@ -4,10 +4,18 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Linkedin from "../Assets/LinkedIn-Logos/linkedin.png";
 import LiLogo from "../Assets/LinkedIn-Logos/LI-Logo.png";
 import "../Styles/navbar.css";
-import { Navbar, Row, Col, Container, Nav, NavDropdown, Dropdown } from "react-bootstrap";
+import {
+  Navbar,
+  Row,
+  Col,
+  Container,
+  Nav,
+  NavDropdown,
+  Dropdown,
+} from "react-bootstrap";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
-import MenuIcon from '@material-ui/icons/Menu';
+import MenuIcon from "@material-ui/icons/Menu";
 import HomeIcon from "@material-ui/icons/Home";
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import WorkIcon from "@material-ui/icons/Work";
@@ -15,9 +23,9 @@ import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import AppsOutlinedIcon from "@material-ui/icons/AppsOutlined";
-import { Avatar } from "@material-ui/core";
+import { Avatar, Badge } from "@material-ui/core";
 import withUser from "./withUser";
-import "../Styles/ham-navbar.css"
+import "../Styles/ham-navbar.css";
 
 function NavBar({ currentUser, history }) {
   // state = {
@@ -34,24 +42,36 @@ function NavBar({ currentUser, history }) {
   return (
     <div>
       <Nav>
-      <Container className="fluid ml-5">
-      <Dropdown className=" hamburger-menu d-fixed">
-      <img alt="icon" src={LiLogo} className="lilogo" />
-        <Dropdown.Toggle className="text-right" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" variant="mycolor">
-         <MenuIcon/>
-        </Dropdown.Toggle>
+        <Container className="fluid ml-5">
+          <Dropdown className=" hamburger-menu d-fixed">
+            <img alt="icon" src={LiLogo} className="lilogo" />
+            <Dropdown.Toggle
+              className="text-right"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              variant="mycolor"
+            >
+              <MenuIcon />
+            </Dropdown.Toggle>
 
-        <Dropdown.Menu aria-labelledby="navbarDropdown">
-          <Dropdown.Item href="/feeds"></Dropdown.Item>
-          <Dropdown.Item href="/profile/me"><Avatar
+            <Dropdown.Menu aria-labelledby="navbarDropdown">
+              <Dropdown.Item href="/feeds"></Dropdown.Item>
+              <Dropdown.Item href="/profile/me">
+                <Avatar
                   className="navbar-avatar"
                   alt={currentUser?.image}
                   src={currentUser?.image}
-                /></Dropdown.Item>
-          <Dropdown.Item href="#/action-3"><WorkIcon className="icons" /></Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-      </Container>
+                />
+              </Dropdown.Item>
+              <Dropdown.Item href="#/action-3">
+                <WorkIcon className="icons" />
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </Container>
       </Nav>
       <Navbar expand="lg" className=" mynavbar">
         <Container>
@@ -76,7 +96,9 @@ function NavBar({ currentUser, history }) {
             <Nav className="ml-auto">
               <div className="navbar-item">
                 <Nav.Link href="/feeds">
-                  <HomeIcon className="icons" />
+                  <Badge badgeContent={21} color="error">
+                    <HomeIcon className="icons" />
+                  </Badge>
                   Home
                 </Nav.Link>
               </div>
@@ -94,7 +116,9 @@ function NavBar({ currentUser, history }) {
               </div>
               <div className="navbar-item">
                 <Nav.Link href="#messages">
-                  <ChatBubbleIcon className="icons" />
+                  <Badge badgeContent={4} color="error">
+                    <ChatBubbleIcon className="icons" />
+                  </Badge>
                   Messaging
                 </Nav.Link>
               </div>
