@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
-import { Card, Row, Col, Button } from 'react-bootstrap'
+import { Card, Row, Col } from 'react-bootstrap'
+import {
+    ListItem,
+    Divider,
+  } from "@material-ui/core";
+  import "../Styles/Activity.css";
 
-export default class Activity extends Component {
-    render() {
+
+  export default function Activity() {
         return (
             <>
                 <div className="mt-3">
-                    <Card className="about-card-container">
+                    <Card className="activity-card-container">
                         <Card.Body className="mx-2">
                             <Col>
                                 <Row className="justify-content-between">
@@ -23,10 +28,21 @@ export default class Activity extends Component {
                             </Col>
 
                         </Card.Body>
-                        <a href="" ><Card.Footer className="text-center" style={{ color: '#467DCB' }}>See all Activity</Card.Footer></a>
-                    </Card>
+                    <Divider light />
+        <ListItem
+          button="primary"
+          component="a"
+          href="#"
+          className="show-more-list-link justify-content-center"
+        >
+          Show more on LinkedIn
+        </ListItem>
+
+        </Card>
+
+                    
                 </div>
             </>
         )
     }
-}
+

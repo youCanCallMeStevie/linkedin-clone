@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Card, Row, Image, Col, Media } from "react-bootstrap";
 import {
@@ -12,10 +12,11 @@ import AddIcon from "@material-ui/icons/Add";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import CreateIcon from "@material-ui/icons/Create";
 import "../Styles/ExperienceEducation.css";
-import moment from 'moment'
+import moment from "moment";
 
 export default function ExperienceEducation({ toggleModal, experiences }) {
   console.log(experiences);
+  // const [show, setShow] = useState(false);
   return (
     <div className="mt-3">
       <Card className="experience-education-container">
@@ -36,10 +37,10 @@ export default function ExperienceEducation({ toggleModal, experiences }) {
 
           <List>
             {experiences &&
-              experiences.map((experience) => (
+              experiences.map(experience => (
                 <>
                   <Divider variant="inset" component="li" />
-                  <ListItem>
+                  <ListItem >
                     <div>
                       <Image
                         src={experience.image}
@@ -47,11 +48,18 @@ export default function ExperienceEducation({ toggleModal, experiences }) {
                         className="experience-education-avatars mr-3"
                       />
                     </div>
-                    <Col>
-                      <Row className="justify-content-between">
+                    <Col >
+                      <Row
+                        className="justify-content-between edit-info-icon"
+                        
+                      >
                         <Typography variant="h5">{experience.role}</Typography>
                         <span>
-                          <CreateIcon onClick={() => toggleModal(experience)} />
+                          
+                            <CreateIcon
+                              onClick={() => toggleModal(experience)}
+                            />
+                      
                         </span>
                       </Row>
                       <Row>
