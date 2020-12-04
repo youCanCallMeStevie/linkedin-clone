@@ -60,12 +60,15 @@ export default function PostFeedModal({
       if (res.ok) {
         const data = await res.json();
         const post_id = data._id;
-        const imageSent = await postPostImage(post_id, postImage);
-        if (imageSent.ok) {
-          console.log("success");
+        if (postImage != "") {
+          const imageSent = await postPostImage(post_id, postImage);
+          if (imageSent) {
+            if (imageSent.ok) {
+              console.log("success");
+            }
+          }
         }
       }
-
       alert(message);
       toggleModal("");
     }
