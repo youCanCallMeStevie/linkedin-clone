@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Col, Row, Button } from "react-bootstrap";
+import { Container, Col, Row, Button, Spinner} from "react-bootstrap";
 import withUser from "./withUser";
 import "../Styles/Feeds.css";
 import { fetchPosts } from "../utils";
@@ -20,6 +20,8 @@ class Feeds extends Component {
     posts: [],
     showModal: false,
     selectedPost: "",
+    loading: true,
+    error: false,
   };
 
   componentDidMount = async () => {
@@ -37,6 +39,11 @@ class Feeds extends Component {
   fetchAllPosts = async () => {
     const posts = await fetchPosts();
     this.setState({ posts });
+    setTimeout(() => {
+      this.setState({
+        loading: false,
+      });
+    }, 750);
   };
 
   handleModalToggle = async (selectedPost = "") => {
@@ -52,7 +59,7 @@ class Feeds extends Component {
   
 
   render() {
-    const { user, allUsers, posts, showModal, selectedPost } = this.state;
+    const { user, allUsers, posts, showModal, selectedPost, loading } = this.state;
     return (
       <Container className="feeds">
         <Row>
@@ -71,20 +78,33 @@ class Feeds extends Component {
               users={allUsers}
             />
             <NewPostButton />
-            {posts && posts
-              .sort((a, b) => {
+
+
+            {loading ? (
+       <><Container><Row className="mt-5"></Row><Row className="mt-5"></Row><Row className="mt-5"></Row> <Row className="mt-5"></Row> <Row className="mt-5"><Col md={{ span: 4, offset: 5 }}  >
+          <Spinner animation="border" variant="primary" />
+          
+        </Col></Row> </Container> </> ): (
+
+
+
+            posts.sort((a, b) => {
+
                 const c = new Date(a.updatedAt);
                 const d = new Date(b.updatedAt);
                 return d - c;
               })
               .map((post) => (
+                
                 <Post
                   post={post}
                   currentUser={`${user.name} ${user.surname}`}
                   toggleModal={this.handleModalToggle}
                   userId={user._id}
+                  loading={loading}
                 />
-              ))}
+              )))
+              }
           </Col>
           <Col md={3} className="position-relative">
             <div className="feeds__top-stick">
