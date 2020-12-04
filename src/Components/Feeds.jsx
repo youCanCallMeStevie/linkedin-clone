@@ -21,7 +21,8 @@ class Feeds extends Component {
     showModal: false,
     selectedPost: "",
     loading: true,
-    error: false,
+    error: false
+   
   };
 
   componentDidMount = async () => {
@@ -57,6 +58,7 @@ class Feeds extends Component {
     }
   };
   
+
 
   render() {
     const { user, allUsers, posts, showModal, selectedPost, loading } = this.state;
@@ -102,6 +104,8 @@ class Feeds extends Component {
                   toggleModal={this.handleModalToggle}
                   userId={user._id}
                   loading={loading}
+                 
+
                 />
               )))
               }
