@@ -10,7 +10,7 @@ import {Link} from "react-router-dom"
 function ProfileDetailsCard({ user,users,handleChangeImage }) {
   return (
     <Row className="profileDetails_card">
-      <div className="profile Details_card__profile-bgr">
+      <div className="profileDetails_card__profile-bgr">
         <PhotoCameraIcon />
         <div className="profileDetails_card__profile-img">
         <label for="file-input">
