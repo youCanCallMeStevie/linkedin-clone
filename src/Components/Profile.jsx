@@ -89,11 +89,11 @@ export default class Profile extends Component {
         let topbar = document.querySelector(".profileTopBar");
         if (typeof topbar !== "null") {
           if (currentScrollPos > 350 && currentScrollPos <= maxScroll) {
-            topbar?.classList.add("d-flex");
-            topbar?.classList.remove("d-none");
+            topbar?.classList.add("d-lg-flex");
+            // topbar?.classList.remove("d-md-none");
           } else {
-            topbar?.classList.add("d-none");
-            topbar?.classList.remove("d-flex");
+            // topbar?.classList.add("d-md-none");
+            topbar?.classList.remove("d-lg-flex");
           }
         }
       };
