@@ -54,21 +54,10 @@ export class ExperienceModal extends React.Component {
   handleSubmit = async (e) => {
     e.preventDefault(e);
     let res = "";
-    console.log("ghbjg");
+    let message="There was an error with your submission"
     if (this.props.selectedExprience === "") {
       res = await postExperiences(this.props.userId, this.state.experience);
-      if (res.ok) {
-        let exp = await res.json();
-        let expId = exp._id;
-        let postImage = await postExperienceImage(
-          this.props.userId,
-          expId,
-          this.state.image
-        );
-        if (postImage.ok) console.log("all good with image");
-        alert("info submitted");
-        this.props.toggleModal();
-      }
+      message="New Experience created"
     } else {
       console.log(this.props.selectedExprience);
       res = await editExperience(
@@ -76,18 +65,27 @@ export class ExperienceModal extends React.Component {
         this.state.experience._id,
         this.state.experience
       );
-      if (res.ok) {
-        let postImage = await postExperienceImage(
-          this.props.userId,
-          this.state.experience._id,
-          this.state.image
-        );
-        if (postImage.ok) console.log("all good with image");
-        alert("info submitted");
-        this.props.toggleModal();
-      }
+      message = "Your Experience has been edited";
     }
-  };
+    if (res !== undefined) {
+      if (res.ok) {
+        let exp = await res.json();
+        let expId = exp._id;
+        if (this.state.image !== "") {
+          let postImage = await postExperienceImage(
+            this.props.userId,
+            expId,
+            this.state.image
+          );
+
+          if (postImage == !undefined && postImage.ok) console.log("all good with image");
+        }
+      }
+      alert(message);
+      this.setState({image:""})
+      this.props.toggleModal();
+    }
+  }
 
   handleDelete = async () => {
     console.log("clicke");
