@@ -56,6 +56,11 @@ class Feeds extends Component {
       this.setState({ selectedPost });
     }
   };
+
+  handleMoveTop = async () => {
+    await fetchPosts()
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
   
 
   render() {
@@ -77,7 +82,7 @@ class Feeds extends Component {
               user={user}
               users={allUsers}
             />
-            <NewPostButton />
+            <NewPostButton scrollUp={this.handleMoveTop} />
 
 
             {loading ? (
