@@ -228,7 +228,7 @@ export default function PostFeedModal({
                   className="d-flex d-flex justify-content-between mt-5"
                 >
                   <label for="image-post" className="d-flex">
-                    <AddIcon style={{ color: "blue" }} />{" "}
+                    <AddIcon className="ml-3" style={{ color: "blue" }} />{" "}
                     {imageThumb !== "" ? (
                       <Image
                         src={imageThumb}
