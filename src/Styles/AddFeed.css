@@ -10,6 +10,18 @@
   width: 0.8rem !important;
   color: rgb(71, 182, 219);
 }
+@media only screen and (max-width: 1205px) {
+  .feed-group {
+    display: none;
+  }
+  .copyright {
+    display: none;
+  }
+}
+.news-item .MuiSvgIcon-root {
+  width: 0.8rem !important;
+  color: rgb(71, 182, 219);
+}
 /*.news-group{
      border: 1px solid rgba(0, 0, 0, .125) !important;
 }*/

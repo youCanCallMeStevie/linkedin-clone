@@ -1,3 +1,15 @@
+@media only screen and (max-width: 1205px) { 
+  .profileDetails_card,
+  .feedProfileCard{
+      display: table-caption;
+  }
+ }
+ @media only screen and (max-width: 852px) { 
+  .profileDetails_card,
+  .feedProfileCard{
+      display: none;
+  }
+ }
 .profileDetails_card {
   background-color: rgb(255, 255, 255);
   border-radius: 15px;
