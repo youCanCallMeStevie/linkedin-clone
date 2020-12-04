@@ -1,11 +1,9 @@
 @media only screen and (max-width: 1205px) { 
-  .profileDetails_card,
   .feedProfileCard{
       display: table-caption;
   }
  }
  @media only screen and (max-width: 991px) { 
-  .profileDetails_card,
   .feedProfileCard{
       display: none;
   }
