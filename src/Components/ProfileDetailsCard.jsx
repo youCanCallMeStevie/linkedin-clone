@@ -14,7 +14,7 @@ function ProfileDetailsCard({ user,users,handleChangeImage }) {
         <PhotoCameraIcon />
         <div className="profileDetails_card__profile-img">
         <label for="file-input">
-          <img className="img-fluid" src={user?.image} />
+          <img className="" src={user?.image} />
           </label>
         </div>
         <input id="file-input" type="file" className="d-none" onChange={(e)=>handleChangeImage(e)}/>

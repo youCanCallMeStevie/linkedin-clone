@@ -56,13 +56,16 @@ export default function PostFeedModal({
       res = await editPost(post._id, post);
       message = "Post sucessfully edited";
     }
-    if (res.ok) {
-      const data = await res.json();
-      const post_id = data._id;
-      const imageSent = await postPostImage(post_id, postImage);
-      if (imageSent.ok) {
-        console.log("success");
+    if (res) {
+      if (res.ok) {
+        const data = await res.json();
+        const post_id = data._id;
+        const imageSent = await postPostImage(post_id, postImage);
+        if (imageSent.ok) {
+          console.log("success");
+        }
       }
+
       alert(message);
       toggleModal("");
     }
