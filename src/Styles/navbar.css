@@ -1,8 +1,11 @@
 @media only screen and (max-width: 1205px) { 
   .navbar{
     display: none !important;
-    background-color: #f4f2ef !important;
   }
+ }
+ .lilogo{
+  width: 100px;
+  margin-top: 3px;
  }
 .logo {
   width: 40px;
