@@ -8,7 +8,6 @@ import {
 } from "../utils";
 import PhotoSizeSelectActualOutlinedIcon from "@material-ui/icons/PhotoSizeSelectActualOutlined";
 import AddIcon from "@material-ui/icons/Add";
-import moment from "moment";
 
 export class ExperienceModal extends React.Component {
   state = {
@@ -201,7 +200,10 @@ export class ExperienceModal extends React.Component {
                   <Form.Control
                     type="date"
                     name="startDate"
-                    value={this.state.experience.startDate}
+                    value={
+                      this.state.experience &&
+                      this.state.experience.startDate.toString().slice(0, 10)
+                    }
                     onChange={(e) => {
                       this.handleChange(e);
                     }}
@@ -217,7 +219,10 @@ export class ExperienceModal extends React.Component {
                   <Form.Control
                     type="date"
                     name="endDate"
-                    value={this.state.experience.endDate}
+                    value={
+                      this.state.experience &&
+                      this.state.experience.endDate.toString().slice(0, 10)
+                    }
                     onChange={(e) => {
                       this.handleChange(e);
                     }}
