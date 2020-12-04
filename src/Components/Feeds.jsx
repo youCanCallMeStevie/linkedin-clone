@@ -22,6 +22,7 @@ class Feeds extends Component {
     selectedPost: "",
     loading: true,
     error: false,
+    toggleLike: false,
   };
 
   componentDidMount = async () => {
@@ -58,8 +59,14 @@ class Feeds extends Component {
   };
   
 
+ handleLike = (e) => {
+    this.setState({
+      toggleLike: !this.state.toggleLike,
+    });
+  };
+
   render() {
-    const { user, allUsers, posts, showModal, selectedPost, loading } = this.state;
+    const { user, allUsers, posts, showModal, selectedPost, loading, handleLike } = this.state;
     return (
       <Container className="feeds">
         <Row>
@@ -102,6 +109,8 @@ class Feeds extends Component {
                   toggleModal={this.handleModalToggle}
                   userId={user._id}
                   loading={loading}
+                  toggleLike={this.handleLike}
+
                 />
               )))
               }
