@@ -45,7 +45,7 @@ export default function PostFeedModal({
     setPost(selectedPost);
   }, [selectedPost]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     let res = "";
     let message = "Something went wrong";
@@ -71,12 +71,12 @@ export default function PostFeedModal({
     }
   };
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const newPost = { ...post };
     newPost[e.target.name] = e.target.value;
     setPost(newPost);
   };
-  const handleChangeImage = async (e) => {
+  const handleChangeImage = async e => {
     // const formData = new FormData();
     // formData.append('post',e.target.files[0])
     setPostImage(e.target.files[0]);
@@ -143,42 +143,70 @@ export default function PostFeedModal({
                       </p>
                     </NavDropdown.Item>
                     <Form>
-                      <NavDropdown.Item>
-                        <Form.Check type="radio" aria-label="radio 1">
-                          {" "}
-                          <PublicIcon /> Anyone{" "}
-                        </Form.Check>
-                      </NavDropdown.Item>
+                      <Row className="d-flex justify-content-between">
+                        <Col className="ml-3">
+                          <Form.Check type="radio" label="Anyone"></Form.Check>{" "}
+                        </Col>
+                        <Col className="ml-2">
+                          <PublicIcon />
+                        </Col>{" "}
+                      </Row>
+
                       <NavDropdown.Divider />
 
-                      <NavDropdown.Item>
-                        <Form.Check type="radio" aria-label="radio 1">
-                          <PublicIcon /> Anyone + Twitter
-                        </Form.Check>
-                      </NavDropdown.Item>
+                      <Row className="d-flex justify-content-between">
+                        <Col className="ml-3">
+                          <Form.Check
+                            type="radio"
+                            label="Anyone + Twitter"
+                          ></Form.Check>{" "}
+                        </Col>
+                        <Col className="ml-2">
+                          <PublicIcon />
+                        </Col>{" "}
+                      </Row>
+
                       <NavDropdown.Divider />
 
-                      <NavDropdown.Item>
-                        <Form.Check type="radio" aria-label="radio 1">
+                      <Row className="d-flex justify-content-between">
+                        <Col className="ml-3">
+                          <Form.Check
+                            type="radio"
+                            label="Connections only"
+                          ></Form.Check>{" "}
+                        </Col>
+                        <Col className="ml-2">
                           <PersonAddIcon />
-                          Connections only
-                        </Form.Check>
-                      </NavDropdown.Item>
+                        </Col>{" "}
+                      </Row>
+
                       <NavDropdown.Divider />
 
-                      <NavDropdown.Item>
-                        <Form.Check type="radio" aria-label="radio 1">
-                          <GroupIcon /> Group Members
-                        </Form.Check>
-                      </NavDropdown.Item>
+                      <Row className="d-flex justify-content-between" >
+                        <Col className="ml-3">
+                          <Form.Check
+                            type="radio"
+                            label="Group Members"
+                          ></Form.Check>{" "}
+                        </Col>
+                        <Col className="ml-2">
+                          <GroupIcon />
+                        </Col>{" "}
+                      </Row>
+
                       <NavDropdown.Divider />
 
-                      <NavDropdown.Item>
-                        <Form.Check type="radio" aria-label="radio 1">
+                      <Row className="d-flex justify-content-between">
+                        <Col className="ml-3">
+                          <Form.Check
+                            type="radio"
+                            label="Advance Settings"
+                          ></Form.Check>{" "}
+                        </Col>
+                        <Col>
                           <SettingsIcon />
-                          Advnace Settings{" "}
-                        </Form.Check>
-                      </NavDropdown.Item>
+                        </Col>{" "}
+                      </Row>
                     </Form>
                   </NavDropdown>
                 </Row>
@@ -187,7 +215,7 @@ export default function PostFeedModal({
             <Col md={3}></Col>
           </Row>
 
-          <Form className="text-white mt-5" onSubmit={(e) => handleSubmit(e)}>
+          <Form className="text-white mt-5" onSubmit={e => handleSubmit(e)}>
             <Form.Group>
               <Form.Control
                 required
@@ -196,7 +224,7 @@ export default function PostFeedModal({
                 placeholder="What do you want to talk about?"
                 as="textarea"
                 rows={5}
-                onChange={(e) => handleChange(e)}
+                onChange={e => handleChange(e)}
               />
             </Form.Group>
 
@@ -244,7 +272,7 @@ export default function PostFeedModal({
                     id="image-post"
                     type="file"
                     className="d-none"
-                    onChange={(e) => handleChangeImage(e)}
+                    onChange={e => handleChangeImage(e)}
                   />
                   <VideoLibraryIcon style={{ color: "grey" }} />
                   <NoteIcon style={{ color: "grey" }} />
