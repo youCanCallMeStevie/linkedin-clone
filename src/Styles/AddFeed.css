@@ -15,7 +15,7 @@
     display: none;
   }
   .copyright {
-    display: none;
+    display: none !important;
   }
 }
 .news-item .MuiSvgIcon-root {

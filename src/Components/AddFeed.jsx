@@ -53,7 +53,7 @@ export default class AddFeed extends Component {
           </ListGroup.Item>
           <ListGroup.Item className="text-muted news-footer">Show all recommendations<ExpandMoreIcon /></ListGroup.Item>
         </ListGroup>
-        <p className="copyright"><img src={Logo} alt="copyright" /> LinkedIn Corporation © 2020<HomeFooter /></p>
+        <p className="copyright"><img src={Logo} alt="copyright" /><HomeFooter /></p>
       </>
     );
   }
