@@ -59,7 +59,7 @@ class Feeds extends Component {
   };
 
   handleMoveTop = async () => {
-    await fetchPosts()
+    await this.fetchAllPosts()
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
   
