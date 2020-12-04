@@ -7,7 +7,7 @@
 .feeds__middle-column {
   /* max-height: 100vh; */
   /* overflow: scroll; */
-  margin-top: -35px;
+  margin-top: -25px;
 }
 .feeds__top-stick{
   position: fixed;
