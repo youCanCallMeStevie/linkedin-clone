@@ -48,7 +48,6 @@ export default function PostFeedModal({
   const handleSubmit = async (e) => {
     e.preventDefault();
     let res = "";
-    let data = "";
     let message = "Something went wrong";
     if (selectedPost == "") {
       res = await postPost(post);
