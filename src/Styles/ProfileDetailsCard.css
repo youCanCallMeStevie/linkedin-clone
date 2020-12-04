@@ -4,7 +4,7 @@
       display: table-caption;
   }
  }
- @media only screen and (max-width: 852px) { 
+ @media only screen and (max-width: 991px) { 
   .profileDetails_card,
   .feedProfileCard{
       display: none;

@@ -19,7 +19,7 @@ export default function Postbox({ toggleModal }) {
               </label>
                 </Button>
             </Card.Body>
-            <Card.Body>
+            <Card.Body className="post-icons">
                 <Row style={{ marginTop: "-15px" }}>
                     <Col>
                         <Button className="add-btn">

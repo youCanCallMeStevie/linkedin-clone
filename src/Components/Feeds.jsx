@@ -63,13 +63,13 @@ class Feeds extends Component {
     return (
       <Container className="feeds">
         <Row>
-          <Col md={2} className="position-relative">
+          <Col lg={2} className="position-relative">
             <div className="feeds__top-stick">
               {/* here goes the profile card - Rita - */}
               <FeedsProfileCard user={user} users={allUsers} />{" "}
             </div>
           </Col>
-          <Col className="feeds__middle-column" md={7}>
+          <Col className="feeds__middle-column" lg={7}>
             {" "}
             {/* here goes all feeds + create new feed - */}
             <Postbox
@@ -106,7 +106,7 @@ class Feeds extends Component {
               )))
               }
           </Col>
-          <Col md={3} className="position-relative">
+          <Col lg={3} className="position-relative">
             <div className="feeds__top-stick">
               <LinkedNews />
               <AddFeed />
