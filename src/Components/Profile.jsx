@@ -19,6 +19,7 @@ import ProfileTopBar from "./ProfileTopBar";
 import ExperienceModal from "./ExperienceModal";
 import PostFeedModal from "./PostFeedModal";
 import Dashboard from "./Dashboard";
+import Activitycard from './Activity'
 
 export default class Profile extends Component {
   state = {
@@ -60,7 +61,7 @@ export default class Profile extends Component {
       console.log(experiences);
 
       this.setState({ user, users, experiences });
-    } catch (err) {}
+    } catch (err) { }
   };
 
   //function to toggle the modal
@@ -130,7 +131,7 @@ export default class Profile extends Component {
 
             <AboutCard bio={user.bio} />
             <Dashboard />
-
+            <Activitycard />
             <ExperienceEducation
               toggleModal={this.handleModalToggle}
               experiences={experiences}
