@@ -33,7 +33,11 @@
   text-decoration: none;
 }
 
-.experience-education-container .MuiButtonBase-root:hover {
+.experience-education-container:hover .MuiButtonBase-root {
   background-color: var(--hover-blue);
   text-decoration: none !important;
+}
+
+.edit-info-icon .MuiSvgIcon-root:hover {
+  display: inline;
 }
