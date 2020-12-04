@@ -30,7 +30,7 @@
 }
 .news-group {
   position: fixed;
-  top: 366px;
+  top: 380px;
   border-radius: 15px;
 }
 .news-item {
@@ -110,12 +110,18 @@
 
 .copyright img {
   width: 60px;
+  margin-bottom: -40px;
+  margin-top: -20;
 }
 .copyright {
   font-size: 13px;
   margin-top: 10px;
-  margin-left: 25px;
+ padding: 0 10px;
   font-weight: 300;
   position: fixed;
-  top: 705px;
+  top: 729px;
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+
 }

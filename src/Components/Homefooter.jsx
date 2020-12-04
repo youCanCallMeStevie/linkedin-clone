@@ -8,7 +8,7 @@ import {
 export default class HomeFooter extends Component {
     render() {
         return (
-            <>
+            <div className="home-footer">
                 <Row>
                     <Col>About</Col>
                     <Col>Accessibility</Col>
@@ -23,7 +23,7 @@ export default class HomeFooter extends Component {
                     <Col>Business Services</Col>
                     <Col>Get the Linkedin pp</Col>
                 </Row>
-            </>
+            </div>
         )
     }
 }
