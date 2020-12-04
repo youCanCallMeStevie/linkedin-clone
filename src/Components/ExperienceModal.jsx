@@ -8,7 +8,6 @@ import {
 } from "../utils";
 import PhotoSizeSelectActualOutlinedIcon from "@material-ui/icons/PhotoSizeSelectActualOutlined";
 import AddIcon from "@material-ui/icons/Add";
-import moment from "moment";
 
 export class ExperienceModal extends React.Component {
   state = {
