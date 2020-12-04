@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import { Container, Col, Row } from "react-bootstrap";
-import { fetchUser, fetchAllUsers, fetchExperiences } from "../utils";
+import {
+  fetchUser,
+  fetchAllUsers,
+  fetchExperiences,
+  toBase64,
+  postUserImage,
+} from "../utils";
 import ProfileDetailsCard from "./ProfileDetailsCard";
 import "../Styles/Profile.css";
 import AboutCard from "./AboutCard";
@@ -12,6 +18,8 @@ import Promoted from "./Promoted";
 import ProfileTopBar from "./ProfileTopBar";
 import ExperienceModal from "./ExperienceModal";
 import PostFeedModal from "./PostFeedModal";
+import Dashboard from "./Dashboard";
+import Activitycard from './Activity'
 
 export default class Profile extends Component {
   state = {
@@ -28,7 +36,7 @@ export default class Profile extends Component {
     }
   };
 
-  //called once when component mounts 
+  //called once when component mounts
   componentDidMount = async () => {
     this.setUpUser();
 
@@ -78,16 +86,26 @@ export default class Profile extends Component {
       window.onscroll = () => {
         let currentScrollPos = window.pageYOffset;
         let maxScroll = document.body.scrollHeight - window.innerHeight;
-        // console.log(maxScroll)
         let topbar = document.querySelector(".profileTopBar");
-        if (currentScrollPos > 350 && currentScrollPos <= maxScroll) {
-          topbar.classList.add("d-flex");
-          topbar.classList.remove("d-none");
-        } else {
-          topbar.classList.add("d-none");
-          topbar.classList.remove("d-flex");
+        if (typeof topbar !== "null") {
+          if (currentScrollPos > 350 && currentScrollPos <= maxScroll) {
+            topbar?.classList.add("d-lg-flex");
+            // topbar?.classList.remove("d-md-none");
+          } else {
+            // topbar?.classList.add("d-md-none");
+            topbar?.classList.remove("d-lg-flex");
+          }
         }
       };
+    }
+  };
+
+  handleChangeImage = async (e) => {
+    let formData = new FormData();
+    formData.append("profile", e.target.files[0]);
+    if (formData) {
+      let res = await postUserImage(this.state.user._id, formData);
+      this.setUpUser();
     }
   };
 
@@ -105,11 +123,15 @@ export default class Profile extends Component {
         <ProfileTopBar show={showTopBar} user={user} />
         <Row>
           <Col md={8}>
-           
-            <ProfileDetailsCard user={user} users={users} />
+            <ProfileDetailsCard
+              user={user}
+              users={users}
+              handleChangeImage={this.handleChangeImage}
+            />
 
-            <AboutCard />
-
+            <AboutCard bio={user.bio} />
+            <Dashboard />
+            <Activitycard />
             <ExperienceEducation
               toggleModal={this.handleModalToggle}
               experiences={experiences}
@@ -128,8 +150,6 @@ export default class Profile extends Component {
           toggleModal={this.handleModalToggle}
           selectedExprience={selectedExprience}
         />
-         {/* <PostFeedModal toggleModal={this.handleModalToggle}
-          showModal={showModal}/> */}
       </Container>
     );
   }

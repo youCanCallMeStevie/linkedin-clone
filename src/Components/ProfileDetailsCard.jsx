@@ -5,15 +5,19 @@ import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import ProfileDetailsButtons from "./ProfileDetailsButtons";
 import DottedBox from "./DottedBox";
+import {Link} from "react-router-dom"
 
-function ProfileDetailsCard({ user,users }) {
+function ProfileDetailsCard({ user,users,handleChangeImage }) {
   return (
     <Row className="profileDetails_card">
       <div className="profileDetails_card__profile-bgr">
         <PhotoCameraIcon />
         <div className="profileDetails_card__profile-img">
-          <img className="img-fluid" src={user?.image} />
+        <label for="file-input">
+          <img className="" src={user?.image} />
+          </label>
         </div>
+        <input id="file-input" type="file" className="d-none" onChange={(e)=>handleChangeImage(e)}/>
       </div>
 
       <div className="profileDetails_card__body">
@@ -25,9 +29,11 @@ function ProfileDetailsCard({ user,users }) {
           <h5>{user?.title}</h5>
           <h6>
             {user?.area} -{" "}
+          <Link to="/connections">
             <span className="blue-primary-color font-weight-bold">
-              {users && users.length} Contacts
+              {users && users.length} Connections
             </span>
+            </Link>
           </h6>
           <span className="blue-primary-color font-weight-bold">
             Contact Info

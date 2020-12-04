@@ -1,6 +1,13 @@
 import React from "react";
 import { Container, Form, Row, Col, Modal, Button } from "react-bootstrap";
-import { postExperiences, editExperience, deleteExperience } from "../utils";
+import {
+  postExperiences,
+  editExperience,
+  deleteExperience,
+  postExperienceImage,
+} from "../utils";
+import PhotoSizeSelectActualOutlinedIcon from "@material-ui/icons/PhotoSizeSelectActualOutlined";
+import AddIcon from "@material-ui/icons/Add";
 
 export class ExperienceModal extends React.Component {
   state = {
@@ -15,6 +22,7 @@ export class ExperienceModal extends React.Component {
       startDate: "",
     },
     selectedExprience: "",
+    image: "",
   };
 
   componentDidUpdate = (prevProp) => {
@@ -32,7 +40,10 @@ export class ExperienceModal extends React.Component {
       this.setState({ validated: true });
     }
   };
-
+  handleChangeImage = (e) => {
+    console.log(e.target.files[0]);
+    this.setState({ image: e.target.files[0] });
+  };
   handleChange = (e) => {
     let newExperience = { ...this.state.experience };
     newExperience[e.target.name] = e.target.value;
@@ -43,10 +54,10 @@ export class ExperienceModal extends React.Component {
   handleSubmit = async (e) => {
     e.preventDefault(e);
     let res = "";
-    console.log('ghbjg')
+    let message="There was an error with your submission"
     if (this.props.selectedExprience === "") {
       res = await postExperiences(this.props.userId, this.state.experience);
-      console.log("button is working");
+      message="New Experience created"
     } else {
       console.log(this.props.selectedExprience);
       res = await editExperience(
@@ -54,25 +65,42 @@ export class ExperienceModal extends React.Component {
         this.state.experience._id,
         this.state.experience
       );
+      message = "Your Experience has been edited";
     }
-    if (res.ok) {
-      alert("info submitted");
+    if (res !== undefined) {
+      if (res.ok) {
+        let exp = await res.json();
+        let expId = exp._id;
+        if (this.state.image !== "") {
+          let postImage = await postExperienceImage(
+            this.props.userId,
+            expId,
+            this.state.image
+          );
+
+          if (postImage == !undefined && postImage.ok) console.log("all good with image");
+        }
+      }
+      alert(message);
+      this.setState({image:""})
       this.props.toggleModal();
     }
-  };
+  }
 
   handleDelete = async () => {
-    console.log('clicke')
+    console.log("clicke");
     try {
-      const res = await deleteExperience(this.props.userId, this.state.experience._id);
-      console.log('deleted');
+      const res = await deleteExperience(
+        this.props.userId,
+        this.state.experience._id
+      );
+      console.log("deleted");
       if (res.ok) {
         alert("experience deleted");
         this.props.toggleModal("");
       }
     } catch (err) {
       console.log(err);
-
     }
   };
 
@@ -93,7 +121,6 @@ export class ExperienceModal extends React.Component {
             </Modal.Title>
           </Modal.Header>
           <Container className="text-body mt-5">
-
             <Form.Text className="text-muted">Title *</Form.Text>
             <Form.Group>
               <Form.Control
@@ -171,7 +198,10 @@ export class ExperienceModal extends React.Component {
                   <Form.Control
                     type="date"
                     name="startDate"
-                    value={this.state.experience.startDate}
+                    value={
+                      this.state.experience.startDate &&
+                      this.state.experience.startDate.toString().slice(0, 10)
+                    }
                     onChange={(e) => {
                       this.handleChange(e);
                     }}
@@ -187,7 +217,10 @@ export class ExperienceModal extends React.Component {
                   <Form.Control
                     type="date"
                     name="endDate"
-                    value={this.state.experience.endDate}
+                    value={
+                      this.state.experience.endDate &&
+                      this.state.experience.endDate.toString().slice(0, 10)
+                    }
                     onChange={(e) => {
                       this.handleChange(e);
                     }}
@@ -209,6 +242,18 @@ export class ExperienceModal extends React.Component {
                 }}
               />
             </Form.Group>
+            <Row>
+              <AddIcon className="ml-3" style={{ color: "blue" }} />{" "}
+              <label for="image-post">
+                <PhotoSizeSelectActualOutlinedIcon style={{ color: "grey" }} />{" "}
+              </label>
+              <input
+                id="image-post"
+                type="file"
+                className="d-none"
+                onChange={(e) => this.handleChangeImage(e)}
+              />
+            </Row>
             {/* <Form.File id="uploadFile">
               <Form.File.Label>Upload</Form.File.Label>
               <Form.File.Input />

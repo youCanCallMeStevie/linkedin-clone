@@ -31,3 +31,7 @@
     padding: 0.6rem 0.5rem !important;
     color: rgb(25, 25, 25) !important;
 }
+.dropdown-btn .btn.focus,
+.dropdown-btn .btn:focus{
+    box-shadow: none !important;
+}
