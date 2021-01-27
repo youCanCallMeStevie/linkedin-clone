@@ -1,12 +1,12 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import Profile from "./Components/Profile";
+import Profile from "./Pages/Profile";
 import NavBar from "./Components/Navbar";
 import Footerr from "./Components/Footerr";
 import { Route, Redirect } from "react-router-dom";
-import Feeds from "./Components/Feeds";
-import Dashboard from './Components/Dashboard'
-import Connections from "./Components/Connections"
+import Feeds from "./Pages/Feeds";
+import Dashboard from "./Components/Dashboard";
+import Connections from "./Pages/Connections";
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
         <Route exact path="/">
           <Redirect to="/feeds" />
         </Route>
-        <Route exact path="/connections" component = {Connections} />
+        <Route exact path="/connections" component={Connections} />
         <Route
           exact
           path="/profile/:user"

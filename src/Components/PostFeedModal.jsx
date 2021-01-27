@@ -45,7 +45,7 @@ export default function PostFeedModal({
     setPost(selectedPost);
   }, [selectedPost]);
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let res = "";
     let message = "Something went wrong";
@@ -74,12 +74,12 @@ export default function PostFeedModal({
     }
   };
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     const newPost = { ...post };
     newPost[e.target.name] = e.target.value;
     setPost(newPost);
   };
-  const handleChangeImage = async e => {
+  const handleChangeImage = async (e) => {
     // const formData = new FormData();
     // formData.append('post',e.target.files[0])
     setPostImage(e.target.files[0]);
@@ -127,8 +127,8 @@ export default function PostFeedModal({
                 style={{ width: "180px", fontSize: "12px" }}
               >
                 <PersonIcon />
-                {user.name}
-                {user.surname} ▾{" "}
+                {user?.name}
+                {user?.surname} ▾{" "}
               </Button>
             </Col>
             <Col md={2} className="ml-4 mt-4">
@@ -185,7 +185,7 @@ export default function PostFeedModal({
 
                       <NavDropdown.Divider />
 
-                      <Row className="d-flex justify-content-between" >
+                      <Row className="d-flex justify-content-between">
                         <Col className="ml-3">
                           <Form.Check
                             type="radio"
@@ -218,16 +218,16 @@ export default function PostFeedModal({
             <Col md={3}></Col>
           </Row>
 
-          <Form className="text-white mt-5" onSubmit={e => handleSubmit(e)}>
+          <Form className="text-white mt-5" onSubmit={(e) => handleSubmit(e)}>
             <Form.Group>
               <Form.Control
                 required
                 name="text"
-                value={post.text}
+                value={post?.text}
                 placeholder="What do you want to talk about?"
                 as="textarea"
                 rows={5}
-                onChange={e => handleChange(e)}
+                onChange={(e) => handleChange(e)}
               />
             </Form.Group>
 
@@ -275,7 +275,7 @@ export default function PostFeedModal({
                     id="image-post"
                     type="file"
                     className="d-none"
-                    onChange={e => handleChangeImage(e)}
+                    onChange={(e) => handleChangeImage(e)}
                   />
                   <VideoLibraryIcon style={{ color: "grey" }} />
                   <NoteIcon style={{ color: "grey" }} />
