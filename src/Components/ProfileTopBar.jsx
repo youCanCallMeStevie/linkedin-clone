@@ -16,7 +16,7 @@ function ProfileTopBar({ user }) {
           </div>
           <div>
             <h6 className="font-weight-semiBold">
-              {user?.name} {user?.surname}
+              {user?.name} {user?.lastName}
             </h6>
             <p>{user?.title}</p>
           </div>

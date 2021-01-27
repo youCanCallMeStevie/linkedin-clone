@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Container, Col, Row } from "react-bootstrap";
 import {
   fetchUser,
@@ -19,6 +19,7 @@ import ExperienceModal from "../Components/ExperienceModal";
 import PostFeedModal from "../Components/PostFeedModal";
 import Dashboard from "../Components/Dashboard";
 import Activitycard from "../Components/Activity";
+import AppContext from "../Context/app-context";
 
 const Profile = ({ match }) => {
   const [state, setState] = useState({
@@ -28,6 +29,8 @@ const Profile = ({ match }) => {
     showModal: false,
     selectedExprience: "",
   });
+
+  const { appState, actions } = useContext(AppContext);
   //called when components receive a new prop (for example a new user id)
   useEffect(() => {
     setUpUser();
@@ -38,6 +41,8 @@ const Profile = ({ match }) => {
     setUpUser();
     console.log(state);
     handleScroll();
+    console.log(appState);
+    actions.retrieveCurrentProfile("60100068cbef445a37eab232");
   }, []);
 
   //function to set up the userand experiences when component load or when routing to new user
