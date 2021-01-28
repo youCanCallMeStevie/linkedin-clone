@@ -12,7 +12,7 @@ export const getAllExp = async () => {
   }
 };
 
-export const postNewExp = async (post) => {
+export const postNewExp = async (experience) => {
   try {
     const res = await authAxios.post(`${REACT_APP_URI_DEV}/api/users/experiences`, experience);
     console.log(res);

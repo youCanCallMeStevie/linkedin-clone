@@ -50,6 +50,9 @@ const Feeds = (props, { currentUser }) => {
     //   });
     // }, 750);
   };
+  useEffect(() => {
+    fetchAllPosts();
+  }, [showModal]);
 
   const handleModalToggle = async (selectedPost = "") => {
     console.log("ciao");
@@ -115,6 +118,7 @@ const Feeds = (props, { currentUser }) => {
                 toggleModal={handleModalToggle}
                 userId={appState.currentUser.currentUser._id}
                 loading={loading}
+                fetchAllPosts={fetchAllPosts}
               />
             </>
           ))}
@@ -131,7 +135,7 @@ const Feeds = (props, { currentUser }) => {
         showModal={showModal}
         toggleModal={handleModalToggle}
         selectedPost={state.selectedPost}
-        user={user}
+        user={appState.currentUser.currentUser}
         users={allUsers}
       />
     </Container>
