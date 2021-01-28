@@ -19,14 +19,13 @@ import PublicIcon from "@material-ui/icons/Public";
 import SettingsIcon from "@material-ui/icons/Settings";
 import GroupIcon from "@material-ui/icons/Group";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import { toBase64 } from "../utils";
 import {
-  postPost,
-  editPost,
   deletePost,
-  toBase64,
-  postPostImage,
-} from "../utils";
-import { postNewPost, uploadPicture } from "../Lib/fetches/posts";
+  editPost,
+  postNewPost,
+  uploadPicture,
+} from "../Lib/fetches/posts";
 
 export default function PostFeedModal({
   toggleModal,
@@ -100,7 +99,7 @@ export default function PostFeedModal({
     <div>
       <Modal
         show={showModal}
-        onHide={toggleModal}
+        onHide={() => toggleModal("")}
         backdrop="static"
         keyboard={false}
       >
