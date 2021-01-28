@@ -5,7 +5,7 @@ import PhotoSizeSelectActualOutlinedIcon from "@material-ui/icons/PhotoSizeSelec
 import AddIcon from "@material-ui/icons/Add";
 
 const ExperienceModal = ({
-  toggleModal,
+  toggleExpModal,
   showModal,
   userId,
   selectedExprience,
@@ -66,7 +66,7 @@ const ExperienceModal = ({
     }
     alert(message);
     setState({ image: "" });
-    toggleModal();
+    toggleExpModal();
   };
   // if (res) {
   // if (res.ok) {
@@ -91,7 +91,7 @@ const ExperienceModal = ({
       console.log("deleted");
       if (res.ok) {
         alert("Experience deleted");
-        toggleModal("");
+        toggleExpModal("");
       }
     } catch (err) {
       console.log(err);
@@ -101,7 +101,7 @@ const ExperienceModal = ({
   return (
     <Modal
       show={showModal}
-      onHide={toggleModal}
+      onHide={toggleExpModal}
       backdrop="static"
       keyboard={false}
     >

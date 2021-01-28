@@ -5,7 +5,7 @@ import PhotoSizeSelectActualOutlinedIcon from "@material-ui/icons/PhotoSizeSelec
 import AddIcon from "@material-ui/icons/Add";
 
 const EducationModal = ({
-  toggleModal,
+    toggleEduModal,
   showModal,
   userId,
   selectedEducation,
@@ -68,7 +68,7 @@ const EducationModal = ({
     }
     alert(message);
     setState({ image: "" });
-    toggleModal();
+    toggleEduModal();
   };
 
   const handleDelete = async () => {
@@ -78,7 +78,7 @@ const EducationModal = ({
       console.log("deleted");
       if (res.ok) {
         alert("Education deleted");
-        toggleModal("");
+        toggleEduModal("");
       }
     } catch (err) {
       console.log(err);
@@ -88,7 +88,7 @@ const EducationModal = ({
   return (
     <Modal
       show={showModal}
-      onHide={toggleModal}
+      onHide={toggleEduModal}
       backdrop="static"
       keyboard={false}
     >
