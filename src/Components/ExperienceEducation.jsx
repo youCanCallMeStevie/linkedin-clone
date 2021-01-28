@@ -37,7 +37,7 @@ export default function ExperienceEducation({
               </Col>
 
               <Col className="d-flex justify-content-end">
-                <AddIcon onClick={() => toggleExModal()} />
+                <AddIcon onClick={() => toggleExpModal()} />
               </Col>
             </Row>
           </Col>
@@ -59,7 +59,7 @@ export default function ExperienceEducation({
                       <Row className="justify-content-between edit-info-icon">
                         <Typography variant="h5">{experience.role}</Typography>
                         <span>
-                          <CreateIcon onClick={() => toggleExModal(experience)} />
+                          <CreateIcon onClick={() => toggleExpModal(experience)} />
                         </span>
                       </Row>
                       <Row>
