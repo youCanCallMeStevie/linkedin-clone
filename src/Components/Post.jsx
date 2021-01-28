@@ -6,9 +6,11 @@ import AddIcon from "@material-ui/icons/Add";
 import DropdownPost from "./DropdownPost";
 import CommentIcon from "@material-ui/icons/Comment";
 import moment from "moment";
+import Comment from './Comment';
 
 function Post({ post, currentUser, toggleModal, userId }) {
   const [toggleLike, setToggleLike] = useState(false);
+  const [toggleComment, setToggleComment] = useState(false);
   console.log(post);
   useEffect(() => {
     console.log("POST");
@@ -16,6 +18,9 @@ function Post({ post, currentUser, toggleModal, userId }) {
   const handleLike = () => {
     setToggleLike(!toggleLike);
   };
+  const handleComment = () =>{
+    setToggleComment(!toggleComment);
+  }
 
   const differenceDays = (date) => {
     const diff = moment(post.updatedAt).fromNow(); // another date
@@ -122,8 +127,16 @@ function Post({ post, currentUser, toggleModal, userId }) {
             </>
           )}
           <span className="ml-3">
-            <CommentIcon /> Comment
+            <CommentIcon onClick={() => handleComment()}/> Comment
           </span>
+          {toggleComment ? 
+            <>
+            <Comment/>
+            </>
+            : 
+            <></>
+          }
+          <p className="noOfComments">2 comments</p>
         </Row>
       </Row>
     </>
