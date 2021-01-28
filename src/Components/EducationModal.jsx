@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container, Form, Row, Col, Modal, Button } from "react-bootstrap";
-import {
-  postEducation,
-  editEducation,
-  deleteEducation,
-  postEducationImage,
-} from "../utils";
+import { postNewEdu, editEdu, deleteEdu } from "../Lib/fetches/education";
 import PhotoSizeSelectActualOutlinedIcon from "@material-ui/icons/PhotoSizeSelectActualOutlined";
 import AddIcon from "@material-ui/icons/Add";
 
@@ -25,7 +20,7 @@ const EducationModal = ({
       description: "",
       activtiesSocieties: "",
       startYear: "",
-      endYear:""
+      endYear: "",
     },
     selectedEducation: "",
     image: "",
@@ -34,11 +29,12 @@ const EducationModal = ({
   useEffect(() => {
     console.log(selectedEducation);
     if (selectedEducation || selectedEducation !== []) {
+      delete selectedEducation.__v;
       setState({ education: selectedEducation });
     }
   }, [selectedEducation]);
 
-  const updateEdu = (event) => {
+  const updateEdu = event => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -47,57 +43,41 @@ const EducationModal = ({
       setState({ validated: true });
     }
   };
-  const handleChangeImage = (e) => {
+  const handleChangeImage = e => {
     console.log(e.target.files[0]);
     setState({ image: e.target.files[0] });
   };
-  const handleChange = (e) => {
-    let newExperience = { ...state.experience };
-    newExperience[e.target.name] = e.target.value;
-    setState({ experience: newExperience });
-    console.log(state.experience);
+  const handleChange = e => {
+    let newEducation = { ...state.education };
+    newEducation[e.target.name] = e.target.value;
+    setState({ education: newEducation });
+    console.log(state.education);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault(e);
     let res = "";
     let message = "There was an error with your submission";
     if (selectedEducation === "") {
-      res = await postExperiences(userId, state.experience);
+      res = await postNewEdu(userId, state.experience);
       message = "New Experience created";
     } else {
       console.log(selectedEducation);
-      res = await editExperience(
-        userId,
-        state.experience._id,
-        state.experience
-      );
-      message = "Your Experience has been edited";
+      res = await editEdu(state.education._id, state.education);
+      message = "Your education has been edited";
     }
-    if (res !== undefined) {
-      if (res.ok) {
-        let exp = await res.json();
-        let expId = exp._id;
-        if (state.image !== "") {
-          let postImage = await postExperienceImage(userId, expId, state.image);
-
-          if (postImage == !undefined && postImage.ok)
-            console.log("all good with image");
-        }
-      }
-      alert(message);
-      setState({ image: "" });
-      toggleModal();
-    }
+    alert(message);
+    setState({ image: "" });
+    toggleModal();
   };
 
   const handleDelete = async () => {
     console.log("clicke");
     try {
-      const res = await deleteExperience(userId, state.experience._id);
+      const res = await deleteEdu(state.education._id);
       console.log("deleted");
       if (res.ok) {
-        alert("experience deleted");
+        alert("Education deleted");
         toggleModal("");
       }
     } catch (err) {
@@ -112,10 +92,10 @@ const EducationModal = ({
       backdrop="static"
       keyboard={false}
     >
-      <Form onSubmit={(e) => handleSubmit(e)}>
+      <Form onSubmit={e => handleSubmit(e)}>
         <Modal.Header closeButton>
           <Modal.Title>
-            {selectedEducation !== "" ? "Edit Experience" : "Add Experience"}
+            {selectedEducation !== "" ? "Edit Education" : "Add Education"}
           </Modal.Title>
         </Modal.Header>
         <Container className="text-body mt-5">
@@ -124,60 +104,39 @@ const EducationModal = ({
             <Form.Control
               required
               type="text"
-              placeholder="Ex: Retail Sales Manager"
-              name="role"
-              value={state.experience && state.experience.role}
-              onChange={(e) => {
+              placeholder="Ex: Harvard University"
+              name="school"
+              value={state.education && state.education.school}
+              onChange={e => {
                 handleChange(e);
               }}
             />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
-          <Form.Text className="text-muted employmentTitle">
-            Employment Type
-          </Form.Text>
-          <Form.Group>
-            <Form.Control
-              as="select"
-              name="EmploymentType"
-              EmploymentType="EmploymentType"
-              custom
-            >
-              <option value="0">Full-Time</option>
-              <option value="1">Part-Time</option>
-              <option value="2">Self Employed</option>
-              <option value="3">Freelance</option>
-              <option value="4">Contract</option>
-              <option value="5">Internship</option>
-              <option value="6">Apprenticeship</option>
-            </Form.Control>
-            <Form.Text className="text-muted">
-              Country-specific employment types
-            </Form.Text>
-          </Form.Group>
-          <Form.Text className="text-muted">Company *</Form.Text>
+       
+          <Form.Text className="text-muted">Degree *</Form.Text>
           <Form.Group>
             <Form.Control
               required
               type="text"
-              placeholder="Ex: Microsoft"
+              placeholder="Ex: Master's Degree"
               name="company"
-              value={state.experience && state.experience.company}
-              onChange={(e) => {
+              value={state.experience && state.experience.degree}
+              onChange={e => {
                 handleChange(e);
               }}
             />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
-          <Form.Text className="text-muted">Location</Form.Text>
+          <Form.Text className="text-muted">Field of Study *</Form.Text>
           <Form.Group>
             <Form.Control
               required
               type="text"
-              placeholder="Ex: London, United Kingdom"
-              name="area"
-              value={state.experience && state.experience.area}
-              onChange={(e) => {
+              placeholder="Ex: Art History"
+              name="fieldOfStudy"
+              value={state.experience && state.experience.fieldOfStudy}
+              onChange={e => {
                 handleChange(e);
               }}
             />
@@ -190,17 +149,17 @@ const EducationModal = ({
           </Form.Group>
           <Row>
             <Col>
-              <Form.Text className="text-muted">Start Date</Form.Text>
+              <Form.Text className="text-muted">Start Year (YYYY) * </Form.Text>
 
               <Form.Group>
                 <Form.Control
                   type="date"
-                  name="startDate"
+                  name="startYear"
                   value={
                     state.experience &&
-                    state.experience.startDate.toString().slice(0, 10)
+                    state.experience.startYear
                   }
-                  onChange={(e) => {
+                  onChange={e => {
                     handleChange(e);
                   }}
                   required
@@ -209,25 +168,25 @@ const EducationModal = ({
             </Col>
 
             <Col>
-              <Form.Text className="text-muted">End Date</Form.Text>
+              <Form.Text className="text-muted">End Date / Expected End Date (YYYY) * </Form.Text>
 
               <Form.Group>
                 <Form.Control
                   type="date"
-                  name="endDate"
+                  name="endYear"
                   value={
                     state.experience &&
-                    state.experience.endDate &&
-                    state.experience.endDate.toString().slice(0, 10)
+                    state.experience.endYear 
                   }
-                  onChange={(e) => {
+                  onChange={e => {
                     handleChange(e);
                   }}
                 />
               </Form.Group>
             </Col>
           </Row>
-          <Form.Text className="text-muted">Description</Form.Text>
+          <Row>
+          <Form.Text className="text-muted">Description *</Form.Text>
           <Form.Group>
             <Form.Control
               required
@@ -236,11 +195,28 @@ const EducationModal = ({
               value={state.experience && state.experience.description}
               as="textarea"
               rows={3}
-              onChange={(e) => {
+              onChange={e => {
+                handleChange(e);
+              }}
+            />
+            </Form.Group>
+          </Row>
+          <Row>
+          <Form.Text className="text-muted">Activties & Societies</Form.Text>
+          <Form.Group>
+            <Form.Control
+              required
+              type="text"
+              name="activtiesSocieties"
+              value={state.experience && state.experience.activtiesSocieties}
+              as="textarea"
+              rows={3}
+              onChange={e => {
                 handleChange(e);
               }}
             />
           </Form.Group>
+          </Row>
           <Row>
             <AddIcon className="ml-3" style={{ color: "blue" }} />{" "}
             <label for="image-post">
@@ -250,7 +226,7 @@ const EducationModal = ({
               id="image-post"
               type="file"
               className="d-none"
-              onChange={(e) => handleChangeImage(e)}
+              onChange={e => handleChangeImage(e)}
             />
           </Row>
           {/* <Form.File id="uploadFile">
@@ -279,4 +255,4 @@ const EducationModal = ({
   );
 };
 
-export default ExperienceModal;
+export default EducationModal;

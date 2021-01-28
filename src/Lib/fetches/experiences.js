@@ -12,7 +12,7 @@ export const getAllExp = async () => {
   }
 };
 
-export const postNewExp = async (post) => {
+export const postNewExp = async (experience) => {
   try {
     const res = await authAxios.post(`${REACT_APP_URI_DEV}/api/users/experiences`, experience);
     console.log(res);
@@ -22,11 +22,11 @@ export const postNewExp = async (post) => {
   }
 };
 
-export const editExp = async (id, post) => {
+export const editExp = async (id, experience) => {
   try {
     const res = await authAxios.put(
       `${REACT_APP_URI_DEV}/api/users/experiences/${id}`,
-      post
+      experience
     );
     if (res.status == 200) return await res.data;
   } catch (err) {
