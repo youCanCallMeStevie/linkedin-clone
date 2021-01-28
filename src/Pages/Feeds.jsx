@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Container, Col, Row, Button, Spinner } from "react-bootstrap";
 import withUser from "../Components/withUser";
 import "../Styles/Feeds.css";
@@ -12,6 +12,8 @@ import Postbox from "../Components/Postbox";
 import LinkedNews from "../Components/LinkedNews";
 import AddFeed from "../Components/AddFeed";
 import NewPostButton from "../Components/NewPostButton";
+import { getAllPosts } from "../Lib/fetches/posts";
+import AppContext from "../Context/app-context";
 
 const Feeds = (props, { currentUser }) => {
   const [state, setState] = useState({
@@ -23,8 +25,12 @@ const Feeds = (props, { currentUser }) => {
     loading: true,
     error: false,
   });
+  const { appState } = useContext(AppContext);
 
   useEffect(() => {
+    setState({ ...state, user: appState.currentUser.currentUser });
+    console.log(appState.currentUser.currentUser);
+    console.log(appState);
     fetchAllPosts();
     console.log(state);
   }, []);
@@ -36,8 +42,8 @@ const Feeds = (props, { currentUser }) => {
   }, [currentUser, props.allUsers]);
 
   const fetchAllPosts = async () => {
-    const posts = await fetchPosts();
-    setState({ posts });
+    const posts = await getAllPosts();
+    setState({ ...state, posts: posts.Post });
     setTimeout(() => {
       setState({
         loading: false,
@@ -95,22 +101,17 @@ const Feeds = (props, { currentUser }) => {
               </Container>{" "}
             </>
           ) : (
-            posts &&
-            posts
-              .sort((a, b) => {
-                const c = new Date(a.updatedAt);
-                const d = new Date(b.updatedAt);
-                return d - c;
-              })
-              .map((post) => (
-                <Post
-                  post={post}
-                  currentUser={`${user?.name} ${user?.surname}`}
-                  toggleModal={handleModalToggle}
-                  userId={user?._id}
-                  loading={loading}
-                />
-              ))
+            posts?.map(
+              (post) => <h1>{post.text}</h1>
+
+              // <Post
+              //   post={post}
+              //   // currentUser={`${user?.name} ${user?.lastName}`}
+              //   toggleModal={handleModalToggle}
+              //   // userId={user?._id}
+              //   loading={loading}
+              // />
+            )
           )}
         </Col>
         <Col lg={3} className="position-relative">
