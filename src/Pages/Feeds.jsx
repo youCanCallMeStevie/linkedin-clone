@@ -25,18 +25,16 @@ const Feeds = (props, { currentUser }) => {
     loading: true,
     error: false,
   });
+  const [showModal,setShowModal] = useState(false)
   const { appState } = useContext(AppContext);
 
   useEffect(() => {
     setState({ ...state, user: appState.currentUser.currentUser });
-    console.log(appState.currentUser.currentUser);
-    console.log(appState);
     fetchAllPosts();
-    console.log(state);
   }, []);
 
   useEffect(() => {
-    setState({ user: currentUser });
+    setState({ ...state, user: currentUser });
     setState({ allUsers: props.allUsers });
     console.log(state);
   }, [currentUser, props.allUsers]);
@@ -54,10 +52,10 @@ const Feeds = (props, { currentUser }) => {
   const handleModalToggle = async (selectedPost = "") => {
     setState({
       ...state,
-      showModal: !state.showModal,
       selectedPost,
     });
-    if (!state.showModal) {
+   setShowModal(!showModal)
+    if (!showModal) {
       fetchAllPosts();
       setState({ selectedPost });
     }
@@ -68,7 +66,7 @@ const Feeds = (props, { currentUser }) => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const { user, allUsers, posts, showModal, selectedPost, loading } = state;
+  const { user, allUsers, posts, selectedPost, loading } = state;
 
   return (
     <Container className="feeds">
