@@ -43,7 +43,7 @@ const Feeds = (props, { currentUser }) => {
 
   const fetchAllPosts = async () => {
     const posts = await getAllPosts();
-    setState({ ...state, posts: posts.Post });
+    setState({ ...state, posts: posts.post });
     // setTimeout(() => {
     //   setState({
     //     loading: false,
@@ -106,9 +106,9 @@ const Feeds = (props, { currentUser }) => {
             <>
               <Post
                 post={post}
-                // currentUser={`${user?.name} ${user?.lastName}`}
+                currentUser={`${post.userId.name} ${post.userId.lastName}`}
                 toggleModal={handleModalToggle}
-                // userId={user?._id}
+                userId={post.userId._id}
                 loading={loading}
               />
             </>
