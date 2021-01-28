@@ -165,6 +165,7 @@ const Profile = ({ match }) => {
       <EducationModal
         toggleEduModal={handleEduModalToggle}
         userId={user?._id}
+        showModal={showModal}
         selectedEducation={selectedEducation}
       />
     </Container>

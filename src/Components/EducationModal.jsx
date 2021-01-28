@@ -5,7 +5,7 @@ import PhotoSizeSelectActualOutlinedIcon from "@material-ui/icons/PhotoSizeSelec
 import AddIcon from "@material-ui/icons/Add";
 
 const EducationModal = ({
-    toggleEduModal,
+toggleEduModal,
   showModal,
   userId,
   selectedEducation,
@@ -13,7 +13,7 @@ const EducationModal = ({
   const [state, setState] = useState({
     validated: false,
     setValidated: false,
-    experience: {
+    education: {
       school: "",
       degree: "",
       fieldOfStudy: "",
@@ -27,9 +27,9 @@ const EducationModal = ({
   });
 
   useEffect(() => {
-    console.log(selectedEducation);
+    console.log("selectedEducation", selectedEducation);
     if (selectedEducation || selectedEducation !== []) {
-      delete selectedEducation.__v;
+    //   delete selectedEducation.__v;
       setState({ education: selectedEducation });
     }
   }, [selectedEducation]);
@@ -59,8 +59,8 @@ const EducationModal = ({
     let res = "";
     let message = "There was an error with your submission";
     if (selectedEducation === "") {
-      res = await postNewEdu(userId, state.experience);
-      message = "New Experience created";
+      res = await postNewEdu(state.education);
+      message = "New education created";
     } else {
       console.log(selectedEducation);
       res = await editEdu(state.education._id, state.education);
@@ -121,7 +121,7 @@ const EducationModal = ({
               type="text"
               placeholder="Ex: Master's Degree"
               name="company"
-              value={state.experience && state.experience.degree}
+              value={state.education && state.education.degree}
               onChange={e => {
                 handleChange(e);
               }}
@@ -135,7 +135,7 @@ const EducationModal = ({
               type="text"
               placeholder="Ex: Art History"
               name="fieldOfStudy"
-              value={state.experience && state.experience.fieldOfStudy}
+              value={state.education && state.education.fieldOfStudy}
               onChange={e => {
                 handleChange(e);
               }}
@@ -153,11 +153,11 @@ const EducationModal = ({
 
               <Form.Group>
                 <Form.Control
-                  type="date"
+                  type="number"
                   name="startYear"
                   value={
-                    state.experience &&
-                    state.experience.startYear
+                    state.education &&
+                    state.education.startYear
                   }
                   onChange={e => {
                     handleChange(e);
@@ -172,11 +172,11 @@ const EducationModal = ({
 
               <Form.Group>
                 <Form.Control
-                  type="date"
+                  type="number"
                   name="endYear"
                   value={
-                    state.experience &&
-                    state.experience.endYear 
+                    state.education &&
+                    state.education.endYear 
                   }
                   onChange={e => {
                     handleChange(e);
@@ -192,7 +192,7 @@ const EducationModal = ({
               required
               type="text"
               name="description"
-              value={state.experience && state.experience.description}
+              value={state.education && state.education.description}
               as="textarea"
               rows={3}
               onChange={e => {
@@ -208,7 +208,7 @@ const EducationModal = ({
               required
               type="text"
               name="activtiesSocieties"
-              value={state.experience && state.experience.activtiesSocieties}
+              value={state.education && state.education.activtiesSocieties}
               as="textarea"
               rows={3}
               onChange={e => {
