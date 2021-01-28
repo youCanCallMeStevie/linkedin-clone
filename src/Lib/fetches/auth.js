@@ -14,4 +14,11 @@ export const login = async (credentials) => {
   }
 };
 
-
+export const logout = async () => {
+  try {
+    const res = await authAxios.post(`${REACT_APP_URI_DEV}/api/auth/logout`);
+    if (res.status == 200) return await res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};

@@ -60,12 +60,10 @@ const Profile = ({ match }) => {
         }
       }
 
-      console.log(user);
+      // const experiences = user.experiences
+      // console.log(experiences);
 
-      const experiences = await fetchExperiences(user._id);
-      console.log(experiences);
-
-      setState({ ...state, users, experiences });
+      // setState({ ...state, users, experiences });
     } catch (err) {}
   };
 

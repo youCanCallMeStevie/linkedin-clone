@@ -6,7 +6,14 @@ const appReducer = (state, { type, payload }) => {
     case LOGIN:
       return {
         ...state,
+        isAuth: true,
         currentUser: payload,
+      };
+    case LOGIN:
+      return {
+        ...state,
+        isAuth: false,
+        currentUser: "",
       };
     default:
       return state;

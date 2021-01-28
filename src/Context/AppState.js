@@ -7,10 +7,10 @@ import {
   getCurrentUser,
   getCurrentProfile,
 } from "../Lib/fetches/users";
-import { login } from "../Lib/fetches/auth";
+import { login, logout } from "../Lib/fetches/auth";
 
 //Import the strings which describe the action which i dispatch to the reducer. I need to put those string into variables to make sure there are no typos and that both reducer and AppState have exactly the same spelling
-import { LOGIN } from "./app-actions";
+import { LOGIN, LOGOUT } from "./app-actions";
 
 //1. We need to wrap our entire app withing this AppContext component so that all components will be able to access to the app contex state
 //2. The way to have access to the appcontext state is using useContext. Look at
@@ -55,6 +55,18 @@ const AppState = (props) => {
       console.log(err);
     }
   };
+  const logoutUser = async () => {
+    try {
+      const auth = await logout();
+      localStorage.clear();
+      dispatch({
+        type: LOGOUT,
+      });
+      if (auth) return true;
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const retrieveAllUsers = async () => {
     try {
@@ -74,7 +86,7 @@ const AppState = (props) => {
   };
 
   return (
-    <AppContext.Provider value={{ appState: state, loginUser }}>
+    <AppContext.Provider value={{ appState: state, loginUser, logoutUser }}>
       {props.children}
     </AppContext.Provider>
   );

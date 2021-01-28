@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import {useContex} from 'react'
 import Profile from "./Pages/Profile";
 import NavBar from "./Components/Navbar";
 import Footerr from "./Components/Footerr";
@@ -9,8 +10,10 @@ import Dashboard from "./Components/Dashboard";
 import Connections from "./Pages/Connections";
 import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
+import AppState from './Context/app-context'
 
 function App() {
+
   return (
     <div className="App">
       <NavBar />
