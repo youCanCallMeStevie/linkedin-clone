@@ -17,12 +17,11 @@ import Promoted from "../Components/Promoted";
 import ProfileTopBar from "../Components/ProfileTopBar";
 import ExperienceModal from "../Components/ExperienceModal";
 import EducationModal from "../Components/EducationModal";
-
 import PostFeedModal from "../Components/PostFeedModal";
 import Dashboard from "../Components/Dashboard";
 import Activitycard from "../Components/Activity";
 import AppContext from "../Context/app-context";
-import { getCurrentProfile } from "../Lib/fetches/users";
+import { getCurrentProfile,uploadProfilePicture } from "../Lib/fetches/users";
 
 const Profile = ({ match }) => {
   const [state, setState] = useState({
@@ -107,13 +106,18 @@ const Profile = ({ match }) => {
       };
     }
   };
+  const [postImage, setPostImage] = useState("");
 
-  const handleChangeImage = async e => {
-    let formData = new FormData();
-    formData.append("profile", e.target.files[0]);
-    if (formData) {
-      let res = await postUserImage(state.user._id, formData);
-      setUpUser();
+  const handleChangeImage = async (e) => {
+    setPostImage(e.target.files[0]);
+    console.log(setPostImage);
+    if (postImage != "") {
+      const imageSent = await uploadProfilePicture(postImage);
+      if (imageSent) {
+        if (imageSent.ok) {
+          console.log("success");
+        }
+      }
     }
   };
 
