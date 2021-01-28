@@ -30,7 +30,7 @@ const Profile = ({ match }) => {
     selectedExprience: "",
   });
 
-  const { appState, actions } = useContext(AppContext);
+  const { appState} = useContext(AppContext);
   //called when components receive a new prop (for example a new user id)
   useEffect(() => {
     setUpUser();
@@ -42,7 +42,6 @@ const Profile = ({ match }) => {
     console.log(state);
     handleScroll();
     console.log(appState);
-    actions.retrieveCurrentProfile("60100068cbef445a37eab232");
   }, []);
 
   //function to set up the userand experiences when component load or when routing to new user

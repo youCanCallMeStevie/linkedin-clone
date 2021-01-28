@@ -30,3 +30,12 @@ export const getCurrentProfile = async (id) => {
     console.log(err);
   }
 };
+
+export const registerUser = async (credentials) => {
+  try {
+    const res = await axios.post(`${REACT_APP_URI_DEV}/api/users`, credentials);
+    if (res.status == 200) return await res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};

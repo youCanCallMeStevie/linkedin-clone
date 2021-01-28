@@ -1,6 +1,13 @@
-const appReducer = (state, action) => {
-  console.log(action);
-  switch (action.type) {
+import { LOGIN } from "./app-actions";
+
+const appReducer = (state, { type, payload }) => {
+  console.log(type);
+  switch (type) {
+    case LOGIN:
+      return {
+        ...state,
+        currentUser: payload,
+      };
     default:
       return state;
   }
