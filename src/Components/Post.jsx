@@ -132,7 +132,7 @@ function Post({ post, currentUser, toggleModal, userId }) {
           <p className="noOfComments">2 comments</p>
           {toggleComment ? 
             <>
-            <Comment/>
+            <Comment postId={post._id}/>
             </>
             : 
             <></>
