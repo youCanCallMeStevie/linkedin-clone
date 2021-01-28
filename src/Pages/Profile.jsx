@@ -154,7 +154,7 @@ const Profile = ({ match }) => {
           <ELearning />
         </Col>
         <Col md={4}>
-          <PeopleSideCards users={users} />
+          <PeopleSideCards following={user?.following} />
           <Promoted />
         </Col>
       </Row>
