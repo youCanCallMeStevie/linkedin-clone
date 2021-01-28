@@ -55,3 +55,10 @@
   width: 100%;
   object-fit: cover;
 }
+.noOfComments{
+  width: 70%;
+  text-align: right;
+  position: relative;
+  margin-top: 0px;
+  padding-top: 3px;
+}
