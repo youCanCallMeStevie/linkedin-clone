@@ -106,19 +106,14 @@ const Profile = ({ match }) => {
       };
     }
   };
-  const [postImage, setPostImage] = useState("");
 
   const handleChangeImage = async (e) => {
-    setPostImage(e.target.files[0]);
-    console.log(setPostImage);
-    if (postImage != "") {
-      const imageSent = await uploadProfilePicture(postImage);
+      const imageSent = await uploadProfilePicture(e.target.files[0]);
       if (imageSent) {
         if (imageSent.ok) {
           console.log("success");
         }
       }
-    }
   };
 
   const {
