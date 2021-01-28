@@ -51,17 +51,21 @@ const Profile = ({ match }) => {
     // use later: param = param.split(".");
     try {
       const users = await fetchAllUsers();
-      const user =
-        param === "me"
-          ? appState.currentUser.currentUser :
-          // : await getCurrentProfile(username)
-          users.find((user) => user.username === param);
+      if (param === "me") {
+        setState({ ...state, user: appState.currentUser.currentUser });
+      } else {
+        const user = await getCurrentProfile(param);
+        {
+          setState({ ...state, user: user.user });
+        }
+      }
+
       console.log(user);
 
       const experiences = await fetchExperiences(user._id);
       console.log(experiences);
 
-      setState({ user, users, experiences });
+      setState({ ...state, users, experiences });
     } catch (err) {}
   };
 

@@ -10,7 +10,7 @@
 //     Get a specific experience
 //     - DELETE https://striveschool-api.herokuapp.com/api/profile/:userId/experiences/:expId
 //     Get a specific experience
-    
+
 //     ---------------------------------------------------------------------------
 
 //     EXPERIENCE Model:
@@ -27,9 +27,7 @@
 //         "updatedAt": "2019-09-30T19:58:31.019Z",  //server generated
 //         "__v": 0  //server generated
 //         "image": ... //server generated on upload
-//     }   
-
-
+//     }
 
 const {
   REACT_APP_PROFILE,
@@ -41,7 +39,6 @@ const {
 //Users functions
 //GET current user
 export const fetchUser = async () => {
-  console.log(REACT_APP_PROFILE);
   try {
     const res = await fetch(REACT_APP_PROFILE, {
       headers: {
@@ -50,10 +47,10 @@ export const fetchUser = async () => {
     });
     const user = await res.json();
     if (res.ok) {
-      console.log('all good')
+      console.log("all good");
       return user;
     } else {
-      console.log('there is an error')
+      console.log("there is an error");
     }
   } catch (err) {
     console.log("there is an error with fetching user");
@@ -62,7 +59,6 @@ export const fetchUser = async () => {
 
 //GET all users
 export const fetchAllUsers = async () => {
-  console.log(REACT_APP_PROFILE);
   try {
     const res = await fetch(REACT_APP_PROFILELIST, {
       headers: {
@@ -70,12 +66,11 @@ export const fetchAllUsers = async () => {
       },
     });
     if (res.ok) {
-       const users = await res.json();
-       return users;
+      const users = await res.json();
+      return users;
     } else {
-      console.log('there is an error')
+      console.log("there is an error");
     }
-   
   } catch (err) {
     console.log("there is an error");
   }
@@ -85,19 +80,18 @@ export const fetchAllUsers = async () => {
 //GET all experiences
 export const fetchExperiences = async (id) => {
   try {
-    const res = await fetch(REACT_APP_PROFILELIST +`/${id}/experiences`, {
+    const res = await fetch(REACT_APP_PROFILELIST + `/${id}/experiences`, {
       headers: {
         Authorization: "Bearer " + REACT_APP_TOKEN,
       },
     });
     if (res.ok) {
-       const experiences = await res.json();
-       console.log(experiences)
-       return experiences;
+      const experiences = await res.json();
+      console.log(experiences);
+      return experiences;
     } else {
-      console.log('there is an error with fetching experiences')
+      console.log("there is an error with fetching experiences");
     }
-   
   } catch (err) {
     console.log("there is an error");
   }
@@ -105,28 +99,29 @@ export const fetchExperiences = async (id) => {
 
 //POST experience
 export const postExperiences = async (id, experience) => {
-  console.log(experience)
+  console.log(experience);
 
   try {
-    const res = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${id}/experiences`, {
-      method: "POST",
-      headers:  new Headers({
-        Authorization: "Bearer " + REACT_APP_TOKEN,
-        "Content-Type": "application/json",
-      }),
-      body: JSON.stringify(experience)
-    });
+    const res = await fetch(
+      `https://striveschool-api.herokuapp.com/api/profile/${id}/experiences`,
+      {
+        method: "POST",
+        headers: new Headers({
+          Authorization: "Bearer " + REACT_APP_TOKEN,
+          "Content-Type": "application/json",
+        }),
+        body: JSON.stringify(experience),
+      }
+    );
     if (res.ok) {
-       return res
+      return res;
     } else {
-      console.log('there is an error with posting experiences')
+      console.log("there is an error with posting experiences");
     }
-   
   } catch (err) {
     console.log("there is an error", err);
   }
 };
-
 
 //PUT experience
 export const editExperience = async (id, expId, experience) => {
@@ -156,7 +151,6 @@ export const editExperience = async (id, expId, experience) => {
 
 //DELETE experience
 export const deleteExperience = async (id, expId) => {
-
   try {
     const res = await fetch(
       `https://striveschool-api.herokuapp.com/api/profile/${id}/experiences/${expId}`,
@@ -165,8 +159,7 @@ export const deleteExperience = async (id, expId) => {
         headers: new Headers({
           Authorization: "Bearer " + REACT_APP_TOKEN,
           "Content-Type": "application/json",
-        })
-       
+        }),
       }
     );
     if (res.ok) {
@@ -179,7 +172,6 @@ export const deleteExperience = async (id, expId) => {
   }
 };
 
-
 //POSTS FUNCTIONS
 
 //GET all posts
@@ -190,7 +182,7 @@ export const fetchPosts = async () => {
         Authorization: "Bearer " + REACT_APP_TOKEN,
       },
     });
-    const posts= await res.json();
+    const posts = await res.json();
     if (res.ok) {
       console.log("all good");
       return posts;
@@ -201,7 +193,6 @@ export const fetchPosts = async () => {
     console.log("there is an error with fetching posts");
   }
 };
-
 
 //POST a single post
 export const postPost = async (text) => {
@@ -225,7 +216,7 @@ export const postPost = async (text) => {
 };
 
 //PUT a single post -> note: you can edit only posts where the userId of the post matched the currentUserId
-export const editPost = async (id,text) => {
+export const editPost = async (id, text) => {
   try {
     const res = await fetch(`${REACT_APP_POSTS}/${id}`, {
       method: "PUT",
@@ -270,79 +261,78 @@ export const deletePost = async (id) => {
 //IMAGES FUNCTIONS
 
 //POST user image
-export const postUserImage = async (id,image) => {
-
+export const postUserImage = async (id, image) => {
   try {
     const res = await fetch(`${REACT_APP_PROFILELIST}/${id}/picture`, {
       method: "POST",
-      headers:  new Headers({
-        Authorization: "Bearer " + REACT_APP_TOKEN
+      headers: new Headers({
+        Authorization: "Bearer " + REACT_APP_TOKEN,
       }),
-      body: image
+      body: image,
     });
     if (res.ok) {
-       return res
+      return res;
     } else {
-      console.log('there is an error with posting image')
+      console.log("there is an error with posting image");
     }
-   
   } catch (err) {
     console.log("there is an error", err);
   }
 };
 
 //POST user image
-export const postPostImage = async (id,image) => {
+export const postPostImage = async (id, image) => {
   const formdata = new FormData();
-  formdata.append('post',image)
+  formdata.append("post", image);
 
   try {
     const res = await fetch(`${REACT_APP_POSTS}/${id}`, {
       method: "POST",
-      headers:  new Headers({
-        Authorization: "Bearer " + REACT_APP_TOKEN
+      headers: new Headers({
+        Authorization: "Bearer " + REACT_APP_TOKEN,
       }),
-      body:formdata
+      body: formdata,
     });
     if (res.ok) {
-       return res
+      return res;
     } else {
-      console.log('there is an error with posting image')
+      console.log("there is an error with posting image");
     }
-   
   } catch (err) {
     console.log("there is an error", err);
   }
 };
-
 
 //POST user image
-export const postExperienceImage = async (userId,expId,image) => {
+export const postExperienceImage = async (userId, expId, image) => {
   const formdata = new FormData();
-  formdata.append('experience',image)
+  formdata.append("experience", image);
 
   try {
-    const res = await fetch(`${REACT_APP_PROFILELIST}/${userId}/experiences/${expId}/picture`, {
-      method: "POST",
-      headers:  new Headers({
-        Authorization: "Bearer " + REACT_APP_TOKEN
-      }),
-      body:formdata
-    });
+    const res = await fetch(
+      `${REACT_APP_PROFILELIST}/${userId}/experiences/${expId}/picture`,
+      {
+        method: "POST",
+        headers: new Headers({
+          Authorization: "Bearer " + REACT_APP_TOKEN,
+        }),
+        body: formdata,
+      }
+    );
     if (res.ok) {
-       return res
+      return res;
     } else {
-      console.log('there is an error with posting image')
+      console.log("there is an error with posting image");
     }
-   
   } catch (err) {
     console.log("there is an error", err);
   }
 };
 
-export const toBase64 = file => new Promise((resolve, reject) => {
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-  reader.onload = () => resolve(reader.result);
-  reader.onerror = error => reject(error);
-});
+export const toBase64 = (file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
