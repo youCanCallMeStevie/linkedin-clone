@@ -122,7 +122,7 @@ const SignUp = ({ history }) => {
           </button>
         </div>
         <h6>
-          New to LinkedIn?<Link> Join now</Link>
+          Already an account?<Link to="/login"> Sign in</Link>
         </h6>
       </form>
     </Container>

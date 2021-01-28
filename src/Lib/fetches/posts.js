@@ -36,7 +36,7 @@ export const editPost = async (id, post) => {
 
 export const deletePost = async (id) => {
   try {
-    const res = await axios.delete(`${REACT_APP_URI_DEV}/api/posts/${id}`);
+    const res = await authAxios.delete(`${REACT_APP_URI_DEV}/api/posts/${id}`);
     if (res.status == 200) return await res.data;
   } catch (err) {
     console.log(err);

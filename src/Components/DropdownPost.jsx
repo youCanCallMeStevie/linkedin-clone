@@ -19,7 +19,7 @@ class DropdownPost extends Component {
         </Dropdown.Toggle>
 
         <Dropdown.Menu className="dropdown-post">
-          {userId === post.user._id && (
+          {userId === post.userId._id && (
             <Dropdown.Item href="#/action-1" onClick={() => toggleModal(post)}>
               <TurnedInNotIcon /> <strong>Edit</strong>
               <p className="text-muted">Save for later</p>

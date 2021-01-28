@@ -24,7 +24,7 @@ export const getCurrentUser = async () => {
 
 export const getCurrentProfile = async (id) => {
   try {
-    const res = await authAxios.get(`${REACT_APP_URI_DEV}/api/users/${id}`);
+    const res = await axios.get(`${REACT_APP_URI_DEV}/api/users/${id}`);
     if (res.status == 200) return await res.data;
   } catch (err) {
     console.log(err);

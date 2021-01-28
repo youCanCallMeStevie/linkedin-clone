@@ -44,15 +44,16 @@ const Feeds = (props, { currentUser }) => {
   const fetchAllPosts = async () => {
     const posts = await getAllPosts();
     setState({ ...state, posts: posts.Post });
-    setTimeout(() => {
-      setState({
-        loading: false,
-      });
-    }, 750);
+    // setTimeout(() => {
+    //   setState({
+    //     loading: false,
+    //   });
+    // }, 750);
   };
 
   const handleModalToggle = async (selectedPost = "") => {
     setState({
+      ...state,
       showModal: !state.showModal,
       selectedPost,
     });
@@ -87,7 +88,7 @@ const Feeds = (props, { currentUser }) => {
             users={allUsers}
           />
           <NewPostButton scrollUp={handleMoveTop} />
-          {loading ? (
+          {/* {loading ? (
             <>
               <Container>
                 <Row className="mt-5"></Row>
@@ -100,19 +101,19 @@ const Feeds = (props, { currentUser }) => {
                 </Row>{" "}
               </Container>{" "}
             </>
-          ) : (
-            posts?.map(
-              (post) => <h1>{post.text}</h1>
-
-              // <Post
-              //   post={post}
-              //   // currentUser={`${user?.name} ${user?.lastName}`}
-              //   toggleModal={handleModalToggle}
-              //   // userId={user?._id}
-              //   loading={loading}
-              // />
-            )
-          )}
+          ) : ( */}
+          {posts?.map((post) => (
+            <>
+              <Post
+                post={post}
+                // currentUser={`${user?.name} ${user?.lastName}`}
+                toggleModal={handleModalToggle}
+                // userId={user?._id}
+                loading={loading}
+              />
+            </>
+          ))}
+          {/* ) */}
         </Col>
         <Col lg={3} className="position-relative">
           <div className="feeds__top-stick">
@@ -132,4 +133,4 @@ const Feeds = (props, { currentUser }) => {
   );
 };
 
-export default withUser(Feeds);
+export default Feeds;
