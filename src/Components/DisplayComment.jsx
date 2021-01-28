@@ -9,13 +9,12 @@ class DisplayComment extends React.Component{
             <>
             <div className="wrapper">
                 <img src={this.props.img} />
-                <input 
-                    type='text' 
-                    onKeyDown={this.handleKeyDown} 
-                    value={this.props.text} 
-                    onChange={this.handleChange}/>
+                <p>
+                    {this.props.text}
+                </p>
             </div>
             </>
         );
     }
+    
 }

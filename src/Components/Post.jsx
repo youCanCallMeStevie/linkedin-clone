@@ -7,11 +7,15 @@ import DropdownPost from "./DropdownPost";
 import CommentIcon from "@material-ui/icons/Comment";
 import moment from "moment";
 import Comment from './Comment';
+import {getAllComments} from '../Lib/fetches/comments'
 
 function Post({ post, currentUser, toggleModal, userId }) {
+  const [state, setState] = useState({
+    comments: []
+  });
   const [toggleLike, setToggleLike] = useState(false);
   const [toggleComment, setToggleComment] = useState(false);
-  const [comments, setComment] = useState([]);
+  const [comments, setComment] = useState({});
 
   console.log("POST::::::::", post);
   useEffect(() => {
@@ -25,6 +29,16 @@ function Post({ post, currentUser, toggleModal, userId }) {
     setToggleComment(!toggleComment);
   }
 
+  useEffect(() => {
+    setState({...state, comments: comments});
+    fetchAllComments(post._id);
+  }, []);
+
+  const fetchAllComments = async(postId) => {
+    const comments = await getAllComments(postId);
+    setComment(comments)
+  }
+
   const differenceDays = (date) => {
     const diff = moment(post.updatedAt).fromNow(); // another date
     return diff;
@@ -33,6 +47,7 @@ function Post({ post, currentUser, toggleModal, userId }) {
   return (
     <>
       <Row className="post d-flex flex-column ">
+      <h6>{comments}</h6>
         <Row className="d-flex justify-content-between align-items-center pt-0 pb-3 post__header">
           <span>
             {toggleLike && <>{/* <b>{currentUser}</b> likes this */}</>}
