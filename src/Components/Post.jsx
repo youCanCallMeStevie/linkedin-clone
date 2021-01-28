@@ -37,7 +37,7 @@ function Post({ post, currentUser, toggleModal, userId }) {
           <DropdownPost
             toggleModal={toggleModal}
             post={post}
-            // userId={userId}
+            userId={userId}
           ></DropdownPost>
         </Row>
 
