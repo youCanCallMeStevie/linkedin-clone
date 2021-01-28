@@ -27,7 +27,7 @@ const Feeds = (props, { currentUser }) => {
     loading: true,
     error: false,
   });
-  const [showModal,setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(false);
   const { appState } = useContext(AppContext);
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const Feeds = (props, { currentUser }) => {
       ...state,
       selectedPost,
     });
-   setShowModal(!showModal)
+    setShowModal(!showModal);
     if (!showModal) {
       fetchAllPosts();
       setState({ selectedPost });
@@ -76,7 +76,10 @@ const Feeds = (props, { currentUser }) => {
         <Col lg={2} className="position-relative">
           <div className="feeds__top-stick">
             {/* here goes the profile card - Rita - */}
-            <FeedsProfileCard user={user} users={allUsers} />{" "}
+            <FeedsProfileCard
+              user={appState.currentUser.currentUser}
+              users={allUsers}
+            />{" "}
           </div>
         </Col>
         <Col className="feeds__middle-column" lg={7}>
@@ -108,7 +111,7 @@ const Feeds = (props, { currentUser }) => {
                 post={post}
                 currentUser={`${post.userId.name} ${post.userId.lastName}`}
                 toggleModal={handleModalToggle}
-                userId={post.userId._id}
+                userId={appState.currentUser.currentUser._id}
                 loading={loading}
               />
             </>
