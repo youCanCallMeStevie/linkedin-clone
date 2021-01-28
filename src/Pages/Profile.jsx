@@ -53,18 +53,16 @@ const Profile = ({ match }) => {
       if (param === "me") {
         await updateCurrentUser();
         setState({ ...state, user: appState.currentUser.currentUser });
+        console.log("user", appState.currentUser.currentUser)
       } else {
         const user = await getCurrentProfile(param);
         {
           setState({ ...state, user: user.user });
         }
       }
-
-      // const experiences = user.experiences
-      // console.log(experiences);
-
-      // setState({ ...state, users, experiences });
-    } catch (err) {}
+    } catch (err) {
+console.log(err);
+    }
   };
 
   //function to toggle the modal
@@ -119,6 +117,8 @@ const Profile = ({ match }) => {
     showModal,
     experiences,
     selectedExprience,
+    education,
+    skills,
   } = state;
 
   return (
@@ -137,7 +137,9 @@ const Profile = ({ match }) => {
           <Activitycard />
           <ExperienceEducation
             toggleModal={handleModalToggle}
-            experiences={experiences}
+            experiences={user.experiences}
+            education={user.education}
+            skills={user.skills}
           />
           <ELearning />
         </Col>
