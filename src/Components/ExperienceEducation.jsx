@@ -21,7 +21,8 @@ export default function ExperienceEducation({
   education,
   skills,
 }) {
-  console.log(experiences);
+  console.log("education", education);
+  console.log("experiences", experiences);
   console.log("skills", skills)
   // const [show, setShow] = useState(false);
   return (

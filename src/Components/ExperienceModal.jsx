@@ -26,7 +26,7 @@ const ExperienceModal = ({
   });
 
   useEffect(() => {
-    console.log(selectedExprience);
+    console.log("selectedExprience", selectedExprience);
     if (selectedExprience || selectedExprience !== []) {
       delete selectedExprience.__v;
       setState({ experience: selectedExprience });
