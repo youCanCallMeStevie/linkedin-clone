@@ -13,7 +13,8 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
 import "../Styles/PeopleSideCards.css";
 
-export default function Promoted({ users }) {
+export default function Promoted({ users, following }) {
+ console.log("following", following)
   return (
     <div>
       <Card className="people-card-container">
@@ -21,30 +22,30 @@ export default function Promoted({ users }) {
           <Row>
             <Col className="d-flex justify-content-start">
               <Card.Title classname="card-title">
-                People you may know
+                People you follow
               </Card.Title>
             </Col>
           </Row>
           <List>
-            {users &&
-              users.slice(0, 4).map((user) => (
+            {following &&
+              following.slice(0, 4).map((following) => (
                <>
                <Row>
                   <ListItem style={{justifyContent:"space-between"}} >
                     <Image
-                      src={user.image}
+                      src={`${following.image}`}
                       roundedCircle
                       className="mr-3 avatar-image"
                     />
-<Link to={`/profile/${user.username}`}>
+<Link to={`/profile/${following.username}`}>
                     <ListItemText
-                      primary={`${user.name} ${user.surname}`}
-                      secondary={user.title}
+                      primary={`${following.name} ${following.surname}`}
+                      secondary={following.title}
                     /> </Link>
                 
-                    <ListItemAvatar>
+                    {/* <ListItemAvatar>
                         <PersonAddIcon />
-                    </ListItemAvatar>
+                    </ListItemAvatar> */}
                    
                   </ListItem>
                   </Row>
