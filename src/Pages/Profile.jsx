@@ -28,14 +28,16 @@ const Profile = ({ match }) => {
     users: [],
     experiences: [],
     showModal: false,
-    selectedExprience: "",
+    selectedExprience: {},
   });
+
+  // const [selectedExprience, setSelectedExprience] = useState({})
 
   const { appState, updateCurrentUser } = useContext(AppContext);
   //called when components receive a new prop (for example a new user id)
   useEffect(() => {
     setUpUser();
-  }, [match.params.user]);
+  }, [match.params.user, state.showModal]);
 
   //called once when component mounts
   useEffect(() => {
@@ -68,17 +70,11 @@ console.log(err);
   //function to toggle the modal
   const handleModalToggle = async (experience = "") => {
     setState({
+      ...state,
       showModal: !state.showModal,
       selectedExprience: experience,
     });
-    if (!state.showModal) {
-      try {
-        const experiences = await fetchExperiences(state.user._id);
-        setState({ experiences });
-      } catch (err) {
-        console.log(err);
-      }
-    }
+    console.log("experience", experience)
   };
 
   //function to make the top bar appear when scrolling
@@ -132,14 +128,14 @@ console.log(err);
             handleChangeImage={handleChangeImage}
           />
 
-          <AboutCard bio={user.bio} />
+          <AboutCard bio={user?.bio} />
           <Dashboard />
           <Activitycard />
           <ExperienceEducation
             toggleModal={handleModalToggle}
-            experiences={user.experiences}
-            education={user.education}
-            skills={user.skills}
+            experiences={user?.experiences}
+            education={user?.education}
+            skills={user?.skills}
           />
           <ELearning />
         </Col>
@@ -151,8 +147,7 @@ console.log(err);
       <ExperienceModal
         toggleModal={handleModalToggle}
         showModal={showModal}
-        userId={user._id}
-        toggleModal={handleModalToggle}
+        userId={user?._id}
         selectedExprience={selectedExprience}
       />
     </Container>

@@ -1,41 +1,44 @@
 import React, { useEffect, useState } from "react";
 import { Container, Form, Row, Col, Modal, Button } from "react-bootstrap";
 import {
-  postNewExp, editExp, deleteExp,
-} from "../Lib/fetches/experiences";
+  postEducation,
+  editEducation,
+  deleteEducation,
+  postEducationImage,
+} from "../utils";
 import PhotoSizeSelectActualOutlinedIcon from "@material-ui/icons/PhotoSizeSelectActualOutlined";
 import AddIcon from "@material-ui/icons/Add";
 
-const ExperienceModal = ({
+const EducationModal = ({
   toggleModal,
   showModal,
   userId,
-  selectedExprience,
+  selectedEducation,
 }) => {
   const [state, setState] = useState({
     validated: false,
     setValidated: false,
     experience: {
-      area: "",
-      company: "",
+      school: "",
+      degree: "",
+      fieldOfStudy: "",
       description: "",
-      endDate: "",
-      role: "",
-      startDate: "",
+      activtiesSocieties: "",
+      startYear: "",
+      endYear:""
     },
-    selectedExprience: "",
+    selectedEducation: "",
     image: "",
   });
 
   useEffect(() => {
-    console.log(selectedExprience);
-    if (selectedExprience || selectedExprience !== []) {
-      delete selectedExprience.__v
-      setState({ experience: selectedExprience });
+    console.log(selectedEducation);
+    if (selectedEducation || selectedEducation !== []) {
+      setState({ education: selectedEducation });
     }
-  }, [selectedExprience]);
+  }, [selectedEducation]);
 
-  const updateExp = (event) => {
+  const updateEdu = (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -59,41 +62,39 @@ const ExperienceModal = ({
     e.preventDefault(e);
     let res = "";
     let message = "There was an error with your submission";
-    if (selectedExprience === "") {
-      res = await postNewExp(state.experience);
+    if (selectedEducation === "") {
+      res = await postExperiences(userId, state.experience);
       message = "New Experience created";
     } else {
-      res = await editExp(
+      console.log(selectedEducation);
+      res = await editExperience(
+        userId,
         state.experience._id,
         state.experience
       );
       message = "Your Experience has been edited";
     }
-    alert(message);
-    setState({ image: "" });
-    toggleModal();
-  }
-    // if (res) {
-      // if (res.ok) {
-      //   let exp = await res.json();
-      //   let expId = exp._id;
-      //   if (state.image !== "") {
-      //     let postImage = await postExperienceImage(userId, expId, state.image);
+    if (res !== undefined) {
+      if (res.ok) {
+        let exp = await res.json();
+        let expId = exp._id;
+        if (state.image !== "") {
+          let postImage = await postExperienceImage(userId, expId, state.image);
 
-      //     if (postImage == !undefined && postImage.ok)
-      //       console.log("all good with image");
-      //   }
-      // }
-      // alert(message);
-      // setState({ image: "" });
-      // toggleModal();
-    // }
- 
+          if (postImage == !undefined && postImage.ok)
+            console.log("all good with image");
+        }
+      }
+      alert(message);
+      setState({ image: "" });
+      toggleModal();
+    }
+  };
 
   const handleDelete = async () => {
     console.log("clicke");
     try {
-      const res = await deleteExp(state.experience._id);
+      const res = await deleteExperience(userId, state.experience._id);
       console.log("deleted");
       if (res.ok) {
         alert("experience deleted");
@@ -114,7 +115,7 @@ const ExperienceModal = ({
       <Form onSubmit={(e) => handleSubmit(e)}>
         <Modal.Header closeButton>
           <Modal.Title>
-            {selectedExprience !== "" ? "Edit Experience" : "Add Experience"}
+            {selectedEducation !== "" ? "Edit Experience" : "Add Experience"}
           </Modal.Title>
         </Modal.Header>
         <Container className="text-body mt-5">
@@ -197,7 +198,6 @@ const ExperienceModal = ({
                   name="startDate"
                   value={
                     state.experience &&
-                    state.experience.startDate &&
                     state.experience.startDate.toString().slice(0, 10)
                   }
                   onChange={(e) => {
@@ -260,7 +260,7 @@ const ExperienceModal = ({
         </Container>
         <Modal.Header>
           <div className="w-100 d-flex justify-content-end">
-            {selectedExprience !== "" && (
+            {selectedEducation !== "" && (
               <Button
                 className="mr-3"
                 variant="danger"
