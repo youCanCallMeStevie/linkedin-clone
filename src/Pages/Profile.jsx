@@ -28,7 +28,8 @@ const Profile = ({ match }) => {
     user: {},
     users: [],
     experiences: [],
-    showModal: false,
+    showExpModal: false,
+    shoEduModal: false,
     selectedExprience: {},
     selectedEducation: {},
   });
@@ -39,7 +40,7 @@ const Profile = ({ match }) => {
   //called when components receive a new prop (for example a new user id)
   useEffect(() => {
     setUpUser();
-  }, [match.params.user, state.showModal]);
+  }, [match.params.user, state.showExpModal, state.showEduModal]);
 
   //called once when component mounts
   useEffect(() => {
@@ -73,16 +74,16 @@ const Profile = ({ match }) => {
   const handleExpModalToggle = async (experience = "") => {
     setState({
       ...state,
-      showModal: !state.showModal,
+      showExpModal: !state.showExpModal,
       selectedExprience: experience,
     });
   };
 
   //function to toggle the education modal
-  const handleEduModalToggle = async (experience = "") => {
+  const handleEduModalToggle = async (education = "") => {
     setState({
       ...state,
-      showModal: !state.showModal,
+      showEduModal: !state.showEduModal,
       selectedEducation: education,
     });
   };
@@ -120,7 +121,8 @@ const Profile = ({ match }) => {
     user,
     users,
     showTopBar,
-    showModal,
+    showEduModal,
+    showExpModal,
     experiences,
     selectedExprience,
     selectedEducation,
@@ -152,20 +154,20 @@ const Profile = ({ match }) => {
           <ELearning />
         </Col>
         <Col md={4}>
-          <PeopleSideCards users={users} />
+          <PeopleSideCards following={user?.following} />
           <Promoted />
         </Col>
       </Row>
       <ExperienceModal
         toggleExpModal={handleExpModalToggle}
-        showModal={showModal}
+        showModal={showExpModal}
         userId={user?._id}
         selectedExprience={selectedExprience}
       />
       <EducationModal
         toggleEduModal={handleEduModalToggle}
         userId={user?._id}
-        showModal={showModal}
+        showModal={showEduModal}
         selectedEducation={selectedEducation}
       />
     </Container>
