@@ -39,7 +39,6 @@ const Profile = ({ match }) => {
 
   //called once when component mounts
   useEffect(() => {
-    updateCurrentUser();
     setUpUser();
     handleScroll();
     console.log(appState.currentUser.currentUser);
@@ -52,6 +51,7 @@ const Profile = ({ match }) => {
     try {
       const users = await fetchAllUsers();
       if (param === "me") {
+        await updateCurrentUser();
         setState({ ...state, user: appState.currentUser.currentUser });
       } else {
         const user = await getCurrentProfile(param);
