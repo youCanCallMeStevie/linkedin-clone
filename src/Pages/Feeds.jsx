@@ -111,7 +111,7 @@ const Feeds = (props, { currentUser }) => {
                 post={post}
                 currentUser={`${post.userId.name} ${post.userId.lastName}`}
                 toggleModal={handleModalToggle}
-                userId={post.userId._id}
+                userId={appState.currentUser.currentUser._id}
                 loading={loading}
               />
             </>
