@@ -129,6 +129,7 @@ function Post({ post, currentUser, toggleModal, userId }) {
           <span className="ml-3">
             <CommentIcon onClick={() => handleComment()}/> Comment
           </span>
+          <p className="noOfComments">2 comments</p>
           {toggleComment ? 
             <>
             <Comment/>
@@ -136,7 +137,6 @@ function Post({ post, currentUser, toggleModal, userId }) {
             : 
             <></>
           }
-          <p className="noOfComments">2 comments</p>
         </Row>
       </Row>
     </>

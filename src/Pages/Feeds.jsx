@@ -13,6 +13,7 @@ import LinkedNews from "../Components/LinkedNews";
 import AddFeed from "../Components/AddFeed";
 import NewPostButton from "../Components/NewPostButton";
 import { getAllPosts } from "../Lib/fetches/posts";
+import { getAllComments } from "../Lib/fetches/comments";
 import AppContext from "../Context/app-context";
 
 const Feeds = (props, { currentUser }) => {
@@ -20,6 +21,7 @@ const Feeds = (props, { currentUser }) => {
     user: "",
     allUsers: [],
     posts: [],
+    comments: [],
     showModal: false,
     selectedPost: "",
     loading: true,

@@ -56,6 +56,9 @@
   object-fit: cover;
 }
 .noOfComments{
-  position: absolute;
-  right: 25px;
+  width: 70%;
+  text-align: right;
+  position: relative;
+  margin-top: 0px;
+  padding-top: 3px;
 }
