@@ -16,7 +16,7 @@ export const postNewPost = async (post) => {
   try {
     const res = await authAxios.post(`${REACT_APP_URI_DEV}/api/posts`, post);
     console.log(res);
-    if (res.status == 200) return await res.data;
+    if (res.status == 201) return await res;
   } catch (err) {
     console.log(err);
   }
@@ -37,6 +37,21 @@ export const editPost = async (id, post) => {
 export const deletePost = async (id) => {
   try {
     const res = await authAxios.delete(`${REACT_APP_URI_DEV}/api/posts/${id}`);
+    if (res.status == 200) return await res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const uploadPicture = async (id, picture) => {
+  const pictureFORM = new FormData();
+  pictureFORM.append("image", picture);
+  try {
+    const res = await authAxios.post(
+      `${REACT_APP_URI_DEV}/api/posts/${id}/upload`,
+      pictureFORM
+    );
+    console.log(res);
     if (res.status == 200) return await res.data;
   } catch (err) {
     console.log(err);
