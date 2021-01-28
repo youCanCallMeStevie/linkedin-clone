@@ -2,9 +2,9 @@ import axios from "axios";
 import authAxios from "./authAxios";
 const { REACT_APP_URI_DEV } = process.env;
 
-export const getAllUsers = async () => {
+export const getAllPosts = async () => {
   try {
-    const res = await axios.get(`${REACT_APP_URI_DEV}/api/users`);
+    const res = await axios.get(`${REACT_APP_URI_DEV}/api/posts`);
     console.log(res);
     if (res.status == 200) return await res.data;
   } catch (err) {
@@ -12,9 +12,9 @@ export const getAllUsers = async () => {
   }
 };
 
-export const getCurrentUser = async () => {
+export const postNewPost = async (post) => {
   try {
-    const res = await authAxios.get(`${REACT_APP_URI_DEV}/api/users/me`);
+    const res = await authAxios.post(`${REACT_APP_URI_DEV}/api/posts`, post);
     console.log(res);
     if (res.status == 200) return await res.data;
   } catch (err) {
@@ -22,18 +22,21 @@ export const getCurrentUser = async () => {
   }
 };
 
-export const getCurrentProfile = async (id) => {
+export const editPost = async (id, post) => {
   try {
-    const res = await axios.get(`${REACT_APP_URI_DEV}/api/users/${id}`);
+    const res = await authAxios.put(
+      `${REACT_APP_URI_DEV}/api/posts/${id}`,
+      post
+    );
     if (res.status == 200) return await res.data;
   } catch (err) {
     console.log(err);
   }
 };
 
-export const registerUser = async (credentials) => {
+export const deletePost = async (id) => {
   try {
-    const res = await axios.post(`${REACT_APP_URI_DEV}/api/users`, credentials);
+    const res = await authAxios.delete(`${REACT_APP_URI_DEV}/api/posts/${id}`);
     if (res.status == 200) return await res.data;
   } catch (err) {
     console.log(err);

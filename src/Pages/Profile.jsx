@@ -20,6 +20,7 @@ import PostFeedModal from "../Components/PostFeedModal";
 import Dashboard from "../Components/Dashboard";
 import Activitycard from "../Components/Activity";
 import AppContext from "../Context/app-context";
+import { getCurrentProfile } from "../Lib/fetches/users";
 
 const Profile = ({ match }) => {
   const [state, setState] = useState({
@@ -30,7 +31,7 @@ const Profile = ({ match }) => {
     selectedExprience: "",
   });
 
-  const { appState} = useContext(AppContext);
+  const { appState } = useContext(AppContext);
   //called when components receive a new prop (for example a new user id)
   useEffect(() => {
     setUpUser();
@@ -41,7 +42,7 @@ const Profile = ({ match }) => {
     setUpUser();
     console.log(state);
     handleScroll();
-    console.log(appState);
+    console.log(appState.currentUser.currentUser);
   }, []);
 
   //function to set up the userand experiences when component load or when routing to new user
@@ -52,8 +53,9 @@ const Profile = ({ match }) => {
       const users = await fetchAllUsers();
       const user =
         param === "me"
-          ? await fetchUser()
-          : users.find((user) => user.username === param);
+          ? appState.currentUser.currentUser :
+          // : await getCurrentProfile(username)
+          users.find((user) => user.username === param);
       console.log(user);
 
       const experiences = await fetchExperiences(user._id);

@@ -53,7 +53,7 @@ const Login = ({ history }) => {
         </span>
       </div>
       <h6>
-        New to LinkedIn?<Link> Join now</Link>
+        New to LinkedIn?<Link to="/signup"> Join now</Link>
       </h6>
     </Container>
   );
