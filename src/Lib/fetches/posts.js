@@ -28,7 +28,7 @@ export const editPost = async (id, post) => {
       `${REACT_APP_URI_DEV}/api/posts/${id}`,
       post
     );
-    if (res.status == 200) return await res.data;
+    if (res.status == 200) return await res;
   } catch (err) {
     console.log(err);
   }
@@ -44,6 +44,8 @@ export const deletePost = async (id) => {
 };
 
 export const uploadPicture = async (id, picture) => {
+  console.log(id);
+  console.log(picture);
   const pictureFORM = new FormData();
   pictureFORM.append("image", picture);
   try {
