@@ -10,9 +10,9 @@ import Comment from './Comment';
 import {getAllComments} from '../Lib/fetches/comments'
 
 function Post({ post, currentUser, toggleModal, userId }) {
-  const [state, setState] = useState({
-    comments: []
-  });
+  // const [state, setState] = useState({
+  //   comments: []
+  // });
   const [toggleLike, setToggleLike] = useState(false);
   const [toggleComment, setToggleComment] = useState(false);
   const [comments, setComment] = useState({});
@@ -30,7 +30,7 @@ function Post({ post, currentUser, toggleModal, userId }) {
   };
 
   useEffect(() => {
-    setState({...state, comments: comments});
+    setComment( comments);
     fetchAllComments(post._id);
   }, []);
 
@@ -44,10 +44,12 @@ function Post({ post, currentUser, toggleModal, userId }) {
     return diff;
   };
 
+  console.log("Comments:::::::::::::::::", comments.comment.length)
+
   return (
     <>
       <Row className="post d-flex flex-column ">
-      <h6>{comments}</h6>
+      
         <Row className="d-flex justify-content-between align-items-center pt-0 pb-3 post__header">
           <span>
             {toggleLike && <>{/* <b>{currentUser}</b> likes this */}</>}
@@ -143,8 +145,8 @@ function Post({ post, currentUser, toggleModal, userId }) {
           <span className="ml-3">
             <CommentIcon onClick={() => handleComment()} /> Comment
           </span>
-          {post.comments.length == 0 ?
-            <p className="noOfComments">{post.comments.length} comments</p> : <></>
+          {comments.comment.length > 0 ?
+            <p className="noOfComments">{comments.comment.length} comments</p> : <></>
           }
           
           {toggleComment ? 
