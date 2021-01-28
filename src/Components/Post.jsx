@@ -7,6 +7,7 @@ import DropdownPost from "./DropdownPost";
 import CommentIcon from "@material-ui/icons/Comment";
 import moment from "moment";
 import Comment from './Comment';
+import DisplayComment from './DisplayComment';
 import {getAllComments} from '../Lib/fetches/comments'
 
 function Post({ post, currentUser, toggleModal, userId }) {
@@ -44,7 +45,13 @@ function Post({ post, currentUser, toggleModal, userId }) {
     return diff;
   };
 
-  console.log("Comments:::::::::::::::::", comments.comment.length)
+  //console.log("Comments:::::::::::::::::", comments.comment.length)
+
+  const showComments = () => {
+    // comments.comment.map(comment => {
+    //   //<DisplayComment img={} text={comment.text}>
+    // })
+  }
 
   return (
     <>
@@ -145,8 +152,11 @@ function Post({ post, currentUser, toggleModal, userId }) {
           <span className="ml-3">
             <CommentIcon onClick={() => handleComment()} /> Comment
           </span>
-          {comments.comment.length > 0 ?
-            <p className="noOfComments">{comments.comment.length} comments</p> : <></>
+          {comments.comment &&
+            <>
+            {comments.comment.length > 0 ?
+            <p className="noOfComments" onClick={() => showComments()}>{comments.comment.length} comments</p> : <></>
+            }</>
           }
           
           {toggleComment ? 
