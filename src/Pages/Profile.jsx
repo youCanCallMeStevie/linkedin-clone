@@ -16,11 +16,12 @@ import ExperienceEducation from "../Components/ExperienceEducation";
 import Promoted from "../Components/Promoted";
 import ProfileTopBar from "../Components/ProfileTopBar";
 import ExperienceModal from "../Components/ExperienceModal";
+import EducationModal from "../Components/EducationModal";
 import PostFeedModal from "../Components/PostFeedModal";
 import Dashboard from "../Components/Dashboard";
 import Activitycard from "../Components/Activity";
 import AppContext from "../Context/app-context";
-import { getCurrentProfile } from "../Lib/fetches/users";
+import { getCurrentProfile,uploadProfilePicture } from "../Lib/fetches/users";
 
 const Profile = ({ match }) => {
   const [state, setState] = useState({
@@ -28,14 +29,17 @@ const Profile = ({ match }) => {
     users: [],
     experiences: [],
     showModal: false,
-    selectedExprience: "",
+    selectedExprience: {},
+    selectedEducation: {},
   });
+
+  // const [selectedExprience, setSelectedExprience] = useState({})
 
   const { appState, updateCurrentUser } = useContext(AppContext);
   //called when components receive a new prop (for example a new user id)
   useEffect(() => {
     setUpUser();
-  }, [match.params.user]);
+  }, [match.params.user, state.showModal]);
 
   //called once when component mounts
   useEffect(() => {
@@ -53,34 +57,34 @@ const Profile = ({ match }) => {
       if (param === "me") {
         await updateCurrentUser();
         setState({ ...state, user: appState.currentUser.currentUser });
+        console.log("user", appState.currentUser.currentUser);
       } else {
         const user = await getCurrentProfile(param);
         {
           setState({ ...state, user: user.user });
         }
       }
-
-      // const experiences = user.experiences
-      // console.log(experiences);
-
-      // setState({ ...state, users, experiences });
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  //function to toggle the modal
-  const handleModalToggle = async (experience = "") => {
+  //function to toggle the experience modal
+  const handleExpModalToggle = async (experience = "") => {
     setState({
+      ...state,
       showModal: !state.showModal,
       selectedExprience: experience,
     });
-    if (!state.showModal) {
-      try {
-        const experiences = await fetchExperiences(state.user._id);
-        setState({ experiences });
-      } catch (err) {
-        console.log(err);
-      }
-    }
+  };
+
+  //function to toggle the education modal
+  const handleEduModalToggle = async (experience = "") => {
+    setState({
+      ...state,
+      showModal: !state.showModal,
+      selectedEducation: education,
+    });
   };
 
   //function to make the top bar appear when scrolling
@@ -104,12 +108,12 @@ const Profile = ({ match }) => {
   };
 
   const handleChangeImage = async (e) => {
-    let formData = new FormData();
-    formData.append("profile", e.target.files[0]);
-    if (formData) {
-      let res = await postUserImage(state.user._id, formData);
-      setUpUser();
-    }
+      const imageSent = await uploadProfilePicture(e.target.files[0]);
+      if (imageSent) {
+        if (imageSent.ok) {
+          console.log("success");
+        }
+      }
   };
 
   const {
@@ -119,6 +123,9 @@ const Profile = ({ match }) => {
     showModal,
     experiences,
     selectedExprience,
+    selectedEducation,
+    education,
+    skills,
   } = state;
 
   return (
@@ -132,12 +139,15 @@ const Profile = ({ match }) => {
             handleChangeImage={handleChangeImage}
           />
 
-          <AboutCard bio={user.bio} />
+          <AboutCard bio={user?.bio} />
           <Dashboard />
           <Activitycard />
           <ExperienceEducation
-            toggleModal={handleModalToggle}
-            experiences={experiences}
+            toggleExpModal={handleExpModalToggle}
+            toggleEduModal={handleEduModalToggle}
+            experiences={user?.experiences}
+            education={user?.education}
+            skills={user?.skills}
           />
           <ELearning />
         </Col>
@@ -147,11 +157,16 @@ const Profile = ({ match }) => {
         </Col>
       </Row>
       <ExperienceModal
-        toggleModal={handleModalToggle}
+        toggleExpModal={handleExpModalToggle}
         showModal={showModal}
-        userId={user._id}
-        toggleModal={handleModalToggle}
+        userId={user?._id}
         selectedExprience={selectedExprience}
+      />
+      <EducationModal
+        toggleEduModal={handleEduModalToggle}
+        userId={user?._id}
+        showModal={showModal}
+        selectedEducation={selectedEducation}
       />
     </Container>
   );

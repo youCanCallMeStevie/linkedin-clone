@@ -25,9 +25,9 @@ function Post({ post, currentUser, toggleModal, userId }) {
   const handleLike = () => {
     setToggleLike(!toggleLike);
   };
-  const handleComment = () =>{
+  const handleComment = () => {
     setToggleComment(!toggleComment);
-  }
+  };
 
   useEffect(() => {
     setState({...state, comments: comments});
@@ -55,17 +55,19 @@ function Post({ post, currentUser, toggleModal, userId }) {
           <DropdownPost
             toggleModal={toggleModal}
             post={post}
-            // userId={userId}
+            userId={userId}
           ></DropdownPost>
         </Row>
 
         <Row className="post__body d-flex justify-content-between pt-3">
           <div className="d-flex">
             <div className="post__avatar mr-2">
-              { <img src={post.userId.image} alt="user-posted-image" />}
+              {<img src={post.userId.image} alt="user-posted-image" />}
             </div>
             <div className="post__user">
-              <h4>{post.userId.name} {post.userId.lastName}</h4>
+              <h4>
+                {post.userId.name} {post.userId.lastName}
+              </h4>
               <span className="post__user-days">
                 {differenceDays(post.createdAt)} <PublicIcon />
               </span>
@@ -81,19 +83,13 @@ function Post({ post, currentUser, toggleModal, userId }) {
         <Row className="d-flex flex-column align-items-start post__text mt-4">
           {post.text}
           <br />
-                  {(() => {
-                    if (post.image==undefined) {
-                      return (
-                        <>
-                        {console.log(post.image)}
-                        </>
-                      )
-                    } else {
-                      return (
-                        <img src={post.image}></img>
-                      )
-                    }
-                  })()}
+          {(() => {
+            if (post.image == undefined) {
+              return <>{console.log(post.image)}</>;
+            } else {
+              return <img src={post.image} className="img-fluid"></img>;
+            }
+          })()}
         </Row>
         <Row className="d-flex align-items-center post__comments ">
           {toggleLike ? (
@@ -145,7 +141,7 @@ function Post({ post, currentUser, toggleModal, userId }) {
             </>
           )}
           <span className="ml-3">
-            <CommentIcon onClick={() => handleComment()}/> Comment
+            <CommentIcon onClick={() => handleComment()} /> Comment
           </span>
           {post.comments.length == 0 ?
             <p className="noOfComments">{post.comments.length} comments</p> : <></>

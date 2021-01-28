@@ -26,6 +26,7 @@ import {
   toBase64,
   postPostImage,
 } from "../utils";
+import { postNewPost, uploadPicture } from "../Lib/fetches/posts";
 
 export default function PostFeedModal({
   toggleModal,
@@ -50,18 +51,19 @@ export default function PostFeedModal({
     let res = "";
     let message = "Something went wrong";
     if (selectedPost == "") {
-      res = await postPost(post);
+      res = await postNewPost(post);
       message = "Post sucessfully created";
     } else {
       res = await editPost(post._id, post);
       message = "Post sucessfully edited";
     }
     if (res) {
-      if (res.ok) {
-        const data = await res.json();
+      if (res.status == 201) {
+        const data = res.data;
         const post_id = data._id;
+        console.log(post_id);
         if (postImage != "") {
-          const imageSent = await postPostImage(post_id, postImage);
+          const imageSent = await uploadPicture(post_id, postImage);
           if (imageSent) {
             if (imageSent.ok) {
               console.log("success");

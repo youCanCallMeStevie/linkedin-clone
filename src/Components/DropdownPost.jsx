@@ -8,6 +8,8 @@ import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import FlagIcon from "@material-ui/icons/Flag";
 import VisibilityIcon from "@material-ui/icons/Visibility";
+import { deletePost } from "../Lib/fetches/posts";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 
 class DropdownPost extends Component {
   render() {
@@ -20,10 +22,22 @@ class DropdownPost extends Component {
 
         <Dropdown.Menu className="dropdown-post">
           {userId === post.userId._id && (
-            <Dropdown.Item href="#/action-1" onClick={() => toggleModal(post)}>
-              <TurnedInNotIcon /> <strong>Edit</strong>
-              <p className="text-muted">Save for later</p>
-            </Dropdown.Item>
+            <>
+              <Dropdown.Item
+                href="#/action-1"
+                onClick={() => toggleModal(post)}
+              >
+                <TurnedInNotIcon /> <strong>Edit</strong>
+                <p className="text-muted">Save for later</p>
+              </Dropdown.Item>
+              <Dropdown.Item
+                href="#/action-1"
+                onClick={() => deletePost(post._id)}
+              >
+                <DeleteForeverIcon /> <strong>Delete</strong>
+                <p className="text-muted">Delete this post</p>
+              </Dropdown.Item>
+            </>
           )}
 
           <Dropdown.Item href="#/action-2">

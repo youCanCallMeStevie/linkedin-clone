@@ -12,7 +12,7 @@ axios.interceptors.response.use(
     if (error.response.status === 400 && !originalRequest._retry) {
       originalRequest._retry = true;
       const res = await axios.post(
-        "http://localhost:3001/api/users/renewToken",
+        `${process.env.REACT_APP_URI_DEV}/api/auth/renewToken`,
         {
           withCredentials: true,
         }
