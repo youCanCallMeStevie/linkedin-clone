@@ -18,8 +18,8 @@ function Post({ post, currentUser, toggleModal, userId }) {
   };
 
   const differenceDays = (date) => {
-    // const diff = moment(post.updatedAt).fromNow(); // another date
-    // return diff;
+    const diff = moment(post.updatedAt).fromNow(); // another date
+    return diff;
   };
 
   return (
@@ -39,12 +39,12 @@ function Post({ post, currentUser, toggleModal, userId }) {
         <Row className="post__body d-flex justify-content-between pt-3">
           <div className="d-flex">
             <div className="post__avatar mr-2">
-              {/* <img src={post.user?.image} alt="user-posted-image" /> */}
+              { <img src={post.userId.image} alt="user-posted-image" />}
             </div>
             <div className="post__user">
-              <h4>{/* {post.userId?.name} {post.userId?.lastName} */}</h4>
+              <h4>{post.userId.name} {post.userId.lastName}</h4>
               <span className="post__user-days">
-                {/* {differenceDays(post.createdAt)} <PublicIcon /> */}
+                {differenceDays(post.createdAt)} <PublicIcon />
               </span>
             </div>
           </div>
@@ -58,13 +58,19 @@ function Post({ post, currentUser, toggleModal, userId }) {
         <Row className="d-flex flex-column align-items-start post__text mt-4">
           {post.text}
           <br />
-          {
-            // post.image && (
-            // <div className="post__img">
-            //   {/* <img src={post?.image} alt="" className="" /> */}
-            // </div>
-            // )
-          }
+                  {(() => {
+                    if (post.image==undefined) {
+                      return (
+                        <>
+                        {console.log(post.image)}
+                        </>
+                      )
+                    } else {
+                      return (
+                        <img src={post.image}></img>
+                      )
+                    }
+                  })()}
         </Row>
         <Row className="d-flex align-items-center post__comments ">
           {toggleLike ? (

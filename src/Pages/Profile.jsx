@@ -31,7 +31,7 @@ const Profile = ({ match }) => {
     selectedExprience: "",
   });
 
-  const { appState } = useContext(AppContext);
+  const { appState, updateCurrentUser } = useContext(AppContext);
   //called when components receive a new prop (for example a new user id)
   useEffect(() => {
     setUpUser();
@@ -40,7 +40,6 @@ const Profile = ({ match }) => {
   //called once when component mounts
   useEffect(() => {
     setUpUser();
-    console.log(state);
     handleScroll();
     console.log(appState.currentUser.currentUser);
   }, []);
@@ -52,6 +51,7 @@ const Profile = ({ match }) => {
     try {
       const users = await fetchAllUsers();
       if (param === "me") {
+        await updateCurrentUser();
         setState({ ...state, user: appState.currentUser.currentUser });
         console.log("user", appState.currentUser.currentUser)
       } else {
