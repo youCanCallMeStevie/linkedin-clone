@@ -15,7 +15,8 @@ import "../Styles/ExperienceEducation.css";
 import moment from "moment";
 
 export default function ExperienceEducation({
-  toggleModal,
+  toggleExpModal,
+  toggleEduModal,
   experiences,
   education,
   skills,
@@ -36,7 +37,7 @@ export default function ExperienceEducation({
               </Col>
 
               <Col className="d-flex justify-content-end">
-                <AddIcon onClick={() => toggleModal()} />
+                <AddIcon onClick={() => toggleExModal()} />
               </Col>
             </Row>
           </Col>
@@ -58,7 +59,7 @@ export default function ExperienceEducation({
                       <Row className="justify-content-between edit-info-icon">
                         <Typography variant="h5">{experience.role}</Typography>
                         <span>
-                          <CreateIcon onClick={() => toggleModal(experience)} />
+                          <CreateIcon onClick={() => toggleExModal(experience)} />
                         </span>
                       </Row>
                       <Row>
@@ -98,7 +99,7 @@ export default function ExperienceEducation({
               </Col>
 
               <Col className="d-flex justify-content-end">
-                <AddIcon />
+              <AddIcon onClick={() => toggleEduModal()} />
               </Col>
             </Row>
           </Col>
@@ -118,7 +119,7 @@ export default function ExperienceEducation({
                     <Row className="justify-content-between edit-info-icon">
                       <Typography variant="h5">{education.school}</Typography>
                       <span>
-                        <CreateIcon />
+                      <CreateIcon onClick={() => toggleEduModal(education)} />
                       </span>
                     </Row>
                     <Row>

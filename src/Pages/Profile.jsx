@@ -16,6 +16,8 @@ import ExperienceEducation from "../Components/ExperienceEducation";
 import Promoted from "../Components/Promoted";
 import ProfileTopBar from "../Components/ProfileTopBar";
 import ExperienceModal from "../Components/ExperienceModal";
+import EducationModal from "../Components/EducationModal";
+
 import PostFeedModal from "../Components/PostFeedModal";
 import Dashboard from "../Components/Dashboard";
 import Activitycard from "../Components/Activity";
@@ -29,6 +31,7 @@ const Profile = ({ match }) => {
     experiences: [],
     showModal: false,
     selectedExprience: {},
+    selectedEducation: {},
   });
 
   // const [selectedExprience, setSelectedExprience] = useState({})
@@ -55,7 +58,7 @@ const Profile = ({ match }) => {
       if (param === "me") {
         await updateCurrentUser();
         setState({ ...state, user: appState.currentUser.currentUser });
-        console.log("user", appState.currentUser.currentUser)
+        console.log("user", appState.currentUser.currentUser);
       } else {
         const user = await getCurrentProfile(param);
         {
@@ -63,18 +66,26 @@ const Profile = ({ match }) => {
         }
       }
     } catch (err) {
-console.log(err);
+      console.log(err);
     }
   };
 
-  //function to toggle the modal
-  const handleModalToggle = async (experience = "") => {
+  //function to toggle the experience modal
+  const handleExpModalToggle = async (experience = "") => {
     setState({
       ...state,
       showModal: !state.showModal,
       selectedExprience: experience,
     });
-    console.log("experience", experience)
+  };
+
+  //function to toggle the education modal
+  const handleEduModalToggle = async (experience = "") => {
+    setState({
+      ...state,
+      showModal: !state.showModal,
+      selectedEducation: education,
+    });
   };
 
   //function to make the top bar appear when scrolling
@@ -97,7 +108,7 @@ console.log(err);
     }
   };
 
-  const handleChangeImage = async (e) => {
+  const handleChangeImage = async e => {
     let formData = new FormData();
     formData.append("profile", e.target.files[0]);
     if (formData) {
@@ -113,6 +124,7 @@ console.log(err);
     showModal,
     experiences,
     selectedExprience,
+    selectedEducation,
     education,
     skills,
   } = state;
@@ -132,7 +144,8 @@ console.log(err);
           <Dashboard />
           <Activitycard />
           <ExperienceEducation
-            toggleModal={handleModalToggle}
+            toggleExpModal={handleExpModalToggle}
+            toggleEduModal={handleEduModalToggle}
             experiences={user?.experiences}
             education={user?.education}
             skills={user?.skills}
@@ -145,10 +158,15 @@ console.log(err);
         </Col>
       </Row>
       <ExperienceModal
-        toggleModal={handleModalToggle}
+        toggleExpModal={handleExpModalToggle}
         showModal={showModal}
         userId={user?._id}
         selectedExprience={selectedExprience}
+      />
+      <EducationModal
+        toggleEduModal={handleEduModalToggle}
+        userId={user?._id}
+        selectedEducation={selectedEducation}
       />
     </Container>
   );
