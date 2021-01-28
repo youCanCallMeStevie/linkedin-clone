@@ -11,10 +11,13 @@ import Comment from './Comment';
 function Post({ post, currentUser, toggleModal, userId }) {
   const [toggleLike, setToggleLike] = useState(false);
   const [toggleComment, setToggleComment] = useState(false);
-  console.log(post);
+  const [comments, setComment] = useState([]);
+
+  console.log("POST::::::::", post);
   useEffect(() => {
     console.log("POST");
   }, []);
+
   const handleLike = () => {
     setToggleLike(!toggleLike);
   };
@@ -129,7 +132,10 @@ function Post({ post, currentUser, toggleModal, userId }) {
           <span className="ml-3">
             <CommentIcon onClick={() => handleComment()}/> Comment
           </span>
-          <p className="noOfComments">2 comments</p>
+          {post.comments.length == 0 ?
+            <p className="noOfComments">{post.comments.length} comments</p> : <></>
+          }
+          
           {toggleComment ? 
             <>
             <Comment postId={post._id}/>
