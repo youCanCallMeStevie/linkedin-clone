@@ -67,9 +67,7 @@ function Post({ post, currentUser, toggleModal, userId }) {
                       )
                     } else {
                       return (
-                        post.image.map((image)=>(
-                          <img src={image}></img>
-                        ))
+                        <img src={post.image}></img>
                       )
                     }
                   })()}
