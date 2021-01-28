@@ -31,7 +31,7 @@ const Profile = ({ match }) => {
     selectedExprience: "",
   });
 
-  const { appState } = useContext(AppContext);
+  const { appState, updateCurrentUser } = useContext(AppContext);
   //called when components receive a new prop (for example a new user id)
   useEffect(() => {
     setUpUser();
@@ -39,8 +39,8 @@ const Profile = ({ match }) => {
 
   //called once when component mounts
   useEffect(() => {
+    updateCurrentUser();
     setUpUser();
-    console.log(state);
     handleScroll();
     console.log(appState.currentUser.currentUser);
   }, []);

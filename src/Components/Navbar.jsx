@@ -34,8 +34,8 @@ function NavBar({ history }) {
   useEffect(() => {
     if (appState.isAuth) {
       setCurrentUser(appState.currentUser.currentUser);
-    } 
-  }, [currentUser]);
+    }
+  }, [appState.currentUser]);
 
   // useMemo(() => function, input)
 
