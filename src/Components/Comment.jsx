@@ -36,9 +36,10 @@ class Comment extends React.Component {
     return (
         <>
             <div className="wrapper">
-                <img src='http://placehold.it/40x40' />
+                <img src={this.props.image} />
                 <input 
                     type='text' 
+                    placeholder='Leave a comment'
                     onKeyDown={this.handleKeyDown} 
                     value={this.state.value} 
                     onChange={this.handleChange}/>
