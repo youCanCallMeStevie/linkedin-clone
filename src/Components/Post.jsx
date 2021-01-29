@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import { Row } from "react-bootstrap";
 import "../Styles/Post.css";
 import PublicIcon from "@material-ui/icons/Public";
@@ -11,7 +11,7 @@ import DisplayComment from './DisplayComment';
 import {getAllComments} from '../Lib/fetches/comments'
 import {getUserById} from '../Lib/fetches/users'
 
-function Post({ post, currentUser, toggleModal, userId }) {
+function Post({ post, currentUser, toggleModal, userId, fetchAllPosts }) {
   // const [state, setState] = useState({
   //   comments: []
   // });
@@ -22,7 +22,6 @@ function Post({ post, currentUser, toggleModal, userId }) {
   const [loggedInUser, setLoggedInUser] = useState({});
 
   console.log("POST::::::::", post);
-  console.log("currentUser::::::::::", userId);
   useEffect(() => {
     console.log("POST");
   }, []);
@@ -79,6 +78,7 @@ function Post({ post, currentUser, toggleModal, userId }) {
             {toggleLike && <>{/* <b>{currentUser}</b> likes this */}</>}
           </span>
           <DropdownPost
+            fetchAllPosts={fetchAllPosts}
             toggleModal={toggleModal}
             post={post}
             userId={userId}

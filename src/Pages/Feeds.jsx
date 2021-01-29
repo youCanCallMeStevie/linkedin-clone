@@ -23,7 +23,7 @@ const Feeds = (props, { currentUser }) => {
     posts: [],
     comments: [],
     showModal: false,
-    selectedPost: "",
+    selectedPost: {},
     loading: true,
     error: false,
   });
@@ -50,13 +50,18 @@ const Feeds = (props, { currentUser }) => {
     //   });
     // }, 750);
   };
+  useEffect(() => {
+    fetchAllPosts();
+  }, [showModal]);
 
   const handleModalToggle = async (selectedPost = "") => {
+    console.log("ciao");
     setState({
       ...state,
       selectedPost,
     });
     setShowModal(!showModal);
+
     if (!showModal) {
       fetchAllPosts();
       setState({ selectedPost });
@@ -113,6 +118,7 @@ const Feeds = (props, { currentUser }) => {
                 toggleModal={handleModalToggle}
                 userId={appState.currentUser.currentUser._id}
                 loading={loading}
+                fetchAllPosts={fetchAllPosts}
               />
             </>
           ))}
@@ -128,8 +134,8 @@ const Feeds = (props, { currentUser }) => {
       <PostFeedModal
         showModal={showModal}
         toggleModal={handleModalToggle}
-        selectedPost={selectedPost}
-        user={user}
+        selectedPost={state.selectedPost}
+        user={appState.currentUser.currentUser}
         users={allUsers}
       />
     </Container>
