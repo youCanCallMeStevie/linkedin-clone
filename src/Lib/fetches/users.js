@@ -73,3 +73,40 @@ export const editUser = async (credentials) => {
     console.log(err);
   }
 };
+
+
+export const followUser = async (id) => {
+  try {
+    const res = await axios.post(`${REACT_APP_URI_DEV}/api/users/follow/${id}`);
+    if (res.status == 201) return await res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const unFollowUser = async (id) => {
+  try {
+    const res = await axios.put(`${REACT_APP_URI_DEV}/api/users/unfollow/${id}`);
+    if (res.status == 201) return await res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const likeComment = async (id) => {
+  try {
+    const res = await axios.post(`${REACT_APP_URI_DEV}/api/posts/like/${id}`);
+    if (res.status == 201) return await res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const unLikeComment = async (id) => {
+  try {
+    const res = await axios.put(`${REACT_APP_URI_DEV}/api/posts/unlike/${id}`);
+    if (res.status == 201) return await res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
