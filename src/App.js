@@ -19,8 +19,9 @@ function App() {
       <NavBar />
       <div className="margin-80">
         <Route exact path="/">
-          <Redirect to="/feeds" />
+          <Redirect to="/" />
         </Route>
+        
         <Route exact path="/connections" component={Connections} />
         <Route exact path="/signup" component={SignUp} />
 
