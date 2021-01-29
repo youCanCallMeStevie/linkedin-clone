@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Container, Form, Row, Col, Modal, Button } from "react-bootstrap";
-import { postNewEdu, editEdu, deleteEdu } from "../Lib/fetches/education";
+import {
+  postNewEdu,
+  editEdu,
+  deleteEdu,
+  uploadPicture,
+} from "../Lib/fetches/education";
 import PhotoSizeSelectActualOutlinedIcon from "@material-ui/icons/PhotoSizeSelectActualOutlined";
 import AddIcon from "@material-ui/icons/Add";
-
+import { toBase64 } from "../utils";
 const EducationModal = ({
-toggleEduModal,
+  toggleEduModal,
   showModal,
   userId,
   selectedEducation,
@@ -25,16 +30,17 @@ toggleEduModal,
     selectedEducation: "",
     image: "",
   });
+  const [postImage, setPostImage] = useState("");
 
   useEffect(() => {
     console.log("selectedEducation", selectedEducation);
     if (selectedEducation || selectedEducation !== []) {
-    //   delete selectedEducation.__v;
+      delete selectedEducation.__v;
       setState({ education: selectedEducation });
     }
   }, [selectedEducation]);
 
-  const updateEdu = event => {
+  const updateEdu = (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -43,18 +49,20 @@ toggleEduModal,
       setState({ validated: true });
     }
   };
-  const handleChangeImage = e => {
-    console.log(e.target.files[0]);
-    setState({ image: e.target.files[0] });
+
+  const handleChangeImage = async (e) => {
+    await setPostImage(e.target.files[0]);
+    let encodedImage = await toBase64(e.target.files[0]);
+    // setImageThumb(encodedImage);
   };
-  const handleChange = e => {
+
+  const handleChange = (e) => {
     let newEducation = { ...state.education };
     newEducation[e.target.name] = e.target.value;
     setState({ education: newEducation });
-    console.log(state.education);
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault(e);
     let res = "";
     let message = "There was an error with your submission";
@@ -65,18 +73,24 @@ toggleEduModal,
       console.log(selectedEducation);
       res = await editEdu(state.education._id, state.education);
       message = "Your education has been edited";
+      console.log("res", res.educationToEdit._id);
     }
-    alert(message);
-    setState({ image: "" });
-    toggleEduModal();
+    if (res) {
+      const photoData = res.data._id;
+      if (postImage != "") {
+        console.log("postImage 2", postImage);
+        const imageSent = await uploadPicture(photoData, postImage);
+      }
+      alert(message);
+      toggleEduModal();
+    }
   };
 
   const handleDelete = async () => {
     console.log("clicke");
     try {
       const res = await deleteEdu(state.education._id);
-      console.log("deleted");
-      if (res.ok) {
+      if (res === 201) {
         alert("Education deleted");
         toggleEduModal("");
       }
@@ -92,7 +106,7 @@ toggleEduModal,
       backdrop="static"
       keyboard={false}
     >
-      <Form onSubmit={e => handleSubmit(e)}>
+      <Form onSubmit={(e) => handleSubmit(e)}>
         <Modal.Header closeButton>
           <Modal.Title>
             {selectedEducation !== "" ? "Edit Education" : "Add Education"}
@@ -107,22 +121,22 @@ toggleEduModal,
               placeholder="Ex: Harvard University"
               name="school"
               value={state.education && state.education.school}
-              onChange={e => {
+              onChange={(e) => {
                 handleChange(e);
               }}
             />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
-       
+
           <Form.Text className="text-muted">Degree *</Form.Text>
           <Form.Group>
             <Form.Control
               required
               type="text"
               placeholder="Ex: Master's Degree"
-              name="company"
+              name="degree"
               value={state.education && state.education.degree}
-              onChange={e => {
+              onChange={(e) => {
                 handleChange(e);
               }}
             />
@@ -136,15 +150,9 @@ toggleEduModal,
               placeholder="Ex: Art History"
               name="fieldOfStudy"
               value={state.education && state.education.fieldOfStudy}
-              onChange={e => {
+              onChange={(e) => {
                 handleChange(e);
               }}
-            />
-          </Form.Group>
-          <Form.Group>
-            <Form.Check
-              type="checkbox"
-              label="I am currently working in this role"
             />
           </Form.Group>
           <Row>
@@ -155,11 +163,8 @@ toggleEduModal,
                 <Form.Control
                   type="number"
                   name="startYear"
-                  value={
-                    state.education &&
-                    state.education.startYear
-                  }
-                  onChange={e => {
+                  value={state.education && state.education.startYear}
+                  onChange={(e) => {
                     handleChange(e);
                   }}
                   required
@@ -168,17 +173,16 @@ toggleEduModal,
             </Col>
 
             <Col>
-              <Form.Text className="text-muted">End Date / Expected End Date (YYYY) * </Form.Text>
+              <Form.Text className="text-muted">
+                End Date / Expected End Date (YYYY) *{" "}
+              </Form.Text>
 
               <Form.Group>
                 <Form.Control
                   type="number"
                   name="endYear"
-                  value={
-                    state.education &&
-                    state.education.endYear 
-                  }
-                  onChange={e => {
+                  value={state.education && state.education.endYear}
+                  onChange={(e) => {
                     handleChange(e);
                   }}
                 />
@@ -186,36 +190,36 @@ toggleEduModal,
             </Col>
           </Row>
           <Row>
-          <Form.Text className="text-muted">Description *</Form.Text>
-          <Form.Group>
-            <Form.Control
-              required
-              type="text"
-              name="description"
-              value={state.education && state.education.description}
-              as="textarea"
-              rows={3}
-              onChange={e => {
-                handleChange(e);
-              }}
-            />
+            <Form.Text className="text-muted">Description *</Form.Text>
+            <Form.Group>
+              <Form.Control
+                required
+                type="text"
+                name="description"
+                value={state.education && state.education.description}
+                as="textarea"
+                rows={3}
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+              />
             </Form.Group>
           </Row>
           <Row>
-          <Form.Text className="text-muted">Activties & Societies</Form.Text>
-          <Form.Group>
-            <Form.Control
-              required
-              type="text"
-              name="activtiesSocieties"
-              value={state.education && state.education.activtiesSocieties}
-              as="textarea"
-              rows={3}
-              onChange={e => {
-                handleChange(e);
-              }}
-            />
-          </Form.Group>
+            <Form.Text className="text-muted">Activties & Societies</Form.Text>
+            <Form.Group>
+              <Form.Control
+                required
+                type="text"
+                name="activtiesSocieties"
+                value={state.education && state.education.activtiesSocieties}
+                as="textarea"
+                rows={3}
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+              />
+            </Form.Group>
           </Row>
           <Row>
             <AddIcon className="ml-3" style={{ color: "blue" }} />{" "}
@@ -226,7 +230,7 @@ toggleEduModal,
               id="image-post"
               type="file"
               className="d-none"
-              onChange={e => handleChangeImage(e)}
+              onChange={(e) => handleChangeImage(e)}
             />
           </Row>
           {/* <Form.File id="uploadFile">

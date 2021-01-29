@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, UPDATE_PROFILE } from "./app-actions";
+import { LOGIN, LOGOUT, UPDATE_PROFILE,SELECT_POST } from "./app-actions";
 
 const appReducer = (state, { type, payload }) => {
   console.log(type);
@@ -19,6 +19,11 @@ const appReducer = (state, { type, payload }) => {
       return {
         ...state,
         currentUser: payload,
+      };
+    case SELECT_POST:
+      return {
+        ...state,
+       selectPost: payload,
       };
     default:
       return state;

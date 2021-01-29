@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Container, Form, Row, Col, Modal, Button } from "react-bootstrap";
-import { postNewExp, editExp, deleteExp } from "../Lib/fetches/experiences";
+import {
+  postNewExp,
+  editExp,
+  deleteExp,
+  uploadPicture,
+} from "../Lib/fetches/experiences";
+import { toBase64 } from "../utils";
 import PhotoSizeSelectActualOutlinedIcon from "@material-ui/icons/PhotoSizeSelectActualOutlined";
 import AddIcon from "@material-ui/icons/Add";
 
@@ -24,6 +30,7 @@ const ExperienceModal = ({
     selectedExprience: "",
     image: "",
   });
+  const [postImage, setPostImage] = useState("");
 
   useEffect(() => {
     console.log("selectedExprience", selectedExprience);
@@ -33,7 +40,7 @@ const ExperienceModal = ({
     }
   }, [selectedExprience]);
 
-  const updateExp = event => {
+  const updateExp = (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -42,18 +49,19 @@ const ExperienceModal = ({
       setState({ validated: true });
     }
   };
-  const handleChangeImage = e => {
-    console.log(e.target.files[0]);
-    setState({ image: e.target.files[0] });
+  const handleChangeImage = async (e) => {
+    await setPostImage(e.target.files[0]);
+    let encodedImage = await toBase64(e.target.files[0]);
+    // setImageThumb(encodedImage);
   };
-  const handleChange = e => {
+
+  const handleChange = (e) => {
     let newExperience = { ...state.experience };
     newExperience[e.target.name] = e.target.value;
     setState({ experience: newExperience });
-    console.log(state.experience);
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault(e);
     let res = "";
     let message = "There was an error with your submission";
@@ -63,33 +71,24 @@ const ExperienceModal = ({
     } else {
       res = await editExp(state.experience._id, state.experience);
       message = "Your Experience has been edited";
+      console.log("postImage 1", postImage);
     }
-    alert(message);
-    setState({ image: "" });
-    toggleExpModal();
+    if (res) {
+      const photoData = res.data._id;
+      if (postImage != "") {
+        console.log("postImage 2", postImage);
+        const imageSent = await uploadPicture(photoData, postImage);
+      }
+      alert(message);
+      toggleExpModal();
+    }
   };
-  // if (res) {
-  // if (res.ok) {
-  //   let exp = await res.json();
-  //   let expId = exp._id;
-  //   if (state.image !== "") {
-  //     let postImage = await postExperienceImage(userId, expId, state.image);
-
-  //     if (postImage == !undefined && postImage.ok)
-  //       console.log("all good with image");
-  //   }
-  // }
-  // alert(message);
-  // setState({ image: "" });
-  // toggleModal();
-  // }
 
   const handleDelete = async () => {
     console.log("clicke");
     try {
       const res = await deleteExp(state.experience._id);
-      console.log("deleted");
-      if (res.ok) {
+      if (res === 201) {
         alert("Experience deleted");
         toggleExpModal("");
       }
@@ -105,7 +104,7 @@ const ExperienceModal = ({
       backdrop="static"
       keyboard={false}
     >
-      <Form onSubmit={e => handleSubmit(e)}>
+      <Form onSubmit={(e) => handleSubmit(e)}>
         <Modal.Header closeButton>
           <Modal.Title>
             {selectedExprience !== "" ? "Edit Experience" : "Add Experience"}
@@ -120,7 +119,7 @@ const ExperienceModal = ({
               placeholder="Ex: Retail Sales Manager"
               name="role"
               value={state.experience && state.experience.role}
-              onChange={e => {
+              onChange={(e) => {
                 handleChange(e);
               }}
             />
@@ -156,7 +155,7 @@ const ExperienceModal = ({
               placeholder="Ex: Microsoft"
               name="company"
               value={state.experience && state.experience.company}
-              onChange={e => {
+              onChange={(e) => {
                 handleChange(e);
               }}
             />
@@ -170,7 +169,7 @@ const ExperienceModal = ({
               placeholder="Ex: London, United Kingdom"
               name="area"
               value={state.experience && state.experience.area}
-              onChange={e => {
+              onChange={(e) => {
                 handleChange(e);
               }}
             />
@@ -194,7 +193,7 @@ const ExperienceModal = ({
                     state.experience.startDate &&
                     state.experience.startDate.toString().slice(0, 10)
                   }
-                  onChange={e => {
+                  onChange={(e) => {
                     handleChange(e);
                   }}
                   required
@@ -214,7 +213,7 @@ const ExperienceModal = ({
                     state.experience.endDate &&
                     state.experience.endDate.toString().slice(0, 10)
                   }
-                  onChange={e => {
+                  onChange={(e) => {
                     handleChange(e);
                   }}
                 />
@@ -230,7 +229,7 @@ const ExperienceModal = ({
               value={state.experience && state.experience.description}
               as="textarea"
               rows={3}
-              onChange={e => {
+              onChange={(e) => {
                 handleChange(e);
               }}
             />
@@ -244,7 +243,7 @@ const ExperienceModal = ({
               id="image-post"
               type="file"
               className="d-none"
-              onChange={e => handleChangeImage(e)}
+              onChange={(e) => handleChangeImage(e)}
             />
           </Row>
           {/* <Form.File id="uploadFile">
