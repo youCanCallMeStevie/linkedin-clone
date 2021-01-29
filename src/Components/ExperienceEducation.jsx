@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Card, Row, Image, Col, Media } from "react-bootstrap";
+import { Card, Row, Image, Col, Container } from "react-bootstrap";
 import {
   List,
   ListItem,
@@ -17,6 +17,7 @@ import { withRouter } from "react-router-dom";
 
 function ExperienceEducation({
   toggleExpModal,
+  toggleSkillModal,
   toggleEduModal,
   experiences,
   education,
@@ -48,7 +49,7 @@ function ExperienceEducation({
 
           <List>
             {experiences &&
-              experiences.map((experience) => (
+              experiences.map(experience => (
                 <>
                   <ListItem>
                     <div>
@@ -82,7 +83,6 @@ function ExperienceEducation({
                     </Col>
                   </ListItem>
                   <Divider />
-
                 </>
               ))}
           </List>
@@ -115,7 +115,7 @@ function ExperienceEducation({
             </Row>
           </Col>
           {education &&
-            education.map((education) => (
+            education.map(education => (
               <>
                 {/* <Divider variant="inset" component="li" /> */}
                 <ListItem>
@@ -180,25 +180,34 @@ function ExperienceEducation({
               </Col>
 
               <Col className="d-flex justify-content-end">
-                {match.params.user == "me" && <AddIcon />}
+                {match.params.user == "me" && (
+                  <AddIcon onClick={() => toggleSkillModal()} />
+                )}
               </Col>
             </Row>
           </Col>
-
+          <Container className = "ml-3">
           <List>
             {skills &&
-              skills.map((skill) => (
+              skills.map(skill => (
                 <>
-                  <ListItem>
-                    <Row>
-                      <div>{skill.text}</div>
-                    </Row>
-                  </ListItem>
-                  <Divider />
+                
 
+                <Row className="justify-content-between edit-info-icon mt-2 mb-2">
+                      <span>{skill.text}</span>
+                      <span>
+                        {match.params.user == "me" && (
+                          <CreateIcon className="mr-4"
+                            onClick={() => toggleSkillModal(skill)}
+                          />
+                        )}
+                      </span>
+                    </Row>
+                  <Divider />
                 </>
               ))}
           </List>
+          </Container>
 
           {/* <List>
             <ListItem>
