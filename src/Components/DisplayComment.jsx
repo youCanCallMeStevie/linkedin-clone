@@ -4,18 +4,20 @@ import {postNewComment} from '../Lib/fetches/comments'
 
 class DisplayComment extends React.Component{
 
-    return(){
-        render(
+    render(){
+        return(
             <>
-            <div className="wrapper">
-                <img src={this.props.img} />
-                <input 
-                    type='text' 
-                    onKeyDown={this.handleKeyDown} 
-                    value={this.props.text} 
-                    onChange={this.handleChange}/>
+            <div className="wrapper d-flex flex-direction-col">
+                <img src='http://placehold.it/40x40' />
+                <p style={{'width': '85%'}}>
+                    {this.props.text}
+                </p>
             </div>
             </>
         );
     }
+    
 }
+
+export default DisplayComment;
+
