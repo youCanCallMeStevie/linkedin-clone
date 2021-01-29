@@ -17,12 +17,12 @@ class Comment extends React.Component {
 
     handleKeyDown = async (event) => {
       if (event.key === 'Enter') {
-        console.log('do validate')
         const comment = {
             ...this.state, 
             postId: this.props.postId
         }
         await postNewComment(comment);
+        await this.setState({text: ''})
       }
     }
 

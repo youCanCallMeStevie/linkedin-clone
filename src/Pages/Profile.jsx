@@ -45,7 +45,7 @@ const Profile = ({ match }) => {
   useEffect(() => {
     setUpUser();
     handleScroll();
-    console.log(appState.currentUser.currentUser);
+    //console.log(appState.currentUser.currentUser);
   }, []);
 
   //function to set up the userand experiences when component load or when routing to new user

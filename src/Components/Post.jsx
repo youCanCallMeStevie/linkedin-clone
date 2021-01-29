@@ -9,6 +9,7 @@ import moment from "moment";
 import Comment from './Comment';
 import DisplayComment from './DisplayComment';
 import {getAllComments} from '../Lib/fetches/comments'
+import {getUserById} from '../Lib/fetches/users'
 
 function Post({ post, currentUser, toggleModal, userId }) {
   // const [state, setState] = useState({
@@ -17,6 +18,7 @@ function Post({ post, currentUser, toggleModal, userId }) {
   const [toggleLike, setToggleLike] = useState(false);
   const [toggleComment, setToggleComment] = useState(false);
   const [comments, setComment] = useState({});
+  const [showComments, setShowComments] = useState(false);
 
   console.log("POST::::::::", post);
   useEffect(() => {
@@ -29,6 +31,9 @@ function Post({ post, currentUser, toggleModal, userId }) {
   const handleComment = () => {
     setToggleComment(!toggleComment);
   };
+  const handleShowComments = () => {
+    setShowComments(!showComments)
+  }
 
   useEffect(() => {
     setComment( comments);
@@ -45,13 +50,15 @@ function Post({ post, currentUser, toggleModal, userId }) {
     return diff;
   };
 
-  //console.log("Comments:::::::::::::::::", comments.comment.length)
+  if(comments.comment)
+    console.log("Comments:::::::::::::::::", comments.comment)
 
-  const showComments = () => {
-    // comments.comment.map(comment => {
-    //   //<DisplayComment img={} text={comment.text}>
-    // })
-  }
+  // const displayComments = async () => {
+  //   await comments.comment.map(comment => {
+  //     <DisplayComment text={comment.text} />
+  //     console.log(comment.text)
+  //   })
+  // }
 
   return (
     <>
@@ -155,8 +162,14 @@ function Post({ post, currentUser, toggleModal, userId }) {
           {comments.comment &&
             <>
             {comments.comment.length > 0 ?
-            <p className="noOfComments" onClick={() => showComments()}>{comments.comment.length} comments</p> : <></>
+            <p className="noOfComments" onClick={() => handleShowComments()}>{comments.comment.length} comments</p> : <></>
             }</>
+          }
+          {
+            showComments ? 
+              comments.comment.map(comment => 
+                <DisplayComment text={comment.text} />
+                ) : <></>
           }
           
           {toggleComment ? 

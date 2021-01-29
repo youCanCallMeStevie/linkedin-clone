@@ -12,6 +12,17 @@ export const getAllUsers = async () => {
   }
 };
 
+export const getUserById = async (userId) => {
+  try{
+    const res = await axios.get(`${REACT_APP_URI_DEV}/api/users/${userId}`);
+    console.log(res);
+    if(res.status == 200)
+      return await res.data;
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 export const getCurrentUser = async () => {
   try {
     const res = await authAxios.get(`${REACT_APP_URI_DEV}/api/users/me`);
