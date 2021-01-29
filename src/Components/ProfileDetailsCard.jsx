@@ -64,6 +64,11 @@ function ProfileDetailsCard({
           <span className="blue-primary-color font-weight-bold">
             Contact Info
           </span>
+          <div>
+          <span className="blue-primary-color font-weight-bold">
+      <a href="https://www.sejda.com/html-to-pdf?save-link">Save to PDF</a>
+      </span>
+          </div>
         </div>
         {match.params.user == "me" && (
           <DottedBox
