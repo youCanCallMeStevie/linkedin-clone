@@ -36,6 +36,7 @@ const Profile = ({ match }) => {
   });
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [imageUpdate, setImageUpdate] = useState(false);
+  const [currentUserPage, setCurrentUserPage] = useState("");
 
   // const [selectedExprience, setSelectedExprience] = useState({})
 
@@ -65,10 +66,13 @@ const Profile = ({ match }) => {
       const users = await fetchAllUsers();
       if (param === "me") {
         await updateCurrentUser();
+        await setCurrentUserPage(param);
         setState({ ...state, user: appState.currentUser.currentUser });
-        console.log("user", appState.currentUser.currentUser);
+        console.log("currentUser", currentUserPage);
       } else {
         const user = await getCurrentProfile(param);
+        setCurrentUserPage(param);
+        console.log("currentUser", currentUserPage);
         {
           setState({ ...state, user: user.user });
         }
@@ -172,6 +176,7 @@ const Profile = ({ match }) => {
           <ProfileDetailsCard
             user={user}
             users={users}
+            currentUserPage={currentUserPage}
             handleChangeImage={handleChangeImage}
             toggleProfileModal={toggleProfileModal}
             setUpUser={setState}

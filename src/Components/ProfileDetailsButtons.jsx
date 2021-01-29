@@ -4,8 +4,10 @@ import "../Styles/ProfileDetailsButtons.css";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import CreateTwoToneIcon from "@material-ui/icons/CreateTwoTone";
+import { withRouter } from "react-router-dom";
 
-function ProfileDetailsButtons({ toggleProfileModal }) {
+function ProfileDetailsButtons({ toggleProfileModal, match }) {
+  console.log(match);
   return (
     <div className="profileDetailsButtons">
       <Button variant="primary">
@@ -14,11 +16,13 @@ function ProfileDetailsButtons({ toggleProfileModal }) {
       <Button variant="trasparent-grey">
         More <MoreHorizIcon />
       </Button>
-      <span className="pen">
-        <CreateTwoToneIcon onClick={() => toggleProfileModal()} />
-      </span>
+      {match.params.user == "me" && (
+        <span className="pen">
+          <CreateTwoToneIcon onClick={() => toggleProfileModal()} />
+        </span>
+      )}
     </div>
   );
 }
 
-export default ProfileDetailsButtons;
+export default withRouter(ProfileDetailsButtons);

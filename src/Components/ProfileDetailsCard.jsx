@@ -5,7 +5,7 @@ import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import ProfileDetailsButtons from "./ProfileDetailsButtons";
 import DottedBox from "./DottedBox";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import AppContext from "../Context/app-context";
 
 function ProfileDetailsCard({
@@ -13,7 +13,9 @@ function ProfileDetailsCard({
   users,
   handleChangeImage,
   toggleProfileModal,
+  currentUserPage,
   setUpUser,
+  match,
 }) {
   const { appState, updateCurrentUser } = useContext(AppContext);
 
@@ -21,6 +23,9 @@ function ProfileDetailsCard({
   useEffect(() => {
     setImage(user.image);
   }, [user, handleChangeImage, appState]);
+  useEffect(() => {
+    console.log("current user", currentUserPage);
+  }, []);
 
   return (
     <Row className="profileDetails_card">
@@ -56,21 +61,21 @@ function ProfileDetailsCard({
               </span>
             </Link>
           </h6>
-          <span
-            className="blue-primary-color font-weight-bold"
-            onClick={() => toggleProfileModal()}
-          >
+          <span className="blue-primary-color font-weight-bold">
             Contact Info
           </span>
         </div>
-        <DottedBox
-          textBold="Show recruiters you're open to work"
-          text="- you control who sees this"
-          linkText="Get Started"
-        />
+        {match.params.user == "me" && (
+          <DottedBox
+            textBold="Show recruiters you're open to work"
+            text="- you control who sees this"
+            linkText="Get Started"
+            currentUserPage={currentUserPage}
+          />
+        )}
       </div>
     </Row>
   );
 }
 
-export default ProfileDetailsCard;
+export default withRouter(ProfileDetailsCard);

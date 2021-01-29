@@ -13,17 +13,19 @@ import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import CreateIcon from "@material-ui/icons/Create";
 import "../Styles/ExperienceEducation.css";
 import moment from "moment";
+import { withRouter } from "react-router-dom";
 
-export default function ExperienceEducation({
+function ExperienceEducation({
   toggleExpModal,
   toggleEduModal,
   experiences,
   education,
   skills,
+  match,
 }) {
   console.log("education", education);
   console.log("experiences", experiences);
-  console.log("skills", skills)
+  console.log("skills", skills);
   // const [show, setShow] = useState(false);
   return (
     <div className="mt-3">
@@ -36,16 +38,17 @@ export default function ExperienceEducation({
                   Experience
                 </Card.Title>
               </Col>
-
-              <Col className="d-flex justify-content-end">
-                <AddIcon onClick={() => toggleExpModal()} />
-              </Col>
+              {match.params.user == "me" && (
+                <Col className="d-flex justify-content-end">
+                  <AddIcon onClick={() => toggleExpModal()} />
+                </Col>
+              )}
             </Row>
           </Col>
 
           <List>
             {experiences &&
-              experiences.map(experience => (
+              experiences.map((experience) => (
                 <>
                   <Divider variant="inset" component="li" />
                   <ListItem>
@@ -60,7 +63,11 @@ export default function ExperienceEducation({
                       <Row className="justify-content-between edit-info-icon">
                         <Typography variant="h5">{experience.role}</Typography>
                         <span>
-                          <CreateIcon onClick={() => toggleExpModal(experience)} />
+                          {match.params.user == "me" && (
+                            <CreateIcon
+                              onClick={() => toggleExpModal(experience)}
+                            />
+                          )}
                         </span>
                       </Row>
                       <Row>
@@ -100,12 +107,14 @@ export default function ExperienceEducation({
               </Col>
 
               <Col className="d-flex justify-content-end">
-              <AddIcon onClick={() => toggleEduModal()} />
+                {match.params.user == "me" && (
+                  <AddIcon onClick={() => toggleEduModal()} />
+                )}
               </Col>
             </Row>
           </Col>
           {education &&
-            education.map(education => (
+            education.map((education) => (
               <>
                 <Divider variant="inset" component="li" />
                 <ListItem>
@@ -120,7 +129,11 @@ export default function ExperienceEducation({
                     <Row className="justify-content-between edit-info-icon">
                       <Typography variant="h5">{education.school}</Typography>
                       <span>
-                      <CreateIcon onClick={() => toggleEduModal(education)} />
+                        {match.params.user == "me" && (
+                          <CreateIcon
+                            onClick={() => toggleEduModal(education)}
+                          />
+                        )}
                       </span>
                     </Row>
                     <Row>
@@ -165,19 +178,19 @@ export default function ExperienceEducation({
               </Col>
 
               <Col className="d-flex justify-content-end">
-                <AddIcon />
+                {match.params.user == "me" && <AddIcon />}
               </Col>
             </Row>
           </Col>
 
           <List>
             {skills &&
-              skills.map(skill => (
+              skills.map((skill) => (
                 <>
                   <Divider variant="inset" component="li" />
                   <ListItem>
                     <Row>
-                     <div>{skill.text}</div> 
+                      <div>{skill.text}</div>
                     </Row>
                   </ListItem>
                 </>
@@ -270,3 +283,4 @@ export default function ExperienceEducation({
     </div>
   );
 }
+export default withRouter(ExperienceEducation);
