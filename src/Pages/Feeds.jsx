@@ -28,11 +28,12 @@ const Feeds = (props, { currentUser }) => {
     error: false,
   });
   const [showModal, setShowModal] = useState(false);
-  const { appState } = useContext(AppContext);
+  const { appState, updateCurrentUser } = useContext(AppContext);
 
   useEffect(() => {
     setState({ ...state, user: appState.currentUser.currentUser });
     fetchAllPosts();
+    updateCurrentUser();
   }, []);
 
   useEffect(() => {
@@ -138,6 +139,7 @@ const Feeds = (props, { currentUser }) => {
         selectedPost={state.selectedPost}
         user={appState.currentUser.currentUser}
         users={allUsers}
+        fetchAllPosts={fetchAllPosts}
       />
     </Container>
   );

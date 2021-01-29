@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useMemo } from "react";
 import { Row } from "react-bootstrap";
 import "../Styles/Post.css";
 import PublicIcon from "@material-ui/icons/Public";
@@ -35,9 +35,13 @@ function Post({
   const [comments, setComment] = useState({});
   const [showComments, setShowComments] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState({});
+  const [username, setUsername] = useState("");
+  const [displayComment, setDisplayComments] = useState(false);
 
   useEffect(() => {
     isFollower();
+    isLiked();
+    console.log("like length", post.likes.length);
   }, [post]);
 
   const isFollower = async () => {
@@ -46,13 +50,25 @@ function Post({
     );
     setToggleFollow(toggle);
   };
+  const isLiked = async () => {
+    const toggle = currentUser.liked.some((liked) => liked == post._id);
+    setToggleLike(toggle);
+    if (toggle) {
+      setUsername(currentUser.username);
+    }
+    if (post.likes.length > -1) {
+      setDisplayComments(true);
+    }
+  };
 
   const handleLike = async () => {
     setToggleLike(!toggleLike);
     if (toggleLike) {
       await unLikeComment(post._id);
+      setUsername("");
     } else {
       await likeComment(post._id);
+      setUsername(currentUser.username);
     }
   };
 
@@ -246,6 +262,19 @@ function Post({
                 <></>
               )}
             </>
+          )}
+          {displayComment ? (
+            <div className="d-block">
+              People who liked this post:  {"  "}
+              {username}
+              {post.likes
+                .slice(0, 2)
+                .filter((like) => like != currentUser.username)
+                .map((like) => ` ${like}`)
+                .join(",")}{" "}
+            </div>
+          ) : (
+            ""
           )}
         </Row>
       </Row>
