@@ -207,33 +207,29 @@ function Post({
           </span>
           {comments.comment && (
             <>
-              {comments.comment.length > 0 ? (
-                <p
-                  className="noOfComments"
-                  onClick={() => handleShowComments(comments.comment._id)}
-                >
-                  {comments.comment.length} comments
-                </p>
-              ) : (
-                <></>
-              )}
-            </>
-          )}
-          {showComments ? (
-            comments.comment.map(comment => (
-              <DisplayComment text={comment.text} image={comment} />
-            ))
-          ) : (
-            <></>
-          )}
 
-          {toggleComment ? (
+            {comments.comment.length > 0 ?
+            <p className="noOfComments" onClick={() => handleShowComments(comments.comment._id)}>
+              {comments.comment.length} comments
+            </p> : <></>
+            }</>
+          }
+          {toggleComment ? 
+
             <>
               <Comment postId={post._id} image={loggedInUser.image} />
             </>
           ) : (
             <></>
-          )}
+
+          }
+          {
+            showComments ? 
+              comments.comment.map(comment => 
+                  <DisplayComment text={comment.text} image={comment}/>
+                ) : <></>
+          }
+
         </Row>
       </Row>
     </>

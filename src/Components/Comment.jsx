@@ -8,7 +8,8 @@ class Comment extends React.Component {
         super(props);
         this.state = {
             text: '',
-            postId: ''
+            postId: '',
+            disabled: ''
         };
         this.handleChange = this.handleChange.bind(this);
         console.log("super props:::::::", props)
@@ -18,11 +19,11 @@ class Comment extends React.Component {
     handleKeyDown = async (event) => {
       if (event.key === 'Enter') {
         const comment = {
-            ...this.state, 
+            text: this.state.text, 
             postId: this.props.postId
         }
         await postNewComment(comment);
-        await this.setState({text: ''})
+        await this.setState({text: '', disabled: 'disabled'})
       }
     }
 
@@ -38,6 +39,7 @@ class Comment extends React.Component {
             <div className="wrapper">
                 <img src={this.props.image} />
                 <input 
+                    disabled={this.state.disabled}
                     type='text' 
                     placeholder='Leave a comment'
                     onKeyDown={this.handleKeyDown} 
