@@ -14,7 +14,7 @@ export const getAllUsers = async () => {
 
 export const getUserById = async (userId) => {
   try{
-    const res = await axios.get(`${REACT_APP_URI_DEV}/api/users/${userId}`);
+    const res = await axios.get(`${REACT_APP_URI_DEV}/api/users/user/${userId}`);
     console.log(res);
     if(res.status == 200)
       return await res.data;

@@ -19,8 +19,10 @@ function Post({ post, currentUser, toggleModal, userId }) {
   const [toggleComment, setToggleComment] = useState(false);
   const [comments, setComment] = useState({});
   const [showComments, setShowComments] = useState(false);
+  const [loggedInUser, setLoggedInUser] = useState({});
 
   console.log("POST::::::::", post);
+  console.log("currentUser::::::::::", userId);
   useEffect(() => {
     console.log("POST");
   }, []);
@@ -28,11 +30,13 @@ function Post({ post, currentUser, toggleModal, userId }) {
   const handleLike = () => {
     setToggleLike(!toggleLike);
   };
-  const handleComment = () => {
+  const handleComment = async() => {
     setToggleComment(!toggleComment);
+    await fetchLoggedInUser();
   };
-  const handleShowComments = () => {
-    setShowComments(!showComments)
+  const handleShowComments = (id) => {
+    setShowComments(!showComments);
+    //fetchCommentAuthor(id)
   }
 
   useEffect(() => {
@@ -43,6 +47,12 @@ function Post({ post, currentUser, toggleModal, userId }) {
   const fetchAllComments = async(postId) => {
     const comments = await getAllComments(postId);
     setComment(comments)
+  }
+
+  const fetchLoggedInUser = async() => {
+    const user = await getUserById(userId);
+    await setLoggedInUser(user);
+    console.log("logedin user:::::::::", user)
   }
 
   const differenceDays = (date) => {
@@ -162,19 +172,21 @@ function Post({ post, currentUser, toggleModal, userId }) {
           {comments.comment &&
             <>
             {comments.comment.length > 0 ?
-            <p className="noOfComments" onClick={() => handleShowComments()}>{comments.comment.length} comments</p> : <></>
+            <p className="noOfComments" onClick={() => handleShowComments(comments.comment._id)}>
+              {comments.comment.length} comments
+            </p> : <></>
             }</>
           }
           {
             showComments ? 
               comments.comment.map(comment => 
-                <DisplayComment text={comment.text} />
+                  <DisplayComment text={comment.text} image={comment}/>
                 ) : <></>
           }
           
           {toggleComment ? 
             <>
-            <Comment postId={post._id}/>
+            <Comment postId={post._id} image={loggedInUser.image}/>
             </>
             : 
             <></>
