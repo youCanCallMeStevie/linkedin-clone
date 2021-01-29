@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useMemo, useContext } from "react";
 import { Container, Col, Row, Button } from "react-bootstrap";
 import "../Styles/ProfileDetailsCard.css";
 import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
@@ -6,6 +6,7 @@ import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import ProfileDetailsButtons from "./ProfileDetailsButtons";
 import DottedBox from "./DottedBox";
 import { Link } from "react-router-dom";
+import AppContext from "../Context/app-context";
 
 function ProfileDetailsCard({
   user,
@@ -14,13 +15,20 @@ function ProfileDetailsCard({
   toggleProfileModal,
   setUpUser,
 }) {
+  const { appState, updateCurrentUser } = useContext(AppContext);
+
+  const [image, setImage] = useState("");
+  useEffect(() => {
+    setImage(user.image);
+  }, [user, handleChangeImage, appState]);
+
   return (
     <Row className="profileDetails_card">
       <div className="profileDetails_card__profile-bgr">
         <PhotoCameraIcon />
         <div className="profileDetails_card__profile-img">
           <label for="file-input">
-            <img className="" src={user?.image} />
+            <img className="" src={appState.currentUser.currentUser.image} />
           </label>
         </div>
         <input
@@ -28,7 +36,7 @@ function ProfileDetailsCard({
           type="file"
           className="d-none"
           onChange={async (e) => {
-            await handleChangeImage(e);
+            handleChangeImage(e);
           }}
         />
       </div>

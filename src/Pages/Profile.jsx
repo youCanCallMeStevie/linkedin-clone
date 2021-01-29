@@ -130,18 +130,25 @@ const Profile = ({ match }) => {
       };
     }
   };
+  function confirmDialog(msg) {
+    return new Promise(function (resolve, reject) {
+      let confirmed = window.confirm(msg);
+
+      return confirmed ? resolve(true) : reject(false);
+    });
+  }
 
   const handleChangeImage = async (e) => {
     await updateCurrentUser();
     await setUpUser();
     setImageUpdate(!imageUpdate);
-    const image = await confirm(
+    const confirm = await confirmDialog(
       "Are you sure you want to submit change your profile Image?"
     );
-    if (image) {
-      await uploadProfilePicture(e.target.files[0]);
-      await updateUser();
+    if (confirm) {
+      const imageSent = await uploadProfilePicture(e.target.files[0]);
     }
+    await updateUser();
   };
 
   const {
