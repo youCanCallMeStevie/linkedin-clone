@@ -20,9 +20,7 @@ function ProfileDetailsCard({
   const { appState, updateCurrentUser } = useContext(AppContext);
 
   const [image, setImage] = useState("");
-  useEffect(() => {
-    setImage(user.image);
-  }, [user, handleChangeImage, appState]);
+
   useEffect(() => {
     console.log("current user", currentUserPage);
   }, []);
@@ -33,7 +31,14 @@ function ProfileDetailsCard({
         <PhotoCameraIcon />
         <div className="profileDetails_card__profile-img">
           <label for="file-input">
-            <img className="" src={appState.currentUser.currentUser.image} />
+            <img
+              className=""
+              src={
+                match.params.user == "me"
+                  ? appState.currentUser.currentUser.image
+                  : user?.image
+              }
+            />
           </label>
         </div>
         <input

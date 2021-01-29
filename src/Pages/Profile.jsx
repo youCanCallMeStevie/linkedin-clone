@@ -72,7 +72,7 @@ const Profile = ({ match }) => {
       } else {
         const user = await getCurrentProfile(param);
         setCurrentUserPage(param);
-        console.log("currentUser", currentUserPage);
+        console.log("currentUser", param);
         {
           setState({ ...state, user: user.user });
         }
@@ -199,23 +199,27 @@ const Profile = ({ match }) => {
           <Promoted />
         </Col>
       </Row>
-      <ExperienceModal
-        toggleExpModal={handleExpModalToggle}
-        showModal={showExpModal}
-        userId={user?._id}
-        selectedExprience={selectedExprience}
-      />
-      <EducationModal
-        toggleEduModal={handleEduModalToggle}
-        userId={user?._id}
-        showModal={showEduModal}
-        selectedEducation={selectedEducation}
-      />
-      <EditProfileModal
-        toggleProfileModal={toggleProfileModal}
-        showProfileModal={showProfileModal}
-        user={user}
-      />
+      {match.params.user == "me" && (
+        <>
+          <ExperienceModal
+            toggleExpModal={handleExpModalToggle}
+            showModal={showExpModal}
+            userId={user?._id}
+            selectedExprience={selectedExprience}
+          />
+          <EducationModal
+            toggleEduModal={handleEduModalToggle}
+            userId={user?._id}
+            showModal={showEduModal}
+            selectedEducation={selectedEducation}
+          />
+          <EditProfileModal
+            toggleProfileModal={toggleProfileModal}
+            showProfileModal={showProfileModal}
+            user={user}
+          />
+        </>
+      )}
     </Container>
   );
 };

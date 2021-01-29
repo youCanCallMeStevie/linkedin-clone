@@ -74,10 +74,10 @@ export const editUser = async (credentials) => {
   }
 };
 
-
 export const followUser = async (id) => {
   try {
     const res = await axios.post(`${REACT_APP_URI_DEV}/api/users/follow/${id}`);
+    console.log(res);
     if (res.status == 201) return await res.data;
   } catch (err) {
     console.log(err);
@@ -86,12 +86,14 @@ export const followUser = async (id) => {
 
 export const unFollowUser = async (id) => {
   try {
-    const res = await axios.put(`${REACT_APP_URI_DEV}/api/users/unfollow/${id}`);
+    const res = await axios.put(
+      `${REACT_APP_URI_DEV}/api/users/unfollow/${id}`
+    );
     if (res.status == 201) return await res.data;
   } catch (err) {
     console.log(err);
   }
-}
+};
 
 export const likeComment = async (id) => {
   try {
@@ -109,4 +111,4 @@ export const unLikeComment = async (id) => {
   } catch (err) {
     console.log(err);
   }
-}
+};
