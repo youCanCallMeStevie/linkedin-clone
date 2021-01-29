@@ -9,7 +9,7 @@ class Comment extends React.Component {
         this.state = {
             text: '',
             postId: '',
-            disabled: ""
+            disabled: ''
         };
         this.handleChange = this.handleChange.bind(this);
         console.log("super props:::::::", props)
@@ -19,7 +19,7 @@ class Comment extends React.Component {
     handleKeyDown = async (event) => {
       if (event.key === 'Enter') {
         const comment = {
-            ...this.state, 
+            text: this.state.text, 
             postId: this.props.postId
         }
         await postNewComment(comment);
