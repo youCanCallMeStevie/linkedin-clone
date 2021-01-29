@@ -1,36 +1,131 @@
-import React, { useEffect, useState,useContext } from "react";
+import React, { useEffect, useState, useContext, useMemo } from "react";
 import { Row } from "react-bootstrap";
 import "../Styles/Post.css";
 import PublicIcon from "@material-ui/icons/Public";
 import AddIcon from "@material-ui/icons/Add";
+import RemoveIcon from "@material-ui/icons/Remove";
 import DropdownPost from "./DropdownPost";
 import CommentIcon from "@material-ui/icons/Comment";
 import moment from "moment";
 import Comment from "./Comment";
+import DisplayComment from "./DisplayComment";
+import { getAllComments } from "../Lib/fetches/comments";
+import {
+  getUserById,
+  followUser,
+  unFollowUser,
+  likeComment,
+  unLikeComment,
+} from "../Lib/fetches/users";
 
-function Post({ post, currentUser, toggleModal, userId,fetchAllPosts }) {
+function Post({
+  post,
+  currentUser,
+  toggleModal,
+  userId,
+  fetchAllPosts,
+  userDetails,
+}) {
+  // const [state, setState] = useState({
+  //   comments: []
+  // });
   const [toggleLike, setToggleLike] = useState(false);
+  const [toggleFollow, setToggleFollow] = useState(false);
   const [toggleComment, setToggleComment] = useState(false);
-
-  const [comments, setComment] = useState([]);
-
-  console.log("POST::::::::", post);
+  const [comments, setComment] = useState({});
+  const [showComments, setShowComments] = useState(false);
+  const [loggedInUser, setLoggedInUser] = useState({});
+  const [username, setUsername] = useState("");
+  const [displayComment, setDisplayComments] = useState(false);
 
   useEffect(() => {
-    console.log("POST");
+    isFollower();
+    isLiked();
+    console.log("like length", post.likes.length);
+  }, [post]);
+
+  const isFollower = async () => {
+    const toggle = currentUser.following.some(
+      (following) => following._id == post.userId._id
+    );
+    setToggleFollow(toggle);
+  };
+  const isLiked = async () => {
+    const toggle = currentUser.liked.some((liked) => liked == post._id);
+    setToggleLike(toggle);
+    if (toggle) {
+      setUsername(currentUser.username);
+    }
+    if (post.likes.length > -1) {
+      setDisplayComments(true);
+    }
+  };
+
+  const handleLike = async () => {
+    setToggleLike(!toggleLike);
+    if (toggleLike) {
+      await unLikeComment(post._id);
+      setUsername("");
+    } else {
+      await likeComment(post._id);
+      setUsername(currentUser.username);
+    }
+  };
+
+  const handleFollow = async () => {
+    setToggleFollow(!toggleFollow);
+    if (toggleFollow) {
+      await unFollowUser(post.userId._id);
+    } else {
+      await followUser(post.userId._id);
+    }
+  };
+
+  const handleComment = async () => {
+    setToggleComment(!toggleComment);
+    await fetchLoggedInUser();
+  };
+  const handleShowComments = (id) => {
+    setShowComments(!showComments);
+    //fetchCommentAuthor(id)
+  };
+
+  useEffect(() => {
+    setComment(comments);
+    fetchAllComments(post._id);
   }, []);
 
-  const handleLike = () => {
-    setToggleLike(!toggleLike);
+  const fetchAllComments = async (postId) => {
+    const comments = await getAllComments(postId);
+    setComment(comments);
   };
-  const handleComment = () => {
-    setToggleComment(!toggleComment);
+
+  // const fetchUsersFollowers = async() => {
+  //   const user = await getUserById(userId)
+  //   await setFollowingUser(user.following._id)
+
+  // }
+
+  const fetchLoggedInUser = async () => {
+    const user = await getUserById(userId);
+    await setLoggedInUser(user);
+    console.log("logedin user:::::::::", user);
   };
 
   const differenceDays = (date) => {
     const diff = moment(post.updatedAt).fromNow(); // another date
     return diff;
   };
+
+  if (comments.comment)
+    console.log("Comments:::::::::::::::::", comments.comment);
+
+  // const displayComments = async () => {
+  //   await comments.comment.map(comment => {
+  //     <DisplayComment text={comment.text} />
+  //     console.log(comment.text)
+  //   })
+  // }
 
   return (
     <>
@@ -63,9 +158,17 @@ function Post({ post, currentUser, toggleModal, userId,fetchAllPosts }) {
           </div>
 
           <div className="post__follow d-flex align-items-center px-2 blue-primary-color font-weight-bold">
-            <span>
-              <AddIcon /> Follow
-            </span>
+            <>
+              {toggleFollow ? (
+                <span>
+                  <RemoveIcon onClick={() => handleFollow()} /> Unfollow
+                </span>
+              ) : (
+                <span>
+                  <AddIcon onClick={() => handleFollow()} /> Follow
+                </span>
+              )}
+            </>
           </div>
         </Row>
         <Row className="d-flex flex-column align-items-start post__text mt-4">
@@ -131,17 +234,48 @@ function Post({ post, currentUser, toggleModal, userId,fetchAllPosts }) {
           <span className="ml-3">
             <CommentIcon onClick={() => handleComment()} /> Comment
           </span>
-          {post.comments.length == 0 ?
-            <p className="noOfComments">{post.comments.length} comments</p> : <></>
-          }
-          
-          {toggleComment ? 
+          {comments.comment && (
             <>
-            <Comment postId={post._id}/>
+              {comments.comment.length > 0 ? (
+                <p
+                  className="noOfComments"
+                  onClick={() => handleShowComments(comments.comment._id)}
+                >
+                  {comments.comment.length} comments
+                </p>
+              ) : (
+                <></>
+              )}
+
+              {toggleComment ? (
+                <>
+                  <Comment postId={post._id} image={loggedInUser.image} />
+                </>
+              ) : (
+                <></>
+              )}
+              {showComments ? (
+                comments.comment.map((comment) => (
+                  <DisplayComment text={comment.text} image={comment} />
+                ))
+              ) : (
+                <></>
+              )}
             </>
-            : 
-            <></>
-          }
+          )}
+          {displayComment ? (
+            <div className="d-block">
+              People who liked this post:  {"  "}
+              {username}
+              {post.likes
+                .slice(0, 2)
+                .filter((like) => like != currentUser.username)
+                .map((like) => ` ${like}`)
+                .join(",")}{" "}
+            </div>
+          ) : (
+            ""
+          )}
         </Row>
       </Row>
     </>

@@ -19,3 +19,4 @@ class DisplayComment extends React.Component{
         );
     }
 }
+export default DisplayComment
