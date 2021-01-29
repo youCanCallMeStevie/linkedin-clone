@@ -30,6 +30,7 @@
 
 .people-card-container .MuiListItem-root img.avatar-image {
   width: 75px !important;
+  height: 75px !important;
   object-fit: contain;
 }
 
