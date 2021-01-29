@@ -50,7 +50,6 @@ function ExperienceEducation({
             {experiences &&
               experiences.map((experience) => (
                 <>
-                  <Divider variant="inset" component="li" />
                   <ListItem>
                     <div>
                       <Image
@@ -82,6 +81,8 @@ function ExperienceEducation({
                       </Row>
                     </Col>
                   </ListItem>
+                  <Divider />
+
                 </>
               ))}
           </List>
@@ -116,7 +117,7 @@ function ExperienceEducation({
           {education &&
             education.map((education) => (
               <>
-                <Divider variant="inset" component="li" />
+                {/* <Divider variant="inset" component="li" /> */}
                 <ListItem>
                   <div>
                     <Image
@@ -155,6 +156,7 @@ function ExperienceEducation({
                     </Row>
                   </Col>
                 </ListItem>
+                <Divider />
               </>
             ))}
         </Card.Body>
@@ -187,12 +189,13 @@ function ExperienceEducation({
             {skills &&
               skills.map((skill) => (
                 <>
-                  <Divider variant="inset" component="li" />
                   <ListItem>
                     <Row>
                       <div>{skill.text}</div>
                     </Row>
                   </ListItem>
+                  <Divider />
+
                 </>
               ))}
           </List>
