@@ -119,6 +119,7 @@ const Feeds = (props, { currentUser }) => {
                 userId={appState.currentUser.currentUser._id}
                 loading={loading}
                 fetchAllPosts={fetchAllPosts}
+                userDetails={appState.currentUser.currentUser}
               />
             </>
           ))}
