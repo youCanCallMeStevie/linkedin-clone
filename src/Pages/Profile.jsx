@@ -21,7 +21,8 @@ import PostFeedModal from "../Components/PostFeedModal";
 import Dashboard from "../Components/Dashboard";
 import Activitycard from "../Components/Activity";
 import AppContext from "../Context/app-context";
-import { getCurrentProfile,uploadProfilePicture } from "../Lib/fetches/users";
+import { getCurrentProfile, uploadProfilePicture } from "../Lib/fetches/users";
+import EditProfileModal from "../Components/EditProfileModal";
 
 const Profile = ({ match }) => {
   const [state, setState] = useState({
@@ -33,6 +34,8 @@ const Profile = ({ match }) => {
     selectedExprience: {},
     selectedEducation: {},
   });
+  const [showProfileModal, setShowProfileModal] = useState(false);
+  const [imageUpdate, setImageUpdate] = useState(false);
 
   // const [selectedExprience, setSelectedExprience] = useState({})
 
@@ -40,7 +43,7 @@ const Profile = ({ match }) => {
   //called when components receive a new prop (for example a new user id)
   useEffect(() => {
     setUpUser();
-  }, [match.params.user, state.showExpModal, state.showEduModal]);
+  }, [match.params.user, showProfileModal]);
 
   //called once when component mounts
   useEffect(() => {
@@ -48,6 +51,11 @@ const Profile = ({ match }) => {
     handleScroll();
     //console.log(appState.currentUser.currentUser);
   }, []);
+
+  useEffect(() => {
+    updateUser();
+    console.log("update");
+  }, [state.showEduModal, state.showExpModal, imageUpdate]);
 
   //function to set up the userand experiences when component load or when routing to new user
   const setUpUser = async () => {
@@ -70,8 +78,15 @@ const Profile = ({ match }) => {
     }
   };
 
+  const updateUser = async () => {
+    await updateCurrentUser();
+    setState({ ...state, user: appState.currentUser.currentUser });
+  };
+
   //function to toggle the experience modal
   const handleExpModalToggle = async (experience = "") => {
+    await updateCurrentUser();
+    await setUpUser();
     setState({
       ...state,
       showExpModal: !state.showExpModal,
@@ -81,11 +96,19 @@ const Profile = ({ match }) => {
 
   //function to toggle the education modal
   const handleEduModalToggle = async (education = "") => {
+    await updateUser();
+    console.log("updated");
     setState({
       ...state,
       showEduModal: !state.showEduModal,
       selectedEducation: education,
     });
+  };
+
+  //function to toggle the edit profile modal
+  const toggleProfileModal = async () => {
+    await setUpUser();
+    setShowProfileModal(!showProfileModal);
   };
 
   //function to make the top bar appear when scrolling
@@ -109,12 +132,16 @@ const Profile = ({ match }) => {
   };
 
   const handleChangeImage = async (e) => {
-      const imageSent = await uploadProfilePicture(e.target.files[0]);
-      if (imageSent) {
-        if (imageSent.ok) {
-          console.log("success");
-        }
-      }
+    await updateCurrentUser();
+    await setUpUser();
+    setImageUpdate(!imageUpdate);
+    const image = await confirm(
+      "Are you sure you want to submit change your profile Image?"
+    );
+    if (image) {
+      await uploadProfilePicture(e.target.files[0]);
+      await updateUser();
+    }
   };
 
   const {
@@ -139,6 +166,8 @@ const Profile = ({ match }) => {
             user={user}
             users={users}
             handleChangeImage={handleChangeImage}
+            toggleProfileModal={toggleProfileModal}
+            setUpUser={setState}
           />
 
           <AboutCard bio={user?.bio} />
@@ -169,6 +198,11 @@ const Profile = ({ match }) => {
         userId={user?._id}
         showModal={showEduModal}
         selectedEducation={selectedEducation}
+      />
+      <EditProfileModal
+        toggleProfileModal={toggleProfileModal}
+        showProfileModal={showProfileModal}
+        user={user}
       />
     </Container>
   );

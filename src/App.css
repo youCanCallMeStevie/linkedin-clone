@@ -1,23 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 :root {
   --blue-primary: rgb(12, 102, 194);
   --border-color: #e0e0de;
-  --button-grey-text-color: #7F7F7F;
-  --gold-color:rgb(248,198,125)
+  --button-grey-text-color: #7f7f7f;
+  --gold-color: rgb(248, 198, 125);
 }
 
 .App {
   background-color: #f4f2ef;
   min-height: 100vh;
-  font-family: 'Roboto', sans-serif;
-
+  font-family: "Roboto", sans-serif;
 }
 
 /* Utils / Common styles */
 .blue-primary-color {
   color: var(--blue-primary);
 }
-.font-weight-semiBold{
+.font-weight-semiBold {
   font-weight: 500;
 }
 .btn-primary {
@@ -33,13 +32,15 @@
   background-color: transparent;
   color: var(--button-grey-text-color);
   height: 20px;
-  
 }
-.margin-80{
+.margin-80 {
   margin-top: 64px !important;
 }
-@media only screen and (max-width: 1205px) { 
-  .margin-80{
+.modal-content {
+  min-width: fit-content;
+}
+@media only screen and (max-width: 1205px) {
+  .margin-80 {
     margin: 40px !important;
   }
- }
+}
