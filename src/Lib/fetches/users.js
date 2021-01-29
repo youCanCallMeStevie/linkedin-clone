@@ -13,15 +13,14 @@ export const getAllUsers = async () => {
 };
 
 export const getUserById = async (userId) => {
-  try{
-    const res = await axios.get(`${REACT_APP_URI_DEV}/api/users/user/${userId}`);
+  try {
+    const res = await axios.get(`${REACT_APP_URI_DEV}/api/users/${userId}`);
     console.log(res);
-    if(res.status == 200)
-      return await res.data;
+    if (res.status == 200) return await res.data;
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
-}
+};
 
 export const getCurrentUser = async () => {
   try {
@@ -60,6 +59,15 @@ export const uploadProfilePicture = async (picture) => {
       pictureFORM
     );
     console.log(res);
+    if (res.status == 200) return await res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const editUser = async (credentials) => {
+  try {
+    const res = await axios.put(`${REACT_APP_URI_DEV}/api/users`, credentials);
     if (res.status == 200) return await res.data;
   } catch (err) {
     console.log(err);

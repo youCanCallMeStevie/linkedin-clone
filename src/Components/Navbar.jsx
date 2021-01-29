@@ -32,7 +32,7 @@ function NavBar({ history }) {
   const { logoutUser, appState } = useContext(AppContext);
   const [currentUser, setCurrentUser] = useState("");
   useEffect(() => {
-    if (appState.isAuth) {
+    if (appState.isAuth && appState.currentUser) {
       setCurrentUser(appState.currentUser.currentUser);
     }
   }, [appState.currentUser]);

@@ -1,27 +1,48 @@
-import React from "react";
+import React, { useState, useEffect, useMemo, useContext } from "react";
 import { Container, Col, Row, Button } from "react-bootstrap";
 import "../Styles/ProfileDetailsCard.css";
 import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import ProfileDetailsButtons from "./ProfileDetailsButtons";
 import DottedBox from "./DottedBox";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
+import AppContext from "../Context/app-context";
 
-function ProfileDetailsCard({ user,users,handleChangeImage }) {
+function ProfileDetailsCard({
+  user,
+  users,
+  handleChangeImage,
+  toggleProfileModal,
+  setUpUser,
+}) {
+  const { appState, updateCurrentUser } = useContext(AppContext);
+
+  const [image, setImage] = useState("");
+  useEffect(() => {
+    setImage(user.image);
+  }, [user, handleChangeImage, appState]);
+
   return (
     <Row className="profileDetails_card">
       <div className="profileDetails_card__profile-bgr">
         <PhotoCameraIcon />
         <div className="profileDetails_card__profile-img">
-        <label for="file-input">
-          <img className="" src={user?.image} />
+          <label for="file-input">
+            <img className="" src={appState.currentUser.currentUser.image} />
           </label>
         </div>
-        <input id="file-input" type="file" className="d-none" onChange={(e)=>handleChangeImage(e)}/>
+        <input
+          id="file-input"
+          type="file"
+          className="d-none"
+          onChange={async (e) => {
+            handleChangeImage(e);
+          }}
+        />
       </div>
 
       <div className="profileDetails_card__body">
-        <ProfileDetailsButtons />
+        <ProfileDetailsButtons toggleProfileModal={toggleProfileModal} />
         <div className="profileDetails__card-body-details mb-3">
           <h4>
             {user?.name} {user?.surname}
@@ -29,13 +50,16 @@ function ProfileDetailsCard({ user,users,handleChangeImage }) {
           <h5>{user?.title}</h5>
           <h6>
             {user?.area} -{" "}
-          <Link to="/connections">
-            <span className="blue-primary-color font-weight-bold">
-              {users && users.length} Connections
-            </span>
+            <Link to="/connections">
+              <span className="blue-primary-color font-weight-bold">
+                {users && users.length} Connections
+              </span>
             </Link>
           </h6>
-          <span className="blue-primary-color font-weight-bold">
+          <span
+            className="blue-primary-color font-weight-bold"
+            onClick={() => toggleProfileModal()}
+          >
             Contact Info
           </span>
         </div>
