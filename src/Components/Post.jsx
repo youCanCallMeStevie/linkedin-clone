@@ -10,7 +10,13 @@ import moment from "moment";
 import Comment from "./Comment";
 import DisplayComment from "./DisplayComment";
 import { getAllComments } from "../Lib/fetches/comments";
-import { getUserById, followUser, unFollowUser, likeComment, unLikeComment } from "../Lib/fetches/users";
+import {
+  getUserById,
+  followUser,
+  unFollowUser,
+  likeComment,
+  unLikeComment,
+} from "../Lib/fetches/users";
 
 function Post({
   post,
@@ -31,15 +37,22 @@ function Post({
   const [loggedInUser, setLoggedInUser] = useState({});
 
   useEffect(() => {
-    console.log("POST");
-  }, []);
+    isFollower();
+  }, [post]);
+
+  const isFollower = async () => {
+    const toggle = currentUser.following.some(
+      (following) => following._id == post.userId._id
+    );
+    setToggleFollow(toggle);
+  };
 
   const handleLike = async () => {
     setToggleLike(!toggleLike);
-    if (toggleLike){
-      await unLikeComment(post._id)
+    if (toggleLike) {
+      await unLikeComment(post._id);
     } else {
-      await followUser(post._id);
+      await likeComment(post._id);
     }
   };
 
@@ -56,7 +69,7 @@ function Post({
     setToggleComment(!toggleComment);
     await fetchLoggedInUser();
   };
-  const handleShowComments = id => {
+  const handleShowComments = (id) => {
     setShowComments(!showComments);
     //fetchCommentAuthor(id)
   };
@@ -66,7 +79,7 @@ function Post({
     fetchAllComments(post._id);
   }, []);
 
-  const fetchAllComments = async postId => {
+  const fetchAllComments = async (postId) => {
     const comments = await getAllComments(postId);
     setComment(comments);
   };
@@ -83,7 +96,7 @@ function Post({
     console.log("logedin user:::::::::", user);
   };
 
-  const differenceDays = date => {
+  const differenceDays = (date) => {
     const diff = moment(post.updatedAt).fromNow(); // another date
     return diff;
   };
@@ -207,29 +220,33 @@ function Post({
           </span>
           {comments.comment && (
             <>
+              {comments.comment.length > 0 ? (
+                <p
+                  className="noOfComments"
+                  onClick={() => handleShowComments(comments.comment._id)}
+                >
+                  {comments.comment.length} comments
+                </p>
+              ) : (
+                <></>
+              )}
 
-            {comments.comment.length > 0 ?
-            <p className="noOfComments" onClick={() => handleShowComments(comments.comment._id)}>
-              {comments.comment.length} comments
-            </p> : <></>
-            }</>
-          }
-          {toggleComment ? 
-
-            <>
-              <Comment postId={post._id} image={loggedInUser.image} />
+              {toggleComment ? (
+                <>
+                  <Comment postId={post._id} image={loggedInUser.image} />
+                </>
+              ) : (
+                <></>
+              )}
+              {showComments ? (
+                comments.comment.map((comment) => (
+                  <DisplayComment text={comment.text} image={comment} />
+                ))
+              ) : (
+                <></>
+              )}
             </>
-          ) : (
-            <></>
-
-          }
-          {
-            showComments ? 
-              comments.comment.map(comment => 
-                  <DisplayComment text={comment.text} image={comment}/>
-                ) : <></>
-          }
-
+          )}
         </Row>
       </Row>
     </>
