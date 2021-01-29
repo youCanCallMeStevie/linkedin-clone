@@ -17,6 +17,7 @@ import Promoted from "../Components/Promoted";
 import ProfileTopBar from "../Components/ProfileTopBar";
 import ExperienceModal from "../Components/ExperienceModal";
 import EducationModal from "../Components/EducationModal";
+import SkillModal from "../Components/SkillModal";
 import PostFeedModal from "../Components/PostFeedModal";
 import Dashboard from "../Components/Dashboard";
 import Activitycard from "../Components/Activity";
@@ -33,6 +34,7 @@ const Profile = ({ match }) => {
     shoEduModal: false,
     selectedExprience: {},
     selectedEducation: {},
+    selectedSkill:{}
   });
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [imageUpdate, setImageUpdate] = useState(false);
@@ -56,7 +58,7 @@ const Profile = ({ match }) => {
   useEffect(() => {
     updateUser();
     console.log("update");
-  }, [state.showEduModal, state.showExpModal, imageUpdate]);
+  }, [state.showEduModal, state.showExpModal, state.showSkillModal, imageUpdate]);
 
   //function to set up the userand experiences when component load or when routing to new user
   const setUpUser = async () => {
@@ -106,6 +108,17 @@ const Profile = ({ match }) => {
       ...state,
       showEduModal: !state.showEduModal,
       selectedEducation: education,
+    });
+  };
+
+  //function to toggle the skill modal
+  const handleSkillModalToggle = async (skill = "") => {
+    await updateUser();
+    console.log("updated");
+    setState({
+      ...state,
+      showSkillModal: !state.showSkillModal,
+      selectedSkill: skill,
     });
   };
 
@@ -161,9 +174,11 @@ const Profile = ({ match }) => {
     showTopBar,
     showEduModal,
     showExpModal,
+    showSkillModal,
     experiences,
     selectedExprience,
     selectedEducation,
+    selectedSkill,
     education,
     skills,
   } = state;
@@ -188,6 +203,7 @@ const Profile = ({ match }) => {
           <ExperienceEducation
             toggleExpModal={handleExpModalToggle}
             toggleEduModal={handleEduModalToggle}
+            toggleSkillModal={handleSkillModalToggle}
             experiences={user?.experiences}
             education={user?.education}
             skills={user?.skills}
@@ -212,6 +228,12 @@ const Profile = ({ match }) => {
             userId={user?._id}
             showModal={showEduModal}
             selectedEducation={selectedEducation}
+          />
+          <SkillModal
+            toggleSkillModal={handleSkillModalToggle}
+            userId={user?._id}
+            showModal={showSkillModal}
+            selectedSkill={selectedSkill}
           />
           <EditProfileModal
             toggleProfileModal={toggleProfileModal}
