@@ -40,7 +40,7 @@ const EducationModal = ({
     }
   }, [selectedEducation]);
 
-  const updateEdu = (event) => {
+  const updateEdu = event => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -50,19 +50,19 @@ const EducationModal = ({
     }
   };
 
-  const handleChangeImage = async (e) => {
+  const handleChangeImage = async e => {
     await setPostImage(e.target.files[0]);
     let encodedImage = await toBase64(e.target.files[0]);
     // setImageThumb(encodedImage);
   };
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     let newEducation = { ...state.education };
     newEducation[e.target.name] = e.target.value;
     setState({ education: newEducation });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault(e);
     let res = "";
     let message = "There was an error with your submission";
@@ -106,7 +106,7 @@ const EducationModal = ({
       backdrop="static"
       keyboard={false}
     >
-      <Form onSubmit={(e) => handleSubmit(e)}>
+      <Form onSubmit={e => handleSubmit(e)}>
         <Modal.Header closeButton>
           <Modal.Title>
             {selectedEducation !== "" ? "Edit Education" : "Add Education"}
@@ -121,7 +121,7 @@ const EducationModal = ({
               placeholder="Ex: Harvard University"
               name="school"
               value={state.education && state.education.school}
-              onChange={(e) => {
+              onChange={e => {
                 handleChange(e);
               }}
             />
@@ -136,7 +136,7 @@ const EducationModal = ({
               placeholder="Ex: Master's Degree"
               name="degree"
               value={state.education && state.education.degree}
-              onChange={(e) => {
+              onChange={e => {
                 handleChange(e);
               }}
             />
@@ -150,7 +150,7 @@ const EducationModal = ({
               placeholder="Ex: Art History"
               name="fieldOfStudy"
               value={state.education && state.education.fieldOfStudy}
-              onChange={(e) => {
+              onChange={e => {
                 handleChange(e);
               }}
             />
@@ -164,7 +164,7 @@ const EducationModal = ({
                   type="number"
                   name="startYear"
                   value={state.education && state.education.startYear}
-                  onChange={(e) => {
+                  onChange={e => {
                     handleChange(e);
                   }}
                   required
@@ -174,7 +174,7 @@ const EducationModal = ({
 
             <Col>
               <Form.Text className="text-muted">
-                End Date / Expected End Date (YYYY) *{" "}
+                (Expected) End Date (YYYY) *{" "}
               </Form.Text>
 
               <Form.Group>
@@ -182,7 +182,7 @@ const EducationModal = ({
                   type="number"
                   name="endYear"
                   value={state.education && state.education.endYear}
-                  onChange={(e) => {
+                  onChange={e => {
                     handleChange(e);
                   }}
                 />
@@ -190,37 +190,42 @@ const EducationModal = ({
             </Col>
           </Row>
           <Row>
-            <Form.Text className="text-muted">Description *</Form.Text>
-            <Form.Group>
-              <Form.Control
-                required
-                type="text"
-                name="description"
-                value={state.education && state.education.description}
-                as="textarea"
-                rows={3}
-                onChange={(e) => {
-                  handleChange(e);
-                }}
-              />
-            </Form.Group>
+            <Col>
+              <Form.Text className="text-muted">Description *</Form.Text>
+              <Form.Group>
+                <Form.Control
+                  required
+                  type="text"
+                  name="description"
+                  value={state.education && state.education.description}
+                  as="textarea"
+                  rows={3}
+                  onChange={e => {
+                    handleChange(e);
+                  }}
+                />
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Text className="text-muted">
+                Activties & Societies
+              </Form.Text>
+              <Form.Group>
+                <Form.Control
+                  required
+                  type="text"
+                  name="activtiesSocieties"
+                  value={state.education && state.education.activtiesSocieties}
+                  as="textarea"
+                  rows={3}
+                  onChange={e => {
+                    handleChange(e);
+                  }}
+                />
+              </Form.Group>
+            </Col>
           </Row>
-          <Row>
-            <Form.Text className="text-muted">Activties & Societies</Form.Text>
-            <Form.Group>
-              <Form.Control
-                required
-                type="text"
-                name="activtiesSocieties"
-                value={state.education && state.education.activtiesSocieties}
-                as="textarea"
-                rows={3}
-                onChange={(e) => {
-                  handleChange(e);
-                }}
-              />
-            </Form.Group>
-          </Row>
+          <Row></Row>
           <Row>
             <AddIcon className="ml-3" style={{ color: "blue" }} />{" "}
             <label for="image-post">
@@ -230,7 +235,7 @@ const EducationModal = ({
               id="image-post"
               type="file"
               className="d-none"
-              onChange={(e) => handleChangeImage(e)}
+              onChange={e => handleChangeImage(e)}
             />
           </Row>
           {/* <Form.File id="uploadFile">
