@@ -205,7 +205,7 @@ function Post({
           <span className="ml-3">
             <CommentIcon onClick={() => handleComment()} /> Comment
           </span>
-          {comments.comment && (
+          {/* {comments.comment && (
             <>
 
             {comments.comment.length > 0 ?
@@ -228,7 +228,7 @@ function Post({
               comments.comment.map(comment => 
                   <DisplayComment text={comment.text} image={comment}/>
                 ) : <></>
-          }
+          } */}
 
         </Row>
       </Row>
