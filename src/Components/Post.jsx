@@ -177,19 +177,18 @@ function Post({ post, currentUser, toggleModal, userId, fetchAllPosts }) {
             </p> : <></>
             }</>
           }
-          {
-            showComments ? 
-              comments.comment.map(comment => 
-                  <DisplayComment text={comment.text} image={comment}/>
-                ) : <></>
-          }
-          
           {toggleComment ? 
             <>
             <Comment postId={post._id} image={loggedInUser.image}/>
             </>
             : 
             <></>
+          }
+          {
+            showComments ? 
+              comments.comment.map(comment => 
+                  <DisplayComment text={comment.text} image={comment}/>
+                ) : <></>
           }
         </Row>
       </Row>
