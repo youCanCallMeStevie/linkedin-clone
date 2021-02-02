@@ -12,7 +12,7 @@ import { deletePost } from "../Lib/fetches/posts";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import AppContext from "../Context/app-context";
 
-const DropdownPost = ({ toggleModal, post, userId, fetchAllPosts }) => {
+const DropdownComment = ({ toggleModal, post, userId, fetchAllPosts }) => {
   const { selectPost } = useContext(AppContext);
   return (
     <Dropdown className="dropdown-btn">
@@ -45,37 +45,9 @@ const DropdownPost = ({ toggleModal, post, userId, fetchAllPosts }) => {
             </Dropdown.Item>
           </>
         )}
-
-        <Dropdown.Item href="#/action-2">
-          <LinkIcon /> <strong>Copy link to post</strong>{" "}
-        </Dropdown.Item>
-        <Dropdown.Item href="#/action-3">
-          <HighlightOffIcon /> <strong>Unfollow Person Name</strong>
-          <p className="text-muted">
-            Stay connected but stop seing posts from Name Person in feed
-          </p>
-        </Dropdown.Item>
-        <Dropdown.Item href="#/action-4">
-          <VisibilityOffIcon /> <strong>Hide this post</strong>
-          <p className="text-muted">
-            I don't want to see this post in my feed
-          </p>{" "}
-        </Dropdown.Item>
-        <Dropdown.Item href="#/action-5">
-          <FlagIcon /> <strong>Report this post</strong>{" "}
-          <p className="text-muted">
-            This post is offensive or the account is hacked
-          </p>
-        </Dropdown.Item>
-        <Dropdown.Item href="#/action-6">
-          <VisibilityIcon /> <strong>Who can see this post?</strong>
-          <p className="text-muted">
-            Visible to anyone on or off Linkedln
-          </p>{" "}
-        </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   );
 };
 
-export default DropdownPost;
+export default DropdownComment;

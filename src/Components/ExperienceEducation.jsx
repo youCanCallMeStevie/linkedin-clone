@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Card, Row, Image, Col, Media } from "react-bootstrap";
+import { Card, Row, Image, Col, Container } from "react-bootstrap";
 import {
   List,
   ListItem,
@@ -13,9 +13,20 @@ import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import CreateIcon from "@material-ui/icons/Create";
 import "../Styles/ExperienceEducation.css";
 import moment from "moment";
+import { withRouter } from "react-router-dom";
 
-export default function ExperienceEducation({ toggleModal, experiences }) {
-  console.log(experiences);
+function ExperienceEducation({
+  toggleExpModal,
+  toggleSkillModal,
+  toggleEduModal,
+  experiences,
+  education,
+  skills,
+  match,
+}) {
+  console.log("education", education);
+  console.log("experiences", experiences);
+  console.log("skills", skills);
   // const [show, setShow] = useState(false);
   return (
     <div className="mt-3">
@@ -28,10 +39,11 @@ export default function ExperienceEducation({ toggleModal, experiences }) {
                   Experience
                 </Card.Title>
               </Col>
-
-              <Col className="d-flex justify-content-end">
-                <AddIcon onClick={() => toggleModal()} />
-              </Col>
+              {match.params.user == "me" && (
+                <Col className="d-flex justify-content-end">
+                  <AddIcon onClick={() => toggleExpModal()} />
+                </Col>
+              )}
             </Row>
           </Col>
 
@@ -39,8 +51,7 @@ export default function ExperienceEducation({ toggleModal, experiences }) {
             {experiences &&
               experiences.map(experience => (
                 <>
-                  <Divider variant="inset" component="li" />
-                  <ListItem >
+                  <ListItem>
                     <div>
                       <Image
                         src={experience.image}
@@ -48,18 +59,15 @@ export default function ExperienceEducation({ toggleModal, experiences }) {
                         className="experience-education-avatars mr-3"
                       />
                     </div>
-                    <Col >
-                      <Row
-                        className="justify-content-between edit-info-icon"
-                        
-                      >
+                    <Col>
+                      <Row className="justify-content-between edit-info-icon">
                         <Typography variant="h5">{experience.role}</Typography>
                         <span>
-                          
+                          {match.params.user == "me" && (
                             <CreateIcon
-                              onClick={() => toggleModal(experience)}
+                              onClick={() => toggleExpModal(experience)}
                             />
-                      
+                          )}
                         </span>
                       </Row>
                       <Row>
@@ -74,6 +82,7 @@ export default function ExperienceEducation({ toggleModal, experiences }) {
                       </Row>
                     </Col>
                   </ListItem>
+                  <Divider />
                 </>
               ))}
           </List>
@@ -99,93 +108,57 @@ export default function ExperienceEducation({ toggleModal, experiences }) {
               </Col>
 
               <Col className="d-flex justify-content-end">
-                <AddIcon />
+                {match.params.user == "me" && (
+                  <AddIcon onClick={() => toggleEduModal()} />
+                )}
               </Col>
             </Row>
           </Col>
-
-          <List>
-            <ListItem>
-              <div>
-                <Image
-                  src="https://via.placeholder.com/90x90"
-                  thumbnail
-                  className="experience-education-avatars mr-3"
-                />
-              </div>
-              <Col>
-                <Row className="justify-content-between">
-                  <Typography variant="h5">School</Typography>
-                  <span>
-                    <CreateIcon />
-                  </span>
-                </Row>
-                <Row>
-                  <ListItemText
-                    primary="Education Title"
-                    secondary="Length of Studies"
-                  />
-                </Row>
-                <Row>
-                  <ListItemText secondary="Scholarly Merits" />
-                </Row>
-              </Col>
-            </ListItem>
-            <Divider variant="inset" component="li" />
-            <ListItem>
-              <div>
-                <Image
-                  src="https://via.placeholder.com/90x90"
-                  thumbnail
-                  className="experience-education-avatars mr-3"
-                />
-              </div>
-              <Col>
-                <Row className="justify-content-between">
-                  <Typography variant="h5">School</Typography>
-                  <span>
-                    <CreateIcon />
-                  </span>
-                </Row>
-                <Row>
-                  <ListItemText
-                    primary="Education Title"
-                    secondary="Length of Studies"
-                  />
-                </Row>
-                <Row>
-                  <ListItemText secondary="Scholarly Merits" />
-                </Row>
-              </Col>
-            </ListItem>
-            <Divider variant="inset" component="li" />
-            <ListItem>
-              <div>
-                <Image
-                  src="https://via.placeholder.com/90x90"
-                  thumbnail
-                  className="experience-education-avatars mr-3"
-                />
-              </div>
-              <Col>
-                <Row className="justify-content-between">
-                  <Typography variant="h5">School</Typography>
-                  <span>
-                    <CreateIcon />
-                  </span>
-                </Row>
-                <Row>
-                  <ListItemText
-                    primary="Education Title"
-                    secondary="Length of Studies"
-                  />
-                </Row>
-                <Row>
-                  <ListItemText secondary="Scholarly Merits" />
-                </Row>
-              </Col>
-            </ListItem>
-          </List>
+          {education &&
+            education.map(education => (
+              <>
+                {/* <Divider variant="inset" component="li" /> */}
+                <ListItem>
+                  <div>
+                    <Image
+                      src={education.image}
+                      thumbnail
+                      className="experience-education-avatars mr-3"
+                    />
+                  </div>
+                  <Col>
+                    <Row className="justify-content-between edit-info-icon">
+                      <Typography variant="h5">{education.school}</Typography>
+                      <span>
+                        {match.params.user == "me" && (
+                          <CreateIcon
+                            onClick={() => toggleEduModal(education)}
+                          />
+                        )}
+                      </span>
+                    </Row>
+                    <Row>
+                      <ListItemText
+                        primary={education.fieldOfStudy}
+                        primary={education.degree}
+                        secondary={`${education.startYear} - ${education.endYear}`}
+                      />
+                    </Row>
+                    <Row>
+                      <ListItemText
+                        secondary={`Activities & Societies: ${education.activtiesSocieties}`}
+                      />
+                    </Row>
+                    <Row>
+                      <ListItemText
+                        secondary={`Description: ${education.description}`}
+                      />
+                    </Row>
+                  </Col>
+                </ListItem>
+                <Divider />
+              </>
+            ))}
         </Card.Body>
         <ListItem
           button="primary"
@@ -193,7 +166,7 @@ export default function ExperienceEducation({ toggleModal, experiences }) {
           href="#"
           className="show-more-list-link justify-content-start"
         >
-          Show 3 more expereinces ▾
+          Show 3 more education ▾
         </ListItem>
         <Divider light />
 
@@ -202,89 +175,113 @@ export default function ExperienceEducation({ toggleModal, experiences }) {
             <Row className="justify-content-between">
               <Col className="d-flex justify-content-start">
                 <Card.Title classname="card-title-expereince d-flex justify-content-start">
-                  Licenses & Certifications
+                  Skills
                 </Card.Title>
               </Col>
 
               <Col className="d-flex justify-content-end">
-                <AddIcon />
+                {match.params.user == "me" && (
+                  <AddIcon onClick={() => toggleSkillModal()} />
+                )}
               </Col>
             </Row>
           </Col>
-
+          <Container className = "ml-3">
           <List>
-            <ListItem>
-              <div>
-                <Image
-                  src="https://via.placeholder.com/90x90"
-                  thumbnail
-                  className="experience-education-avatars mr-3"
-                />
-              </div>
-              <Col>
-                <Row className="justify-content-between">
-                  <Typography variant="h5">Name of Award</Typography>
-                  <span>
-                    <CreateIcon />
-                  </span>
-                </Row>
-                <Row>
-                  <ListItemText
-                    primary="Earned from Where"
-                    secondary="Time of Issue"
-                  />
-                </Row>
-              </Col>
-            </ListItem>
-            <Divider variant="inset" component="li" />
-            <ListItem>
-              <div>
-                <Image
-                  src="https://via.placeholder.com/90x90"
-                  thumbnail
-                  className="experience-education-avatars mr-3"
-                />
-              </div>
-              <Col>
-                <Row className="justify-content-between">
-                  <Typography variant="h5">Name of Award</Typography>
-                  <span>
-                    <CreateIcon />
-                  </span>
-                </Row>
-                <Row>
-                  <ListItemText
-                    primary="Earned from Where"
-                    secondary="Time of Issue"
-                  />
-                </Row>
-              </Col>
-            </ListItem>
-            <Divider variant="inset" component="li" />
-            <ListItem>
-              <div>
-                <Image
-                  src="https://via.placeholder.com/90x90"
-                  thumbnail
-                  className="experience-education-avatars mr-3"
-                />
-              </div>
-              <Col>
-                <Row className="justify-content-between">
-                  <Typography variant="h5">Name of Award</Typography>
-                  <span>
-                    <CreateIcon />
-                  </span>
-                </Row>
-                <Row>
-                  <ListItemText
-                    primary="Earned from Where"
-                    secondary="Time of Issue"
-                  />
-                </Row>
-              </Col>
-            </ListItem>
+            {skills &&
+              skills.map(skill => (
+                <>
+                
+
+                <Row className="justify-content-between edit-info-icon mt-2 mb-2">
+                      <span>{skill.text}</span>
+                      <span>
+                        {match.params.user == "me" && (
+                          <CreateIcon className="mr-4"
+                            onClick={() => toggleSkillModal(skill)}
+                          />
+                        )}
+                      </span>
+                    </Row>
+                  <Divider />
+                </>
+              ))}
           </List>
+          </Container>
+
+          {/* <List>
+            <ListItem>
+              <div>
+                <Image
+                  src="https://via.placeholder.com/90x90"
+                  thumbnail
+                  className="experience-education-avatars mr-3"
+                />
+              </div>
+              <Col>
+                <Row className="justify-content-between">
+                  <Typography variant="h5">Name of Award</Typography>
+                  <span>
+                    <CreateIcon />
+                  </span>
+                </Row>
+                <Row>
+                  <ListItemText
+                    primary="Earned from Where"
+                    secondary="Time of Issue"
+                  />
+                </Row>
+              </Col>
+            </ListItem>
+            <Divider variant="inset" component="li" />
+            <ListItem>
+              <div>
+                <Image
+                  src="https://via.placeholder.com/90x90"
+                  thumbnail
+                  className="experience-education-avatars mr-3"
+                />
+              </div>
+              <Col>
+                <Row className="justify-content-between">
+                  <Typography variant="h5">Name of Award</Typography>
+                  <span>
+                    <CreateIcon />
+                  </span>
+                </Row>
+                <Row>
+                  <ListItemText
+                    primary="Earned from Where"
+                    secondary="Time of Issue"
+                  />
+                </Row>
+              </Col>
+            </ListItem>
+            <Divider variant="inset" component="li" />
+            <ListItem>
+              <div>
+                <Image
+                  src="https://via.placeholder.com/90x90"
+                  thumbnail
+                  className="experience-education-avatars mr-3"
+                />
+              </div>
+              <Col>
+                <Row className="justify-content-between">
+                  <Typography variant="h5">Name of Award</Typography>
+                  <span>
+                    <CreateIcon />
+                  </span>
+                </Row>
+                <Row>
+                  <ListItemText
+                    primary="Earned from Where"
+                    secondary="Time of Issue"
+                  />
+                </Row>
+              </Col>
+            </ListItem>
+          </List> */}
         </Card.Body>
         <ListItem
           button="primary"
@@ -292,9 +289,10 @@ export default function ExperienceEducation({ toggleModal, experiences }) {
           href="#"
           className="show-more-list-link justify-content-start"
         >
-          Show 3 more expereinces ▾
+          Show 3 more skills ▾
         </ListItem>
       </Card>
     </div>
   );
 }
+export default withRouter(ExperienceEducation);

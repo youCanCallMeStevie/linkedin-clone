@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Container,
   Form,
@@ -19,13 +19,14 @@ import PublicIcon from "@material-ui/icons/Public";
 import SettingsIcon from "@material-ui/icons/Settings";
 import GroupIcon from "@material-ui/icons/Group";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import { toBase64 } from "../utils";
 import {
-  postPost,
-  editPost,
   deletePost,
-  toBase64,
-  postPostImage,
-} from "../utils";
+  editPost,
+  postNewPost,
+  uploadPicture,
+} from "../Lib/fetches/posts";
+import AppContext from "../Context/app-context";
 
 export default function PostFeedModal({
   toggleModal,
@@ -33,35 +34,45 @@ export default function PostFeedModal({
   selectedPost,
   user,
 }) {
-  const [post, setPost] = useState({
-    text: "",
-  });
+  const [post, setPost] = useState({});
 
   const [postImage, setPostImage] = useState("");
   const [imageThumb, setImageThumb] = useState("");
+  const [postId, setPostId] = useState("");
+  const { appState } = useContext(AppContext);
 
   useEffect(() => {
-    console.log(selectedPost);
+    console.log(appState);
     setPost(selectedPost);
+    setPostId({ id: selectedPost?._id });
+    console.log(postId);
+    console.log(selectedPost);
   }, [selectedPost]);
+  useEffect(() => {
+    setPost(selectedPost);
+    setPostId(selectedPost?._id);
+  }, []);
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let res = "";
     let message = "Something went wrong";
     if (selectedPost == "") {
-      res = await postPost(post);
+      res = await postNewPost(post);
       message = "Post sucessfully created";
     } else {
-      res = await editPost(post._id, post);
+      console.log(postId);
+      res = await editPost(appState.selectPost._id, post);
       message = "Post sucessfully edited";
     }
     if (res) {
-      if (res.ok) {
-        const data = await res.json();
+      console.log(res);
+      if (res.status == 201 || res.status == 200) {
+        const data = res.data;
         const post_id = data._id;
+        console.log(post_id);
         if (postImage != "") {
-          const imageSent = await postPostImage(post_id, postImage);
+          const imageSent = await uploadPicture(post_id, postImage);
           if (imageSent) {
             if (imageSent.ok) {
               console.log("success");
@@ -74,12 +85,12 @@ export default function PostFeedModal({
     }
   };
 
-  const handleChange = e => {
-    const newPost = { ...post };
-    newPost[e.target.name] = e.target.value;
-    setPost(newPost);
+  const handleChange = (e) => {
+    console.log(post);
+    const text = e.target.value;
+    setPost({ text });
   };
-  const handleChangeImage = async e => {
+  const handleChangeImage = async (e) => {
     // const formData = new FormData();
     // formData.append('post',e.target.files[0])
     setPostImage(e.target.files[0]);
@@ -98,7 +109,7 @@ export default function PostFeedModal({
     <div>
       <Modal
         show={showModal}
-        onHide={toggleModal}
+        onHide={() => toggleModal("")}
         backdrop="static"
         keyboard={false}
       >
@@ -127,8 +138,8 @@ export default function PostFeedModal({
                 style={{ width: "180px", fontSize: "12px" }}
               >
                 <PersonIcon />
-                {user.name}
-                {user.surname} ▾{" "}
+                {user?.name}
+                {user?.surname} ▾{" "}
               </Button>
             </Col>
             <Col md={2} className="ml-4 mt-4">
@@ -145,72 +156,71 @@ export default function PostFeedModal({
                         <strong>Who can see your post?</strong>
                       </p>
                     </NavDropdown.Item>
-                    <Form>
-                      <Row className="d-flex justify-content-between">
-                        <Col className="ml-3">
-                          <Form.Check type="radio" label="Anyone"></Form.Check>{" "}
-                        </Col>
-                        <Col className="ml-2">
-                          <PublicIcon />
-                        </Col>{" "}
-                      </Row>
 
-                      <NavDropdown.Divider />
+                    <Row className="d-flex justify-content-between">
+                      <Col className="ml-3">
+                        <Form.Check type="radio" label="Anyone"></Form.Check>{" "}
+                      </Col>
+                      <Col className="ml-2">
+                        <PublicIcon />
+                      </Col>{" "}
+                    </Row>
 
-                      <Row className="d-flex justify-content-between">
-                        <Col className="ml-3">
-                          <Form.Check
-                            type="radio"
-                            label="Anyone + Twitter"
-                          ></Form.Check>{" "}
-                        </Col>
-                        <Col className="ml-2">
-                          <PublicIcon />
-                        </Col>{" "}
-                      </Row>
+                    <NavDropdown.Divider />
 
-                      <NavDropdown.Divider />
+                    <Row className="d-flex justify-content-between">
+                      <Col className="ml-3">
+                        <Form.Check
+                          type="radio"
+                          label="Anyone + Twitter"
+                        ></Form.Check>{" "}
+                      </Col>
+                      <Col className="ml-2">
+                        <PublicIcon />
+                      </Col>{" "}
+                    </Row>
 
-                      <Row className="d-flex justify-content-between">
-                        <Col className="ml-3">
-                          <Form.Check
-                            type="radio"
-                            label="Connections only"
-                          ></Form.Check>{" "}
-                        </Col>
-                        <Col className="ml-2">
-                          <PersonAddIcon />
-                        </Col>{" "}
-                      </Row>
+                    <NavDropdown.Divider />
 
-                      <NavDropdown.Divider />
+                    <Row className="d-flex justify-content-between">
+                      <Col className="ml-3">
+                        <Form.Check
+                          type="radio"
+                          label="Connections only"
+                        ></Form.Check>{" "}
+                      </Col>
+                      <Col className="ml-2">
+                        <PersonAddIcon />
+                      </Col>{" "}
+                    </Row>
 
-                      <Row className="d-flex justify-content-between" >
-                        <Col className="ml-3">
-                          <Form.Check
-                            type="radio"
-                            label="Group Members"
-                          ></Form.Check>{" "}
-                        </Col>
-                        <Col className="ml-2">
-                          <GroupIcon />
-                        </Col>{" "}
-                      </Row>
+                    <NavDropdown.Divider />
 
-                      <NavDropdown.Divider />
+                    <Row className="d-flex justify-content-between">
+                      <Col className="ml-3">
+                        <Form.Check
+                          type="radio"
+                          label="Group Members"
+                        ></Form.Check>{" "}
+                      </Col>
+                      <Col className="ml-2">
+                        <GroupIcon />
+                      </Col>{" "}
+                    </Row>
 
-                      <Row className="d-flex justify-content-between">
-                        <Col className="ml-3">
-                          <Form.Check
-                            type="radio"
-                            label="Advance Settings"
-                          ></Form.Check>{" "}
-                        </Col>
-                        <Col>
-                          <SettingsIcon />
-                        </Col>{" "}
-                      </Row>
-                    </Form>
+                    <NavDropdown.Divider />
+
+                    <Row className="d-flex justify-content-between">
+                      <Col className="ml-3">
+                        <Form.Check
+                          type="radio"
+                          label="Advance Settings"
+                        ></Form.Check>{" "}
+                      </Col>
+                      <Col>
+                        <SettingsIcon />
+                      </Col>{" "}
+                    </Row>
                   </NavDropdown>
                 </Row>
               </Button>
@@ -218,16 +228,16 @@ export default function PostFeedModal({
             <Col md={3}></Col>
           </Row>
 
-          <Form className="text-white mt-5" onSubmit={e => handleSubmit(e)}>
+          <Form className="text-white mt-5" onSubmit={(e) => handleSubmit(e)}>
             <Form.Group>
               <Form.Control
                 required
                 name="text"
-                value={post.text}
+                value={post?.text}
                 placeholder="What do you want to talk about?"
                 as="textarea"
                 rows={5}
-                onChange={e => handleChange(e)}
+                onChange={(e) => handleChange(e)}
               />
             </Form.Group>
 
@@ -260,7 +270,7 @@ export default function PostFeedModal({
                 >
                   <label for="image-post" className="d-flex">
                     <AddIcon className="ml-3" style={{ color: "blue" }} />{" "}
-                    {imageThumb !== "" ? (
+                    {imageThumb !== "" && selectedPost == "" ? (
                       <Image
                         src={imageThumb}
                         className="mr-3 img-fluid post__thumb"
@@ -275,7 +285,7 @@ export default function PostFeedModal({
                     id="image-post"
                     type="file"
                     className="d-none"
-                    onChange={e => handleChangeImage(e)}
+                    onChange={(e) => handleChangeImage(e)}
                   />
                   <VideoLibraryIcon style={{ color: "grey" }} />
                   <NoteIcon style={{ color: "grey" }} />

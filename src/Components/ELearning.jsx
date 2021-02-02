@@ -50,7 +50,7 @@ export default function Promoted() {
               <ListItemText primary="Vue.js Essential Training" secondary="12,557 viewers" />
               
             </ListItem>
-            <Divider variant="inset" component="li" />
+            <Divider />
             <ListItem>
             <div>
                 <span>
@@ -65,7 +65,7 @@ export default function Promoted() {
               <ListItemText primary="CSS: Variables and Fluid Layouts" secondary="3,068 viewers" />
               
             </ListItem>
-            <Divider variant="inset" component="li" />
+            <Divider />
             <ListItem>
             <div>
                 <span>

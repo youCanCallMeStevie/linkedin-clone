@@ -5,7 +5,7 @@ import CreateIcon from "@material-ui/icons/Create";
 
 import "../Styles/AboutCard.css";
 
-export default function Promoted({bio}) {
+export default function Promoted({ bio }) {
   return (
     <div className="mt-3">
       <Card className="about-card-container">
@@ -13,14 +13,9 @@ export default function Promoted({bio}) {
           <Col>
             <Row className="justify-content-between">
               <Card.Title classname="general-card-title">About </Card.Title>
-              <span>
-                <CreateIcon />
-              </span>
             </Row>
             <Row>
-              <Card.Text>
-                {bio}
-              </Card.Text>
+              <Card.Text>{bio}</Card.Text>
             </Row>
           </Col>
         </Card.Body>
